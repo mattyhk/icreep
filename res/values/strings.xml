@@ -7,5 +7,18 @@
     <string name="title_activity_location">LocationActivity</string>
     <string name="title_location_section1">Current Location</string>
     <string name="title_location_section2">Daily Movement</string>
+    <string name="report">Reports</string>
+    <string name="autoButtonText">Automated</string>
+    <string name="manualButtonText">Manual</string>
+    <string name="autoDelivery">Automated Delivery</string>
+    <string name="deliveryTimeText">Delivery Time</string>
+    <string name="saveButtonTest">Save</string>
+    <color name="OpenBoxGreen">#BCD727</color>
+    <color name="lightBlueForLabels">#6699FF</color>
+    <color name="greyForBackrounds">#CCCCCC</color>
+    <color name="darkGreyForBackrounds">#999999</color>
+    <color name="whiteBackground">#FFFFFF</color>
+    <color name="blackColor">#000000</color>
+    <string name="sendReportText">Send Report</string>
 
 </resources>
