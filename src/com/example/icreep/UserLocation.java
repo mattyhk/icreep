@@ -70,4 +70,13 @@ public class UserLocation {
 		
 	}
 	
+	/**
+	 * Calculates the amount of time spent out of the office that day
+	 * The start of the day is assumed to be 9:00 am
+	 * @return time - the amount of time spent outside of the office
+	 */
+	public static float calcOutofOfficeTime(){
+		
+	}
+	
 }
