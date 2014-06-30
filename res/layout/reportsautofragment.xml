@@ -52,8 +52,7 @@
         android:text="@string/saveButtonTest"
         android:enabled="false"
         android:textColor="@color/blackColor"
-        android:background="@color/greyForBackrounds"
-        
+        android:background="@color/greyForBackrounds"        
     />
 	
 	    

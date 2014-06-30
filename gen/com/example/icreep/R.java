@@ -36,12 +36,13 @@ public final class R {
         public static final int Delivery=0x7f090006;
         public static final int DeliveryTime=0x7f090008;
         public static final int TimeEditText=0x7f090009;
-        public static final int action_settings=0x7f09000b;
+        public static final int action_settings=0x7f09000c;
         public static final int autoButton=0x7f090003;
         public static final int autoFragLayout=0x7f090005;
         public static final int container=0x7f090000;
         public static final int manualButton=0x7f090004;
         public static final int saveButton=0x7f09000a;
+        public static final int sendReportButton=0x7f09000b;
         public static final int switchBar=0x7f090007;
         public static final int textViewMain=0x7f090001;
         public static final int userDescript=0x7f090002;
@@ -50,6 +51,7 @@ public final class R {
         public static final int activity_main=0x7f030000;
         public static final int reports=0x7f030001;
         public static final int reportsautofragment=0x7f030002;
+        public static final int reportsmanualfragment=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -64,6 +66,7 @@ public final class R {
         public static final int manualButtonText=0x7f050005;
         public static final int report=0x7f050003;
         public static final int saveButtonTest=0x7f050008;
+        public static final int sendReportText=0x7f050009;
     }
     public static final class style {
         /** 
