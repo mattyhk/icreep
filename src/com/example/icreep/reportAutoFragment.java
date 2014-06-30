@@ -14,13 +14,20 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.TimePicker.OnTimeChangedListener;
 
 public class reportAutoFragment extends Fragment {
 		
 		Switch switched;
 		Button save ;
 		TimePicker tp ;
+		int hour = 0 ;
+		int min = 0 ;
+		//the following is how you get your text pixels to the correct size depending on the screen
+    	//16*getResources().getDisplayMetrics().density
+		float correctTextpixel = 16*getResources().getDisplayMetrics().density;
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -28,16 +35,38 @@ public class reportAutoFragment extends Fragment {
 		
 		
 		}
+		
+		/* please note that the switch will depend on the following possibly, db, shared preferences or 
+		 * savedInstanceState
+		 *  
+		 * (non-Javadoc)
+		 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+		 */
 	    @Override
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                             Bundle savedInstanceState) {
 	        // Inflate the layout for this fragment
-	      //  return inflater.inflate(R.layout., container, false);
+	    	// Return inflater.inflate(R.layout., container, false);
+	    	
 	    	View v = inflater.inflate(R.layout.reportsautofragment, container,false) ;
+	    	
+	    	
+	    	//getting all the components for use and shaping of sizes 
 	    	save = (Button) v.findViewById(R.id.saveButton);
-	    	switched = (Switch) v.findViewById(R.id.switchBar);
-	    	tp = (TimePicker) v.findViewById(R.id.timePicker);
+	    	switched = (Switch) v.findViewById(R.id.switchBar);	    	
+	    	tp = (TimePicker) v.findViewById(R.id.timePicker);	    	
+	    	TextView deli = (TextView) v.findViewById(R.id.Delivery);	    	
+	    	TextView deliTime = (TextView)v.findViewById(R.id.DeliveryTime);
 	    	tp.setEnabled(false);
+	    	
+	    	//ensuring all text pixels are the correct size
+	    	save.setTextSize(correctTextpixel);
+	    	deli.setTextSize(correctTextpixel);
+	    	deliTime.setTextSize(correctTextpixel);
+	    	switched.setTextSize(correctTextpixel);
+	    	
+	    	
+	    	//all the listeners using unnamed inner classes to avoid id checks
 	    	switched.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 	    		
 				@Override
@@ -63,6 +92,24 @@ public class reportAutoFragment extends Fragment {
 			});
 	    	
 	    	tp.setIs24HourView(true);
+	    	
+	    	tp.setOnTimeChangedListener(new OnTimeChangedListener() {	    		
+	    		/*must store data of original time and then decide if i should enable button or not
+	    		 **also i must read from the DB for the users stored values
+	    		 **tp.setcurrenthour....
+	    		 **store those read values to check
+	    		 *it automatically defaults to the current time which is cool*/
+	    		
+				@Override
+				public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+					// TODO Auto-generated method stub
+				if (!((hourOfDay == hour) && (minute == min)))
+				{
+				save.setEnabled(true);	
+				}else save.setEnabled(false);
+				
+				}
+			});
 	    	
 	    	
 	    	return v ;
