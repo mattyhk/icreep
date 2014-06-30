@@ -2,6 +2,7 @@ package com.example.icreep;
 
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -12,35 +13,56 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class reportActivity extends Activity {
 
 	Button auto, manual ;
+	boolean automated = true ;
+	float correctTextpixel = 16*getResources().getDisplayMetrics().density;
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.reports); 
 	        auto = (Button) findViewById(R.id.autoButton);
-	        manual = (Button) findViewById(R.id.manualButton) ;
+	        manual = (Button) findViewById(R.id.manualButton) ;	        
+	        TextView reports = (TextView) findViewById(R.id.textViewMain);
+	        TextView userDescrip = (TextView) findViewById(R.id.userDescript);
+	        	        
+	        reports.setTextSize(correctTextpixel);
+	        userDescrip.setTextSize(correctTextpixel);
+	        auto.setTextSize(correctTextpixel);
+	        manual.setTextSize(correctTextpixel);
 	        addautoFragment();
+	        
+	        /*here I will add the code required to get the users info with using his id
+	        * possibly from sp, sis
+	        * userdescrip.setText("kobus")
+	        */
+	        
 	        //adding button handler for the auto report
 	        auto.setOnClickListener(new OnClickListener() {
 				
-				@Override
+				@SuppressLint("ResourceAsColor") @Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					switchtoautofrag();
+					automated = false ;
+					manual.setBackgroundColor(R.color.greyForBackrounds);
+					auto.setBackgroundColor(R.color.lightBlueForLabels);
+					
 				}
 			});
 	        
 	      //adding button handler for the manual report
 	        manual.setOnClickListener(new OnClickListener() {
 				
-				@Override
+				@SuppressLint("ResourceAsColor") @Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					switchtomanualfrag();
-					
+					auto.setBackgroundColor(R.color.greyForBackrounds);
+					manual.setBackgroundColor(R.color.lightBlueForLabels);
 				}
 			});
 	    }

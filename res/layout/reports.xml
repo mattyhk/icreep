@@ -25,33 +25,33 @@
         android:textColor="@color/whiteBackground"
          />
 	
-	<LinearLayout 
+	<RelativeLayout 
 	    android:id = "@+id/llforbuttonsinreport"
-	    android:layout_width="match_parent"
+	    android:layout_width="fill_parent"
         android:layout_height= "wrap_content"
 		android:orientation="horizontal"
-	    android:background = "@color/darkGreyForBackrounds" >	    
-	    
+	    android:background = "@color/darkGreyForBackrounds"	    
+	    >	    
+	    	    
 	    <Button
         android:id="@+id/autoButton"
         android:layout_width="wrap_content"
         android:layout_height= "wrap_content"
         android:text="@string/autoButtonText"
-        android:background="@color/lightBlueForLabels"
-        android:layout_gravity= "right"
-        style="?android:attr/borderlessButtonStyle"       
+        android:background="@color/lightBlueForLabels"        
+        style="?android:attr/borderlessButtonStyle"     
         />
 	
 		<Button
 	        android:id="@+id/manualButton"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height= "wrap_content"
 	        android:text="@string/manualButtonText"
 	        android:background="@color/greyForBackrounds"
-	        android:layout_gravity= "right"
 	        style="?android:attr/borderlessButtonStyle"
+	        android:layout_toRightOf="@+id/autoButton"
 	    />  	    
-	    </LinearLayout>
+	    </RelativeLayout>
 	
 	
 	

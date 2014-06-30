@@ -75,6 +75,13 @@ public class reportAutoFragment extends Fragment {
 					if (isChecked == true)
 					{
 						tp.setEnabled(true);
+						
+						
+					}else
+					{
+						tp.setEnabled(false);
+						save.setEnabled(false);
+						// will have to remove the automatic time from the database
 					}
 				}
 			});
@@ -87,11 +94,17 @@ public class reportAutoFragment extends Fragment {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 				save.setEnabled(false);
+				int storehour = tp.getCurrentHour();
+				int storeminute = tp.getCurrentMinute();
+				writeToDB(storehour, storeminute);
+				
 				
 				}
 			});
 	    	
 	    	tp.setIs24HourView(true);
+	    	setTheTimePicker() ; //setting it's time
+	    	
 	    	
 	    	tp.setOnTimeChangedListener(new OnTimeChangedListener() {	    		
 	    		/*must store data of original time and then decide if i should enable button or not
@@ -112,8 +125,34 @@ public class reportAutoFragment extends Fragment {
 			});
 	    	
 	    	
+	    	
+	    	
 	    	return v ;
 	    }	
+	    
+	  //setting of the time will be here, note is in the set below
+	    private void setTheTimePicker()
+	    {
+	    	if (switched.isChecked() == true)
+	    	{
+	    		getAutoTime();
+	    		tp.setCurrentHour(hour);
+	    		tp.setCurrentMinute(min);
+	    	}
+	    }
+	    
+	    //connect to DB and get automated report time from the table
+	    private void getAutoTime()
+	    {
+	    	
+	    }	    
+	    
+	    // this will be invoked when the save button is clicked and will 
+	    // store the latest hour and minute that the user wants there auto report at
+	    private void writeToDB(int stoh,int stom)
+	    {
+	    	
+	    }
 	
 	 @Override
 	public void onStart() 

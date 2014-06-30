@@ -13,6 +13,7 @@ public class reportManualFragment extends Fragment{
 
 	
 	Button sendreport ;
+	float correctTextpixel = 16*getResources().getDisplayMetrics().density;
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
@@ -24,17 +25,27 @@ public class reportManualFragment extends Fragment{
 		 
 		 View v = inflater.inflate(R.layout.reportsmanualfragment, container,false) ;
 		 sendreport = (Button) v.findViewById(R.id.sendReportButton);
+		 sendreport.setTextSize(correctTextpixel);
+		 //sendreport.
 		 sendreport.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				// this will call the method for the manual mailer
+				// i will just use the embedded two options for mailing, mail or gmail.
+				// hopefully the user will chose a proper option and do this properly >>> to test
+				sendMail();
 			}
 		});
 		 
 		 
 		 return container;	 
+	 }
+	 
+	 public void sendMail()
+	 {
+		 
 	 }
 	
 	
