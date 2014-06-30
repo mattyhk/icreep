@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import android.os.Build;
 
 public class MainActivity extends Activity {
@@ -17,7 +19,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);    
-        
        
     }
 
@@ -41,5 +42,61 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
         //comment
+    }
+    
+    @Override
+    protected void onStart() 
+    {
+        super.onStart();
+        Log.d("onStart", "onStart");
+    }    
+    
+    @Override
+    protected void onResume() 
+    {
+        super.onResume();
+        Log.d("onResume", "onResume");  
+    }    
+      
+    @Override
+    protected void onPause() 
+    {
+        super.onPause();
+        Log.d("onPause", "onPause");
+    }    
+
+    @Override
+    protected void onStop() 
+    {
+        super.onStop();
+        Log.d("vince", "onStop");
+    }    
+    
+    @Override
+    protected void onRestart() 
+    {
+        super.onRestart();
+        Log.d("onRestart", "onRestart");
+    }    
+    
+    @Override
+    protected void onDestroy() 
+    {
+    	super.onDestroy();
+    	Log.d("vince", "onDestroy");
+    }
+    
+   @Override
+   protected void onSaveInstanceState(Bundle out) 
+    {
+    	super.onSaveInstanceState(out);
+    	
+    }
+    
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    	// TODO Auto-generated method stub
+    	super.onRestoreInstanceState(savedInstanceState);
+    	
     }
 }
