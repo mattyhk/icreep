@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">iCreep</string>
+    <string name="hello_world">Hello World!</string>
+    <string name="action_settings">Settings</string>
+    <string name="TimeTrackerText">Time Tracker</string>
+    <string name="TimeTrackerLocationText">Location</string>
+    <string name="report">Reports</string>
+    <string name="autoButtonText">Automated</string>
+    <string name="manualButtonText">Manual</string>
+    <string name="autoDelivery">Automated Delivery</string>
+    <string name="deliveryTimeText">Delivery Time</string>
+    <string name="saveButtonTest">Save</string>
+    <color name="OpenBoxGreen">#BCD727</color>
+    <color name="lightBlueForLabels">#6699FF</color>
+    <color name="greyForBackrounds">#CCCCCC</color>
+    <color name="darkGreyForBackrounds">#999999</color>
+    <color name="whiteBackground">#FFFFFF</color>
+    <color name="blackColor">#000000</color>
+    <string name="sendReportText">Send Report</string>
+
+</resources>
