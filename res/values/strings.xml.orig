@@ -6,6 +6,11 @@
     <string name="action_settings">Settings</string>
     <string name="TimeTrackerText">Time Tracker</string>
     <string name="TimeTrackerLocationText">Location</string>
+<<<<<<< HEAD
+    <string name="title_activity_location">LocationActivity</string>
+    <string name="title_location_section1">Current Location</string>
+    <string name="title_location_section2">Daily Movement</string>
+=======
     <string name="report">Reports</string>
     <string name="autoButtonText">Automated</string>
     <string name="manualButtonText">Manual</string>

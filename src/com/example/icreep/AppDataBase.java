@@ -1,5 +1,5 @@
 package com.example.icreep;
 
-public class dataBase {
+public class AppDataBase {
 
 }
