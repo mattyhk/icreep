@@ -1,5 +1,6 @@
 package com.example.icreep;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,23 @@ public class UserLocation {
 	 * @return zone - returns the calculated zone
 	 */
 	private int findCurrentZone(){
+		
+	}
+	
+	/**
+	 * Queries the Location database to determine which zones the user has visited that day
+	 * @return zones - an array of all the zones visited
+	 */
+	public static ArrayList<String> findDailyMovements(){
+		
+	}
+	
+	/**
+	 * Queries the Location database to determine which zones the user has visited that day and for how long.
+	 * Creates a hash map that contains the zone ID as a key and the time spent in that zone as the value
+	 * @return zoneTimes - hash map with the zones and durations
+	 */
+	public static HashMap<Integer, Float> findDailyTimes(){
 		
 	}
 	
