@@ -4,5 +4,8 @@
     <string name="app_name">iCreep</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_location">LocationActivity</string>
+    <string name="title_location_section1">Current Location</string>
+    <string name="title_location_section2">Daily Movement</string>
 
 </resources>
