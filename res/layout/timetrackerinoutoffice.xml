@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="@color/darkGreyForBackrounds">
+    android:background="@color/darkGreyForBackgrounds">
 
     <TextView
         android:id="@+id/textView1"
@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/TimeTrackerText"
+        android:text="@string/TimeTrackerLocationText"
         android:textColor="@color/OpenBoxGreen"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -26,7 +26,7 @@
         android:layout_marginTop="18dp"
         android:text="name and surname: position"
         android:textColor="@color/greyForBackrounds"
-        android:background="@color/darkGreyForBackrounds"
+        android:background="@color/darkGreyForBackgrounds"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_marginTop="60dp"
         android:text="In Office"
         android:textColor="@color/greyForBackrounds"
-        android:background="@color/darkGreyForBackrounds"
+        android:background="@color/darkGreyForBackgrounds"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -50,11 +50,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="26dp"
         android:text="Out Office"
-        android:background="@color/darkGreyForBackrounds"
+        android:background="@color/darkGreyForBackgrounds"
         android:textColor="@color/greyForBackrounds"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    	<!-- to be calculated: 0-100, android:progress="50" -->
+    	<!-- progress to to be calculated: 0-100, android:progress="50" -->
+
     <ProgressBar
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleHorizontal"
@@ -63,10 +64,9 @@
         android:layout_alignLeft="@+id/textView3"
         android:layout_alignRight="@+id/textView5"
         android:layout_below="@+id/textView3"
-        android:layout_marginTop="18dp" 
+        android:layout_marginTop="18dp"
         android:endColor="@color/OpenBoxGreen"
-        android:startColor="@color/whiteBackground"
-        />
+        android:startColor="@color/whiteBackground" />
 
     	<!-- times should be calculated and displayed here -->
        <TextView
@@ -78,7 +78,7 @@
            android:layout_marginTop="35dp"
            android:text="05:34:19"
            android:textColor="@color/greyForBackrounds"
-           android:background="@color/darkGreyForBackrounds"
+           android:background="@color/darkGreyForBackgrounds"
            android:textAppearance="?android:attr/textAppearanceMedium" />
 
        <TextView
@@ -90,7 +90,7 @@
            android:layout_alignRight="@+id/progressBar1"
            android:text="0:48:12"
            android:textColor="@color/greyForBackrounds"
-           android:background="@color/darkGreyForBackrounds"
+           android:background="@color/darkGreyForBackgrounds"
            android:textAppearance="?android:attr/textAppearanceMedium" />
     
 </RelativeLayout>

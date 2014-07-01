@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="@color/darkGreyForBackrounds">
+    android:background="@color/darkGreyForBackgrounds">
 
     <TextView
         android:id="@+id/textView1"
@@ -16,6 +16,7 @@
         android:textColor="@color/OpenBoxGreen"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
+    <!-- need to get user details and display -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -26,7 +27,6 @@
         android:text="name and surname: position"
         android:textColor="@color/greyForBackrounds"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -44,10 +44,24 @@
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="26dp"
-         >
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView2" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:background="@color/darkGreyForBackgrounds"
+            android:text="Display Floor Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/greyForBackrounds" />
+
+        <TableRow
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
 
        <TableRow
 	        android:id="@+id/location"
@@ -78,7 +92,25 @@
 	        	                  
        </TableRow>
 
-        
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_alignLeft="@+id/TextView04"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:text="@string/TimeTrackerLocationText"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_alignLeft="@+id/TextView04"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:text="Duration"
+                android:textColor="#000000" />
+            
+        </TableRow>
     </TableLayout>
       
 </RelativeLayout>
