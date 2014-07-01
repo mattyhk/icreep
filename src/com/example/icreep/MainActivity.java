@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 		
 		userName = (EditText) findViewById(R.id.editText1);
 		userSurname = (EditText) findViewById(R.id.editText2);
-		//userPosition = (EditText) findViewById(R.id.editText2);
+		userPosition = (EditText) findViewById(R.id.editText4_user_position);
 		userEmail = (EditText) findViewById(R.id.editText3);
 						
 		//rename helper for db management
