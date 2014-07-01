@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@color/darkGreyForBackrounds">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="19dp"
+<<<<<<< HEAD
+        android:text=""
+=======
+        android:text="@string/TimeTrackerText"
+        android:textColor="@color/OpenBoxGreen"
+>>>>>>> 553c1e9907b7a99b496935d894cc3a839fde159a
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="14dp"
+        android:text="name and surname: position"
+        android:textColor="@color/greyForBackrounds"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tableLayout1"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="36dp"
+        android:text="Display Floor Name"
+        android:textColor="@color/greyForBackrounds"
+        android:background="@color/darkGreyForBackrounds"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="26dp"
+         >
+
+       <TableRow
+	        android:id="@+id/location"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        >
+         
+           	<!-- table with 2 columns -->
+           	<!-- for location -->
+	        <TextView 
+	            android:id="@+id/TextView04" 
+	            android:text="@string/TimeTrackerLocationText"
+	            android:layout_weight="1" 
+	            android:background="#ffffff"
+	            android:textColor="#000000"
+	            android:layout_alignLeft="@+id/TextView04" 
+	            android:gravity="center"/> 
+	            
+	        <!-- for time -->
+	        <TextView 
+	            android:id="@+id/TextView04" 
+	            android:text="Duration"
+	            android:layout_weight="1" 
+	            android:background="#ffffff"
+	            android:textColor="#000000"
+	            android:layout_alignLeft="@+id/TextView04"
+	            android:gravity="center"/>
+	        	                  
+       </TableRow>
+
+        
+    </TableLayout>
+      
+</RelativeLayout>
