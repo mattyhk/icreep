@@ -38,7 +38,7 @@
     <drawable name="pogressBar">#B7FF00</drawable>
     <string name="test2">6:18</string>
 
-    <drawable name="pogressBar">#B7FF00</drawable>
+  
 
     <color name="background">#999999</color>
 
@@ -51,7 +51,7 @@
     <string name="select_reports">Reports</string>
     <string name="select_profile">Profile</string>
     <string name="content_descrip">Profile Picture</string>
-    <string name="TimeTrackerLocationText">Location</string>
+
     <string name="TimeTrackerText">Time Tracker</string>
 
 
