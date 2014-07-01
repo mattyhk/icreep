@@ -1,5 +1,7 @@
 package com.example.icreep;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.Activity;
@@ -70,6 +72,7 @@ public class LocationActivity extends FragmentActivity implements TabListener {
 	 * @return zone - the current zone
 	 */
 	private int getCurrentZone(UserLocation location) {
+		return 0;
 
 	}
 
@@ -89,7 +92,7 @@ public class LocationActivity extends FragmentActivity implements TabListener {
 	 *         visited that day
 	 */
 	private ArrayList<Integer> findDailyMovements(UserLocation location) {
-
+		return null ;
 	}
 
 	/**

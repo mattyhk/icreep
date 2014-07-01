@@ -39,7 +39,7 @@
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:background="@color/greyForBackrounds"	
-    android:textColor="@color/darkGreyForBackrounds"
+    android:textColor="@color/darkGreyForBackgrounds"
 	    />
 	<Button
         android:id="@+id/saveButton"
