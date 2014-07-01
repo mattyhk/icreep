@@ -12,8 +12,12 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="19dp"
+<<<<<<< HEAD
         android:text=""
+=======
+        android:text="@string/TimeTrackerText"
         android:textColor="@color/OpenBoxGreen"
+>>>>>>> 553c1e9907b7a99b496935d894cc3a839fde159a
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <TextView
