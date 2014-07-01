@@ -26,10 +26,10 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		userName = (EditText) findViewById(R.id.editText1);
-		userSurname = (EditText) findViewById(R.id.editText2);
+		userName = (EditText) findViewById(R.id.editText1_user_name);
+		userSurname = (EditText) findViewById(R.id.editText2_user_surname);
 		userPosition = (EditText) findViewById(R.id.editText4_user_position);
-		userEmail = (EditText) findViewById(R.id.editText3);
+		userEmail = (EditText) findViewById(R.id.editText3_user_email);
 						
 		//rename helper for db management
 		icreepHelper = new iCreepDatabaseAdapter(this);		
