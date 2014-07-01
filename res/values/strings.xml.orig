@@ -49,9 +49,14 @@
     <string name="select_reports">Reports</string>
     <string name="select_profile">Profile</string>
     <string name="content_descrip">Profile Picture</string>
+<<<<<<< HEAD
+    <string name="TimeTrackerLocationText">Location</string>
+    <string name="TimeTrackerText">Time Tracker</string>
     <string name="action_home">Home</string>
     <string name="position_label">Position:</string>
     <string name="edit_position">Enter position</string>
+=======
+>>>>>>> eb188f1ad658671749b58673fbb18d0a33cd2f3e
 
     <string name="TimeTrackerText">Time Tracker</string>
 
