@@ -23,7 +23,8 @@
 
     <string name="sendReportText">Send Report</string>
 <<<<<<< HEAD
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Test">Marc Storebel: Developer</string>
+    <string name="test2">6:18</string>
 =======
     <drawable name="pogressBar">#B7FF00</drawable>
 >>>>>>> 553c1e9907b7a99b496935d894cc3a839fde159a

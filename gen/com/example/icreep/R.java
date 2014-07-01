@@ -69,6 +69,7 @@ public final class R {
         public static final int main=0x7f080001;
     }
     public static final class string {
+        public static final int Test=0x7f05000d;
         public static final int action_settings=0x7f050002;
         public static final int app_name=0x7f050000;
         public static final int autoButtonText=0x7f050007;
@@ -80,6 +81,7 @@ public final class R {
         public static final int report=0x7f050006;
         public static final int saveButtonTest=0x7f05000b;
         public static final int sendReportText=0x7f05000c;
+        public static final int test2=0x7f05000e;
         public static final int title_activity_location=0x7f050003;
         public static final int title_location_section1=0x7f050004;
         public static final int title_location_section2=0x7f050005;
@@ -89,11 +91,7 @@ public final class R {
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
+ API 14 theme customizations can go here. 
 
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
