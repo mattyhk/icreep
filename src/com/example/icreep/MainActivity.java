@@ -1,26 +1,38 @@
 package com.example.icreep;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-import android.os.Build;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 public class MainActivity extends Activity {
+	
+	//views to extract user details from
+	EditText userName, userSurname, userPosition, userEmail;
+	//find way to get photo
+	ImageView userPhoto;
+	
+	String photo="";
+	
+	//create db helper object
+	iCreepDatabaseAdapter icreepHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-       
+		
+		userName = (EditText) findViewById(R.id.editText1);
+		userSurname = (EditText) findViewById(R.id.editText2);
+		//userPosition = (EditText) findViewById(R.id.editText2);
+		userEmail = (EditText) findViewById(R.id.editText3);
+						
+		//rename helper for db management
+		icreepHelper = new iCreepDatabaseAdapter(this);		
 	}
 
 	@Override
@@ -91,5 +103,28 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onRestoreInstanceState(savedInstanceState);
 
+	}
+		
+	//upload image	
+	public void uploadImage(View view){
+		//String photo = userPhoto...
+	}
+	
+	//listener to adddUser event - let's add new user to db	
+	public void saveDetails(View v){
+		//get user details
+		String name = userName.getText().toString();
+		String surname = userSurname.getText().toString();
+		String position = userPosition.getText().toString();
+		String email = userEmail.getText().toString();
+		
+		long id = icreepHelper.enterNewUser(name, surname, position, email, photo);	
+		
+		//check if insertion was successful
+		if(id<0){
+			Message.message(this, "insertion failed");
+		}else{
+			Message.message(this, "insertion successful");
+		}
 	}
 }

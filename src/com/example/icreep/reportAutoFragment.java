@@ -1,8 +1,10 @@
 package com.example.icreep;
 
 import android.R.bool;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,15 +29,9 @@ public class reportAutoFragment extends Fragment {
 		int min = 0 ;
 		//the following is how you get your text pixels to the correct size depending on the screen
     	//16*getResources().getDisplayMetrics().density
-		float correctTextpixel = 16*getResources().getDisplayMetrics().density;
-		
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
 		
 		
-		}
+		
 		
 		/* please note that the switch will depend on the following possibly, db, shared preferences or 
 		 * savedInstanceState
@@ -51,21 +47,21 @@ public class reportAutoFragment extends Fragment {
 	    	
 	    	View v = inflater.inflate(R.layout.reportsautofragment, container,false) ;
 	    	
-	    	
-	    	//getting all the components for use and shaping of sizes 
 	    	save = (Button) v.findViewById(R.id.saveButton);
 	    	switched = (Switch) v.findViewById(R.id.switchBar);	    	
+	    	save.setEnabled(false);
+	    	switched.setBackgroundColor(getResources().getColor(R.color.whiteBackground));
+	    	// need to make the color of switched more visibile
 	    	tp = (TimePicker) v.findViewById(R.id.timePicker);	    	
 	    	TextView deli = (TextView) v.findViewById(R.id.Delivery);	    	
 	    	TextView deliTime = (TextView)v.findViewById(R.id.DeliveryTime);
 	    	tp.setEnabled(false);
-	    	
+	    	float correctTextpixel = 16*getResources().getDisplayMetrics().density;
 	    	//ensuring all text pixels are the correct size
 	    	save.setTextSize(correctTextpixel);
 	    	deli.setTextSize(correctTextpixel);
 	    	deliTime.setTextSize(correctTextpixel);
 	    	switched.setTextSize(correctTextpixel);
-	    	
 	    	
 	    	//all the listeners using unnamed inner classes to avoid id checks
 	    	switched.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -76,7 +72,7 @@ public class reportAutoFragment extends Fragment {
 					if (isChecked == true)
 					{
 						tp.setEnabled(true);
-						
+						save.setEnabled(true);					
 						
 					}else
 					{
@@ -124,10 +120,7 @@ public class reportAutoFragment extends Fragment {
 				
 				}
 			});
-	    	
-	    	
-	    	
-	    	
+
 	    	return v ;
 	    }	
 	    

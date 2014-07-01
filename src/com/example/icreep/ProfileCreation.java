@@ -9,21 +9,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.os.Build;
+import android.content.Intent;
+
 
 public class ProfileCreation extends Activity {
-
+	
     public void uploadImage(View view){
     	
-    	
+    	//Intent intent = new Intent(this, ProfilePicture.class);
     	
     }//uploadImage
 	
 	public void saveDetails(View view){
     	
+    	//Intent intent = new Intent(this, SaveUserDetails.class);
     	
-    	
+    	//EditText editText = (EditText) findViewById(R.string.);
     	
     }//saveDetails method
 	
@@ -36,7 +41,12 @@ public class ProfileCreation extends Activity {
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
+			
+		Button button = findViewById(R.id.) 
+			
 		}
+		
+		
 	}//onCreate method
 
 	

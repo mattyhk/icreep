@@ -25,7 +25,7 @@
         android:textColor="@color/whiteBackground"
          />
 	
-	<RelativeLayout 
+	<LinearLayout 
 	    android:id = "@+id/llforbuttonsinreport"
 	    android:layout_width="fill_parent"
         android:layout_height= "wrap_content"
@@ -35,26 +35,34 @@
 	    	    
 	    <Button
         android:id="@+id/autoButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height= "wrap_content"
         android:text="@string/autoButtonText"
         android:background="@color/lightBlueForLabels"        
-        style="?android:attr/borderlessButtonStyle"     
+        style="?android:attr/borderlessButtonStyle" 
+        android:layout_weight="1"    
+        android:layout_marginLeft="2dp"
         />
 	
 		<Button
 	        android:id="@+id/manualButton"
-	        android:layout_width="fill_parent"
+	        android:layout_width="0dp"
 	        android:layout_height= "wrap_content"
 	        android:text="@string/manualButtonText"
 	        android:background="@color/greyForBackrounds"
 	        style="?android:attr/borderlessButtonStyle"
-	        android:layout_toRightOf="@+id/autoButton"
+	        android:layout_weight="1"    
+	         android:layout_marginRight="2dp"
+	        
 	    />  	    
-	    </RelativeLayout>
+	    </LinearLayout>
+	    
 	
 	
 	
+	
+
+
 	
 	
 </LinearLayout>

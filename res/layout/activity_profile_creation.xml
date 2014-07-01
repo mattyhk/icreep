@@ -7,110 +7,131 @@
     tools:context="com.example.icreep.ProfileCreation"
     tools:ignore="MergeRootFrame" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="18dp"
-        android:text="@string/name_label"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#b7ff00" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/edit_name"
-        android:textColorHint="#FFFFFF"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:ems="10"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:text="@string/surname_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
-        android:layout_marginTop="16dp"
-        android:textAppearance="?android:attr/textAppearanceSmall" 
-        android:textColor="#b7ff00" />
-    
-    <EditText
-        android:id="@+id/editText2"
-        android:hint="@string/edit_surname"
-        android:textColorHint="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_below="@+id/editText2"
-        android:layout_marginTop="15dp"
-        android:text="@string/email_label"
-        android:textAppearance="?android:attr/textAppearanceSmall" 
-        android:textColor="#b7ff00"/>
-
-    <EditText
-        android:id="@+id/editText3"
-        android:hint="@string/edit_email"
-        android:textColorHint="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_below="@+id/textView3"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_centerVertical="true"
-        android:text="@string/profile_picture_label"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#b7ff00" />
-
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button2_save_user_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="34dp"
-        android:layout_marginRight="42dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginRight="33dp"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
         android:onClick="saveDetails"
         android:text="@string/save_user_details" />
 
+    <TextView
+        android:id="@+id/textView3_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView1_user_name"
+        android:layout_below="@+id/editText2_user_surname"
+        android:layout_marginTop="14dp"
+        android:text="@string/email_label"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/lightGreenForLabels" />
+
+    <TextView
+        android:id="@+id/textView5_user_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3_user_email"
+        android:layout_centerVertical="true"
+        android:text="@string/position_label"
+        android:textColor="@color/lightGreenForLabels"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/editText4_user_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView5_user_position"
+        android:layout_below="@+id/textView5_user_position"
+        android:ems="10" 
+        android:hint = "@string/edit_position"
+        android:textColorHint="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/textView4_profile_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView1_profile_picture"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="38dp"
+        android:text="@string/profile_picture_label"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/lightGreenForLabels" />
+
+    <EditText
+        android:id="@+id/editText1_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4_profile_picture"
+        android:layout_below="@+id/textView1_user_name"
+        android:ems="10"
+        android:hint="@string/edit_name"
+        android:inputType="textPersonName"
+        android:textColorHint="#FFFFFF" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView1_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1_user_name"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp"
+        android:text="@string/name_label"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/lightGreenForLabels" />
+
+    <EditText
+        android:id="@+id/editText3_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3_user_email"
+        android:layout_below="@+id/textView3_user_email"
+        android:ems="10"
+        android:hint="@string/edit_email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/editText2_user_surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3_user_email"
+        android:layout_below="@+id/textView2_user_surname"
+        android:ems="10"
+        android:hint="@string/edit_surname"
+        android:inputType="textPersonName"
+        android:textColorHint="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/textView2_user_surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1_user_name"
+        android:layout_below="@+id/editText1_user_name"
+        android:layout_marginTop="16dp"
+        android:text="@string/surname_label"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/lightGreenForLabels" />
+
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/imageView1_profile_picture"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_below="@+id/textView4"
-        android:layout_marginTop="14dp"
+        android:layout_alignBottom="@+id/button2_save_user_details"
+        android:layout_alignLeft="@+id/editText4_user_position"
+        android:layout_marginBottom="29dp"
+        android:background="@color/greyForBackrounds"
         android:clickable="true"
+        android:contentDescription="@string/content_descrip"
         android:onClick="uploadImage"
-        android:background="@color/OpenBoxGreen"
-        android:contentDescription="Profile Picture"
         android:src="@drawable/profile_pic_icon" />
 
 </RelativeLayout>
