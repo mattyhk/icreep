@@ -56,6 +56,7 @@ public final class R {
         public static final int profile_creation=0x7f080004;
     }
     public static final class string {
+        public static final int Test=0x7f05000d;
         public static final int action_settings=0x7f050002;
         public static final int app_name=0x7f050000;
         public static final int email_label=0x7f050008;
@@ -64,7 +65,6 @@ public final class R {
         public static final int surname_label=0x7f050006;
         public static final int title_activity_icreep_menu=0x7f05000e;
         public static final int title_activity_main_menu=0x7f05000c;
-        public static final int title_activity_menu=0x7f05000d;
         public static final int title_activity_profile_creation=0x7f050003;
     }
     public static final class style {
@@ -72,11 +72,7 @@ public final class R {
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
+ API 14 theme customizations can go here. 
 android:fontFamily="courier new"
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.

@@ -34,13 +34,26 @@
         android:textColor="@color/OpenBoxGreen"        
          />
 	
+<<<<<<< HEAD
 	<TimePicker 
 	    android:id="@+id/timePicker"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:background="@color/greyForBackrounds"	
-    android:textColor="@color/darkGreyForBackrounds"
 	    />
+=======
+	<EditText
+    android:id="@+id/TimeEditText"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:inputType= "time|number"
+    android:gravity="center" 
+    android:text = "7:18"
+    android:background="@color/whiteBackground"
+    android:textColor="@color/darkGreyForBackgrounds"
+    />
+	
+>>>>>>> 7d3045f4e40cdf69420302ceb07d054d57a8844f
 	<Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
