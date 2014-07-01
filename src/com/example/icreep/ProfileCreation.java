@@ -14,8 +14,13 @@ import android.os.Build;
 
 public class ProfileCreation extends Activity {
 
+    public void uploadImage(View view){
+    	
+    	
+    	
+    }//uploadImage
 	
-    public void saveDetails(View view){
+	public void saveDetails(View view){
     	
     	
     	

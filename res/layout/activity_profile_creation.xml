@@ -87,18 +87,6 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#b7ff00" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:contentDescription="@string/content_descrip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/textView4"
-        android:layout_marginTop="14dp"
-        android:clickable="true"
-        android:src="@drawable/ic_launcher" />
-
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -111,6 +99,19 @@
         android:fontFamily="courier new"
         android:onClick="saveDetails"
         android:text="@string/save_user_details" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="14dp"
+        android:clickable="true"
+        android:onClick="uploadImage"
+        android:background="@color/OpenBoxGreen"
+        android:contentDescription="Profile Picture"
+        android:src="@drawable/profile_pic_icon" />
 
 </RelativeLayout>
 
