@@ -35,7 +35,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Test">Marc Storebel: Developer</string>
 
-    <drawable name="pogressBar">#B7FF00</drawable>
+    <drawable name="progressBar">#B7FF00</drawable>
 
     <string name="test2">6:18</string>
 
