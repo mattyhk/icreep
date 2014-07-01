@@ -1,0 +1,12 @@
+<<<<<<< HEAD
+*/bin/
+*/gen/
+*.class
+=======
+*.class
+\bin
+\gen
+*/bin/
+*/gen/
+
+>>>>>>> 7d3045f4e40cdf69420302ceb07d054d57a8844f
