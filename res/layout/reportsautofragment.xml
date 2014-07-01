@@ -47,8 +47,10 @@
         android:text="@string/saveButtonTest"
         android:enabled="false"
         android:textColor="@color/blackColor"
-        android:background="@color/OpenBoxGreen"  
+        android:background="@drawable/button_style"  
         android:layout_marginTop="2dp"
+        android:fontFamily="courier new"
+        
     />
 	
 	    

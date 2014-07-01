@@ -37,11 +37,13 @@
         android:id="@+id/autoButton"
         android:layout_width="0dp"
         android:layout_height= "wrap_content"
-        android:text="@string/autoButtonText"
-        android:background="@color/lightGreenForLabels"        
+        android:text="@string/autoButtonText"      
         style="?android:attr/borderlessButtonStyle" 
         android:layout_weight="1"    
         android:layout_marginLeft="2dp"
+        android:fontFamily="courier new"
+        android:background="@drawable/button_style_blue"
+        android:layout_marginRight="2dp"  
         />
 	
 		<Button
@@ -49,10 +51,11 @@
 	        android:layout_width="0dp"
 	        android:layout_height= "wrap_content"
 	        android:text="@string/manualButtonText"
-	        android:background="@color/greyForBackrounds"
 	        style="?android:attr/borderlessButtonStyle"
 	        android:layout_weight="1"    
-	         android:layout_marginRight="2dp"
+	        android:layout_marginRight="2dp"
+	        android:fontFamily="courier new"
+	        android:background="@drawable/button_style"  
 	        
 	    />  	    
 	    </LinearLayout>
