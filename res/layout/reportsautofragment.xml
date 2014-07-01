@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation= "vertical"
-    android:background = "@color/darkGreyForBackrounds"
+    android:background = "@color/darkGreyForBackgrounds"
     >
     
     
@@ -42,7 +42,7 @@
     android:gravity="center" 
     android:text = "7:18"
     android:background="@color/whiteBackground"
-    android:textColor="@color/darkGreyForBackrounds"
+    android:textColor="@color/darkGreyForBackgrounds"
     />
 	
 	<Button
