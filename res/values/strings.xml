@@ -22,6 +22,7 @@
     <string name="edit_email">Enter email</string>
     <string name="profile_picture_label">Profile Picture:</string>
     <string name="save_user_details">Save</string>
+    <string name="TimeTrackerLocationText">Insert Text</string>
 
     <color name="OpenBoxGreen">#BCD727</color>
     <color name="lightBlueForLabels">#6699FF</color>

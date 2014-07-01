@@ -27,12 +27,11 @@
         android:text="name and surname: position"
         android:textColor="@color/greyForBackrounds"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+	
     <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRLeft="true"
         android:layout_below="@+id/textView2" >
 
         <TextView
