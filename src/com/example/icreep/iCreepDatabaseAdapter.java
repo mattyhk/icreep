@@ -91,12 +91,12 @@ public class iCreepDatabaseAdapter {
 			
 		//CREATE_TABLE QUERIES for db
 		
-		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOMINCREMENT," + MAJOR + " LONG,"+ MINOR +" LONG);";
-		private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOMINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID), FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID));";
-		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOMINCREMENT," + DESCRIPTION + " VARCHAR(255),"+ FLOOR + " INTEGER);";
+		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " LONG,"+ MINOR +" LONG);";
+		private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID), FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID));";
+		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + DESCRIPTION + " VARCHAR(255),"+ FLOOR + " INTEGER);";
 		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " DATETIME, " + TIME_LEFT +" DATETIME, " + LOCATION_DATE+ " DATE, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID), FOREIGN KEY (User_ID) REFERENCES User(User_ID));"; 
-		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOMINCREMENT," + NAME + " NVARCHAR(75)," + SURNAME +" NVARCHAR(75), "+ EMAIL +" NVARCHAR(100)," + EMPLOYEE_POSITION +" NVARCHAR(50), "+ PHOTO +" VARHCAR(255) IS NULL);";
-		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOMINCREMENT,"+ USER_ID + " INTEGER, " + AUTO_DELIVERY +" BOOLEAN, " + DELIVERY_TIME +" DATETIME, FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
+		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME + " NVARCHAR(75)," + SURNAME +" NVARCHAR(75), "+ EMAIL +" NVARCHAR(100)," + EMPLOYEE_POSITION +" NVARCHAR(50), "+ PHOTO +" VARHCAR(255));";
+		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER, " + AUTO_DELIVERY +" BOOLEAN, " + DELIVERY_TIME +" DATETIME, FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
 
 		private int tableCount = 6;
 		private int createTableQueryCount = 6;
