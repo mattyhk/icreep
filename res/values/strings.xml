@@ -22,6 +22,11 @@
     <string name="edit_email">Enter email</string>
     <string name="profile_picture_label">Profile Picture:</string>
     <string name="save_user_details">Save</string>
+    <string name="user_position">Employee Name: Position</string>
+    <string name="ground_floor">Ground Floor</string>
+    <string name="first_floor">First Floor</string>
+    <string name="second_floor">Second Floor</string>
+    <string name="zone_map">Zone Map</string>
 
     <color name="OpenBoxGreen">#BCD727</color>
     <color name="lightGreenForLabels">#b7ff00</color>
