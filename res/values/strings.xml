@@ -25,7 +25,7 @@
     <string name="TimeTrackerLocationText">Insert Text Here</string>
 
     <color name="OpenBoxGreen">#BCD727</color>
-    <color name="lightBlueForLabels">#6699FF</color>
+    <color name="lightGreenForLabels">#b7ff00</color>
     <color name="greyForBackrounds">#CCCCCC</color>
     <color name="darkGreyForBackgrounds">#999999</color>
     <color name="whiteBackground">#FFFFFF</color>
@@ -53,6 +53,9 @@
     <string name="content_descrip">Profile Picture</string>
     <string name="TimeTrackerLocationText">Location</string>
     <string name="TimeTrackerText">Time Tracker</string>
+    <string name="action_home">Home</string>
+    <string name="position_label">Position:</string>
+    <string name="edit_position">Enter position</string>
 
 
 </resources>
