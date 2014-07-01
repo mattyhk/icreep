@@ -38,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height= "wrap_content"
         android:text="@string/autoButtonText"
-        android:background="@color/lightBlueForLabels"        
+        android:background="@color/lightGreenForLabels"        
         style="?android:attr/borderlessButtonStyle" 
         android:layout_weight="1"    
         android:layout_marginLeft="2dp"
