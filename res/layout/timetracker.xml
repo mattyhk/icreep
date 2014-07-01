@@ -36,7 +36,7 @@
         android:layout_marginTop="36dp"
         android:text="Display Floor Name"
         android:textColor="@color/greyForBackrounds"
-        android:background="@color/darkGreyForBackrounds"
+        android:background="@color/darkGreyForBackgrounds"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
