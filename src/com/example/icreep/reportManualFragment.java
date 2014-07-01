@@ -1,6 +1,9 @@
 package com.example.icreep;
 
-import android.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,16 +16,11 @@ public class reportManualFragment extends Fragment{
 
 	
 	Button sendreport ;
-	float correctTextpixel = 16*getResources().getDisplayMetrics().density;
-	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-	}
 	
 	 @Override
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                             Bundle savedInstanceState) {
-		 
+		 float correctTextpixel = 16*getResources().getDisplayMetrics().density;
 		 View v = inflater.inflate(R.layout.reportsmanualfragment, container,false) ;
 		 sendreport = (Button) v.findViewById(R.id.sendReportButton);
 		 sendreport.setTextSize(correctTextpixel);
@@ -40,7 +38,7 @@ public class reportManualFragment extends Fragment{
 		});
 		 
 		 
-		 return container;	 
+		 return v;	 
 	 }
 	 
 	 public void sendMail()
