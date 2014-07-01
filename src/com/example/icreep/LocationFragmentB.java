@@ -35,10 +35,8 @@ public class LocationFragmentB extends Fragment {
 		
 		View v = inflater.inflate(R.layout.fragment_location_b, container, false);
 		
-		l = (ListView) getView().findViewById(R.id.location_b_listView1);
-		
 		// Temporary adapter
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, secondFloor);
+		
 		
 		// Inflate the layout for this fragment
 		return v;
