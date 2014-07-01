@@ -11,6 +11,9 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int OpenBoxGreen=0x7f060000;
+        public static final int background=0x7f060006;
+        public static final int blackColor=0x7f060005;
         public static final int darkGreyForBackgrounds=0x7f060003;
         public static final int greyForBackrounds=0x7f060002;
         public static final int lightBlueForLabels=0x7f060001;
@@ -30,42 +33,104 @@ public final class R {
     public static final class drawable {
         public static final int button_style=0x7f020000;
         public static final int ic_launcher=0x7f020001;
+        public static final int pogressBar=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f080001;
-        public static final int container=0x7f080000;
-        public static final int tableLayout1=0x7f090010;
-        public static final int textView1=0x7f09000d;
-        public static final int textView2=0x7f09000e;
-        public static final int textView3=0x7f09000f;
-        public static final int textViewMain=0x7f090002;
-        public static final int userDescript=0x7f090003;
+        public static final int Delivery=0x7f090015;
+        public static final int DeliveryTime=0x7f090017;
+        public static final int TextView04=0x7f09001e;
+        public static final int action_settings=0x7f090022;
+        public static final int autoButton=0x7f090012;
+        public static final int autoFragLayout=0x7f090014;
+        public static final int button1=0x7f090002;
+        public static final int button2=0x7f090003;
+        public static final int button3=0x7f090004;
+        public static final int button4=0x7f090005;
+        public static final int container=0x7f090000;
+        public static final int editText1=0x7f090007;
+        public static final int editText2=0x7f090009;
+        public static final int editText3=0x7f09000b;
+        public static final int imageView1=0x7f09000d;
+        public static final int llforbuttonsinreport=0x7f090011;
+        public static final int location=0x7f09001d;
+        public static final int location_pager=0x7f090006;
+        public static final int manualButton=0x7f090013;
+        public static final int progressBar1=0x7f090020;
+        public static final int report=0x7f09000e;
+        public static final int reportManualLayout=0x7f09001a;
+        public static final int saveButton=0x7f090019;
+        public static final int sendReportButton=0x7f09001b;
+        public static final int switchBar=0x7f090016;
+        public static final int tableLayout1=0x7f09001c;
+        public static final int textView1=0x7f090001;
+        public static final int textView2=0x7f090008;
+        public static final int textView3=0x7f09000a;
+        public static final int textView4=0x7f09000c;
+        public static final int textView5=0x7f09001f;
+        public static final int textView6=0x7f090021;
+        public static final int textViewMain=0x7f09000f;
+        public static final int timePicker=0x7f090018;
+        public static final int userDescript=0x7f090010;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int reportsautofragment=0x7f030005;
-        public static final int reportsmanualfragment=0x7f030006;
-        public static final int timetracker=0x7f030007;
+        public static final int activity_icreep_menu=0x7f030000;
+        public static final int activity_location=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_profile_creation=0x7f030003;
+        public static final int fragment_icreep_menu=0x7f030004;
+        public static final int fragment_location_a=0x7f030005;
+        public static final int fragment_location_b=0x7f030006;
+        public static final int fragment_profile_creation=0x7f030007;
+        public static final int reports=0x7f030008;
+        public static final int reportsautofragment=0x7f030009;
+        public static final int reportsmanualfragment=0x7f03000a;
+        public static final int timetracker=0x7f03000b;
+        public static final int timetrackerinoutoffice=0x7f03000c;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
-        public static final int main=0x7f080001;
-        public static final int main_menu=0x7f080002;
-        public static final int menu=0x7f080003;
-        public static final int profile_creation=0x7f080004;
+        public static final int icreep_menu=0x7f080000;
+        public static final int location=0x7f080001;
+        public static final int main=0x7f080002;
+        public static final int main_menu=0x7f080003;
+        public static final int menu=0x7f080004;
+        public static final int profile_creation=0x7f080005;
     }
     public static final class string {
-        public static final int Test=0x7f05000d;
+        public static final int Test=0x7f050018;
+        public static final int TimeTrackerLocationText=0x7f050015;
         public static final int action_settings=0x7f050002;
         public static final int app_name=0x7f050000;
-        public static final int email_label=0x7f050008;
+        public static final int autoButtonText=0x7f050007;
+        public static final int autoDelivery=0x7f050009;
+        public static final int content_descrip=0x7f050022;
+        public static final int deliveryTimeText=0x7f05000a;
+        public static final int edit_email=0x7f050012;
+        public static final int edit_name=0x7f05000e;
+        public static final int edit_surname=0x7f050010;
+        public static final int email_label=0x7f050011;
+        public static final int hello_blank_fragment=0x7f050017;
         public static final int hello_world=0x7f050001;
-        public static final int select_time_tracker=0x7f050011;
-        public static final int surname_label=0x7f050006;
-        public static final int title_activity_icreep_menu=0x7f05000e;
-        public static final int title_activity_main_menu=0x7f05000c;
-        public static final int title_activity_profile_creation=0x7f050003;
+        public static final int icreep_main_menu_logo=0x7f05001d;
+        public static final int manualButtonText=0x7f050008;
+        public static final int name_label=0x7f05000d;
+        public static final int profile_picture_label=0x7f050013;
+        public static final int report=0x7f050006;
+        public static final int saveButtonTest=0x7f05000b;
+        public static final int save_user_details=0x7f050014;
+        public static final int select_profile=0x7f050021;
+        public static final int select_proximity=0x7f05001e;
+        public static final int select_reports=0x7f050020;
+        public static final int select_time_tracker=0x7f05001f;
+        public static final int sendReportText=0x7f050016;
+        public static final int surname_label=0x7f05000f;
+        public static final int test2=0x7f050019;
+        public static final int title_activity_icreep_menu=0x7f05001c;
+        public static final int title_activity_location=0x7f050003;
+        public static final int title_activity_main_menu=0x7f05001a;
+        public static final int title_activity_menu=0x7f05001b;
+        public static final int title_activity_profile_creation=0x7f05000c;
+        public static final int title_location_section1=0x7f050004;
+        public static final int title_location_section2=0x7f050005;
     }
     public static final class style {
         /** 
@@ -73,7 +138,7 @@ public final class R {
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
  API 14 theme customizations can go here. 
-android:fontFamily="courier new"
+
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
