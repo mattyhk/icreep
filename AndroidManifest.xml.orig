@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity
+<<<<<<< HEAD
             android:name="com.example.icreep.ProfileCreation"
             android:label="@string/title_activity_profile_creation"
             android:parentActivityName="com.example.icreep.MainActivity" >
@@ -56,6 +57,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.icreep.MainActivity" />
+=======
+            android:name="com.example.icreep.LocationActivity"
+            android:label="@string/title_activity_location" >
+>>>>>>> 7d3045f4e40cdf69420302ceb07d054d57a8844f
         </activity>
     </application>
 

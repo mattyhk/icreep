@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.example.icreep.ProfileCreation"
+    tools:ignore="MergeRootFrame" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/name_label"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#b7ff00" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_name"
+        android:textColorHint="#FFFFFF"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:text="@string/surname_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_below="@+id/editText1"
+        android:layout_marginTop="16dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" 
+        android:textColor="#b7ff00" />
+    
+    <EditText
+        android:id="@+id/editText2"
+        android:hint="@string/edit_surname"
+        android:textColorHint="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="15dp"
+        android:text="@string/email_label"
+        android:textAppearance="?android:attr/textAppearanceSmall" 
+        android:textColor="#b7ff00"/>
+
+    <EditText
+        android:id="@+id/editText3"
+        android:hint="@string/edit_email"
+        android:textColorHint="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_centerVertical="true"
+        android:text="@string/profile_picture_label"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#b7ff00" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:contentDescription="@string/content_descrip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="14dp"
+        android:clickable="true"
+        android:src="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="34dp"
+        android:layout_marginRight="42dp"
+        android:background="@drawable/button_style"
+        android:fontFamily="courier new"
+        android:onClick="saveDetails"
+        android:text="@string/save_user_details" />
+
+</RelativeLayout>
+

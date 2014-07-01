@@ -28,6 +28,36 @@
         <activity
             android:name="com.example.icreep.LocationActivity"
             android:label="@string/title_activity_location" >
+            android:name="com.example.icreep.ProfileCreation"
+            android:label="@string/title_activity_profile_creation"
+            android:parentActivityName="com.example.icreep.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.icreep.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.icreep.MainMenu"
+            android:label="@string/title_activity_main_menu"
+            android:parentActivityName="com.example.icreep.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.icreep.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.icreep.Menu"
+            android:label="@string/title_activity_menu"
+            android:parentActivityName="com.example.icreep.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.icreep.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.icreep.IcreepMenu"
+            android:label="@string/title_activity_icreep_menu"
+            android:parentActivityName="com.example.icreep.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.icreep.MainActivity" />
         </activity>
     </application>
 
