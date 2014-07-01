@@ -65,6 +65,22 @@ public class reportActivity extends Activity {
 			});
 	    }
 	 
+	 
+	 	//gain access to fragment
+	 	public reportAutoFragment gainAccessToAutoFragment()
+	 	{
+	 	reportAutoFragment fragment = (reportAutoFragment) getFragmentManager().findFragmentById(R.id.autoFragLayout);
+	 	
+	 	return fragment;
+	 	}
+	 	//gain access to fragment
+	 	public reportManualFragment gainAccessToManualFragment()
+	 	{
+	 	reportManualFragment fragment = (reportManualFragment) getFragmentManager().findFragmentById(R.id.reportManualLayout);
+	 	return fragment;
+	 	}
+	 	
+	 	
 	 	public void addautoFragment()
 	 	{
 	 		android.app.FragmentManager fragmentManager = getFragmentManager();

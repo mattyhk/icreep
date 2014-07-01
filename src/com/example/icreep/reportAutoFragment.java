@@ -28,6 +28,7 @@ public class reportAutoFragment extends Fragment {
 		//the following is how you get your text pixels to the correct size depending on the screen
     	//16*getResources().getDisplayMetrics().density
 		float correctTextpixel = 16*getResources().getDisplayMetrics().density;
+		
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -197,6 +198,7 @@ public class reportAutoFragment extends Fragment {
 	    	
 	    }
 	    
+	   
 	    
 	
 	
