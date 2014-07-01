@@ -54,7 +54,7 @@
         android:textColor="@color/greyForBackrounds"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    	<!-- to be calculated: 0-100, android:progress="50" -->
+    	<!-- progress to to be calculated: 0-100, android:progress="50" -->
 
     <ProgressBar
         android:id="@+id/progressBar1"
