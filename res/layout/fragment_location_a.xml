@@ -7,21 +7,23 @@
     tools:context="com.example.icreep.LocationFragmentA" >
 
     <TextView
-        android:id="@+id/location_a_textView1"
+        android:id="@+id/location_a_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/OpenBoxGreen"
         android:text="@string/title_location_section1" />
 
     <TextView
-        android:id="@+id/location__a_textView2"
+        android:id="@+id/location_a_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/location_a_textView1"
+        android:layout_below="@+id/location_a_title"
+        android:textColor="@color/whiteBackground"
         android:text="@string/user_position" />
 
     <ImageView
-        android:id="@+id/location_a_imageView1"
+        android:id="@+id/location_a_zone_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

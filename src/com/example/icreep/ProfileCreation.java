@@ -48,6 +48,7 @@ public class ProfileCreation extends Activity {
     	//Intent intent = new Intent(this, ProfilePicture.class);
 		
     	photo = "";
+	}
     	
 	}
 	

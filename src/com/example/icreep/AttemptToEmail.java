@@ -8,7 +8,7 @@ import java.util.Date;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class AttempToEmail extends AsyncTask<String, Void, String>{
+public class AttemptToEmail extends AsyncTask<String, Void, String>{
 
 	@Override
 	protected String doInBackground(String... params) {

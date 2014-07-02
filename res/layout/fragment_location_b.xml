@@ -7,14 +7,14 @@
     tools:context="com.example.icreep.LocationFragmentB" >
 
     <TextView
-        android:id="@+id/location_b_textView1"
+        android:id="@+id/location_b_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/OpenBoxGreen"
         android:text="@string/title_location_section2" />
 
     <ListView 
-        android:id="@+id/listView_main"
+        android:id="@+id/daily_movement_listView_main"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" 
         android:layout_marginTop="50dp"
@@ -24,11 +24,12 @@
         android:background="@color/darkGreyForBackgrounds"/>
 
     <TextView
-        android:id="@+id/location_b_textView2"
+        android:id="@+id/location_b_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/location_b_textView1"
+        android:layout_below="@+id/location_b_title"
+        android:textColor="@color/whiteBackground"
         android:text="@string/user_position" />
 
 </RelativeLayout>
