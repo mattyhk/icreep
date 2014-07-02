@@ -1,6 +1,8 @@
 package com.example.icreep;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
@@ -120,6 +122,9 @@ public class LocationActivity extends FragmentActivity implements TabListener {
 class MyAdapter extends FragmentPagerAdapter {
 
 	private final int NUMSCREENS = 2;
+	
+	// Provides reference to instantiated fragments, allows for call in onPageSelected
+	private final Map<Integer, Fragment> mPageReferenceMap = new HashMap<Integer, Fragment>();
 
 	public MyAdapter(FragmentManager fm) {
 		super(fm);
@@ -132,9 +137,11 @@ class MyAdapter extends FragmentPagerAdapter {
 
 		if (arg0 == 0) {
 			fragment = new LocationFragmentA();
+			mPageReferenceMap.put(arg0, fragment);
 		}
 		if (arg0 == 1) {
 			fragment = new LocationFragmentB();
+			mPageReferenceMap.put(arg0, fragment);
 		}
 
 		return fragment;
@@ -143,5 +150,14 @@ class MyAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		return NUMSCREENS;
+	}
+	
+	@Override
+	public void destroyItem(ViewGroup container, int position, Object object) {
+		super.destroyItem(container, position, object);
+	}
+	
+	public Fragment getFragment(int position){
+		return mPageReferenceMap.get(position);
 	}
 }
