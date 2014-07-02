@@ -11,28 +11,11 @@ import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 	
-	//views to extract user details from
-	EditText userName, userSurname, userPosition, userEmail;
-	//find way to get photo
-	ImageView userPhoto;
-	
-	String photo="";
-	
-	//create db helper object
-	iCreepDatabaseAdapter icreepHelper;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		userName = (EditText) findViewById(R.id.editText1_user_name);
-		userSurname = (EditText) findViewById(R.id.editText2_user_surname);
-		userPosition = (EditText) findViewById(R.id.editText4_user_position);
-		userEmail = (EditText) findViewById(R.id.editText3_user_email);
-						
-		//rename helper for db management
-		icreepHelper = new iCreepDatabaseAdapter(this);		
+			
 	}
 
 	@Override
@@ -110,24 +93,4 @@ public class MainActivity extends Activity {
 		//String photo = userPhoto...
 	}
 	
-	//listener to adddUser event - let's add new user to db	
-	public void saveDetails(View v){
-		//get user details
-		String name = userName.getText().toString();
-		String surname = userSurname.getText().toString();
-		String position = userPosition.getText().toString();
-		String email = userEmail.getText().toString();
-		
-		//before entering user into DB - can send validation email first
-		//if validation email bounces than user not entered in tDB else add to DB
-		
-		long id = icreepHelper.enterNewUser(name, surname, position, email, photo);	
-		
-		//check if insertion was successful
-		if(id<0){
-			Message.message(this, "User details saved");
-		}else{
-			Message.message(this, "User not details saved");
-		}
-	}
 }

@@ -1,94 +1,71 @@
 package com.example.icreep;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.os.Build;
-import android.content.Intent;
 
 
 public class ProfileCreation extends Activity {
 	
-    public void uploadImage(View view){
-    	
-    	//Intent intent = new Intent(this, ProfilePicture.class);
-    	
-    }//uploadImage
+	//views to extract user details from
+	EditText userName, userSurname, userPosition, userEmail;
+	//find way to get photo
+	ImageView userPhoto;
 	
-	public void saveDetails(View view){
-    	
-    	//Intent intent = new Intent(this, SaveUserDetails.class);
-    	
-    	//EditText editText = (EditText) findViewById(R.string.);
-    	
-    }//saveDetails method
+	String photo="";
 	
-	
+	//create db helper object
+	iCreepDatabaseAdapter icreepHelper;
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile_creation);
 
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-			
-		Button button = findViewById(R.id.) 
-			
-		}
-		
-		
+		userName = (EditText) findViewById(R.id.editText1_user_name);
+		userSurname = (EditText) findViewById(R.id.editText2_user_surname);
+		userPosition = (EditText) findViewById(R.id.editText4_user_position);
+		userEmail = (EditText) findViewById(R.id.editText3_user_email);
+						
+		//rename helper for db management
+		icreepHelper = new iCreepDatabaseAdapter(this);	
 	}//onCreate method
-
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.profile_creation, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);	
+	//upload image
+	public void uploadImage(View view){
+    	
+    	//Intent intent = new Intent(this, ProfilePicture.class);
+    	
+    }//uploadImage
+	
+	
+	//listener to adddUser event - let's add new user to db	
+	public void saveDetails(View view){
+    	
+    	//Intent intent = new Intent(this, SaveUserDetails.class);
+    	
+    	//EditText editText = (EditText) findViewById(R.string.);
 		
-	}//onOptionsItemSelected method
-	
-	
-	
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
+		//get user details
+		String name = userName.getText().toString();
+		String surname = userSurname.getText().toString();
+		String position = userPosition.getText().toString();
+		String email = userEmail.getText().toString();
+		
+		//before entering user into DB - can send validation email first
+		//if validation email bounces than user not entered in DB else add to DB
+			
+		long id = icreepHelper.enterNewUser(name, surname, position, email, photo);	
+		
+		//check if insertion was successful
+		if(id<0){
+			Message.message(this, "User details saved");
+		}else{
+			Message.message(this, "User not details saved");
 		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(
-					R.layout.fragment_profile_creation, container, false);
-			return rootView;
-		}
-	}
-
+		
+    	
+    }//saveDetails method	
 }
