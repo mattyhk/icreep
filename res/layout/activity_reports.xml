@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/report"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background = "@color/darkGreyForBackgrounds" 
+    >
+    
+	<TextView
+        android:id="@+id/textViewMain"
+        android:layout_width="wrap_content"
+        android:layout_height= "wrap_content"
+        android:text="@string/report"
+        android:gravity="left"
+        android:textColor="@color/OpenBoxGreen"
+         />
+	
+	<TextView
+        android:id="@+id/userDescript"
+        android:layout_width="wrap_content"
+        android:layout_height= "wrap_content"
+        android:text="@string/Test"
+        android:gravity="left"
+        android:textColor="@color/whiteBackground"
+         />
+	
+	<LinearLayout 
+	    android:id = "@+id/llforbuttonsinreport"
+	    android:layout_width="fill_parent"
+        android:layout_height= "wrap_content"
+		android:orientation="horizontal"
+	    android:background = "@color/darkGreyForBackgrounds"	    
+	    >	    
+	    	    
+	    <Button
+        android:id="@+id/autoButton"
+        android:layout_width="0dp"
+        android:layout_height= "wrap_content"
+        android:text="@string/autoButtonText"      
+        style="?android:attr/borderlessButtonStyle" 
+        android:layout_weight="1"    
+        android:layout_marginLeft="2dp"
+        android:fontFamily="courier new"
+        android:background="@drawable/button_style_blue"
+        android:layout_marginRight="2dp"  
+        />
+	
+		<Button
+	        android:id="@+id/manualButton"
+	        android:layout_width="0dp"
+	        android:layout_height= "wrap_content"
+	        android:text="@string/manualButtonText"
+	        style="?android:attr/borderlessButtonStyle"
+	        android:layout_weight="1"    
+	        android:layout_marginRight="2dp"
+	        android:fontFamily="courier new"
+	        android:background="@drawable/button_style"  
+	        
+	    />  	    
+	    </LinearLayout>
+	    
+	
+	
+	
+	
+
+
+	
+	
+</LinearLayout>

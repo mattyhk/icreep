@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/autoFragLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation= "vertical"
+    android:background = "@color/darkGreyForBackgrounds"
+    >
+    
+    
+	<TextView
+        android:id="@+id/Delivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/autoDelivery"
+        android:gravity="center"
+        android:textColor= "@color/OpenBoxGreen"
+         />
+
+	<Switch
+	    android:id="@+id/switchBar"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:checked="false"
+	    android:textOff="OFF"
+	    android:textOn="ON" />
+		    
+	<TextView
+        android:id="@+id/DeliveryTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/deliveryTimeText"
+        android:gravity="left"
+        android:textColor="@color/OpenBoxGreen"        
+         />
+	
+	<TimePicker 
+	    android:id="@+id/timePicker"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:background="@color/greyForBackrounds"	
+	    />
+	<Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:enabled="false"
+        android:textColor="@color/blackColor"
+        android:background="@drawable/button_style"  
+        android:layout_marginTop="2dp"
+        android:fontFamily="courier new"
+        
+    />
+	
+	    
+</LinearLayout>
