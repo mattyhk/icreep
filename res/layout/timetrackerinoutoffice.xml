@@ -10,29 +10,6 @@
     	<!-- times should be calculated and displayed here -->
 
        <TextView
-           android:id="@+id/textView3_in_office"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignBaseline="@+id/textView5_out_office"
-           android:layout_alignBottom="@+id/textView5_out_office"
-           android:layout_alignLeft="@+id/textView2_user_name_position"
-           android:background="@color/darkGreyForBackgrounds"
-           android:text="@string/in_office_label"
-           android:textAppearance="?android:attr/textAppearanceMedium"
-           android:textColor="@color/whiteColor" />
-
-       <TextView
-           android:id="@+id/textView5_out_office"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignRight="@+id/textView2_user_name_position"
-           android:layout_below="@+id/textView2_user_name_position"
-           android:layout_marginTop="86dp"
-           android:text="@string/out_office_label"
-           android:textAppearance="?android:attr/textAppearanceMedium"
-           android:textColor="@color/whiteColor" />
-
-       <TextView
            android:id="@+id/textView4_out_office_time"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -40,7 +17,7 @@
            android:layout_below="@+id/progressBar1_in_out_office"
            android:layout_marginTop="15dp"
            android:background="@color/darkGreyForBackgrounds"
-           android:text="0:48:12"
+           android:text="1:48:12"
            android:textAppearance="?android:attr/textAppearanceMedium"
            android:textColor="@color/whiteColor" />
 
@@ -52,16 +29,39 @@
            android:layout_alignBottom="@+id/textView4_out_office_time"
            android:layout_alignLeft="@+id/progressBar1_in_out_office"
            android:background="@color/darkGreyForBackgrounds"
-           android:text="05:34:19"
+           android:text="04:34:19"
            android:textAppearance="?android:attr/textAppearanceMedium"
            android:textColor="@color/whiteColor" />
+
+       <TextView
+           android:id="@+id/textView3_in_office"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignBaseline="@+id/textView5_out_office"
+           android:layout_alignBottom="@+id/textView5_out_office"
+           android:layout_alignRight="@+id/textView6_in_office_time"
+           android:background="@color/darkGreyForBackgrounds"
+           android:text="@string/in_office_label"
+           android:textAppearance="?android:attr/textAppearanceMedium"
+           android:textColor="@color/whiteColor" />
+
+       <TextView
+           android:id="@+id/textView1_time_tracker_heading_1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignLeft="@+id/textView2_user_name_position_1"
+           android:layout_alignParentTop="true"
+           android:layout_marginTop="32dp"
+           android:text="@string/TimeTrackerText"
+           android:textAppearance="?android:attr/textAppearanceLarge"
+           android:textColor="@color/lightGreenForLabels" />
 
        <ProgressBar
            android:id="@+id/progressBar1_in_out_office"
            style="?android:attr/progressBarStyleHorizontal"
            android:layout_width="245dip"
            android:layout_height="wrap_content"
-           android:layout_alignLeft="@+id/textView3_in_office"
+           android:layout_centerHorizontal="true"
            android:layout_centerVertical="true"
            android:indeterminate="false"
            android:maxHeight="35dip"
@@ -70,23 +70,23 @@
            android:progressDrawable="@drawable/progress_bar" />
 
        <TextView
-           android:id="@+id/textView1_time_tracker_heading_1"
+           android:id="@+id/textView5_out_office"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_alignLeft="@+id/textView2_user_name_position"
-           android:layout_alignParentTop="true"
-           android:layout_marginTop="28dp"
-           android:text="@string/TimeTrackerText"
-           android:textAppearance="?android:attr/textAppearanceLarge"
-           android:textColor="@color/lightGreenForLabels" />
+           android:layout_above="@+id/progressBar1_in_out_office"
+           android:layout_alignRight="@+id/progressBar1_in_out_office"
+           android:layout_marginBottom="25dp"
+           android:text="@string/out_office_label"
+           android:textAppearance="?android:attr/textAppearanceMedium"
+           android:textColor="@color/whiteColor" />
 
        <TextView
-           android:id="@+id/textView2_user_name_position"
+           android:id="@+id/textView2_user_name_position_1"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
+           android:layout_alignLeft="@+id/progressBar1_in_out_office"
            android:layout_below="@+id/textView1_time_tracker_heading_1"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="17dp"
+           android:layout_marginTop="15dp"
            android:text="@string/Test"
            android:textAppearance="?android:attr/textAppearanceLarge"
            android:textColor="@color/grey_text" />
