@@ -1,5 +1,7 @@
 package com.example.icreep;
 
+import com.example.dummyapp.R;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -20,16 +22,23 @@ public class ProfileCreation extends Activity {
 	
     public void uploadImage(View view){
     	
-    	//Intent intent = new Intent(this, ProfilePicture.class);
+    	
     	
     }//uploadImage
 	
 	public void saveDetails(View view){
     	
-    	//Intent intent = new Intent(this, SaveUserDetails.class);
-    	
-    	//EditText editText = (EditText) findViewById(R.string.);
-    	
+		
+		EditText name = (EditText) findViewById(R.id.editText1_user_name);
+		EditText surname = (EditText) findViewById(R.id.editText2_user_surname);
+		EditText email = (EditText) findViewById(R.id.editText3_user_email);
+		EditText position = (EditText) findViewById(R.id.editText4_user_position);
+		
+		String sname = name.getText().toString(); 
+		String ssurname = surname.getText().toString(); 
+		String semail  = email.getText().toString();
+		String sposition  = position.getText().toString();
+		
     }//saveDetails method
 	
 	
@@ -38,25 +47,16 @@ public class ProfileCreation extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile_creation);
 
+		/*
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
-			
-		Button button = findViewById(R.id.) 
-			
+					
 		}
-		
+	*/	
 		
 	}//onCreate method
 
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.profile_creation, menu);
-		return true;
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -77,6 +77,8 @@ public class ProfileCreation extends Activity {
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
+	
+	/*
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
@@ -89,6 +91,8 @@ public class ProfileCreation extends Activity {
 					R.layout.fragment_profile_creation, container, false);
 			return rootView;
 		}
-	}
+		
+		}
+		*/
 
 }
