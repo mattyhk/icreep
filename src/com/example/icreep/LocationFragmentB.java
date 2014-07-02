@@ -19,6 +19,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	
 	private ListView listView = null;
 	private ArrayList<ListItem> items = new ArrayList<ListItem>(); 
+	private DailyMovementAdapter mAdapter;
 
 	public LocationFragmentB() {
 		// Required empty public constructor
@@ -48,8 +49,8 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
         items.add(new ZoneItem("Wing", "East"));
         items.add(new ZoneItem("Hallway", "Main"));
 		
-        DailyMovementAdapter adapter = new DailyMovementAdapter(getActivity(), items);
-        listView.setAdapter(adapter);
+        mAdapter = new DailyMovementAdapter(getActivity(), items);
+        listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
 
 		return v;
@@ -62,6 +63,15 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		ZoneItem item = (ZoneItem)items.get(position);
 		Toast.makeText(getActivity(), "You clicked " + item.getTitle() , Toast.LENGTH_SHORT).show();
 		
+	}
+	
+	/**
+	 * Needs to update the list displayed
+	 */
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 	}
 
 }

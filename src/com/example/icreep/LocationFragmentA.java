@@ -16,9 +16,37 @@ public class LocationFragmentA extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
+		
 		View v = inflater.inflate(R.layout.fragment_location_a, container, false);
 		
 		return v;
 	}
+	
+	/**
+	 * Returns the current floor of the user
+	 * @return floor
+	 */
+	private int getFloor(){
+		return 0;
+	}
+	
+	/**
+	 * Sets the map to be displayed as determined by the current zone and floor
+	 * @param floor
+	 * @param currentZone
+	 */
+	private void setImage(int floor, int currentZone){
+		
+	}
+	
+	/**
+	 * Needs to update the map displayed
+	 */
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+	
 
 }
