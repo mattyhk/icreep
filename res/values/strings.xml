@@ -59,5 +59,9 @@
     <string name="edit_position">Enter position</string>
 
     <string name="TimeTrackerText">Time Tracker</string>
+    <string name="in_office_label">In Office</string>
+    <string name="out_office_label">Out Office</string>
+    <color name="whiteColor">#FFFFFF</color>
+    <color name="grey_text">#CCCCCC</color>
 
 </resources>

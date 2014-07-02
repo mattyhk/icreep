@@ -55,6 +55,7 @@ public class UserLocation {
 	 * @return zone - returns the calculated zone
 	 */
 	private int findCurrentZone() {
+		return 0;
 
 	}
 
@@ -65,6 +66,7 @@ public class UserLocation {
 	 * @return zones - an array of all the zones visited
 	 */
 	public static ArrayList<String> findDailyMovements() {
+		return null;
 
 	}
 
@@ -76,6 +78,7 @@ public class UserLocation {
 	 * @return zoneTimes - hash map with the zones and durations
 	 */
 	public static HashMap<Integer, Float> findDailyTimes() {
+		return null;
 
 	}
 
@@ -86,6 +89,7 @@ public class UserLocation {
 	 * @return time - the amount of time spent outside of the office
 	 */
 	public static float calcOutofOfficeTime() {
+		return 0;
 
 	}
 
