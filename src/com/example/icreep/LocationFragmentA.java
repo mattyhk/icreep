@@ -5,9 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class LocationFragmentA extends Fragment {
-
+	
 	public LocationFragmentA() {
 		// Required empty public constructor
 	}
@@ -18,6 +19,13 @@ public class LocationFragmentA extends Fragment {
 		// Inflate the layout for this fragment
 		
 		View v = inflater.inflate(R.layout.fragment_location_a, container, false);
+		
+		TextView fragmentTitle = (TextView) v.findViewById(R.id.location_a_title);
+		TextView fragmentUser = (TextView) v.findViewById(R.id.location_a_user);
+		
+		float correctTextSize = 16*getResources().getDisplayMetrics().density;
+		fragmentTitle.setTextSize(correctTextSize);
+		fragmentUser.setTextSize(correctTextSize);
 		
 		return v;
 	}
