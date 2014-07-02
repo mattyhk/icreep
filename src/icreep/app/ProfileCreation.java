@@ -13,16 +13,7 @@ public class ProfileCreation extends Activity {
 	//views to extract user details from
 	EditText userName, userSurname, userPosition, userEmail;
 	//find way to get photo
-	ImageView userPhoto;
-		EditText name = (EditText) findViewById(R.id.editText1_user_name);
-		EditText surname = (EditText) findViewById(R.id.editText2_user_surname);
-		EditText email = (EditText) findViewById(R.id.editText3_user_email);
-		EditText position = (EditText) findViewById(R.id.editText4_user_position);
-		
-		String sname = name.getText().toString(); 
-		String ssurname = surname.getText().toString(); 
-		String semail  = email.getText().toString();
-		String sposition  = position.getText().toString();
+	ImageView userPhoto;		
 		
 	String photo="";
 	
