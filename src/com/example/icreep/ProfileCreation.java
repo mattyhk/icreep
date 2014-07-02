@@ -37,6 +37,8 @@ public class ProfileCreation extends Activity {
 	public void uploadImage(View view){
     	
     	//Intent intent = new Intent(this, ProfilePicture.class);
+		
+    	photo = "";
     	
     }//uploadImage
 	
@@ -64,8 +66,6 @@ public class ProfileCreation extends Activity {
 			Message.message(this, "User details saved");
 		}else{
 			Message.message(this, "User not details saved");
-		}
-		
-    	
+		}		   	
     }//saveDetails method	
 }
