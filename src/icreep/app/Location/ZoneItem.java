@@ -1,4 +1,5 @@
-package com.example.icreep;
+package icreep.app.Location;
+
 
 public class ZoneItem implements ListItem {
 	

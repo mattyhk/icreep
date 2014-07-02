@@ -1,4 +1,4 @@
-package com.example.icreep;
+package icreep.app.Report;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import icreep.app.R;
+import icreep.app.R.id;
+import icreep.app.R.layout;
 
 public class reportManualFragment extends Fragment{
 
@@ -31,7 +34,7 @@ public class reportManualFragment extends Fragment{
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                             Bundle savedInstanceState) {
 		 float correctTextpixel = 16*getResources().getDisplayMetrics().density;
-		 View v = inflater.inflate(R.layout.reportsmanualfragment, container,false) ;
+		 View v = inflater.inflate(R.layout.reports_manual_fragment, container,false) ;
 		 sendreport = (Button) v.findViewById(R.id.sendReportButton);
 		 sendreport.setTextSize(correctTextpixel);
 		 //sendreport.

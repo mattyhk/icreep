@@ -1,4 +1,4 @@
-package com.example.icreep;
+package icreep.app;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import icreep.app.R;
 
 public class MainActivity extends Activity {
 	

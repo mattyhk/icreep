@@ -1,5 +1,6 @@
-package com.example.icreep;
+package icreep.app.db;
 
+import icreep.app.Message;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;

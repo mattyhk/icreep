@@ -1,4 +1,4 @@
-package com.example.icreep;
+package icreep.app;
 
 import android.content.Context;
 import android.widget.Toast;

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkGreyForBackgrounds"
     android:orientation="vertical"
-    tools:context="com.example.icreep.LocationFragmentA" >
+    tools:context="icreep.app.Location.LocationFragmentA" >
 
     <TextView
         android:id="@+id/location_a_title"

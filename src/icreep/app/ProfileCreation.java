@@ -1,5 +1,6 @@
-package com.example.icreep;
+package icreep.app;
 
+import icreep.app.db.iCreepDatabaseAdapter;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
