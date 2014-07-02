@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import icreep.app.R;
+import icreep.app.Location.LocationActivity;
 
 public class IcreepMenu extends Activity {
 	
