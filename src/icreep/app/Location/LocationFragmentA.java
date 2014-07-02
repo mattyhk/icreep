@@ -1,9 +1,8 @@
-package com.example.icreep;
+package icreep.app.Location;
 
-import com.example.icreep.R;
-import com.example.icreep.R.id;
-import com.example.icreep.R.layout;
-
+import icreep.app.R;
+import icreep.app.R.id;
+import icreep.app.R.layout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

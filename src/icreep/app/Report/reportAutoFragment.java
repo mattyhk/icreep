@@ -1,4 +1,4 @@
-package com.example.icreep;
+package icreep.app.Report;
 
 import android.R.bool;
 import android.support.v4.app.FragmentActivity;
@@ -19,6 +19,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
+import icreep.app.R;
+import icreep.app.R.color;
+import icreep.app.R.id;
+import icreep.app.R.layout;
 
 public class reportAutoFragment extends Fragment {
 		
@@ -58,7 +62,7 @@ public class reportAutoFragment extends Fragment {
 	        // Inflate the layout for this fragment
 	    	// Return inflater.inflate(R.layout., container, false);
 	    	
-	    	View v = inflater.inflate(R.layout.reportsautofragment, container,false) ;
+	    	View v = inflater.inflate(R.layout.reports_auto_fragment, container,false) ;
 	    	
 	    	save = (Button) v.findViewById(R.id.saveButton);
 	    	switched = (Switch) v.findViewById(R.id.switchBar);	  

@@ -1,6 +1,10 @@
-package com.example.icreep;
+package icreep.app.Report;
 
-
+import icreep.app.R;
+import icreep.app.R.color;
+import icreep.app.R.id;
+import icreep.app.R.layout;
+import icreep.app.R.menu;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.support.v4.app.FragmentTransaction;
