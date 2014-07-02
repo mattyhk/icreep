@@ -118,6 +118,9 @@ public class MainActivity extends Activity {
 		String position = userPosition.getText().toString();
 		String email = userEmail.getText().toString();
 		
+		//before entering user into DB - can send validation email first
+		//if validation email bounces than user not entered in tDB else add to DB
+		
 		long id = icreepHelper.enterNewUser(name, surname, position, email, photo);	
 		
 		//check if insertion was successful

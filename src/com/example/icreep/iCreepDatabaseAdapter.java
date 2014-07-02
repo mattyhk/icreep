@@ -16,6 +16,7 @@ public class iCreepDatabaseAdapter {
 	
 	//function to insert new users in DB
 	public long enterNewUser(String name,String surname,String position,String email,String photo){
+
 		//define record to insert into DB
 		ContentValues newUser = new ContentValues();
 		newUser.put(iCreepHelper.NAME, name);
@@ -37,7 +38,7 @@ public class iCreepDatabaseAdapter {
 		private static final String DATABASE_NAME = "icreepdatabase";
 		
 		//version changes every time the structure of the db changes
-		private static final int DATABASE_VERSION = 1;
+		private static final int DATABASE_VERSION = 2;
 		
 		//define tables (1..6) in db
 		
