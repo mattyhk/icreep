@@ -5,7 +5,6 @@
     <string name="app_name">iCreep</string>
     <string name="action_settings">Settings</string>
     <string name="save">Save</string>
-    <string name="user_position">Employee Name: Position</string>
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="title_activity_menu">Menu</string>
     <string name="title_activity_icreep_menu">IcreepMenu</string>
@@ -47,10 +46,12 @@
     <!--  Time Tracker Strings -->
     <string name="title_activity_time_tracker">TimeTrackerActivity</string>
     <string name="time_tracker">Time Tracker</string>
+    <string name="outside">Out of Office</string>
 	<string name="in_office_label">In Office</string>
-    <string name="out_office_label">Out Office</string>    
+    <string name="out_office_label">Out Office</string>  
     
     <!--  Test Placeholder Strings -->
+    <string name="user_position">Employee Name: Position</string>
     <string name="Test">Marc Storebel: Developer</string>
     <string name="test2">6:18</string>
     

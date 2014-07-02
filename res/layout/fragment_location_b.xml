@@ -5,7 +5,16 @@
     android:background="@color/darkGreyForBackgrounds"
     android:orientation="vertical"
     tools:context="icreep.app.Location.LocationFragmentB" >
-
+	
+    <TextView
+        android:id="@+id/location_b_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/location_b_title"
+        android:textColor="@color/whiteBackground"
+        android:text="@string/user_position" />
+    
     <TextView
         android:id="@+id/location_b_title"
         android:layout_width="wrap_content"
@@ -22,14 +31,5 @@
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         android:background="@color/darkGreyForBackgrounds"/>
-
-    <TextView
-        android:id="@+id/location_b_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/location_b_title"
-        android:textColor="@color/whiteBackground"
-        android:text="@string/user_position" />
 
 </RelativeLayout>

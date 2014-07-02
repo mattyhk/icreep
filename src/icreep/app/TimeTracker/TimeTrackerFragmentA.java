@@ -1,7 +1,6 @@
 package icreep.app.TimeTracker;
 
 import icreep.app.R;
-import icreep.app.R.layout;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;

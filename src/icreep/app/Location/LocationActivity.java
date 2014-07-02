@@ -1,8 +1,6 @@
 package icreep.app.Location;
 
 import icreep.app.R;
-import icreep.app.R.id;
-import icreep.app.R.layout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,11 +57,11 @@ public class LocationActivity extends FragmentActivity implements TabListener {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		ActionBar.Tab tab1 = actionBar.newTab();
-		tab1.setText("Current Location");
+		tab1.setText(getResources().getString(R.string.title_location_section1));
 		tab1.setTabListener(this);
 
 		ActionBar.Tab tab2 = actionBar.newTab();
-		tab2.setText("Visited Zones");
+		tab2.setText(getResources().getString(R.string.title_location_section2));
 		tab2.setTabListener(this);
 
 		actionBar.addTab(tab1);
