@@ -5,7 +5,7 @@
     android:orientation="vertical" >
     
     <include
-		android:id="@+id/daily_movment_list_item_floor_text"
+		android:id="@+id/list_item_floor_text"
 		layout="@android:layout/preference_category" />
     
 

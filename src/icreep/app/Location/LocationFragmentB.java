@@ -49,17 +49,14 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
         items.add(new ZoneItem("Gym", "South"));
         items.add(new ZoneItem("Kitchen", "South"));
         items.add(new ZoneItem("Boardroom", "West"));
-        items.add(new ZoneItem("Hallway", "North"));
         
         items.add(new FloorItem("First Floor"));
         items.add(new ZoneItem("Boardroom", "South"));
         items.add(new ZoneItem("Wing", "East"));
-        items.add(new ZoneItem("Hallway", "Main"));
         
         items.add(new FloorItem("Second Floor"));
         items.add(new ZoneItem("Boardroom", "South"));
         items.add(new ZoneItem("Wing", "East"));
-        items.add(new ZoneItem("Hallway", "Main"));
 		
         mAdapter = new DailyMovementAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
