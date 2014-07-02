@@ -1,7 +1,5 @@
 package com.example.icreep;
 
-import com.example.dummyapp.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,7 +49,7 @@ public class ProfileCreation extends Activity {
 		
     	photo = "";
     	
-	
+	}
 	
 	//listener to adddUser event - let's add new user to db	
 	public void saveDetails(View view){
@@ -70,8 +68,6 @@ public class ProfileCreation extends Activity {
 		//if validation email bounces than user not entered in DB else add to DB
 			
 		long id = icreepHelper.enterNewUser(name, surname, position, email, photo);	
-		
-		*/
 		
 		//check if insertion was successful
 		if(id<0){
