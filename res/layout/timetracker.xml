@@ -5,7 +5,7 @@
     android:background="@color/darkGreyForBackgrounds">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView1_time_tracker_heading_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -13,104 +13,32 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="19dp"
         android:text="@string/TimeTrackerText"
-        android:textColor="@color/OpenBoxGreen"
+        android:textColor="@color/lightGreenForLabels"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <!-- need to get user details and display -->
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="14dp"
-        android:text="name and surname: position"
-        android:textColor="@color/greyForBackrounds"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tableLayout1"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="36dp"
-        android:text="Display Floor Name"
-        android:textColor="@color/greyForBackrounds"
+        android:layout_alignLeft="@+id/textView2_"
+        android:layout_below="@+id/textView2_"
+        android:layout_marginTop="38dp"
         android:background="@color/darkGreyForBackgrounds"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="Display Floor Name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/greyForBackrounds" />
 
-
-    <TableLayout
-        android:id="@+id/tableLayout1"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView2_"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2" >
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:background="@color/darkGreyForBackgrounds"
-            android:text="Display Floor Name"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/greyForBackrounds" />
-
-        <TableRow
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-
-       <TableRow
-	        android:id="@+id/location"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        >
-         
-           	<!-- table with 2 columns -->
-           	<!-- for location -->
-	        <TextView 
-	            android:id="@+id/TextView04" 
-	            android:text="Time Tracker"
-	            android:layout_weight="1" 
-	            android:background="#ffffff"
-	            android:textColor="#000000"
-	            android:layout_alignLeft="@+id/TextView04" 
-	            android:gravity="center"/> 
-	            
-	        <!-- for time -->
-	        <TextView 
-	            android:id="@+id/TextView04" 
-	            android:text="Duration"
-	            android:layout_weight="1" 
-	            android:background="#ffffff"
-	            android:textColor="#000000"
-	            android:layout_alignLeft="@+id/TextView04"
-	            android:gravity="center"/>
-	        	                  
-       </TableRow>
-
-            <TextView
-                android:id="@+id/TextView04"
-                android:layout_alignLeft="@+id/TextView04"
-                android:layout_weight="1"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:text="Location"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/TextView04"
-                android:layout_alignLeft="@+id/TextView04"
-                android:layout_weight="1"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:text="Duration"
-                android:textColor="#000000" />
-            
-        </TableRow>
-    </TableLayout>
+        android:layout_alignLeft="@+id/textView1_time_tracker_heading_2"
+        android:layout_below="@+id/textView1_time_tracker_heading_2"
+        android:layout_marginTop="15dp"
+        android:text="@string/Test"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey_text" />
       
 </RelativeLayout>

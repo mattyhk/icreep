@@ -4,6 +4,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,14 @@ public class reportManualFragment extends Fragment{
 	
 	Button sendreport ;
 	
+	
+	/* Pre-Conditions: A bundle in case we need a saved state if we switch screens and want to keep old information
+ 	*	The trigger is that you have switched to this activity using an intent and now this activity is created
+ 	*  Post-conditions: 
+ 	*  > This will set all the listeners for the different views
+ 	*  > This will ensure the correct sizing of views and their text as a function of the screen density
+ 	*  > This ensures the logical flow of events and will cover the different combination of inputs  
+ 	*/
 	 @Override
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                             Bundle savedInstanceState) {
@@ -41,9 +51,23 @@ public class reportManualFragment extends Fragment{
 		 return v;	 
 	 }
 	 
+	 
+	 /* Pre-Conditions: None
+	 	*  Post-conditions: 
+	 	*  > Send the mail using the default mailer for the user to add recipients if they want
+	 	*/
 	 public void sendMail()
 	 {
-		 
+		 Intent i = new Intent(Intent.ACTION_SENDTO);
+		 i.setType("message/rfc822");
+		 i.setData(Uri.parse("mailto:vreid@openboxsoftware.com"));
+		 i.putExtra(Intent.EXTRA_SUBJECT, "Manual Location report");
+		 i.putExtra(Intent.EXTRA_TEXT   , "You have been in the kitchen too much today");
+		 try {
+		     startActivity(Intent.createChooser(i, "Send mail..."));
+		 } catch (android.content.ActivityNotFoundException ex) {
+		     Log.e("vince", "couldn't send");
+		 }		
 	 }
 	
 	

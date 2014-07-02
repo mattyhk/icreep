@@ -23,6 +23,14 @@ public class reportActivity extends FragmentActivity {
 	boolean automated = true ;
 	
 	
+	
+	/* Pre-Conditions: A bundle in case we need a saved state if we switch screens and want to keep old information
+ 	*	The trigger is that you have switched to this activity using an intent and now this activity is created
+ 	*  Post-conditions: 
+ 	*  > This will set all the listeners for the different views
+ 	*  > This will ensure the correct sizing of views and their text as a function of the screen density
+ 	*  > This ensures the logical flow of events and will cover the different combination of inputs  
+ 	*/
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -31,28 +39,18 @@ public class reportActivity extends FragmentActivity {
 	        manual = (Button) findViewById(R.id.manualButton) ;	        
 	        TextView reports = (TextView) findViewById(R.id.textViewMain);
 	        TextView userDescrip = (TextView) findViewById(R.id.userDescript);
-	        	        
+	        String foruserdesc = buildUserDescription();
+	        // will do this userDescrip.setText(foruserdesc) ;
+	        
+	        
 	        float correctTextpixel = 16*getResources().getDisplayMetrics().density;
 	        reports.setTextSize(correctTextpixel);
 	        userDescrip.setTextSize(correctTextpixel);
 	        auto.setTextSize(correctTextpixel);
-	        manual.setTextSize(correctTextpixel);        
+	        manual.setTextSize(correctTextpixel);   
 	        
-	        addautoFragment(savedInstanceState);
-	      /*  
-	        reportAutoFragment frag = new reportAutoFragment();
-	        android.app.FragmentManager fragmentManager = getFragmentManager();
-	 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-	 		
-	 		fragmentTransaction.add(R.id.autoFragLayout, frag,"auto");
-	 		fragmentTransaction.commit();
-	 		*/
-	        /*here I will add the code required to get the users info with using his id
-	        * possibly from sp, sis
-	        * userdescrip.setText("kobus")
-	        */
-	        
-	       
+	        // this is called because we want this fragment to be added auto when we create this activity
+	        addautoFragment(savedInstanceState);        
 	        
 	        //adding button handler for the auto report
 	        auto.setOnClickListener(new OnClickListener() {
@@ -60,8 +58,8 @@ public class reportActivity extends FragmentActivity {
 			 @Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					switchtoautofrag();
-					automated = false ;
+					switchtoautofrag();					
+					//need to change the style to the button_style_blue 
 					manual.setBackgroundColor(getResources().getColor(R.color.greyForBackrounds));
 					auto.setBackgroundColor(getResources().getColor(R.color.lightBlueForLabels));
 					
@@ -75,6 +73,7 @@ public class reportActivity extends FragmentActivity {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					switchtomanualfrag();
+					//need to change the style to the button_style_blue 
 					manual.setBackgroundColor(getResources().getColor(R.color.lightBlueForLabels));
 					auto.setBackgroundColor(getResources().getColor(R.color.greyForBackrounds));
 				}
@@ -83,22 +82,47 @@ public class reportActivity extends FragmentActivity {
 	    }
 	 
 	 
-	 	
-	 	//gain access to fragment
+	 /* Pre-Conditions: none
+	 	*
+	 	*  Post-conditions: This will give us access to the auto fragment 
+	 	*  in case we need information from it.
+	 	*/
 	 	public reportAutoFragment gainAccessToAutoFragment()
 	 	{
 	 	reportAutoFragment fragment = (reportAutoFragment) getSupportFragmentManager().findFragmentById(R.id.autoFragLayout);
 	 	
 	 	return fragment;
 	 	}
-	 	//gain access to fragment
+	 	
+	 	/* Pre-Conditions: none
+	 	*
+	 	*  Post-conditions: This will give us access to the manual fragment 
+	 	*  in case we need information from it.
+	 	*/
 	 	public reportManualFragment gainAccessToManualFragment()
 	 	{
 	 	reportManualFragment fragment = (reportManualFragment) getSupportFragmentManager().findFragmentById(R.id.reportManualLayout);
 	 	return fragment;
 	 	}
 	 	
+	 	/* Pre-Conditions: none
+	 	*
+	 	*  Post-conditions return a string that will get the users name and surname
+	 	*  together with his/her job position to develop our interface for reports
+	 	*/
+	 	public String buildUserDescription()
+	 	{
+	 		
+	 		return "" ;
+	 	}
 	 	
+	 	/* Pre-Conditions: A bundle in case we need a saved state if we switch screens and want to keep old information
+	 	*	The trigger is that you need the default fragment to be added when this activity is created
+	 	*  Post-conditions: 
+	 	*  > This will add the auto fragment to the activity
+	 	*  > this will ensure that old fragment data is kept and that the view for the activity 
+	 	*  is still active
+	 	*/
 	 	public void addautoFragment(Bundle save)
 	 	{
 	 		Log.e("vince", "" + (R.id.autoFragLayout));
@@ -110,9 +134,8 @@ public class reportActivity extends FragmentActivity {
 	 			{
 	 				return;
 	 			}
-	 		// Create a new Fragment to be placed in the activity layout	
-	 		
-	 		
+	 		// Create a new Fragment to be placed in the activity layout		 		
+	 		// always ensure that you do the correct important!! LESSON LEARNT ! 
 	 		reportAutoFragment frag = new reportAutoFragment();
 	 		
 	 		FragmentManager fragmentManager = getSupportFragmentManager();
@@ -123,6 +146,16 @@ public class reportActivity extends FragmentActivity {
 	 		}
 	 	}
 	 	
+	 	
+	 	/* Pre-Conditions: This method is invoked when the manual button is pressed
+	 	 * requires no parameters
+	 	*
+	 	*  Post-conditions: 
+	 	*  > this will remove the old fragment which will be the auto fragment
+	 	*  > switch it to the manual fragment
+	 	*  > this is done via transaction
+	 	*  > never forget commits
+	 	*/
 	 	public void switchtomanualfrag()
 	 	{
 	 		
@@ -137,6 +170,16 @@ public class reportActivity extends FragmentActivity {
 	 		// Commit the transaction
 	 		transaction.commit();
 	 	}
+	 	
+	 	/* Pre-Conditions: This method is invoked when the auto button is pressed
+	 	 * requires no parameters
+	 	*
+	 	*  Post-conditions: 
+	 	*  > this will remove the old fragment which will be the manual fragment
+	 	*  > switch it to the auto fragment
+	 	*  > this is done via transaction
+	 	*  > never forget commits
+	 	*/
 	 	public void switchtoautofrag()
 	 	{
 	 		reportAutoFragment frag = new reportAutoFragment();
