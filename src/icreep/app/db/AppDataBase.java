@@ -1,4 +1,4 @@
-package com.example.icreep;
+package icreep.app.db;
 
 public class AppDataBase {
 	

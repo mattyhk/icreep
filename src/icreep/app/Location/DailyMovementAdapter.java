@@ -1,4 +1,8 @@
-package com.example.icreep;
+package icreep.app.Location;
+
+import icreep.app.R;
+import icreep.app.R.id;
+import icreep.app.R.layout;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.icreep;
+package icreep.app.Location;
 
 import java.util.ArrayList;
 import java.util.HashMap;

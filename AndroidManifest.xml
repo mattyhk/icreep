@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.icreep"
+    package="icreep.app"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme" > 
 
         <activity
-            android:name="com.example.icreep.MainActivity"
+            android:name="icreep.app.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.icreep.LocationActivity"
+            android:name="icreep.app.Location.LocationActivity"
             android:label="@string/title_activity_location" >
             android:name="com.example.icreep.ProfileCreation"
             android:label="@string/title_activity_profile_creation"
@@ -37,34 +37,34 @@
                 android:value="com.example.icreep.MainActivity" />
         </activity>
         <activity
-            android:name="com.example.icreep.MainMenu"
+            android:name="icreep.app.MainMenu"
             android:label="@string/title_activity_main_menu"
-            android:parentActivityName="com.example.icreep.MainActivity" >
+            android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.icreep.MainActivity" />
         </activity>
         <activity
-            android:name="com.example.icreep.Menu"
+            android:name="icreep.app.Menu"
             android:label="@string/title_activity_menu"
-            android:parentActivityName="com.example.icreep.MainActivity" >
+            android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.icreep.MainActivity" />
         </activity>
         <activity
-            android:name="com.example.icreep.IcreepMenu"
+            android:name="icreep.app.IcreepMenu"
             android:label="@string/title_activity_icreep_menu"
-            android:parentActivityName="com.example.icreep.MainActivity" >
+            android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.icreep.MainActivity" />
         </activity>
         
         <activity
-            android:name="com.example.icreep.reportActivity"
+            android:name="icreep.app.Report.reportActivity"
             android:label="@string/title_activity_icreep_menu"
-            android:parentActivityName="com.example.icreep.MainActivity" >
+            android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.icreep.MainActivity" />

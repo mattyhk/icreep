@@ -1,4 +1,4 @@
-package com.example.icreep;
+package icreep.app.Location;
 
 /**
  * An enum type representing the predefined Zones that exist
