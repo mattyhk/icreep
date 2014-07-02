@@ -51,7 +51,7 @@ public class LocationFragmentA extends Fragment {
 	}
 	
 	/**
-	 * Needs to update the map displayed
+	 * Needs to update the map displayed - should be updated in Location Activity upon fragment selection
 	 */
 	@Override
 	public void onResume() {
