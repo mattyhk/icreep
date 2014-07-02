@@ -27,6 +27,7 @@ public class reportAutoFragment extends Fragment {
 		TimePicker tp ;
 		int hour = 0 ;
 		int min = 0 ;
+		boolean hasAuto = false ;
 		//the following is how you get your text pixels to the correct size depending on the screen
     	//16*getResources().getDisplayMetrics().density
 		
@@ -39,6 +40,18 @@ public class reportAutoFragment extends Fragment {
 		 * (non-Javadoc)
 		 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 		 */
+		
+		
+		/* Pre-Conditions: This method occurs when they fragment is added to a activity
+	     * 
+	 	 *  Post-conditions: 
+	 	 *  > all the listeners are added
+	 	 *  > the button sizes and font sizes are set using virtual pixels as a function of screen density
+	 	 *  > the control of enabling and disabling differnet views
+	 	 *  > the logical flow of events depending on other views ect.
+	 	 *  > return the view that was inflated by the inflater from the xml of this fragment
+	 	 *  > the changing of the sizes will automatically adjust the view
+	 	*/ 	    
 	    @Override
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                             Bundle savedInstanceState) {
@@ -48,15 +61,20 @@ public class reportAutoFragment extends Fragment {
 	    	View v = inflater.inflate(R.layout.reportsautofragment, container,false) ;
 	    	
 	    	save = (Button) v.findViewById(R.id.saveButton);
-	    	switched = (Switch) v.findViewById(R.id.switchBar);	    	
-	    	save.setEnabled(false);
+	    	switched = (Switch) v.findViewById(R.id.switchBar);	  
+	    	// need to make the color of switched more visible
 	    	switched.setBackgroundColor(getResources().getColor(R.color.whiteBackground));
-	    	// need to make the color of switched more visibile
+	    	
+	    	setTheHourMinuteSwitch() ; // switch on switched
+	    	save.setEnabled(false); //no changes thus button shouldn't be enabled	    	
+	    	
 	    	tp = (TimePicker) v.findViewById(R.id.timePicker);	    	
 	    	TextView deli = (TextView) v.findViewById(R.id.Delivery);	    	
 	    	TextView deliTime = (TextView)v.findViewById(R.id.DeliveryTime);
-	    	tp.setEnabled(false);
+	    	
+	    	//tp.setEnabled(false);
 	    	float correctTextpixel = 16*getResources().getDisplayMetrics().density;
+	    	
 	    	//ensuring all text pixels are the correct size
 	    	save.setTextSize(correctTextpixel);
 	    	deli.setTextSize(correctTextpixel);
@@ -69,15 +87,24 @@ public class reportAutoFragment extends Fragment {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					// TODO Auto-generated method stub
-					if (isChecked == true)
+					if (isChecked == true) // set the default time of the users DB
 					{
-						tp.setEnabled(true);
-						save.setEnabled(true);					
+						setTheTimePicker();
+						
+						//if a auto has never been set, then if you enable, you could save at 
+						// this exact current time
+						if (hasAuto == true)
+						{
+						save.setEnabled(false);
+						}else save.setEnabled(true);			
 						
 					}else
 					{
 						tp.setEnabled(false);
-						save.setEnabled(false);
+						if (hasAuto == true)
+						{
+						save.setEnabled(true);
+						}else save.setEnabled(false);
 						// will have to remove the automatic time from the database
 					}
 				}
@@ -90,12 +117,24 @@ public class reportAutoFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-				save.setEnabled(false);
-				int storehour = tp.getCurrentHour();
-				int storeminute = tp.getCurrentMinute();
-				writeToDB(storehour, storeminute);
 				
-				
+					/* The whole idea is the save button will work like
+					 * if checked is false then they won't want automated 
+					 * but had it before so save the new time as 0 to know it's not auto
+					 * if checked is true then save the new automated time
+					 */
+					if (switched.isEnabled() == true) //first test to see if it did update then disable save >> future
+					{					
+					int storehour = tp.getCurrentHour();
+					int storeminute = tp.getCurrentMinute();
+					writeToDB(storehour, storeminute);
+					save.setEnabled(false);
+					}else
+					{
+						int storehour = 0;
+						int storeminute = 0;
+						writeToDB(storehour, storeminute);				
+					}
 				}
 			});
 	    	
@@ -124,28 +163,59 @@ public class reportAutoFragment extends Fragment {
 	    	return v ;
 	    }	
 	    
-	  //setting of the time will be here, note is in the set below
+	    
+	    
+	    /* Pre-Conditions: none
+	 	*
+	 	*  Post-conditions: Need to check the database for auto report information
+	 	*  the time that is in the database is what our picker will default to
+	 	*  this will also enable the switcher if time has been set
+	 	*  aka hour != 0 && minute != 0
+	 	*/ 
+	    private void setTheHourMinuteSwitch()
+	    {
+	    	//if there is a auto time
+	    	//isAuto = true ;
+	    	
+	    	if ((hour != 0) && (min != 0))
+	    	{
+	    		switched.setEnabled(true);
+	    		setTheTimePicker();
+	    	}
+	    }
+	    
+	    /* Pre-Conditions: The hour and minute to set the time picker
+	 	*
+	 	*  Post-conditions: The timer picker hour and minute is changed if the switched
+	 	*  is on which indicates the spinner is on. This allows it to default
+	 	*  to the users values 
+	 	*/ 
 	    private void setTheTimePicker()
 	    {
 	    	if (switched.isChecked() == true)
 	    	{
-	    		getAutoTime();
+	    		tp.setEnabled(true);	
+	    		if (hasAuto == true)
+	    		{
 	    		tp.setCurrentHour(hour);
 	    		tp.setCurrentMinute(min);
-	    	}
+	    		}
+	    	}else tp.setEnabled(false);
 	    }
 	    
-	    //connect to DB and get automated report time from the table
-	    private void getAutoTime()
-	    {
-	    	
-	    }	    
 	    
-	    // this will be invoked when the save button is clicked and will 
-	    // store the latest hour and minute that the user wants there auto report at
+	    
+	    /* Pre-Conditions: The new hour and minute for the DB
+	     * 
+	 	 *  Post-conditions: // this will be invoked when the save button is clicked and will 
+	     // store the latest hour and minute that the user wants there auto report at
+	 	*/ 	    
 	    private void writeToDB(int stoh,int stom)
 	    {
+	    	//all code for writing to DB
 	    	
+	    	hour = stoh ;
+	    	min = stom;
 	    }
 	
 	 @Override
