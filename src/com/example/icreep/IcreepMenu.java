@@ -37,13 +37,13 @@ public class IcreepMenu extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_icreep_menu);
-
+/*
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 			
 		}//if
-		
+		*/
 	}//onCreate 
 
 	@Override
@@ -75,6 +75,8 @@ public class IcreepMenu extends Activity {
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
+	
+	/*
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
@@ -88,5 +90,5 @@ public class IcreepMenu extends Activity {
 			return rootView;
 		}
 	}
-
+*/
 }
