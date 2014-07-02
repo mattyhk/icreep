@@ -3,6 +3,10 @@ package com.example.icreep;
 
 import java.util.ArrayList;
 
+import com.example.icreep.R;
+import com.example.icreep.R.id;
+import com.example.icreep.R.layout;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
