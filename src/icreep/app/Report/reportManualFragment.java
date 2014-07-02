@@ -34,7 +34,7 @@ public class reportManualFragment extends Fragment{
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                             Bundle savedInstanceState) {
 		 float correctTextpixel = 16*getResources().getDisplayMetrics().density;
-		 View v = inflater.inflate(R.layout.reports_manual_fragment, container,false) ;
+		 View v = inflater.inflate(R.layout.fragment_reports_manual, container,false) ;
 		 sendreport = (Button) v.findViewById(R.id.sendReportButton);
 		 sendreport.setTextSize(correctTextpixel);
 		 //sendreport.

@@ -40,7 +40,7 @@ public class DailyMovementAdapter extends ArrayAdapter<ListItem> {
 			
 			if (i.isFloor()){
 				FloorItem floor = (FloorItem) i;
-				v = vi.inflate(R.layout.daily_movement_list_item_floor, null);
+				v = vi.inflate(R.layout.list_item_daily_movement_floor, null);
 				
 				v.setOnClickListener(null);
 				v.setOnLongClickListener(null);
@@ -53,7 +53,7 @@ public class DailyMovementAdapter extends ArrayAdapter<ListItem> {
 			else {
 				
 				ZoneItem zone = (ZoneItem) i;
-				v = vi.inflate(R.layout.daily_movement_list_item_zone, null);
+				v = vi.inflate(R.layout.list_item_daily_movement_zone, null);
 				final TextView title = (TextView) v.findViewById(R.id.daily_movement_list_item_zone_title);
 				final TextView subtitle = (TextView) v.findViewById(R.id.daily_movement_list_item_zone_summary);
 				
