@@ -122,9 +122,9 @@ public class MainActivity extends Activity {
 		
 		//check if insertion was successful
 		if(id<0){
-			Message.message(this, "insertion failed");
+			Message.message(this, "User details saved");
 		}else{
-			Message.message(this, "insertion successful");
+			Message.message(this, "User not details saved");
 		}
 	}
 }

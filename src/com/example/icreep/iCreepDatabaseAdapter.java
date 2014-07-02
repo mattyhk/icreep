@@ -89,14 +89,13 @@ public class iCreepDatabaseAdapter {
 		private static final String AUTO_DELIVERY = "Auto_Delivery";
 		private static final String DELIVERY_TIME = "Delivery_Time";
 			
-		//CREATE_TABLE QUERIES for db
-		
-		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " LONG,"+ MINOR +" LONG);";
-		private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID), FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID));";
-		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + DESCRIPTION + " VARCHAR(255),"+ FLOOR + " INTEGER);";
-		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " DATETIME, " + TIME_LEFT +" DATETIME, " + LOCATION_DATE+ " DATE, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID), FOREIGN KEY (User_ID) REFERENCES User(User_ID));"; 
-		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME + " NVARCHAR(75)," + SURNAME +" NVARCHAR(75), "+ EMAIL +" NVARCHAR(100)," + EMPLOYEE_POSITION +" NVARCHAR(50), "+ PHOTO +" VARHCAR(255));";
-		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER, " + AUTO_DELIVERY +" BOOLEAN, " + DELIVERY_TIME +" DATETIME, FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
+		//CREATE_TABLE QUERIES for db		
+		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " LONG NOT NULL,"+ MINOR +" LONG NOT NULL);";
+		private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID), FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID));";
+		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " INTEGER NOT NULL);";
+		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " DATETIME NOT NULL, " + TIME_LEFT +" DATETIME NOT NULL, " + LOCATION_DATE+ " DATE NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID), FOREIGN KEY (User_ID) REFERENCES User(User_ID));"; 
+		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME + " NVARCHAR(75) NOT NULL," + SURNAME +" NVARCHAR(75) NOT NULL, "+ EMAIL +" NVARCHAR(100) NOT NULL," + EMPLOYEE_POSITION +" NVARCHAR(50) NOT NULL, "+ PHOTO +" VARHCAR(255));";
+		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER, " + AUTO_DELIVERY +" BOOLEAN NOT NULL, " + DELIVERY_TIME +" DATETIME, FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
 
 		private int tableCount = 6;
 		private int createTableQueryCount = 6;
@@ -130,7 +129,7 @@ public class iCreepDatabaseAdapter {
 
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			// u can backup db online, alter table, drop table and such here...
+			// u can backup db online (after changes), alter table, drop table and such here...
 			// on upgrade, drop older tables
 			
 			//to see onUpgrade was called
@@ -141,7 +140,7 @@ public class iCreepDatabaseAdapter {
 			//dropping existing tables upon db structure changes (if oldVersion != newVersion)
 			for(int i=0;i<tableCount;i++){
 				try {
-					//carry out wanted query - eg DROP TABLE
+					//carry out wanted query: Alter, DROP TABLEs, etc...
 					//need to drop tables if DB structure changes
 					db.execSQL("DROP TABLE IF EXISTS " + tables[i]);
 				} catch (SQLException e) {
