@@ -1,7 +1,5 @@
 package com.example.icreep;
 
-import com.example.dummyapp.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +48,7 @@ public class ProfileCreation extends Activity {
     	//Intent intent = new Intent(this, ProfilePicture.class);
 		
     	photo = "";
+	}
     	
 	
 	
@@ -71,7 +70,6 @@ public class ProfileCreation extends Activity {
 			
 		long id = icreepHelper.enterNewUser(name, surname, position, email, photo);	
 		
-		*/
 		
 		//check if insertion was successful
 		if(id<0){
