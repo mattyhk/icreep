@@ -8,6 +8,8 @@ import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.location.FloorItem;
 import icreep.app.location.ListItem;
 import icreep.app.report.TimePlace;
+import icreep.app.report.reportActivity;
+import icreep.app.report.reportManualFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -70,7 +72,8 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         FragmentActivity fragActivity = getActivity();
         icreepHelper = new iCreepDatabaseAdapter(fragActivity);
        
-        timePlaces = icreepHelper.getTimePlaces(); // now I have to sorted the locations according to floors
+        //get timePlaces, tp (Description, totalTimeSpent, floor)
+        timePlaces = icreepHelper.getTimePlaces(); 
         timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
         
         mAdapter = new TimeTrackerListAdapter(getActivity(), items);
@@ -86,13 +89,35 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		return v;
 	}
 	
+	//this function will sort the location with respect to their floors and description(locations)
 	public ArrayList<TimePlace> sortTimePlaces(ArrayList<TimePlace> timePlaces){
 		
-		ArrayList<TimePlace> sorted = timePlaces;
+		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
+		
+		reportManualFragment ra = new reportManualFragment();
+		ArrayList<TimePlace> sorted = ra.InsertionSort(timePlaces);
+		
+		TimePlace toAdd;
+		
+		/*
+		for (int i=0; i<sorted.size();i++) {
+			
+			double totalSpent = sorted.get(i).getTimeSpent();
+			
+		    for(int j=i+1; i<sorted.size();i++) {
+		    	if(sorted.get(i).getFloor() == sorted.get(j).getFloor() && sorted.get(i).getLocation() == sorted.get(j).getLocation())
+		    	{
+		    		totalSpent+=sorted.get(j).getTimeSpent();
+		    		sorted.remove(sorted.get(j));
+		    	}		    			    	
+		    }
+		    
+		    finalSortedTimePlaces.add((sorted.get(i)).setTime(totalSpent));	    
+		}*/
 		
 		
 		
-		return sorted;
+		return finalSortedTimePlaces;
 	}
 
 	@Override
