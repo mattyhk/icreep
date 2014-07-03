@@ -48,9 +48,7 @@ public class ProfileCreation extends Activity {
 	public void saveDetails(View view){
     	
     	//Intent intent = new Intent(this, SaveUserDetails.class);
-    	
-    	//EditText editText = (EditText) findViewById(R.string.);
-		
+
 		//get user details
 		String name = userName.getText().toString();
 		String surname = userSurname.getText().toString();
@@ -65,6 +63,7 @@ public class ProfileCreation extends Activity {
 			//check if insertion was successful
 			if(id<0){
 				Message.message(this, "User details saved");
+				//should now call intent to open app menu activity
 			}else{
 				Message.message(this, "User details not  saved");
 			}		
