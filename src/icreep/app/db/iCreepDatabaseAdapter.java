@@ -1,8 +1,14 @@
 package icreep.app.db;
 
+import java.util.ArrayList;
+
+import com.example.dummyapp.iCreepDatabaseAdapter.iCreepHelper;
+
 import icreep.app.Message;
+import icreep.app.report.TimePlace;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -30,8 +36,37 @@ public class iCreepDatabaseAdapter {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		long id = db.insert(iCreepHelper.TABLE_NAME5, null, newUser); //id to check if insertion was successful
 		
-		return id;
-				
+		return id;				
+	}
+	
+	//this function will be called when the user wishes to see the details of all the location of where his been with times
+	//this function returns an array list of all time places that user has been to
+	public ArrayList<TimePlace> getTimePlaces(){
+		
+		ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
+		
+		//sql to get all of the user's locations
+		//SELECT User_ID, Zone.Floor, Zone.Description, Location.Time_Entered, Location.Time_Left FROM ZONE, Location
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		String query = "SELECT Floor, Description, Time_Entered, Time_Left FROM Zone, Location WHERE Zone.Zone_ID = Location.Zone_ID";
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		while(cursor.moveToNext()){
+			
+			String loc = cursor.getString(cursor.getColumnIndex(iCreepHelper.DESCRIPTION));
+			double totalTime =  cursor.getDouble(cursor.getColumnIndex(iCreepHelper.TIME_LEFT)) - cursor.getDouble(cursor.getColumnIndex(iCreepHelper.TIME_ENTERED));
+			String floor = cursor.getString(cursor.getColumnIndex(iCreepHelper.FLOOR));
+			
+			TimePlace tp = new TimePlace(loc,totalTime,floor);
+			
+			timePlaces.add(tp);
+			
+		}
+		
+		return timePlaces; 
 	}
 	
 	static class iCreepHelper extends SQLiteOpenHelper{
