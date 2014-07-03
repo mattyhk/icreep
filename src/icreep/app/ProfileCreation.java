@@ -57,7 +57,7 @@ public class ProfileCreation extends Activity {
 		String position = userPosition.getText().toString();
 		String email = userEmail.getText().toString();
 		
-		//before entering user into DB - can send validation email first
+		//before entering user into DB - can send or validate email first
 		//if validation email bounces than user not entered in DB else add to DB		
 		if(isValidEmail(email)){				
 			long id = icreepHelper.enterNewUser(name, surname, position, email, photo);	
