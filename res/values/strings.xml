@@ -10,7 +10,7 @@
     <string name="title_activity_icreep_menu">IcreepMenu</string>
     <string name="icreep_main_menu_logo">iCreep</string>
     <string name="select_proximity">Proximity</string>
-    <string name="action_home">Home</string>
+    <string name="home">Home</string>
     
     <!--  Profile Strings -->
     <string name="profile">Profile</string>
@@ -36,8 +36,8 @@
     
     <!--  Location Strings -->
     <string name="title_activity_location">Location Activity</string>
-    <string name="title_location_section1">Current Location</string>
-    <string name="title_location_section2">Daily Movement</string>
+    <string name="title_location_current">Current Location</string>
+    <string name="title_location_movement">Daily Movement</string>
     <string name="ground_floor">Ground Floor</string>
     <string name="first_floor">First Floor</string>
     <string name="second_floor">Second Floor</string>
