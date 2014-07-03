@@ -47,8 +47,8 @@ public class ProfileCreationActivity extends Activity {
 		// }
 		
 		// If there is no user, assume profile is being created: else {
-			home_button.setVisibility(View.INVISIBLE);
-			home_button.setClickable(false);
+//			home_button.setVisibility(View.INVISIBLE);
+//			home_button.setClickable(false);
 		// }
 		
 		
