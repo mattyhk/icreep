@@ -16,6 +16,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		// Redirecting to profile creation - we will have to check for user presence
 		Intent i = new Intent();
 		i.setClassName(this, "icreep.app.ProfileCreationActivity");
 		startActivity(i);
@@ -45,37 +46,31 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		Log.d("onStart", "onStart");
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.d("onResume", "onResume");
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		Log.d("onPause", "onPause");
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		Log.d("vince", "onStop");
 	}
 
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		Log.d("onRestart", "onRestart");
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		Log.d("vince", "onDestroy");
 	}
 
 	@Override
@@ -89,11 +84,6 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onRestoreInstanceState(savedInstanceState);
 
-	}
-		
-	//upload image	
-	public void uploadImage(View view){
-		//String photo = userPhoto...
 	}
 	
 }
