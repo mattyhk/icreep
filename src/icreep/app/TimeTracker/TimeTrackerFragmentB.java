@@ -34,6 +34,9 @@ public class TimeTrackerFragmentB extends Fragment {
 		
 		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
 		
+		// Place holder for time being
+		mProgressBar.setProgress(65);
+		
 		return v;
 	}
 	
@@ -45,6 +48,16 @@ public class TimeTrackerFragmentB extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+	}
+	
+	/**
+	 * Calculates the percentage of time the user has spent in the office
+	 * @param inOffice - time spent in the office
+	 * @param outOffice - time spent out of the office
+	 * @return percentage - the percentage rounded to nearest integer
+	 */
+	private int calcPercentageTime(float inOffice, float outOffice) {
+		return 0;
 	}
 
 }

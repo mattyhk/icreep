@@ -33,4 +33,62 @@
         android:minHeight="75dp"
         android:progressDrawable="@drawable/progress_bar" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/time_tracker_progress_bar"
+        android:layout_alignLeft="@+id/time_tracker_progress_bar"
+        android:layout_alignRight="@+id/time_tracker_progress_bar" 
+        android:orientation="horizontal"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp">
+        
+        <TextView
+            android:id="@+id/in_office"
+            android:layout_height ="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/whiteColor"
+            android:layout_gravity="left" 
+            android:text="@string/in_office_label"/>
+        
+        <TextView
+            android:id="@+id/out_office"
+            android:layout_height ="wrap_content"
+            android:layout_width="fill_parent"
+            android:textColor="@color/whiteColor"
+            android:gravity="right" 
+            android:text="@string/out_office_label"/>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time_tracker_progress_bar"
+        android:layout_alignLeft="@+id/time_tracker_progress_bar"
+        android:layout_alignRight="@+id/time_tracker_progress_bar" 
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp">
+        
+        <TextView
+            android:id="@+id/time_in_office"
+            android:layout_height ="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/whiteColor"
+            android:layout_gravity="left" 
+            android:text="@string/timeInOffice"/>
+        
+        <TextView
+            android:id="@+id/time_out_office"
+            android:layout_height ="wrap_content"
+            android:layout_width="fill_parent"
+            android:textColor="@color/whiteColor"
+            android:gravity="right" 
+            android:text="@string/timeOutOffice"/>
+
+    </LinearLayout>
+
 </RelativeLayout>
