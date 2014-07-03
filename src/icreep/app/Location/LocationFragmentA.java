@@ -2,8 +2,6 @@ package icreep.app.location;
 
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
-import icreep.app.R.id;
-import icreep.app.R.layout;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

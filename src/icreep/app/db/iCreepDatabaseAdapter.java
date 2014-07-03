@@ -45,7 +45,7 @@ public class iCreepDatabaseAdapter {
 		
 		// for easy access later define table column NAMES for each table here
 		
-		//create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "( Beacon_ID INTEGER PRIMARY KEY AUTOMINCREMENT, Major LONG, Minor LONG);";
+		//create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "( Beacon_ID INTEGER PRIMARY KEY AUTOMINCREMENT, Major INTEGER, Minor INTEGER);";
 		private static final String TABLE_NAME1 = "Beacon";
 		
 		private static final String BEACON_ID = "Beacon_ID";
@@ -92,7 +92,7 @@ public class iCreepDatabaseAdapter {
 		private static final String DELIVERY_TIME = "Delivery_Time";
 			
 		//CREATE_TABLE QUERIES for db		
-		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " LONG NOT NULL,"+ MINOR +" LONG NOT NULL);";
+		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " INTEGER NOT NULL,"+ MINOR +" INTEGER NOT NULL);";
 		private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID), FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID));";
 		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " INTEGER NOT NULL);";
 		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " DATETIME NOT NULL, " + TIME_LEFT +" DATETIME NOT NULL, " + LOCATION_DATE+ " DATE NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID), FOREIGN KEY (User_ID) REFERENCES User(User_ID));"; 
