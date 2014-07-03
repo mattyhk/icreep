@@ -20,11 +20,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class ReportActivity extends FragmentActivity {
 
-	Button auto, manual, home;
+	Button auto, manual;
+	ImageButton home;
 	boolean automated = true;
 	
 	
@@ -42,7 +44,7 @@ public class ReportActivity extends FragmentActivity {
 	        setContentView(R.layout.activity_reports); 
 	        auto = (Button) findViewById(R.id.autoButton);
 	        manual = (Button) findViewById(R.id.manualButton);
-	        home = (Button) findViewById(R.id.home_button_report);
+	        home = (ImageButton) findViewById(R.id.home_button_report);
 	        TextView reports = (TextView) findViewById(R.id.textViewMain);
 	        TextView userDescrip = (TextView) findViewById(R.id.userDescript);
 	        String foruserdesc = buildUserDescription();

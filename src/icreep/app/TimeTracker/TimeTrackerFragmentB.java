@@ -10,13 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class TimeTrackerFragmentB extends Fragment {
 	
 	private ProgressBar mProgressBar;
-	private Button home;
+	private ImageButton home;
 
 	public TimeTrackerFragmentB() {
 		// Required empty public constructor
@@ -40,7 +41,7 @@ public class TimeTrackerFragmentB extends Fragment {
 		// Place holder for time being
 		mProgressBar.setProgress(65);
 		
-		home = (Button) v.findViewById(R.id.home_button_time_tracker_b);
+		home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_b);
 		Activity c = getActivity();
 		if (c != null) {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));

@@ -9,11 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class LocationFragmentA extends Fragment {
 	
-	Button home;
+	ImageButton home;
 	
 	public LocationFragmentA() {
 		// Required empty public constructor
@@ -33,7 +34,7 @@ public class LocationFragmentA extends Fragment {
 		fragmentTitle.setTextSize(correctTextSize);
 		fragmentUser.setTextSize(correctTextSize);
 		
-		home = (Button) v.findViewById(R.id.home_button_location_current);
+		home = (ImageButton) v.findViewById(R.id.home_button_location_current);
 		Activity c = getActivity();
 		if (c != null) {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));

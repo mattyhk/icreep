@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	private ListView listView = null;
 	private ArrayList<ListItem> items = new ArrayList<ListItem>(); 
 	private TimeTrackerListAdapter mAdapter;
-	private Button home;
+	private ImageButton home;
 
 	public TimeTrackerFragmentA() {
 		// Required empty public constructor
@@ -62,7 +63,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
         
-        home = (Button) v.findViewById(R.id.home_button_time_tracker_a);
+        home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_a);
 		Activity c = getActivity();
 		if (c != null) {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
