@@ -2,8 +2,6 @@ package icreep.app.db;
 
 import java.util.ArrayList;
 
-import com.example.dummyapp.iCreepDatabaseAdapter.iCreepHelper;
-
 import icreep.app.Message;
 import icreep.app.report.TimePlace;
 import android.content.ContentValues;
@@ -62,8 +60,7 @@ public class iCreepDatabaseAdapter {
 			
 			TimePlace tp = new TimePlace(loc,totalTime,floor);
 			
-			timePlaces.add(tp);
-			
+			timePlaces.add(tp);		
 		}
 		
 		return timePlaces; 

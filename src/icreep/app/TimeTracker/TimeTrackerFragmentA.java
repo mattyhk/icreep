@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
+import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.location.FloorItem;
 import icreep.app.location.ListItem;
+import icreep.app.report.TimePlace;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +28,12 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	private ArrayList<ListItem> items = new ArrayList<ListItem>(); 
 	private TimeTrackerListAdapter mAdapter;
 	private Button home;
-
+	
+	iCreepDatabaseAdapter icreepHelper;
+	
+	//list to store timeplaces
+	ArrayList<TimePlace> timePlaces;
+	
 	public TimeTrackerFragmentA() {
 		// Required empty public constructor
 	}
@@ -57,6 +65,14 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         items.add(new FloorItem("Second Floor"));
         items.add(new ZoneTimeItem("Boardroom", "South", "4:00"));
         items.add(new ZoneTimeItem("Wing", "East", "1:00"));
+        
+        //get time places that user has been to from the database
+        
+        FragmentActivity fragActivity = getActivity();
+        icreepHelper = new iCreepDatabaseAdapter(fragActivity);
+       
+        timePlaces = icreepHelper.getTimePlaces(); // now I have to sorted the locations according to floors
+        
         
         mAdapter = new TimeTrackerListAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
