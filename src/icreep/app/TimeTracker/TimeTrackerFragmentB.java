@@ -8,9 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class TimeTrackerFragmentB extends Fragment {
+	
+	ProgressBar mProgressBar;
 
 	public TimeTrackerFragmentB() {
 		// Required empty public constructor
@@ -28,6 +31,8 @@ public class TimeTrackerFragmentB extends Fragment {
 		float correctTextSize = 16*getResources().getDisplayMetrics().density;
 		fragmentTitle.setTextSize(correctTextSize);
 		fragmentUser.setTextSize(correctTextSize);
+		
+		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
 		
 		return v;
 	}

@@ -21,6 +21,16 @@
         android:layout_height="wrap_content"
         android:textColor="@color/OpenBoxGreen"
         android:text="@string/time_tracker" />
-    
+
+    <ProgressBar
+        android:id="@+id/time_tracker_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:minWidth="500dp"
+        android:minHeight="75dp"
+        android:progressDrawable="@drawable/progress_bar" />
 
 </RelativeLayout>
