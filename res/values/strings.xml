@@ -54,6 +54,8 @@
     <string name="user_position">Employee Name: Position</string>
     <string name="Test">Marc Storebel: Developer</string>
     <string name="test2">6:18</string>
+    <string name="timeInOffice">5:15</string>
+    <string name="timeOutOffice">2:45</string>
     
 	
     <!--  Colours -->

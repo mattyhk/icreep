@@ -8,9 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class TimeTrackerFragmentB extends Fragment {
+	
+	ProgressBar mProgressBar;
 
 	public TimeTrackerFragmentB() {
 		// Required empty public constructor
@@ -29,25 +32,14 @@ public class TimeTrackerFragmentB extends Fragment {
 		fragmentTitle.setTextSize(correctTextSize);
 		fragmentUser.setTextSize(correctTextSize);
 		
+		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
+		
+		// Place holder for time being
+		mProgressBar.setProgress(65);
+		
 		return v;
 	}
 	
-	/**
-	 * Returns the current floor of the user
-	 * @return floor
-	 */
-	private int getFloor(){
-		return 0;
-	}
-	
-	/**
-	 * Sets the map to be displayed as determined by the current zone and floor
-	 * @param floor
-	 * @param currentZone
-	 */
-	private void setImage(int floor, int currentZone){
-		
-	}
 	
 	/**
 	 * Needs to update the map displayed - should be updated in TimeTracker Activity upon fragment selection
@@ -56,6 +48,16 @@ public class TimeTrackerFragmentB extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+	}
+	
+	/**
+	 * Calculates the percentage of time the user has spent in the office
+	 * @param inOffice - time spent in the office
+	 * @param outOffice - time spent out of the office
+	 * @return percentage - the percentage rounded to nearest integer
+	 */
+	private int calcPercentageTime(float inOffice, float outOffice) {
+		return 0;
 	}
 
 }
