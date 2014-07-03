@@ -1,4 +1,4 @@
-package icreep.app.Report;
+package icreep.app.report;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;

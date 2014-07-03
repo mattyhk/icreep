@@ -16,19 +16,19 @@ public class IcreepMenu extends Activity {
 		
 		//Proximity Button
 		location_button = (Button) findViewById(R.id.button1_location);
-		location_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.Location.LocationActivity"));
+		location_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.location.LocationActivity"));
 		
 		//Time Tracker Button
 		time_tracker_button = (Button) findViewById(R.id.button2_time_tracker);
-		time_tracker_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.TimeTracker.TimeTrackerActivity"));
+		time_tracker_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.timetracker.TimeTrackerActivity"));
 		
 		//Reports Button
 		reports_button = (Button) findViewById(R.id.button3_reports);
-		reports_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.Report.reportActivity"));
+		reports_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.report.ReportActivity"));
 		
 		//Proximity Button
 		profile_button = (Button) findViewById(R.id.button4_profile);
-		profile_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.ProfileCreation"));
+		profile_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.ProfileCreationActivity"));
 		
 	}//onCreate
 	

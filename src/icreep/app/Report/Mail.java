@@ -1,4 +1,4 @@
-package icreep.app.Report;
+package icreep.app.report;
 
 import java.util.Date;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package icreep.app.Report;
+package icreep.app.report;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,7 +28,7 @@ import icreep.app.R;
 import icreep.app.R.id;
 import icreep.app.R.layout;
 
-public class reportManualFragment extends Fragment {
+public class ReportManualFragment extends Fragment {
 
 	Button sendreport;
 
@@ -172,7 +172,7 @@ public class reportManualFragment extends Fragment {
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
 		String Dated = sdf.format(d);
 
-		s = s + "\nOpenBox Software - iCreep app";
+		s = s + "\nOpen Box Software - iCreep app";
 		s = s + "\nThere when you least expect it ;)";
 		s = s + "\n";
 		s = s + "\nSent on the " + sdf.format(d) + " at " + sdf2.format(d);
@@ -231,7 +231,7 @@ public class reportManualFragment extends Fragment {
 				+ "\nFor the best view on your statistics, please use MS Office or Wordpad.";
 		s = s + "\n";
 		s = s + "\nRegards";
-		s = s + "\nOpenBox Software iCreep team";
+		s = s + "\nOpen Box Software iCreep team";
 
 		return s;
 	}

@@ -1,4 +1,4 @@
-package icreep.app.TimeTracker;
+package icreep.app.timetracker;
 
 import icreep.app.R;
 import android.app.Activity;

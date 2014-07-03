@@ -1,4 +1,4 @@
-package icreep.app.Report;
+package icreep.app.report;
 
 import android.R.bool;
 import android.support.v4.app.FragmentActivity;
@@ -24,7 +24,7 @@ import icreep.app.R.color;
 import icreep.app.R.id;
 import icreep.app.R.layout;
 
-public class reportAutoFragment extends Fragment {
+public class ReportAutoFragment extends Fragment {
 		
 		Switch switched;
 		Button save ;

@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 
-public class ProfileCreation extends Activity {
+public class ProfileCreationActivity extends Activity {
 	
 	Button save_button;
 	

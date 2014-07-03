@@ -1,6 +1,6 @@
-package icreep.app.TimeTracker;
+package icreep.app.timetracker;
 
-import icreep.app.Location.ListItem;
+import icreep.app.location.ListItem;
 
 public class ZoneTimeItem implements ListItem {
 	

@@ -1,4 +1,4 @@
-package icreep.app.Location;
+package icreep.app.location;
 
 public interface ListItem {
 	
