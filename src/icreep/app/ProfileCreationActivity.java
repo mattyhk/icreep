@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +33,10 @@ public class ProfileCreationActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_profile_creation);		
+		setContentView(R.layout.activity_profile_creation);	
+		
+		// Prevents the keyboard from automatically popping up
+		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 		userName = (EditText) findViewById(R.id.editText1_user_name);
 		userSurname = (EditText) findViewById(R.id.editText2_user_surname);
