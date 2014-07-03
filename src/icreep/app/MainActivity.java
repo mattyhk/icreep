@@ -16,7 +16,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		// Redirecting to profile creation - we will have to check for user presence
 		Intent i = new Intent();
 		i.setClassName(this, "icreep.app.ProfileCreationActivity");
 		startActivity(i);
@@ -85,5 +84,7 @@ public class MainActivity extends Activity {
 		super.onRestoreInstanceState(savedInstanceState);
 
 	}
+		
+	
 	
 }
