@@ -29,8 +29,8 @@ public class TimeTrackerFragmentB extends Fragment {
 		
 		View v = inflater.inflate(R.layout.fragment_time_tracker_b, container, false);
 		
-		TextView fragmentTitle = (TextView) v.findViewById(R.id.time_tracker_a_title);
-		TextView fragmentUser = (TextView) v.findViewById(R.id.time_tracker_a_user);
+		TextView fragmentTitle = (TextView) v.findViewById(R.id.time_tracker_b_title);
+		TextView fragmentUser = (TextView) v.findViewById(R.id.time_tracker_b_user);
 		
 		float correctTextSize = 16*getResources().getDisplayMetrics().density;
 		fragmentTitle.setTextSize(correctTextSize);
