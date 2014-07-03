@@ -66,13 +66,12 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         items.add(new ZoneTimeItem("Boardroom", "South", "4:00"));
         items.add(new ZoneTimeItem("Wing", "East", "1:00"));
         
-        //get time places that user has been to from the database
-        
+        //get time places that user has been to from the database       
         FragmentActivity fragActivity = getActivity();
         icreepHelper = new iCreepDatabaseAdapter(fragActivity);
        
         timePlaces = icreepHelper.getTimePlaces(); // now I have to sorted the locations according to floors
-        
+        timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
         
         mAdapter = new TimeTrackerListAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
@@ -85,6 +84,15 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		}
 		
 		return v;
+	}
+	
+	public ArrayList<TimePlace> sortTimePlaces(ArrayList<TimePlace> timePlaces){
+		
+		ArrayList<TimePlace> sorted = timePlaces;
+		
+		
+		
+		return sorted;
 	}
 
 	@Override

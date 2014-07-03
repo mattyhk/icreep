@@ -26,8 +26,7 @@ public class TimeTrackerListAdapter extends ArrayAdapter<ListItem> {
 		
 		this.context = context;
 		this.items = items;
-		vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
+		vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);		
 	}
 	
 	@Override
