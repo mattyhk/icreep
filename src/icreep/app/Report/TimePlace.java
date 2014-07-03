@@ -1,4 +1,4 @@
-package icreep.app.Report;
+package icreep.app.report;
 
 public class TimePlace {
 	private String location = "" ;

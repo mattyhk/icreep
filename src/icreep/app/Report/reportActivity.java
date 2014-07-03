@@ -1,4 +1,4 @@
-package icreep.app.Report;
+package icreep.app.report;
 
 import icreep.app.R;
 import icreep.app.R.color;

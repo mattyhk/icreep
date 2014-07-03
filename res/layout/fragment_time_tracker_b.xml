@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkGreyForBackgrounds"
     android:orientation="vertical"
-    tools:context="icreep.app.TimeTracker.TimeTrackerFragmentB" >
+    tools:context="icreep.app.timetracker.TimeTrackerFragmentB" >
 
     <TextView
         android:id="@+id/time_tracker_b_user"

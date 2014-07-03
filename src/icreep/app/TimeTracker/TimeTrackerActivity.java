@@ -1,4 +1,4 @@
-package icreep.app.TimeTracker;
+package icreep.app.timetracker;
 
 import java.util.HashMap;
 import java.util.Map;

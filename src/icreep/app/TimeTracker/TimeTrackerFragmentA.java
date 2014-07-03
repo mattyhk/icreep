@@ -1,10 +1,10 @@
-package icreep.app.TimeTracker;
+package icreep.app.timetracker;
 
 import java.util.ArrayList;
 
 import icreep.app.R;
-import icreep.app.Location.FloorItem;
-import icreep.app.Location.ListItem;
+import icreep.app.location.FloorItem;
+import icreep.app.location.ListItem;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

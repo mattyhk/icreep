@@ -1,4 +1,4 @@
-package icreep.app.Report;
+package icreep.app.report;
 
 import android.R.bool;
 import android.support.v4.app.FragmentActivity;

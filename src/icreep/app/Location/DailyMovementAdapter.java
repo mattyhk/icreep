@@ -1,4 +1,4 @@
-package icreep.app.Location;
+package icreep.app.location;
 
 import icreep.app.R;
 import icreep.app.R.id;

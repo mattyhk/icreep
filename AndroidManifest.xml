@@ -55,7 +55,7 @@
         </activity>
         
         <activity
-	        android:name="icreep.app.Location.LocationActivity"
+	        android:name="icreep.app.location.LocationActivity"
     	    android:label="@string/title_activity_location" >
         	<meta-data
             	android:name="android.support.PARENT_ACTIVITY"
@@ -63,7 +63,7 @@
         </activity>
         
         <activity
-            android:name="icreep.app.Report.ReportActivity"
+            android:name="icreep.app.report.ReportActivity"
             android:label="@string/title_activity_icreep_menu"
             android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
@@ -72,7 +72,7 @@
         </activity>
         
         <activity
-            android:name="icreep.app.TimeTracker.TimeTrackerActivity"
+            android:name="icreep.app.timetracker.TimeTrackerActivity"
             android:label="@string/title_activity_time_tracker" 
             android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
