@@ -56,16 +56,14 @@ public class ProfileCreationActivity extends Activity {
 	public void saveDetails(View view){
     	
     	//Intent intent = new Intent(this, SaveUserDetails.class);
-    	
-    	//EditText editText = (EditText) findViewById(R.string.);
-		
+
 		//get user details
 		String name = userName.getText().toString();
 		String surname = userSurname.getText().toString();
 		String position = userPosition.getText().toString();
 		String email = userEmail.getText().toString();
 		
-		//before entering user into DB - can send validation email first
+		//before entering user into DB - can send or validate email first
 		//if validation email bounces than user not entered in DB else add to DB		
 		if(isValidEmail(email)){				
 			long id = icreepHelper.enterNewUser(name, surname, position, email, photo);	
