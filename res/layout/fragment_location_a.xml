@@ -5,22 +5,44 @@
     android:background="@color/darkGreyForBackgrounds"
     android:orientation="vertical"
     tools:context="icreep.app.location.LocationFragmentA" >
-
-    <TextView
-        android:id="@+id/location_a_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/location_a_title"
-        android:textColor="@color/whiteBackground"
-        android:text="@string/user_position" />
-    
-    <TextView
-        android:id="@+id/location_a_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/OpenBoxGreen"
-        android:text="@string/title_location_section1" />
+	
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+        <LinearLayout 
+            android:layout_height="wrap_content"
+            android:layout_width="0dp" 
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp" >
+            
+            <TextView
+		        android:id="@+id/location_a_title"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/OpenBoxGreen"
+		        android:text="@string/title_location_current" />
+            
+            <TextView
+		        android:id="@+id/location_a_user"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/whiteBackground"
+		        android:text="@string/user_position" />
+            
+        </LinearLayout>
+	
+        <ImageButton
+	        android:id="@+id/home_button_location_current"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:background="@drawable/home"
+	        android:contentDescription="@string/home" 
+	        android:layout_gravity="right" />
+        
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/location_a_zone_map"

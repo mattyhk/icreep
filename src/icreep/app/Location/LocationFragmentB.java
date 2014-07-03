@@ -2,11 +2,13 @@ package icreep.app.location;
 
 
 import icreep.app.R;
+import icreep.app.SwitchButtonListener;
 import icreep.app.R.id;
 import icreep.app.R.layout;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	private ListView listView = null;
 	private ArrayList<ListItem> items = new ArrayList<ListItem>(); 
 	private DailyMovementAdapter mAdapter;
+	private Button home;
 
 	public LocationFragmentB() {
 		// Required empty public constructor
@@ -61,6 +65,12 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
         mAdapter = new DailyMovementAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
+        
+        home = (Button) v.findViewById(R.id.home_button_location_movement);
+		Activity c = getActivity();
+		if (c != null) {
+			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
+		}
 
 		return v;
 	}

@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -36,8 +35,7 @@ public class reportManualFragment extends Fragment {
 	 * Pre-Conditions: A bundle in case we need a saved state if we switch
 	 * screens and want to keep old information The trigger is that you have
 	 * switched to this activity using an intent and now this activity is
-	 * created 
-	 * Post-conditions: > This will set all the listeners for the
+	 * created Post-conditions: > This will set all the listeners for the
 	 * different views > This will ensure the correct sizing of views and their
 	 * text as a function of the screen density > This ensures the logical flow
 	 * of events and will cover the different combination of inputs
@@ -50,7 +48,7 @@ public class reportManualFragment extends Fragment {
 				false);
 		sendreport = (Button) v.findViewById(R.id.sendReportButton);
 		sendreport.setTextSize(correctTextpixel);
-		// sendreport.
+		
 		sendreport.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -69,8 +67,7 @@ public class reportManualFragment extends Fragment {
 	}
 
 	/*
-	 * Pre-Conditions: None 
-	 * Post-conditions: > Send the mail using the default
+	 * Pre-Conditions: None Post-conditions: > Send the mail using the default
 	 * mailer for the user to add recipients if they want
 	 */
 	public void sendMail() {
@@ -100,10 +97,8 @@ public class reportManualFragment extends Fragment {
 	}
 
 	/*
-	 * Pre-Conditions: None 
-	 * Post-conditions: 
-	 * > Build the report using string handling 
-	 * > Create a fully formatted text file to attach to the email
+	 * Pre-Conditions: None Post-conditions: > Build the report using string
+	 * handling > Create a fully formatted text file to attach to the email
 	 */
 	public void finalBuildEmailReport() {
 		String s = "This is the report for your daily statistics:";
@@ -127,8 +122,6 @@ public class reportManualFragment extends Fragment {
 		list.add(tp7);
 
 		list = InsertionSort(list);
-		
-
 
 		int max = 0;
 		for (TimePlace t : list) {
@@ -147,26 +140,24 @@ public class reportManualFragment extends Fragment {
 				s = s + "\nGround Floor";
 				s = s + "\n--------------------------------------------";
 				g = true;
-			} 
+			}
 			if (t.getFloor().equals("First") && (f == false)) {
-				if (g == false )
-				{
+				if (g == false) {
 					s = s + "\n============================================";
 					s = s + "\nGround Floor";
 					s = s + "\n--------------------------------------------";
-					g= true;
+					g = true;
 				}
 				s = s + "\n============================================";
 				s = s + "\nFirst Floor";
 				s = s + "\n--------------------------------------------";
 				f = true;
 			} else if (t.getFloor().equals("Second") && (se == false)) {
-				if (f == false )
-				{
+				if (f == false) {
 					s = s + "\n============================================";
 					s = s + "\nGround Floor";
 					s = s + "\n--------------------------------------------";
-					f= true ;
+					f = true;
 				}
 				s = s + "\n============================================";
 				s = s + "\nSecond Floor";
@@ -200,10 +191,9 @@ public class reportManualFragment extends Fragment {
 	}
 
 	/*
-	 * Pre-Conditions: The fully formatted string that needs to be written 
-	 * Post-conditions: 
-	 * > Write string to a textFile
-	 * > Create a fully formatted text file to attach to the email
+	 * Pre-Conditions: The fully formatted string that needs to be written
+	 * Post-conditions: > Write string to a textFile > Create a fully formatted
+	 * text file to attach to the email
 	 */
 	public void createReportTextFile(String in) {
 		File outFileDir = Environment.getExternalStorageDirectory();
@@ -236,9 +226,8 @@ public class reportManualFragment extends Fragment {
 	}
 
 	/*
-	 * Pre-Conditions: None 
-	 * Post-conditions: 
-	 * > build the emails body that will be attached to the intent
+	 * Pre-Conditions: None Post-conditions: > build the emails body that will
+	 * be attached to the intent
 	 */
 	public String buildEmailBody() {
 		String userName = "Logan Dunbar"; // can be retrieved from the DB
@@ -256,12 +245,9 @@ public class reportManualFragment extends Fragment {
 	}
 
 	/*
-	 * Pre-Conditions: 
- 	 * > ArrayList of time places that is unsorted.
-	 * Post-conditions: 
-	 * > Sorts the arrayList of time places
-	 * > The sort is done on the floor
-	 * > items order: Ground Floor, First Floor, Second Floor
+	 * Pre-Conditions: > ArrayList of time places that is unsorted.
+	 * Post-conditions: > Sorts the arrayList of time places > The sort is done
+	 * on the floor > items order: Ground Floor, First Floor, Second Floor
 	 */
 	public ArrayList<TimePlace> InsertionSort(ArrayList<TimePlace> a) {
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
