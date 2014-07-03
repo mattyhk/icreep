@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:minHeight="?android:attr/listPreferredItemHeight" 
     android:gravity="center_vertical"
-    android:paddingRight="?android:attr/scrollbarSize" >
+    android:paddingRight="?android:attr/scrollbarSize"
+    android:background="@color/whiteBackground" >
     
     <ImageView
         android:id="@+id/daily_movement_list_item_zone_drawable"

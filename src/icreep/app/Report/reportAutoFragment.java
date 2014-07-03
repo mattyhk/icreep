@@ -62,7 +62,7 @@ public class reportAutoFragment extends Fragment {
 	        // Inflate the layout for this fragment
 	    	// Return inflater.inflate(R.layout., container, false);
 	    	
-	    	View v = inflater.inflate(R.layout.reports_auto_fragment, container,false) ;
+	    	View v = inflater.inflate(R.layout.fragment_reports_auto, container,false) ;
 	    	
 	    	save = (Button) v.findViewById(R.id.saveButton);
 	    	switched = (Switch) v.findViewById(R.id.switchBar);	  

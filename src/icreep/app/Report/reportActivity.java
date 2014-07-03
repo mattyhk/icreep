@@ -38,7 +38,7 @@ public class reportActivity extends FragmentActivity {
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.reports); 
+	        setContentView(R.layout.activity_reports); 
 	        auto = (Button) findViewById(R.id.autoButton);
 	        manual = (Button) findViewById(R.id.manualButton) ;	        
 	        TextView reports = (TextView) findViewById(R.id.textViewMain);
