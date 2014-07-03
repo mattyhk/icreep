@@ -24,7 +24,7 @@ import icreep.app.R.color;
 import icreep.app.R.id;
 import icreep.app.R.layout;
 
-public class reportAutoFragment extends Fragment {
+public class ReportAutoFragment extends Fragment {
 		
 		Switch switched;
 		Button save ;
