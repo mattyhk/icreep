@@ -1,16 +1,21 @@
 package icreep.app.location;
 
 import icreep.app.R;
+import icreep.app.SwitchButtonListener;
 import icreep.app.R.id;
 import icreep.app.R.layout;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class LocationFragmentA extends Fragment {
+	
+	Button home;
 	
 	public LocationFragmentA() {
 		// Required empty public constructor
@@ -29,6 +34,12 @@ public class LocationFragmentA extends Fragment {
 		float correctTextSize = 16*getResources().getDisplayMetrics().density;
 		fragmentTitle.setTextSize(correctTextSize);
 		fragmentUser.setTextSize(correctTextSize);
+		
+		home = (Button) v.findViewById(R.id.home_button_location_current);
+		Activity c = getActivity();
+		if (c != null) {
+			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
+		}
 		
 		return v;
 	}

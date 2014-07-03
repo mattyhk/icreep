@@ -3,8 +3,10 @@ package icreep.app.timetracker;
 import java.util.ArrayList;
 
 import icreep.app.R;
+import icreep.app.SwitchButtonListener;
 import icreep.app.location.FloorItem;
 import icreep.app.location.ListItem;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +24,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	private ListView listView = null;
 	private ArrayList<ListItem> items = new ArrayList<ListItem>(); 
 	private TimeTrackerListAdapter mAdapter;
+	private Button home;
 
 	public TimeTrackerFragmentA() {
 		// Required empty public constructor
@@ -57,6 +61,12 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         mAdapter = new TimeTrackerListAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
+        
+        home = (Button) v.findViewById(R.id.home_button_time_tracker_a);
+		Activity c = getActivity();
+		if (c != null) {
+			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
+		}
 		
 		return v;
 	}

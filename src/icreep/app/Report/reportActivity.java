@@ -5,6 +5,7 @@ import icreep.app.R.color;
 import icreep.app.R.id;
 import icreep.app.R.layout;
 import icreep.app.R.menu;
+import icreep.app.SwitchButtonListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.support.v4.app.FragmentTransaction;
@@ -23,8 +24,8 @@ import android.widget.TextView;
 
 public class ReportActivity extends FragmentActivity {
 
-	Button auto, manual ;
-	boolean automated = true ;
+	Button auto, manual, home;
+	boolean automated = true;
 	
 	
 	
@@ -40,7 +41,8 @@ public class ReportActivity extends FragmentActivity {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.activity_reports); 
 	        auto = (Button) findViewById(R.id.autoButton);
-	        manual = (Button) findViewById(R.id.manualButton) ;	        
+	        manual = (Button) findViewById(R.id.manualButton);
+	        home = (Button) findViewById(R.id.home_button_report);
 	        TextView reports = (TextView) findViewById(R.id.textViewMain);
 	        TextView userDescrip = (TextView) findViewById(R.id.userDescript);
 	        String foruserdesc = buildUserDescription();
@@ -53,10 +55,10 @@ public class ReportActivity extends FragmentActivity {
 	        auto.setTextSize(correctTextpixel);
 	        manual.setTextSize(correctTextpixel);   
 	        
-	        // this is called because we want this fragment to be added auto when we create this activity
+	        // This is called because we want this fragment to be added auto when we create this activity
 	        addautoFragment(savedInstanceState);        
 	        
-	        //adding button handler for the auto report
+	        // Adding button handler for the auto report
 	        auto.setOnClickListener(new OnClickListener() {
 				
 			 @Override
@@ -70,7 +72,7 @@ public class ReportActivity extends FragmentActivity {
 				}
 			});
 	        
-	      //adding button handler for the manual report
+	        // Adding button handler for the manual report
 	        manual.setOnClickListener(new OnClickListener() {
 				
 	        	@Override
@@ -82,6 +84,9 @@ public class ReportActivity extends FragmentActivity {
 					auto.setBackgroundColor(getResources().getColor(R.color.greyForBackrounds));
 				}
 			});
+	        
+	        // Adding home button listener
+	        home.setOnClickListener(new SwitchButtonListener(this, "icreep.app.IcreepMenu"));
 	        
 	    }
 	 
