@@ -33,7 +33,7 @@
             android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.icreep.MainActivity" />
+                android:value="icreep.app.MainActivity" />
         </activity>
         
         <activity
@@ -42,7 +42,16 @@
             android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.icreep.MainActivity" />
+                android:value="icreep.app.MainActivity" />
+        </activity>
+        
+        <activity
+            android:name="icreep.app.ProfileCreationActivity"
+            android:label="@string/title_activity_profile_creation"
+            android:parentActivityName="icreep.app.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="icreep.app.MainActivity" />
         </activity>
         
         <activity
@@ -51,7 +60,7 @@
             android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.icreep.MainActivity" />
+                android:value="icreep.app.MainActivity" />
         </activity>
         
         <activity
@@ -59,7 +68,7 @@
     	    android:label="@string/title_activity_location" >
         	<meta-data
             	android:name="android.support.PARENT_ACTIVITY"
-            	android:value="com.example.icreep.MainActivity" />
+            	android:value="icreep.app.MainActivity" />
         </activity>
         
         <activity
@@ -68,7 +77,7 @@
             android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.icreep.MainActivity" />
+                android:value="icreep.app.MainActivity" />
         </activity>
         
         <activity
@@ -77,7 +86,7 @@
             android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.icreep.MainActivity" />
+                android:value="icreep.app.MainActivity" />
         </activity>
         
     </application>
