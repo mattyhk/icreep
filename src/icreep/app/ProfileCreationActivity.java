@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 
 public class ProfileCreationActivity extends Activity {
 	
-	private Button save_button, home_button;
+	private Button save_button;
+	private ImageButton home_button;
 	
 	// Views to extract user details from
 	EditText userName, userSurname, userPosition, userEmail;
@@ -40,7 +42,7 @@ public class ProfileCreationActivity extends Activity {
 		//rename helper for db management
 		icreepHelper = new iCreepDatabaseAdapter(this);	
 		
-		home_button = (Button) findViewById(R.id.home_button_profile);
+		home_button = (ImageButton) findViewById(R.id.home_button_profile);
 		
 		// Check if a user has been created: if (user != null) {
 			home_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.IcreepMenu"));
