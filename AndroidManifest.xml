@@ -26,11 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="com.example.icreep.ProfileCreation"
+            android:label="@string/title_activity_profile_creation"></activity>     
         <activity
             android:name="icreep.app.Location.LocationActivity"
-            android:label="@string/title_activity_location" >
-            android:name="com.example.icreep.ProfileCreation"
-            android:label="@string/title_activity_profile_creation"
+            android:label="@string/title_activity_location"           
             android:parentActivityName="com.example.icreep.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
