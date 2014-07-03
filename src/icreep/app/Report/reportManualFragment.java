@@ -127,13 +127,8 @@ public class ReportManualFragment extends Fragment {
 		list.add(tp7);
 
 		list = InsertionSort(list);
-		boolean g = false;
-		boolean f = false;
-		boolean se = false;
-		boolean should = false;
-		s = s + "\n============================================";
-		s = s + "\nGround Floor";
-		s = s + "\n--------------------------------------------";
+		
+
 
 		int max = 0;
 		for (TimePlace t : list) {
@@ -142,13 +137,37 @@ public class ReportManualFragment extends Fragment {
 			}
 		}
 
+		boolean g = false;
+		boolean f = false;
+		boolean se = false;
+		boolean should = false;
 		for (TimePlace t : list) {
+			if (t.getFloor().equals("Ground") && (g == false)) {
+				s = s + "\n============================================";
+				s = s + "\nGround Floor";
+				s = s + "\n--------------------------------------------";
+				g = true;
+			} 
 			if (t.getFloor().equals("First") && (f == false)) {
+				if (g == false )
+				{
+					s = s + "\n============================================";
+					s = s + "\nGround Floor";
+					s = s + "\n--------------------------------------------";
+					g= true;
+				}
 				s = s + "\n============================================";
 				s = s + "\nFirst Floor";
 				s = s + "\n--------------------------------------------";
 				f = true;
 			} else if (t.getFloor().equals("Second") && (se == false)) {
+				if (f == false )
+				{
+					s = s + "\n============================================";
+					s = s + "\nGround Floor";
+					s = s + "\n--------------------------------------------";
+					f= true ;
+				}
 				s = s + "\n============================================";
 				s = s + "\nSecond Floor";
 				s = s + "\n--------------------------------------------";
