@@ -1,101 +1,35 @@
 package icreep.app;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.Button;
 import icreep.app.R;
-import icreep.app.Location.LocationActivity;
 
 public class IcreepMenu extends Activity {
 	
-	Intent intent;
+	Button location_button, time_tracker_button, reports_button, profile_button;
 
-    public void userProximity(View view){
-    	
-    	Intent intent = new Intent(this, LocationActivity.class);
-        startActivity(intent);
-    	
-    }//selectProximity 
-
-	public void timeTracker(View view){
-		
-		
-	}//timeTracker 
-	
-	public void userReports(View view){
-		
-		
-	}//userReports 
-	
-	public void userProfile(View view){
-		
-		
-	}//userProfile 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_icreep_menu);
-/*
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-			
-		}//if
-		*/
-	}//onCreate 
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.icreep_menu, menu);
-		return true;
 		
-	}//onCreateOptionsMenu 
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
+		//Proximity Button
+		location_button = (Button) findViewById(R.id.button1_location);
+		location_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.Location.LocationActivity"));
 		
-		if (id == R.id.action_settings) {
-			
-			return true;
-			
-		}//if
+		//Time Tracker Button
+		time_tracker_button = (Button) findViewById(R.id.button2_time_tracker);
+		time_tracker_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.TimeTracker.TimeTrackerActivity"));
 		
-		return super.onOptionsItemSelected(item);
+		//Reports Button
+		reports_button = (Button) findViewById(R.id.button3_reports);
+		reports_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.Report.reportActivity"));
 		
-	}//onOptionsItemSelected
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
+		//Proximity Button
+		profile_button = (Button) findViewById(R.id.button4_profile);
+		profile_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.ProfileCreation"));
+		
+	}//onCreate
 	
-	/*
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_icreep_menu,
-					container, false);
-			return rootView;
-		}
-	}
-*/
-}
+}//IcreepMenu class

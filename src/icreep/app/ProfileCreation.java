@@ -2,19 +2,25 @@ package icreep.app;
 
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 
 public class ProfileCreation extends Activity {
 	
+	Button save_button;
+	
 	//views to extract user details from
 	EditText userName, userSurname, userPosition, userEmail;
 	
 	//find way to get photo
-	ImageView userPhoto;
+	ImageView userPhoto;		
 		
 	String photo="";
 	
@@ -24,7 +30,8 @@ public class ProfileCreation extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_profile_creation);
+		setContentView(R.layout.activity_profile_creation);		
+		
 
 		userName = (EditText) findViewById(R.id.editText1_user_name);
 		userSurname = (EditText) findViewById(R.id.editText2_user_surname);
@@ -36,13 +43,14 @@ public class ProfileCreation extends Activity {
 		
 	}//onCreate method
 	
-	//upload image
+	
 	public void uploadImage(View view){
     	
     	//Intent intent = new Intent(this, ProfilePicture.class);
 		
     	photo = "";
-	}
+    	
+	}//uploadImage
 	
 	//listener to adddUser event - let's add new user to db	
 	public void saveDetails(View view){
@@ -63,14 +71,19 @@ public class ProfileCreation extends Activity {
 			//check if insertion was successful
 			if(id<0){
 				Message.message(this, "User details saved");
-				//should now call intent to open app menu activity
+				
+				//Go to main menu if insertion is successful
+				save_button = (Button) findViewById(R.id.button2_save_user_details);
+				save_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.IcreepMenu"));
+				
 			}else{
 				Message.message(this, "User details not  saved");
 			}		
 	    }
 		else{
 			Message.message(this,"invalid email address");
-		}		
+		}			
+		
 	}//saveDetails method
 	
 	//function to validate email addresses against an email Regular Expression
