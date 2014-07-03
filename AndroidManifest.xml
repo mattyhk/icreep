@@ -29,7 +29,7 @@
         
         <activity
             android:name="icreep.app.ProfileCreationActivity"
-            android:label="@string/title_activity_profile_creation"
+            android:label="@string/profile"
             android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -55,7 +55,7 @@
         
         <activity
             android:name="icreep.app.report.ReportActivity"
-            android:label="@string/title_activity_icreep_menu"
+            android:label="@string/report"
             android:parentActivityName="icreep.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

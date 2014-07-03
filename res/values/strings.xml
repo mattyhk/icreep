@@ -12,7 +12,6 @@
     
     <!--  Profile Strings -->
     <string name="profile">Profile</string>
-    <string name="title_activity_profile_creation">ProfileCreation</string>
     <string name="name_label">Name:</string>
     <string name="edit_name">Enter name</string>
     <string name="surname_label">Surname:</string>
