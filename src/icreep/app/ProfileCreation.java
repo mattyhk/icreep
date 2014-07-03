@@ -2,13 +2,19 @@ package icreep.app;
 
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 
 public class ProfileCreation extends Activity {
+	
+	Button button;
 	
 	//views to extract user details from
 	EditText userName, userSurname, userPosition, userEmail;
@@ -24,7 +30,8 @@ public class ProfileCreation extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_profile_creation);
+		setContentView(R.layout.activity_profile_creation);		
+		addListenerOnButton();
 
 		userName = (EditText) findViewById(R.id.editText1_user_name);
 		userSurname = (EditText) findViewById(R.id.editText2_user_surname);
@@ -35,6 +42,27 @@ public class ProfileCreation extends Activity {
 		icreepHelper = new iCreepDatabaseAdapter(this);	
 		
 	}//onCreate method
+	
+	private void addListenerOnButton() {
+		
+		final Context context = this;
+		 
+		button = (Button) findViewById(R.id.button2_save_user_details);
+ 
+		button.setOnClickListener(new OnClickListener() {
+ 
+			@Override
+			public void onClick(View arg0) {
+ 
+			    Intent intent = new Intent(context, IcreepMenu.class);
+                            startActivity(intent);   
+ 
+			}//onClick
+ 
+		});
+		
+	}//addListenerOnButton
+
 	
 	//upload image
 	public void uploadImage(View view){

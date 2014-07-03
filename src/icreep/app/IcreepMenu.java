@@ -10,18 +10,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.os.Build;
 import icreep.app.R;
 import icreep.app.Location.LocationActivity;
 
 public class IcreepMenu extends Activity {
 	
-	Intent intent;
+	Button button;
 
-    public void userProximity(View view){
-    	
-    	Intent intent = new Intent(this, LocationActivity.class);
-        startActivity(intent);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_icreep_menu);
+
+	}//onCreate
+	
+	public void userProximity(View view){
+    	 
     	
     }//selectProximity 
 
@@ -39,20 +45,10 @@ public class IcreepMenu extends Activity {
 		
 		
 	}//userProfile 
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_icreep_menu);
-/*
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-			
-		}//if
-		*/
-	}//onCreate 
+	 
 
+////////////////////////////////////////////////////////////////////////////////////////////////	
+	/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -78,6 +74,7 @@ public class IcreepMenu extends Activity {
 		return super.onOptionsItemSelected(item);
 		
 	}//onOptionsItemSelected
+	*/
 
 	/**
 	 * A placeholder fragment containing a simple view.
@@ -98,4 +95,5 @@ public class IcreepMenu extends Activity {
 		}
 	}
 */
+	
 }
