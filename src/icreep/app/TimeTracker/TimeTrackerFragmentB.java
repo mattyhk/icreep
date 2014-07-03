@@ -32,22 +32,6 @@ public class TimeTrackerFragmentB extends Fragment {
 		return v;
 	}
 	
-	/**
-	 * Returns the current floor of the user
-	 * @return floor
-	 */
-	private int getFloor(){
-		return 0;
-	}
-	
-	/**
-	 * Sets the map to be displayed as determined by the current zone and floor
-	 * @param floor
-	 * @param currentZone
-	 */
-	private void setImage(int floor, int currentZone){
-		
-	}
 	
 	/**
 	 * Needs to update the map displayed - should be updated in TimeTracker Activity upon fragment selection
