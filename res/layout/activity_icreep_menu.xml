@@ -23,54 +23,54 @@
         android:textStyle="bold" />
 
 <!--Buttons-->
+
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button1_location"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="22dp"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
-        android:text="@string/select_proximity"
-        android:onClick="userProximity"/>
-        
+        android:onClick="userProximity"
+        android:text="@string/select_proximity" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button2_time_tracker"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="26dp"
+        android:layout_alignLeft="@+id/button1_location"
+        android:layout_below="@+id/button1_location"
+        android:layout_marginTop="39dp"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
-        android:text="@string/time_tracker" 
-        android:onClick="timeTracker"/>
+        android:onClick="timeTracker"
+        android:text="@string/time_tracker" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button3_reports"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_below="@+id/button2"
-        android:layout_marginTop="27dp"
+        android:layout_alignLeft="@+id/button2_time_tracker"
+        android:layout_below="@+id/button2_time_tracker"
+        android:layout_marginTop="36dp"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
-        android:text="@string/report"
-        android:onClick="userReports" />
+        android:onClick="userReports"
+        android:text="@string/report" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button4_profile"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_below="@+id/button3"
-        android:layout_marginTop="24dp"
+        android:layout_alignLeft="@+id/button3_reports"
+        android:layout_below="@+id/button3_reports"
+        android:layout_marginTop="34dp"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
-        android:text="@string/profile" 
-        android:onClick="userProfile"/>
+        android:onClick="userProfile"
+        android:text="@string/profile" />
 
 </RelativeLayout>
 
