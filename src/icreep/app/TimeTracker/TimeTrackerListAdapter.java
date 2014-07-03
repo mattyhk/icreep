@@ -1,8 +1,9 @@
-package icreep.app.Location;
+package icreep.app.TimeTracker;
 
 import icreep.app.R;
-import icreep.app.R.id;
-import icreep.app.R.layout;
+import icreep.app.Location.FloorItem;
+import icreep.app.Location.ListItem;
+import icreep.app.Location.ZoneItem;
 
 import java.util.ArrayList;
 
@@ -13,13 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class DailyMovementAdapter extends ArrayAdapter<ListItem> {
+public class TimeTrackerListAdapter extends ArrayAdapter<ListItem> {
 	
 	private Context context;
 	private ArrayList<ListItem> items;
 	private LayoutInflater vi;
 	
-	public DailyMovementAdapter(Context context, ArrayList<ListItem> items) {
+	public TimeTrackerListAdapter(Context context, ArrayList<ListItem> items) {
 		
 		super(context, 0, items);
 		
@@ -54,15 +55,18 @@ public class DailyMovementAdapter extends ArrayAdapter<ListItem> {
 			
 			else {
 				
-				ZoneItem zone = (ZoneItem) i;
+				ZoneTimeItem zone = (ZoneTimeItem) i;
 				v = vi.inflate(R.layout.list_item_zone, null);
-				final TextView title = (TextView) v.findViewById(R.id.daily_movement_list_item_zone_title);
-				final TextView subtitle = (TextView) v.findViewById(R.id.daily_movement_list_item_zone_summary);
+				final TextView title = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_title);
+				final TextView subtitle = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_summary);
+				final TextView time = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_time);
 				
 				if (title != null)
 					title.setText(zone.getTitle());
 				if (subtitle != null)
 					subtitle.setText(zone.getSubtitle());
+				if (time != null)
+					subtitle.setText(zone.getTime());
 			}
 			
 		}

@@ -18,7 +18,7 @@
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
         android:onClick="saveDetails"
-        android:text="@string/save_user_details" />
+        android:text="@string/save" />
 
     <TextView
         android:id="@+id/textView3_user_email"

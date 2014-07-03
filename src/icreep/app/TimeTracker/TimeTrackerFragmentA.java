@@ -1,12 +1,10 @@
-package icreep.app.Location;
-
-
-import icreep.app.R;
-import icreep.app.R.id;
-import icreep.app.R.layout;
+package icreep.app.TimeTracker;
 
 import java.util.ArrayList;
 
+import icreep.app.R;
+import icreep.app.Location.FloorItem;
+import icreep.app.Location.ListItem;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,64 +12,61 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-public class LocationFragmentB extends Fragment implements OnItemClickListener {
+public class TimeTrackerFragmentA extends Fragment implements OnItemClickListener {
 	
 	private ListView listView = null;
 	private ArrayList<ListItem> items = new ArrayList<ListItem>(); 
-	private DailyMovementAdapter mAdapter;
+	private TimeTrackerListAdapter mAdapter;
 
-	public LocationFragmentB() {
+	public TimeTrackerFragmentA() {
 		// Required empty public constructor
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		// Inflate the layout for this fragment
+		View v = inflater.inflate(R.layout.fragment_time_tracker_a, container, false);
 		
-		View v = inflater.inflate(R.layout.fragment_location_b, container, false);
-		
-		TextView fragmentTitle = (TextView) v.findViewById(R.id.location_b_title);
-		TextView fragmentUser = (TextView) v.findViewById(R.id.location_b_user);
+		TextView fragmentTitle = (TextView) v.findViewById(R.id.time_tracker_a_title);
+		TextView fragmentUser = (TextView) v.findViewById(R.id.time_tracker_a_user);
 		
 		float correctTextSize = 16*getResources().getDisplayMetrics().density;
 		fragmentTitle.setTextSize(correctTextSize);
 		fragmentUser.setTextSize(correctTextSize);
 		
-		listView = (ListView) v.findViewById(R.id.daily_movement_listView_main);
+		listView = (ListView) v.findViewById(R.id.time_tracker_listView_main);
 		
 		items.add(new FloorItem("Ground Floor"));
-        items.add(new ZoneItem("Gym", "South"));
-        items.add(new ZoneItem("Kitchen", "South"));
-        items.add(new ZoneItem("Boardroom", "West"));
+        items.add(new ZoneTimeItem("Gym", "South", "1:00"));
+        items.add(new ZoneTimeItem("Kitchen", "South", "2:00"));
+        items.add(new ZoneTimeItem("Boardroom", "West", "1:50"));
         
         items.add(new FloorItem("First Floor"));
-        items.add(new ZoneItem("Boardroom", "South"));
-        items.add(new ZoneItem("Wing", "East"));
+        items.add(new ZoneTimeItem("Boardroom", "South", "1:00"));
+        items.add(new ZoneTimeItem("Wing", "East", "3:00"));
         
         items.add(new FloorItem("Second Floor"));
-        items.add(new ZoneItem("Boardroom", "South"));
-        items.add(new ZoneItem("Wing", "East"));
-		
-        mAdapter = new DailyMovementAdapter(getActivity(), items);
+        items.add(new ZoneTimeItem("Boardroom", "South", "4:00"));
+        items.add(new ZoneTimeItem("Wing", "East", "1:00"));
+        
+        mAdapter = new TimeTrackerListAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
-
+		
 		return v;
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		
-		ZoneItem item = (ZoneItem)items.get(position);
+		// TODO Auto-generated method stub
+		ZoneTimeItem item = (ZoneTimeItem)items.get(position);
 		Toast.makeText(getActivity(), "You clicked " + item.getTitle() , Toast.LENGTH_SHORT).show();
-		
 	}
 	
 	/**

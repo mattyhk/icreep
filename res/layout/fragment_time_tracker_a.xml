@@ -4,26 +4,17 @@
     android:layout_height="match_parent"
     android:background="@color/darkGreyForBackgrounds"
     android:orientation="vertical"
-    tools:context="icreep.app.Location.LocationFragmentB" >
-	
-    <TextView
-        android:id="@+id/location_b_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/location_b_title"
-        android:textColor="@color/whiteBackground"
-        android:text="@string/user_position" />
+    tools:context="icreep.app.TimeTracker.TimeTrackerFragmentA" >
     
     <TextView
-        android:id="@+id/location_b_title"
+        android:id="@+id/time_tracker_a_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/OpenBoxGreen"
-        android:text="@string/title_location_section2" />
-
+        android:text="@string/time_tracker" />
+    
     <ListView 
-        android:id="@+id/daily_movement_listView_main"
+        android:id="@+id/time_tracker_listView_main"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" 
         android:layout_marginTop="50dp"
@@ -31,5 +22,14 @@
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         android:background="@color/darkGreyForBackgrounds"/>
+    
+    <TextView
+        android:id="@+id/time_tracker_a_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/time_tracker_a_title"
+        android:textColor="@color/whiteBackground"
+        android:text="@string/user_position" />
 
 </RelativeLayout>
