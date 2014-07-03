@@ -14,7 +14,7 @@ import android.widget.ImageView;
 
 public class ProfileCreation extends Activity {
 	
-	Button button;
+	Button save_button;
 	
 	//views to extract user details from
 	EditText userName, userSurname, userPosition, userEmail;
@@ -31,7 +31,7 @@ public class ProfileCreation extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile_creation);		
-		addListenerOnButton();
+		
 
 		userName = (EditText) findViewById(R.id.editText1_user_name);
 		userSurname = (EditText) findViewById(R.id.editText2_user_surname);
@@ -43,34 +43,14 @@ public class ProfileCreation extends Activity {
 		
 	}//onCreate method
 	
-	private void addListenerOnButton() {
-		
-		final Context context = this;
-		 
-		button = (Button) findViewById(R.id.button2_save_user_details);
- 
-		button.setOnClickListener(new OnClickListener() {
- 
-			@Override
-			public void onClick(View arg0) {
- 
-			    Intent intent = new Intent(context, IcreepMenu.class);
-                            startActivity(intent);   
- 
-			}//onClick
- 
-		});
-		
-	}//addListenerOnButton
-
 	
-	//upload image
 	public void uploadImage(View view){
     	
     	//Intent intent = new Intent(this, ProfilePicture.class);
 		
     	photo = "";
-	}
+    	
+	}//uploadImage
 	
 	//listener to adddUser event - let's add new user to db	
 	public void saveDetails(View view){
@@ -93,13 +73,19 @@ public class ProfileCreation extends Activity {
 			//check if insertion was successful
 			if(id<0){
 				Message.message(this, "User details saved");
+				
+				//Go to main menu if insertion is successful
+				save_button = (Button) findViewById(R.id.button2_save_user_details);
+				save_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.IcreepMenu"));
+				
 			}else{
 				Message.message(this, "User details not  saved");
 			}		
 	    }
 		else{
 			Message.message(this,"invalid email address");
-		}		
+		}			
+		
 	}//saveDetails method
 	
 	//function to validate email addresses against an email Regular Expression
