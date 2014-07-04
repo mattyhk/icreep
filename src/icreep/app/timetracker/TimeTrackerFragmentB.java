@@ -18,6 +18,8 @@ public class TimeTrackerFragmentB extends Fragment {
 	
 	private ProgressBar mProgressBar;
 	private ImageButton home;
+	
+	public double inTimeHolder = 0;
 
 	public TimeTrackerFragmentB() {
 		// Required empty public constructor
@@ -38,19 +40,21 @@ public class TimeTrackerFragmentB extends Fragment {
 		
 		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
 		
-		// Place holder for time being
-		mProgressBar.setProgress(65);
+		//get in-time calculated from TimeTrackerFragmentA	
+		
+				
+		// get percentage and set progress
+		mProgressBar.setProgress(calcPercentageTime(inTimeHolder));
+		
 		
 		home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_b);
 		Activity c = getActivity();
 		if (c != null) {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
 		}
-		
-		
+				
 		return v;
 	}
-	
 	
 	/**
 	 * Needs to update the map displayed - should be updated in TimeTracker Activity upon fragment selection
@@ -67,8 +71,9 @@ public class TimeTrackerFragmentB extends Fragment {
 	 * @param outOffice - time spent out of the office
 	 * @return percentage - the percentage rounded to nearest integer
 	 */
-	private int calcPercentageTime(float inOffice, float outOffice) {
-		return 0;
+	private int calcPercentageTime(double inOffice) {
+		
+		return (int) (inOffice/24)*100;
 	}
 
 }
