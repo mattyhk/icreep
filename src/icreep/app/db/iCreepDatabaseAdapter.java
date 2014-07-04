@@ -19,7 +19,10 @@ public class iCreepDatabaseAdapter {
 		helper = new iCreepHelper(context);
 	}
 	
-	//function to insert new users in DB
+	/*
+	 * Pre-Conditions: > A new user who wishes to be entered into database will supply relevant information and be entered into database
+	 * Post-conditions: > Enter the user into the database and return ID to check if the insertion has been successful or not
+	 */
 	public long enterNewUser(String name,String surname,String position,String email,String photo){
 
 		//define record to insert into DB
@@ -37,8 +40,10 @@ public class iCreepDatabaseAdapter {
 		return id;				
 	}
 	
-	//this function will be called when the user wishes to see the details of all the location of where his been with times
-	//this function returns an array list of all time places that user has been to
+	/*
+	 * Pre-Conditions: > Go through database and retrieve user floor, location(description) total time spent.
+	 * Post-conditions: > Return an ArrayList with floors, location(descriptions) and total time spent in location(description)
+	 */
 	public ArrayList<TimePlace> getTimePlaces(){
 		
 		ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
@@ -66,6 +71,7 @@ public class iCreepDatabaseAdapter {
 		return timePlaces; 
 	}
 	
+	//database schema definition and creation 
 	static class iCreepHelper extends SQLiteOpenHelper{
 		//set db name and version
 		private static final String DATABASE_NAME = "icreepdatabase";

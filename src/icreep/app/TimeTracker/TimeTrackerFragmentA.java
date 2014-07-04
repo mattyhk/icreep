@@ -62,7 +62,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         items.add(new ZoneTimeItem("Boardroom", "West", "1:50"));
         
         items.add(new FloorItem("First Floor"));
-        items.add(new ZoneTimeItem("Boardroom", "South", "1:00"));TimePlace
+        items.add(new ZoneTimeItem("Boardroom", "South", "1:00"));
         items.add(new ZoneTimeItem("Wing", "East", "3:00"));
         
         items.add(new FloorItem("Second Floor"));
@@ -85,12 +85,14 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		Activity c = getActivity();
 		if (c != null) {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
-		}
-		
+		}		
 		return v;
 	}
 	
-	//this function will sort the location with respect to their floors and description(locations)
+	/*
+	 * Pre-Conditions: > ArrayList of time places that is unsorted according location(description), floor and total time spent.
+	 * Post-conditions: > Sorts the arrayList of time places according location(description), floor and total time spent> The sort is done
+	 */
 	public ArrayList<TimePlace> sortTimePlaces(ArrayList<TimePlace> timePlaces){
 		
 		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
@@ -98,26 +100,21 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		reportManualFragment ra = new reportManualFragment();
 		ArrayList<TimePlace> sorted = ra.InsertionSort(timePlaces);
 		
-		TimePlace toAdd;
+		TimePlace toAdd = sorted.get(0);
+		sorted.remove(0);
 		
-		/*
-		for (int i=0; i<sorted.size();i++) {
-			
-			double totalSpent = sorted.get(i).getTimeSpent();
-			
-		    for(int j=i+1; i<sorted.size();i++) {
-		    	if(sorted.get(i).getFloor() == sorted.get(j).getFloor() && sorted.get(i).getLocation() == sorted.get(j).getLocation())
-		    	{
-		    		totalSpent+=sorted.get(j).getTimeSpent();
-		    		sorted.remove(sorted.get(j));
-		    	}		    			    	
-		    }
-		    
-		    finalSortedTimePlaces.add((sorted.get(i)).setTime(totalSpent));	    
-		}*/
+		//boolean added=false;
 		
-		
-		
+		for(TimePlace tp : sorted){
+			if(tp.getFloor().equals(toAdd.getFloor()) && tp.getLocation().equals(toAdd.getLocation())){
+				toAdd.increaseTimeSpent(tp.getTimeSpent());				
+			} 
+			else{
+				sorted.add(toAdd);
+				//added = true;
+				toAdd=tp;
+			}
+		}		
 		return finalSortedTimePlaces;
 	}
 
