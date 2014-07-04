@@ -2,19 +2,27 @@ package icreep.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import icreep.app.R;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		// Check for Bluetooth capability
+//		if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+//			finishActivityWithMessage("Device does not support Bluetooth LE");
+//		}
 		
 		Intent i = new Intent();
 		i.setClassName(this, "icreep.app.ProfileCreationActivity");
@@ -63,6 +71,17 @@ public class MainActivity extends Activity {
 		super.onRestoreInstanceState(savedInstanceState);
 
 	}
+	
+	private void finishActivityWithMessage(String message)
+	{
+		// Notify the user of the problem
+		Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+		toast.show();
+
+		// End the activity
+		finish();
+	}
+
 		
 	
 	
