@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class reportActivity extends FragmentActivity {
+public class ReportActivity extends FragmentActivity {
 
 	Button auto, manual;
 	ImageButton home;
@@ -102,8 +102,8 @@ public class reportActivity extends FragmentActivity {
 	 * Post-conditions: This will give us access to the auto fragment in case we
 	 * need information from it.
 	 */
-	public reportAutoFragment gainAccessToAutoFragment() {
-		reportAutoFragment fragment = (reportAutoFragment) getSupportFragmentManager()
+	public ReportAutoFragment gainAccessToAutoFragment() {
+		ReportAutoFragment fragment = (ReportAutoFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.autoFragLayout);
 
 		return fragment;
@@ -115,8 +115,8 @@ public class reportActivity extends FragmentActivity {
 	 * Post-conditions: This will give us access to the manual fragment in case
 	 * we need information from it.
 	 */
-	public reportManualFragment gainAccessToManualFragment() {
-		reportManualFragment fragment = (reportManualFragment) getSupportFragmentManager()
+	public ReportManualFragment gainAccessToManualFragment() {
+		ReportManualFragment fragment = (ReportManualFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.reportManualLayout);
 		return fragment;
 	}
@@ -150,7 +150,7 @@ public class reportActivity extends FragmentActivity {
 			}
 			// Create a new Fragment to be placed in the activity layout
 			// always ensure that you do the correct important!! LESSON LEARNT !
-			reportAutoFragment frag = new reportAutoFragment();
+			ReportAutoFragment frag = new ReportAutoFragment();
 
 			FragmentManager fragmentManager = getSupportFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager
@@ -171,7 +171,7 @@ public class reportActivity extends FragmentActivity {
 	 */
 	public void switchtomanualfrag() {
 
-		Fragment frag = new reportManualFragment();
+		Fragment frag = new ReportManualFragment();
 		FragmentTransaction transaction = getSupportFragmentManager()
 				.beginTransaction();
 		transaction.addToBackStack(null);
@@ -194,7 +194,7 @@ public class reportActivity extends FragmentActivity {
 	 * transaction > never forget commits
 	 */
 	public void switchtoautofrag() {
-		reportAutoFragment frag = new reportAutoFragment();
+		ReportAutoFragment frag = new ReportAutoFragment();
 		FragmentTransaction transaction = getSupportFragmentManager()
 				.beginTransaction();
 		transaction.addToBackStack(null);

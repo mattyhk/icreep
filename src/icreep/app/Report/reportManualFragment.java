@@ -27,7 +27,7 @@ import icreep.app.R;
 import icreep.app.R.id;
 import icreep.app.R.layout;
 
-public class reportManualFragment extends Fragment {
+public class ReportManualFragment extends Fragment {
 
 	Button sendreport;
 
