@@ -8,6 +8,7 @@ import icreep.app.R.menu;
 import icreep.app.SwitchButtonListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -88,6 +89,7 @@ public class ReportActivity extends FragmentActivity {
 						R.color.lightGreenForLabels));
 				auto.setBackgroundColor(getResources().getColor(
 						R.color.greyForBackrounds));
+				
 			}
 		});
 	        
@@ -95,7 +97,9 @@ public class ReportActivity extends FragmentActivity {
 	        home.setOnClickListener(new SwitchButtonListener(this, "icreep.app.IcreepMenu"));
 
 	}
-
+	
+	
+	
 	/*
 	 * Pre-Conditions: none
 	 * 
