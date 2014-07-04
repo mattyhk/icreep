@@ -26,9 +26,9 @@
 	    android:layout_height="wrap_content"
 	    android:checked="false"
 	    android:textOff="OFF"
-	    android:textOn="ON"
+	    android:textOn="ON"	    
 	    android:layout_marginTop="@dimen/top_margin"
-	    android:layout_marginLeft="@dimen/left_margin" 
+	    android:layout_marginLeft="@dimen/left_margin" 	    
 	    />
 		    
 	<TextView
@@ -49,7 +49,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="@dimen/top_margin"
 	    android:layout_marginLeft="@dimen/left_margin"
-	    android:background="@color/greyForBackrounds"
+	    android:background="@drawable/time_picker"
 	    android:fadingEdge="vertical" />
 	
 	<Button
