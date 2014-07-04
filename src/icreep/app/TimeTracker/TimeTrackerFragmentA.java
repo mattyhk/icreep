@@ -4,17 +4,23 @@ import java.util.ArrayList;
 
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
+import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.location.FloorItem;
 import icreep.app.location.ListItem;
+import icreep.app.report.TimePlace;
+import icreep.app.report.reportActivity;
+import icreep.app.report.reportManualFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +30,13 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	private ListView listView = null;
 	private ArrayList<ListItem> items = new ArrayList<ListItem>(); 
 	private TimeTrackerListAdapter mAdapter;
-	private Button home;
-
+	private ImageButton home;
+	
+	iCreepDatabaseAdapter icreepHelper;
+	
+	//list to store timeplaces
+	ArrayList<TimePlace> timePlaces;
+	
 	public TimeTrackerFragmentA() {
 		// Required empty public constructor
 	}
@@ -58,17 +69,53 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         items.add(new ZoneTimeItem("Boardroom", "South", "4:00"));
         items.add(new ZoneTimeItem("Wing", "East", "1:00"));
         
+        //get time places that user has been to from the database       
+        FragmentActivity fragActivity = getActivity();
+        icreepHelper = new iCreepDatabaseAdapter(fragActivity);
+       
+        //get timePlaces, tp (Description, totalTimeSpent, floor)
+        timePlaces = icreepHelper.getTimePlaces(); 
+        timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
+        
         mAdapter = new TimeTrackerListAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
         
-        home = (Button) v.findViewById(R.id.home_button_time_tracker_a);
+        home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_a);
 		Activity c = getActivity();
 		if (c != null) {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
-		}
-		
+		}		
 		return v;
+	}
+	
+	/*
+	 * Pre-Conditions: > ArrayList of time places that is unsorted according location(description), floor and total time spent.
+	 * Post-conditions: > Sorts the arrayList of time places according location(description), floor and total time spent> The sort is done
+	 */
+	public ArrayList<TimePlace> sortTimePlaces(ArrayList<TimePlace> timePlaces){
+		
+		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
+		
+		reportManualFragment ra = new reportManualFragment();
+		ArrayList<TimePlace> sorted = ra.InsertionSort(timePlaces);
+		
+		TimePlace toAdd = sorted.get(0);
+		sorted.remove(0);
+		
+		//boolean added=false;
+		
+		for(TimePlace tp : sorted){
+			if(tp.getFloor().equals(toAdd.getFloor()) && tp.getLocation().equals(toAdd.getLocation())){
+				toAdd.increaseTimeSpent(tp.getTimeSpent());				
+			} 
+			else{
+				sorted.add(toAdd);
+				//added = true;
+				toAdd=tp;
+			}
+		}		
+		return finalSortedTimePlaces;
 	}
 
 	@Override

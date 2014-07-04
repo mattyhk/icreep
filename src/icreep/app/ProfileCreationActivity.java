@@ -6,32 +6,37 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 
 public class ProfileCreationActivity extends Activity {
 	
-	Button save_button;
+	private Button save_button;
+	private ImageButton home_button;
 	
-	//views to extract user details from
+	// Views to extract user details from
 	EditText userName, userSurname, userPosition, userEmail;
 	
-	//find way to get photo
+	// Find way to get photo
 	ImageView userPhoto;		
 		
 	String photo="";
 	
-	//create db helper object
+	// Create db helper object
 	iCreepDatabaseAdapter icreepHelper;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_profile_creation);		
+		setContentView(R.layout.activity_profile_creation);	
 		
+		// Prevents the keyboard from automatically popping up
+		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 		userName = (EditText) findViewById(R.id.editText1_user_name);
 		userSurname = (EditText) findViewById(R.id.editText2_user_surname);
@@ -41,8 +46,20 @@ public class ProfileCreationActivity extends Activity {
 		//rename helper for db management
 		icreepHelper = new iCreepDatabaseAdapter(this);	
 		
-	}//onCreate method
-	
+		home_button = (ImageButton) findViewById(R.id.home_button_profile);
+		
+		// Check if a user has been created: if (user != null) {
+			home_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.IcreepMenu"));
+		// }
+		
+		// If there is no user, assume profile is being created: else {
+//			home_button.setVisibility(View.INVISIBLE);
+//			home_button.setClickable(false);
+		// }
+		
+		
+		
+	}//onCreate
 	
 	public void uploadImage(View view){
     	

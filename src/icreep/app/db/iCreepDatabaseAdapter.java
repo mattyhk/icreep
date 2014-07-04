@@ -1,8 +1,12 @@
 package icreep.app.db;
 
+import java.util.ArrayList;
+
 import icreep.app.Message;
+import icreep.app.report.TimePlace;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,7 +19,10 @@ public class iCreepDatabaseAdapter {
 		helper = new iCreepHelper(context);
 	}
 	
-	//function to insert new users in DB
+	/*
+	 * Pre-Conditions: > A new user who wishes to be entered into database will supply relevant information and be entered into database
+	 * Post-conditions: > Enter the user into the database and return ID to check if the insertion has been successful or not
+	 */
 	public long enterNewUser(String name,String surname,String position,String email,String photo){
 
 		//define record to insert into DB
@@ -30,10 +37,41 @@ public class iCreepDatabaseAdapter {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		long id = db.insert(iCreepHelper.TABLE_NAME5, null, newUser); //id to check if insertion was successful
 		
-		return id;
-				
+		return id;				
 	}
 	
+	/*
+	 * Pre-Conditions: > Go through database and retrieve user floor, location(description) total time spent.
+	 * Post-conditions: > Return an ArrayList with floors, location(descriptions) and total time spent in location(description)
+	 */
+	public ArrayList<TimePlace> getTimePlaces(){
+		
+		ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
+		
+		//sql to get all of the user's locations
+		//SELECT User_ID, Zone.Floor, Zone.Description, Location.Time_Entered, Location.Time_Left FROM ZONE, Location
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		String query = "SELECT Floor, Description, Time_Entered, Time_Left FROM Zone, Location WHERE Zone.Zone_ID = Location.Zone_ID";
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		while(cursor.moveToNext()){
+			
+			String loc = cursor.getString(cursor.getColumnIndex(iCreepHelper.DESCRIPTION));
+			double totalTime =  cursor.getDouble(cursor.getColumnIndex(iCreepHelper.TIME_LEFT)) - cursor.getDouble(cursor.getColumnIndex(iCreepHelper.TIME_ENTERED));
+			String floor = cursor.getString(cursor.getColumnIndex(iCreepHelper.FLOOR));
+			
+			TimePlace tp = new TimePlace(loc,totalTime,floor);
+			
+			timePlaces.add(tp);		
+		}
+		
+		return timePlaces; 
+	}
+	
+	//database schema definition and creation 
 	static class iCreepHelper extends SQLiteOpenHelper{
 		//set db name and version
 		private static final String DATABASE_NAME = "icreepdatabase";
@@ -107,7 +145,6 @@ public class iCreepDatabaseAdapter {
 		public iCreepHelper(Context context) {
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
 			this.context = context;
-			Message.message(context, " constructor called");
 		}
 
 		@Override
