@@ -52,27 +52,28 @@ public class Sorting {
 				listSE.add(tt);
 			}
 		}
-		listG = secondarySortDescription(listG);
-		listF = secondarySortDescription(listF);
-		listSE = secondarySortDescription(listSE);
+		listG = secondarySortDescriptionAsc(listG);
+		listF = secondarySortDescriptionAsc(listF);
+		listSE = secondarySortDescriptionAsc(listSE);
 		list.clear();
 		for (TimePlace tt : listG) {
-			list.add(tt);		
+			list.add(tt);
 		}
-		
+
 		for (TimePlace tt : listF) {
-			list.add(tt);		
+			list.add(tt);
 		}
-		
+
 		for (TimePlace tt : listSE) {
-			list.add(tt);		
+			list.add(tt);
 		}
 
 		return list;
 	}
 
-	private ArrayList<TimePlace> secondarySortDescription(ArrayList<TimePlace> a) 
-	{
+	// descending
+	private ArrayList<TimePlace> secondarySortDescriptionDesc(
+			ArrayList<TimePlace> a) {
 		int in, out;
 
 		for (out = 1; out < a.size(); out++) {
@@ -80,13 +81,44 @@ public class Sorting {
 			in = out;
 
 			while (in > 0
-					&& a.get(in-1).getLocation().compareTo(temp.getLocation()) > 0) {
-				a.set(in, a.get(in-1));
+					&& a.get(in - 1).getLocation()
+							.compareTo(temp.getLocation()) > 0) {
+				a.set(in, a.get(in - 1));
 				--in;
 			}
 			a.set(in, temp);
 		}
-		return a ;
+		return a;
 	}
-	
+
+	// Asc
+	private ArrayList<TimePlace> secondarySortDescriptionAsc(
+			ArrayList<TimePlace> a) {
+		ArrayList<TimePlace> toReturn = new ArrayList<TimePlace>();
+		toReturn.add(a.get(0));
+
+		for (int i = 1; i < a.size(); i++) {
+			TimePlace toAdd = a.get(i);
+			boolean added = false;
+			for (int j = 0; j < toReturn.size(); j++) 
+			{
+				String locAdd = toAdd.getLocation();
+				TimePlace cur = toReturn.get(j);
+				String locCur = cur.getLocation();
+				if (locAdd.compareTo(locCur) <0)
+				{
+					toReturn.add(j, toAdd);
+					added = true;
+					break ;					
+				}				
+			}
+			if (added == false)
+			{
+				toReturn.add(toAdd);
+			}
+		}
+		return toReturn;
+
+	}
+
 }

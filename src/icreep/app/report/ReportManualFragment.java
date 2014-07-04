@@ -78,12 +78,12 @@ public class ReportManualFragment extends Fragment {
 
 		finalBuildEmailReport(); // this will create the latest report for data
 
-		File fie = new File(getActivity().getCacheDir(), "Report.txt");
+		File fie = new File(getActivity().getCacheDir(), "Reports2.txt");
 		String t = fie.getAbsolutePath();
 
 		File outFileDir = Environment.getExternalStorageDirectory();
 		String dir = outFileDir.getAbsolutePath();
-		File outFile = new File(outFileDir, "Reports.txt");
+		File outFile = new File(outFileDir, "LatestReport.txt");
 
 		i.putExtra(Intent.EXTRA_TEXT, buildEmailBody());
 		i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(outFile));
@@ -200,10 +200,9 @@ public class ReportManualFragment extends Fragment {
 		File outFileDir = Environment.getExternalStorageDirectory();
 		String dir = outFileDir.getAbsolutePath();
 		File ttt = Environment.getDataDirectory();
-		String fileName = "Reports.txt";
 		// .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 		// File outFile = new File(outFileDir, "Reports2.txt");
-		File outFile = new File(dir + File.separator + fileName);
+		File outFile = new File(outFileDir,"LatestReport.txt");	
 
 		OutputStream os = null;
 		try {
