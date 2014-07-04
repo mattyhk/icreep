@@ -121,7 +121,8 @@ public class ReportManualFragment extends Fragment {
 		list.add(tp5);
 		list.add(tp7);
 
-		list = InsertionSort(list);
+		Sorting sorter = new Sorting() ;
+		list = sorter.InsertionSort(list);
 
 		int max = 0;
 		for (TimePlace t : list) {
@@ -244,36 +245,7 @@ public class ReportManualFragment extends Fragment {
 		return s;
 	}
 
-	/*
-	 * Pre-Conditions: > ArrayList of time places that is unsorted.
-	 * Post-conditions: > Sorts the arrayList of time places > The sort is done
-	 * on the floor > items order: Ground Floor, First Floor, Second Floor
-	 */
-	public ArrayList<TimePlace> InsertionSort(ArrayList<TimePlace> a) {
-		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
-		if (a.size() == 0) {
-			return new ArrayList<TimePlace>();
-		}
-		list.add(a.get(0));
-		for (int i = 1; i < a.size(); i++) {
-			TimePlace t = a.get(i);
-			if (t.getFloor().equals("Ground")) {
-				list.add(0, t);
-			} else if (t.getFloor().equals("Second")) {
-				list.add(list.size(), t);
-			} else {
-				int j = 0;
-				while (!(list.get(j).getFloor().equals("First"))
-						&& (list.get(j) != null)) {
-					j = i + 1;
-				}
-				list.add(j, t);
-
-			}
-		}
-
-		return list;
-	}
+	
 
 	@Override
 	public void onStart() {
