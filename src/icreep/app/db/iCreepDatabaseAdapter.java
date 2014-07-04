@@ -57,7 +57,8 @@ public class iCreepDatabaseAdapter {
 		
 		String query = "SELECT User_ID, Floor, Description, Time_Entered, Time_Left FROM User, Zone, Location WHERE User.User_ID = Location.User_ID, Location.User_ID = Zone.Location_ID";
 		
-		Cursor cursor = db.rawQuery(query, null);
+		String[] toReturn = {iCreepHelper.FLOOR, iCreepHelper.DESCRIPTION, iCreepHelper.TIME_ENTERED, iCreepHelper.TIME_LEFT};
+		Cursor cursor = db.rawQuery(query, toReturn);
 		
 		while(cursor.moveToNext()){
 			
