@@ -86,7 +86,7 @@ public class ProfileCreationActivity extends Activity {
 			long id = icreepHelper.enterNewUser(name, surname, position, email, photo);	
 			
 			//check if insertion was successful
-			if(id<0){
+			if(id != -1 || id < 0){
 				Message.message(this, "User details saved");
 				
 				//Go to main menu if insertion is successful
