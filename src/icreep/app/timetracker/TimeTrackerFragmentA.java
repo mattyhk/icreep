@@ -111,15 +111,12 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		TimePlace toAdd = sorted.get(0);
 		sorted.remove(0);
 		
-		//boolean added=false;
-		
 		for(TimePlace tp : sorted){
 			if(tp.getFloor().equals(toAdd.getFloor()) && tp.getLocation().equals(toAdd.getLocation())){
 				toAdd.increaseTimeSpent(tp.getTimeSpent());				
 			} 
 			else{
 				sorted.add(toAdd);
-				//added = true;
 				toAdd=tp;
 			}
 		}	
