@@ -75,8 +75,8 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         icreepHelper = new iCreepDatabaseAdapter(fragActivity);
        
         //get timePlaces, tp (Description, totalTimeSpent, floor)
-        timePlaces = icreepHelper.getTimePlaces(); 
-        timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
+//        timePlaces = icreepHelper.getTimePlaces(); 
+//        timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
         
         mAdapter = new TimeTrackerListAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
