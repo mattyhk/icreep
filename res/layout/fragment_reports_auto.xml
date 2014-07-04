@@ -14,8 +14,11 @@
         android:layout_height="wrap_content"
         android:text="@string/autoDelivery"
         android:gravity="center"
-        android:textColor= "@color/OpenBoxGreen"
-         />
+        android:textColor= "@color/lightGreenForLabels"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin"
+        android:textSize="@string/sub_heading_text_size"
+        />
 
 	<Switch
 	    android:id="@+id/switchBar"
@@ -23,7 +26,10 @@
 	    android:layout_height="wrap_content"
 	    android:checked="false"
 	    android:textOff="OFF"
-	    android:textOn="ON" />
+	    android:textOn="ON"
+	    android:layout_marginTop="@string/top_margin"
+	    android:layout_marginLeft="@string/left_margin" 
+	    />
 		    
 	<TextView
         android:id="@+id/DeliveryTime"
@@ -31,15 +37,20 @@
         android:layout_height="wrap_content"
         android:text="@string/deliveryTimeText"
         android:gravity="left"
-        android:textColor="@color/OpenBoxGreen"        
+        android:textColor="@color/lightGreenForLabels"
+        android:layout_marginTop="@string/top_margin" 
+        android:layout_marginLeft="@string/left_margin"  
+        android:textSize="@string/sub_heading_text_size"     
          />
 	
-	<TimePicker 
+	<TimePicker
 	    android:id="@+id/timePicker"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:background="@color/greyForBackrounds"	
-	    />
+	    android:layout_width="250dp"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="@string/top_margin"
+	    android:background="@color/darkGreyForBackgrounds"
+	    android:fadingEdge="vertical" />
+	
 	<Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
@@ -48,10 +59,10 @@
         android:enabled="false"
         android:textColor="@color/blackColor"
         android:background="@drawable/button_style"  
-        android:layout_marginTop="2dp"
         android:fontFamily="courier new"
-        
-    />
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin" 
+        />
 	
 	    
 </LinearLayout>

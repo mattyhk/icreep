@@ -65,6 +65,11 @@
     <color name="background">#999999</color>
     <color name="whiteColor">#FFFFFF</color>
     <color name="grey_text">#CCCCCC</color>
+    <string name="manualDelivery">Manual Delivery</string>
+    <string name="heading_text_size">20sp</string>
+    <string name="sub_heading_text_size">17sp</string>
+    <string name="top_margin">20dp</string>
+    <string name="left_margin">20dp</string>
 
 
 </resources>
