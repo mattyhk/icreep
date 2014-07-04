@@ -85,7 +85,6 @@
 	        android:layout_weight="1"
 	        android:fontFamily="courier new"
 	        android:text="@string/manualButtonText" />
-  	    
 	    </LinearLayout>
 	    
 	
