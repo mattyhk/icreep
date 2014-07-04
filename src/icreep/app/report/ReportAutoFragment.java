@@ -1,11 +1,22 @@
 package icreep.app.report;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.R.bool;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +30,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
+import icreep.app.MainActivity;
 import icreep.app.R;
 import icreep.app.R.color;
 import icreep.app.R.id;
@@ -32,6 +44,8 @@ public class ReportAutoFragment extends Fragment {
 		int hour = 0 ;
 		int min = 0 ;
 		boolean hasAuto = false ;
+		boolean checkerIfEmailed = false ;
+		AlarmControlClass acc = new AlarmControlClass();
 		//the following is how you get your text pixels to the correct size depending on the screen
     	//16*getResources().getDisplayMetrics().density
 		
@@ -115,6 +129,7 @@ public class ReportAutoFragment extends Fragment {
 			});
 	    	
 	    	
+	    	
 	    	//this will get the time for the time picker and store it into the user's profile
 	    	save.setOnClickListener(new OnClickListener() {
 				//listener for when you click save
@@ -132,6 +147,8 @@ public class ReportAutoFragment extends Fragment {
 					int storehour = tp.getCurrentHour();
 					int storeminute = tp.getCurrentMinute();
 					writeToDB(storehour, storeminute);
+					addAlarm(storehour, storeminute);
+					boolean checkerIfEmailed = false ;
 					save.setEnabled(false);
 					}else
 					{
@@ -166,6 +183,22 @@ public class ReportAutoFragment extends Fragment {
 
 	    	return v ;
 	    }	
+	    
+	    public void addAlarm(int hour, int min)
+    	{
+	    	if (checkerIfEmailed == false)
+	    	{	    		
+		    	acc.setAlarm(hour, min,getActivity());
+		    	checkerIfEmailed = true ;
+	    	}else
+	    	{
+	    		acc.turnOffAlarm();
+	    	}
+	    		
+	    	
+    	}
+	    
+
 	    
 	    
 	    

@@ -3,6 +3,7 @@ package icreep.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -11,8 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import icreep.app.R;
+import icreep.app.db.iCreepDatabaseAdapter;
 
 public class MainActivity extends FragmentActivity {
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

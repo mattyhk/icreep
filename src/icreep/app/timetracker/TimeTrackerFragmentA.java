@@ -2,6 +2,7 @@ package icreep.app.timetracker;
 
 import java.util.ArrayList;
 
+import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
@@ -12,6 +13,7 @@ import icreep.app.report.TimePlace;
 import icreep.app.report.ReportActivity;
 import icreep.app.report.ReportManualFragment;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -35,8 +37,9 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	
 	iCreepDatabaseAdapter icreepHelper;
 	
-	//list to store timeplaces
-	ArrayList<TimePlace> timePlaces;
+	//list to store timePlaces
+	public ArrayList<TimePlace> timePlaces;
+	FragmentActivity fragActivity;
 	
 	public TimeTrackerFragmentA() {
 		// Required empty public constructor
@@ -71,12 +74,22 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         items.add(new ZoneTimeItem("Wing", "East", "1:00"));
         
         //get time places that user has been to from the database       
-        FragmentActivity fragActivity = getActivity();
+        fragActivity = getActivity();
         icreepHelper = new iCreepDatabaseAdapter(fragActivity);
        
-        //get timePlaces, tp (Description, totalTimeSpent, floor)
-//        timePlaces = icreepHelper.getTimePlaces(); 
-//        timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
+        //get timePlaces, tp (Description, totalTimeSpent, floor)        
+        timePlaces = icreepHelper.getTimePlaces(); 
+        if(timePlaces.size() != 0){
+        	timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
+        	
+        	//now add these TimePlaces into ListView
+        	
+        	//store Total-In-Time in bundle OR whatever for next fragment
+        	totalInTime();
+        }
+        else{
+        	Message.message(fragActivity, "You haven't been anywhere");
+        }
         
         mAdapter = new TimeTrackerListAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
@@ -104,19 +117,33 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		TimePlace toAdd = sorted.get(0);
 		sorted.remove(0);
 		
-		//boolean added=false;
-		
 		for(TimePlace tp : sorted){
 			if(tp.getFloor().equals(toAdd.getFloor()) && tp.getLocation().equals(toAdd.getLocation())){
 				toAdd.increaseTimeSpent(tp.getTimeSpent());				
 			} 
 			else{
 				sorted.add(toAdd);
-				//added = true;
 				toAdd=tp;
 			}
-		}		
+		}	
 		return finalSortedTimePlaces;
+	}
+	
+	/*
+	 * Pre-Conditions: > ArrayList of time places that is sorted according location(description), floor and total time spent.
+	 * Post-conditions: > this function will return the total time spent in all the floors, locations(Descriptions)
+	 */
+	public void totalInTime(){
+		
+		double total = 0;
+		ArrayList<TimePlace> timeInPlaces = timePlaces;
+		
+		for(TimePlace tp: timeInPlaces){
+			double time = tp.getTimeSpent();
+			total+= time;
+		}		
+		
+		//find a way to pass this total to next fragment!!!
 	}
 
 	@Override
