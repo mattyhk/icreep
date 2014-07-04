@@ -22,15 +22,21 @@
 		        android:id="@+id/time_tracker_a_title"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:textColor="@color/OpenBoxGreen"
-		        android:text="@string/time_tracker" />
+		        android:text="@string/time_tracker"
+		        android:textColor="@color/lightGreenForLabels"
+                android:textSize="@string/heading_text_size"
+                android:layout_marginTop = "@string/top_margin"
+                android:layout_marginLeft = "@string/left_margin"/>
 	        
 	        <TextView
 		        android:id="@+id/time_tracker_a_user"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textColor="@color/whiteBackground"
-		        android:text="@string/user_position" />
+		        android:text="@string/user_position"
+                android:textSize="@string/heading_text_size"
+                android:layout_marginTop = "@string/top_margin"
+                android:layout_marginLeft = "@string/left_margin" />
         </LinearLayout>
     	
         <ImageButton
@@ -47,10 +53,10 @@
         android:id="@+id/time_tracker_listView_main"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" 
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@string/top_margin_table"
         android:layout_marginBottom="50dp"
         android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="@string/left_margin"        
         android:background="@color/darkGreyForBackgrounds"/>
 
 </RelativeLayout>

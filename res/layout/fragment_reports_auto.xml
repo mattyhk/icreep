@@ -55,7 +55,7 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save"
+        android:text="@string/save_report_time"
         android:enabled="false"
         android:textColor="@color/blackColor"
         android:background="@drawable/button_style"  

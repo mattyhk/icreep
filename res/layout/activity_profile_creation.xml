@@ -7,62 +7,35 @@
     tools:context="icreep.app.ProfileCreationActivity"
     tools:ignore="MergeRootFrame" >
 
-    <Button
-        android:id="@+id/button2_save_user_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="48dp"
-        android:layout_marginRight="33dp"
-        android:background="@drawable/button_style"
-        android:fontFamily="courier new"
-        android:onClick="saveDetails"
-        android:text="@string/save" />
-
     <TextView
         android:id="@+id/textView3_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1_user_name"
         android:layout_below="@+id/editText2_user_surname"
-        android:layout_marginTop="14dp"
         android:text="@string/email_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@string/sub_heading_text_size" />
+        android:textSize="@string/sub_heading_text_size"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin" />
 
     <EditText
         android:id="@+id/editText4_user_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView5_user_position"
         android:layout_below="@+id/textView5_user_position"
         android:ems="10" 
         android:hint = "@string/edit_position"
-        android:textColorHint="#FFFFFF"/>
-
-    <EditText
-        android:id="@+id/editText1_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView4_profile_picture"
-        android:layout_below="@+id/textView1_user_name"
-        android:ems="10"
-        android:hint="@string/edit_name"
-        android:inputType="textPersonName"
-        android:textColorHint="#FFFFFF" >
-
-        <requestFocus />
-    </EditText>
+        android:textColorHint="@color/whiteColor"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin"/>
 
     <TextView
         android:id="@+id/textView1_user_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1_user_name"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="18dp"
+        android:layout_height="wrap_content"        
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin"
         android:text="@string/name_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
@@ -72,35 +45,37 @@
         android:id="@+id/editText3_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3_user_email"
         android:layout_below="@+id/textView3_user_email"
         android:ems="10"
         android:hint="@string/edit_email"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/whiteColor" />
+        android:textColorHint="@color/whiteColor"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin" />
 
     <EditText
         android:id="@+id/editText2_user_surname"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3_user_email"
+        android:layout_height="wrap_content"       
         android:layout_below="@+id/textView2_user_surname"
         android:ems="10"
         android:hint="@string/edit_surname"
         android:inputType="textPersonName"
-        android:textColorHint="@color/whiteColor" />
+        android:textColorHint="@color/whiteColor"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin" />
 
     <TextView
         android:id="@+id/textView2_user_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1_user_name"
         android:layout_below="@+id/editText1_user_name"
-        android:layout_marginTop="16dp"
         android:text="@string/surname_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@string/sub_heading_text_size" />
+        android:textSize="@string/sub_heading_text_size"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin" />
 
     <ImageButton
         android:id="@+id/home_button_profile"
@@ -115,39 +90,62 @@
         android:id="@+id/textView5_user_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3_user_email"
         android:layout_below="@+id/editText3_user_email"
-        android:layout_marginTop="17dp"
         android:text="@string/position_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@string/sub_heading_text_size" />
+        android:textSize="@string/sub_heading_text_size"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin" />
 
     <TextView
         android:id="@+id/textView4_profile_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/editText4_user_position"
-        android:layout_marginLeft="38dp"
-        android:layout_marginTop="19dp"
         android:text="@string/profile_picture_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@string/sub_heading_text_size" />
+        android:textSize="@string/sub_heading_text_size"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin" />
 
     <ImageView
         android:id="@+id/imageView1_profile_picture"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignLeft="@+id/editText4_user_position"
         android:layout_below="@+id/textView4_profile_picture"
-        android:layout_marginTop="19dp"
         android:background="@color/greyForBackrounds"
         android:clickable="true"
         android:contentDescription="@string/content_descrip"
         android:onClick="uploadImage"
-        android:src="@drawable/profile_pic_icon" />
+        android:src="@drawable/profile_pic_icon"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin" />
+
+    <EditText
+        android:id="@+id/editText1_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1_user_name"
+        android:ems="10"
+        android:hint="@string/edit_name"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/whiteColor"
+        android:layout_marginTop="@string/top_margin"
+        android:layout_marginLeft="@string/left_margin" />
+
+    <Button
+        android:id="@+id/button2_save_user_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1_profile_picture"
+        android:background="@drawable/button_style"
+        android:fontFamily="courier new"
+        android:onClick="saveDetails"
+        android:text="@string/save_user_details"
+        android:layout_marginTop="@string/top_margin_save_button"
+        android:layout_marginLeft="@string/left_margin"  />
 
 </RelativeLayout>
 
