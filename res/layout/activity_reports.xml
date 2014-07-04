@@ -27,9 +27,9 @@
 		        android:text="@string/report"
 		        android:gravity="left"
 		        android:textColor="@color/lightGreenForLabels"
-                android:textSize="@string/heading_text_size"
-                android:layout_marginTop = "@string/top_margin"
-                android:layout_marginLeft = "@string/left_margin" />
+                android:textSize="@dimen/heading_text_size"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin" />
             
             <TextView
 		        android:id="@+id/userDescript"
@@ -38,9 +38,9 @@
 		        android:text="@string/Test"
 		        android:gravity="left"
 		        android:textColor="@color/whiteColor"
-                android:textSize="@string/heading_text_size"
-                android:layout_marginTop = "@string/top_margin"
-                android:layout_marginLeft = "@string/left_margin"/>
+                android:textSize="@dimen/heading_text_size"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin"/>
             
         </LinearLayout>
 
@@ -59,7 +59,7 @@
 	    android:layout_width="fill_parent"
         android:layout_height= "wrap_content"
 		android:orientation="horizontal"
-	    android:background = "@color/darkGreyForBackgrounds"	    
+	        
 	    >
 
 		<Button
@@ -69,7 +69,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_marginLeft="2dp"
 		    android:layout_marginRight="2dp"
-		    android:layout_marginTop="@string/top_margin"
+		    android:layout_marginTop="@dimen/top_margin"
 		    android:layout_weight="1"
 		    android:background="@color/lightGreenForLabels"
 		    android:fontFamily="courier new"
@@ -81,10 +81,12 @@
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_marginRight="2dp"
-	        android:layout_marginTop="@string/top_margin"
+	        android:layout_marginTop="@dimen/top_margin"
 	        android:layout_weight="1"
 	        android:fontFamily="courier new"
-	        android:text="@string/manualButtonText" />
+	        android:text="@string/manualButtonText" 
+	        android:background = "@color/greyForBackrounds"	/>
+	    
 	    </LinearLayout>
 	    
 	

@@ -66,14 +66,8 @@
     <color name="whiteColor">#FFFFFF</color>
     <color name="grey_text">#CCCCCC</color>
     <string name="manualDelivery">Manual Delivery</string>
-    <string name="heading_text_size">20sp</string>
-    <string name="sub_heading_text_size">17sp</string>
-    <string name="top_margin">18dp</string>
-    <string name="left_margin">20dp</string>
     <string name="save_report_time">Save</string>
-    <string name="top_margin_save_button">40dp</string>
-    <string name="top_margin_menu_buttons">50dp</string>
-    <string name="top_margin_table">100dp</string>
+    <color name="time_picker_color">#282828</color>
 
 
 </resources>

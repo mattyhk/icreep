@@ -15,9 +15,9 @@
         android:text="@string/autoDelivery"
         android:gravity="center"
         android:textColor= "@color/lightGreenForLabels"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin"
-        android:textSize="@string/sub_heading_text_size"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:textSize="@dimen/sub_heading_text_size"
         />
 
 	<Switch
@@ -27,8 +27,8 @@
 	    android:checked="false"
 	    android:textOff="OFF"
 	    android:textOn="ON"
-	    android:layout_marginTop="@string/top_margin"
-	    android:layout_marginLeft="@string/left_margin" 
+	    android:layout_marginTop="@dimen/top_margin"
+	    android:layout_marginLeft="@dimen/left_margin" 
 	    />
 		    
 	<TextView
@@ -38,17 +38,18 @@
         android:text="@string/deliveryTimeText"
         android:gravity="left"
         android:textColor="@color/lightGreenForLabels"
-        android:layout_marginTop="@string/top_margin" 
-        android:layout_marginLeft="@string/left_margin"  
-        android:textSize="@string/sub_heading_text_size"     
+        android:layout_marginTop="@dimen/top_margin" 
+        android:layout_marginLeft="@dimen/left_margin"  
+        android:textSize="@dimen/sub_heading_text_size"     
          />
 	
 	<TimePicker
 	    android:id="@+id/timePicker"
 	    android:layout_width="250dp"
 	    android:layout_height="wrap_content"
-	    android:layout_marginTop="@string/top_margin"
-	    android:background="@color/darkGreyForBackgrounds"
+	    android:layout_marginTop="@dimen/top_margin"
+	    android:layout_marginLeft="@dimen/left_margin"
+	    android:background="@color/greyForBackrounds"
 	    android:fadingEdge="vertical" />
 	
 	<Button
@@ -60,8 +61,8 @@
         android:textColor="@color/blackColor"
         android:background="@drawable/button_style"  
         android:fontFamily="courier new"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin" 
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin" 
         />
 	
 	    

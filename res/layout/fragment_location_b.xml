@@ -23,9 +23,9 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textColor="@color/lightGreenForLabels"
-                android:textSize="@string/heading_text_size"
-                android:layout_marginTop = "@string/top_margin"
-                android:layout_marginLeft = "@string/left_margin"
+                android:textSize="@dimen/heading_text_size"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin"
 		        android:text="@string/title_location_movement" />
             
             <TextView
@@ -34,9 +34,9 @@
 		        android:layout_height="wrap_content"
 		        android:textColor="@color/whiteBackground"
 		        android:text="@string/user_position"
-                android:textSize="@string/heading_text_size"
-                android:layout_marginTop = "@string/top_margin"
-                android:layout_marginLeft = "@string/left_margin" />
+                android:textSize="@dimen/heading_text_size"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin" />
         
         </LinearLayout>
         
@@ -54,10 +54,10 @@
         android:id="@+id/daily_movement_listView_main"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" 
-        android:layout_marginTop="@string/top_margin_table"
+        android:layout_marginTop="@dimen/top_margin_table"
         android:layout_marginBottom="50dp"
         android:layout_marginRight="25dp"
-        android:layout_marginLeft="@string/left_margin"
+        android:layout_marginLeft="@dimen/left_margin"
         android:background="@color/darkGreyForBackgrounds"/>
 
 </RelativeLayout>

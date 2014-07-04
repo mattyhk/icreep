@@ -15,9 +15,9 @@
         android:text="@string/email_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@string/sub_heading_text_size"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin" />
+        android:textSize="@dimen/sub_heading_text_size"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin" />
 
     <EditText
         android:id="@+id/editText4_user_position"
@@ -27,19 +27,19 @@
         android:ems="10" 
         android:hint = "@string/edit_position"
         android:textColorHint="@color/whiteColor"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin"/>
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin"/>
 
     <TextView
         android:id="@+id/textView1_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"        
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin"
         android:text="@string/name_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@string/sub_heading_text_size" />
+        android:textSize="@dimen/sub_heading_text_size" />
 
     <EditText
         android:id="@+id/editText3_user_email"
@@ -50,8 +50,8 @@
         android:hint="@string/edit_email"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/whiteColor"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin" />
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin" />
 
     <EditText
         android:id="@+id/editText2_user_surname"
@@ -62,8 +62,8 @@
         android:hint="@string/edit_surname"
         android:inputType="textPersonName"
         android:textColorHint="@color/whiteColor"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin" />
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin" />
 
     <TextView
         android:id="@+id/textView2_user_surname"
@@ -73,9 +73,9 @@
         android:text="@string/surname_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@string/sub_heading_text_size"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin" />
+        android:textSize="@dimen/sub_heading_text_size"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin" />
 
     <ImageButton
         android:id="@+id/home_button_profile"
@@ -94,9 +94,9 @@
         android:text="@string/position_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@string/sub_heading_text_size"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin" />
+        android:textSize="@dimen/sub_heading_text_size"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin" />
 
     <TextView
         android:id="@+id/textView4_profile_picture"
@@ -106,9 +106,9 @@
         android:text="@string/profile_picture_label"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@string/sub_heading_text_size"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin" />
+        android:textSize="@dimen/sub_heading_text_size"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin" />
 
     <ImageView
         android:id="@+id/imageView1_profile_picture"
@@ -120,8 +120,8 @@
         android:contentDescription="@string/content_descrip"
         android:onClick="uploadImage"
         android:src="@drawable/profile_pic_icon"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin" />
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin" />
 
     <EditText
         android:id="@+id/editText1_user_name"
@@ -132,8 +132,8 @@
         android:hint="@string/edit_name"
         android:inputType="textPersonName"
         android:textColorHint="@color/whiteColor"
-        android:layout_marginTop="@string/top_margin"
-        android:layout_marginLeft="@string/left_margin" />
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin" />
 
     <Button
         android:id="@+id/button2_save_user_details"
@@ -144,8 +144,8 @@
         android:fontFamily="courier new"
         android:onClick="saveDetails"
         android:text="@string/save_user_details"
-        android:layout_marginTop="@string/top_margin_save_button"
-        android:layout_marginLeft="@string/left_margin"  />
+        android:layout_marginTop="@dimen/top_margin_save_button"
+        android:layout_marginLeft="@dimen/left_margin"  />
 
 </RelativeLayout>
 

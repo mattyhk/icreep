@@ -24,9 +24,9 @@
 		        android:layout_height="wrap_content"		       
 		        android:text="@string/title_location_current" 
                 android:textColor="@color/lightGreenForLabels"
-                android:textSize="@string/heading_text_size"
-                android:layout_marginTop = "@string/top_margin"
-                android:layout_marginLeft = "@string/left_margin"/>
+                android:textSize="@dimen/heading_text_size"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin"/>
             
             <TextView
 		        android:id="@+id/location_a_user"
@@ -34,9 +34,9 @@
 		        android:layout_height="wrap_content"
 		        android:text="@string/user_position"
 		        android:textColor="@color/whiteColor"
-                android:textSize="@string/heading_text_size"
-                android:layout_marginTop = "@string/top_margin"
-                android:layout_marginLeft = "@string/left_margin" />
+                android:textSize="@dimen/heading_text_size"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin" />
             
         </LinearLayout>
 	
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "@string/top_margin"
+        android:layout_marginTop = "@dimen/top_margin"
         android:contentDescription="@string/zone_map"
         android:background="@color/darkGreyForBackgrounds"
         android:padding = "25dp"
