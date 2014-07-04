@@ -2,6 +2,7 @@ package icreep.app.timetracker;
 
 import java.util.ArrayList;
 
+import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
@@ -36,7 +37,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	iCreepDatabaseAdapter icreepHelper;
 	
 	//list to store timeplaces
-	ArrayList<TimePlace> timePlaces;
+	public ArrayList<TimePlace> timePlaces;
 	
 	public TimeTrackerFragmentA() {
 		// Required empty public constructor
@@ -74,9 +75,15 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         FragmentActivity fragActivity = getActivity();
         icreepHelper = new iCreepDatabaseAdapter(fragActivity);
        
-        //get timePlaces, tp (Description, totalTimeSpent, floor)
-//        timePlaces = icreepHelper.getTimePlaces(); 
-//        timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
+        //get timePlaces, tp (Description, totalTimeSpent, floor)        
+        timePlaces = icreepHelper.getTimePlaces(); 
+        if(timePlaces.size() != 0){
+        	timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
+        	//now add these TimePlaces into listview
+        }
+        else{
+        	Message.message(fragActivity, "You haven't been anywhere");
+        }
         
         mAdapter = new TimeTrackerListAdapter(getActivity(), items);
         listView.setAdapter(mAdapter);
@@ -115,7 +122,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 				//added = true;
 				toAdd=tp;
 			}
-		}		
+		}	
 		return finalSortedTimePlaces;
 	}
 
