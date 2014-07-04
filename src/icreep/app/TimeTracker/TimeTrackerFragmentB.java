@@ -46,8 +46,7 @@ public class TimeTrackerFragmentB extends Fragment {
 		if (c != null) {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
 		}
-		
-		
+				
 		return v;
 	}
 	
@@ -68,7 +67,7 @@ public class TimeTrackerFragmentB extends Fragment {
 	 * @return percentage - the percentage rounded to nearest integer
 	 */
 	private int calcPercentageTime(float inOffice, float outOffice) {
-		return 0;
+		return (int) inOffice/8;
 	}
 
 }
