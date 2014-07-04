@@ -7,9 +7,10 @@ import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.location.FloorItem;
 import icreep.app.location.ListItem;
+import icreep.app.report.Sorting;
 import icreep.app.report.TimePlace;
-import icreep.app.report.reportActivity;
-import icreep.app.report.reportManualFragment;
+import icreep.app.report.ReportActivity;
+import icreep.app.report.ReportManualFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -97,8 +98,8 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		
 		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
 		
-		reportManualFragment ra = new reportManualFragment();
-		ArrayList<TimePlace> sorted = ra.InsertionSort(timePlaces);
+		Sorting sorter = new Sorting();
+		ArrayList<TimePlace> sorted = sorter.InsertionSort(timePlaces);
 		
 		TimePlace toAdd = sorted.get(0);
 		sorted.remove(0);
