@@ -65,8 +65,8 @@
         android:layout_weight="1"    
         android:layout_marginLeft="2dp"
         android:fontFamily="courier new"
-        android:background="@drawable/button_style_blue"
         android:layout_marginRight="2dp"  
+        android:background="@color/lightGreenForLabels"
         />
 	
 		<Button
@@ -78,7 +78,6 @@
 	        android:layout_weight="1"    
 	        android:layout_marginRight="2dp"
 	        android:fontFamily="courier new"
-	        android:background="@drawable/button_style"  
 	        
 	    />  	    
 	    </LinearLayout>
