@@ -78,7 +78,7 @@
 	        android:layout_weight="1"    
 	        android:layout_marginRight="2dp"
 	        android:fontFamily="courier new"
-	        
+	        android:background="@color/greyForBackrounds"	        
 	    />  	    
 	    </LinearLayout>
 	    
