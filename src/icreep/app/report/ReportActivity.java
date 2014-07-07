@@ -24,6 +24,7 @@ public class ReportActivity extends FragmentActivity
 	ImageButton home;
 	boolean automated = true;
 	iCreepDatabaseAdapter adapt = null;
+
 	/*
 	 * Pre-Conditions: A bundle in case we need a saved state if we switch
 	 * screens and want to keep old information The trigger is that you have
@@ -40,15 +41,15 @@ public class ReportActivity extends FragmentActivity
 		setContentView(R.layout.activity_reports);
 		auto = (Button) findViewById(R.id.autoButton);
 		auto.setBackgroundColor(getResources().getColor(
-						R.color.lightGreenForLabels));
+				R.color.lightGreenForLabels));
 		manual = (Button) findViewById(R.id.manualButton);
 		manual.setBackgroundColor(getResources().getColor(
 				R.color.greyForBackrounds));
 		home = (ImageButton) findViewById(R.id.home_button_report);
-		
-		adapt = new iCreepDatabaseAdapter(this) ;
-		
-		//build user description
+
+		adapt = new iCreepDatabaseAdapter(this);
+
+		// build user description
 		buildUserDescription();
 		// TextView reports = (TextView) findViewById(R.id.textViewMain);
 		// TextView userDescrip = (TextView) findViewById(R.id.userDescript);
@@ -145,7 +146,13 @@ public class ReportActivity extends FragmentActivity
 	{
 		TextView userDescrip = (TextView) findViewById(R.id.userDescript);
 		String needed = adapt.getUserDetails();
-		userDescrip.setText(needed);
+		if (needed != null) {
+			userDescrip.setText(needed);
+		}else 
+		{
+			userDescrip.setText("Nothing in DB, thus no User desciption to show");
+		}
+
 	}
 
 	/*
