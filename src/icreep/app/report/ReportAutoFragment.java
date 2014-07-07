@@ -240,18 +240,19 @@ public class ReportAutoFragment extends Fragment
 	 */
 	private void updateTheTableForAutoMail(int stoh, int stom)
 	{
-
 		boolean newAuto = switched.isChecked();
 		String newTime = "" + stoh + ":" + stom;
 		// call the db update
-		adapt.setDeliveryTime(newTime);
-		hasAuto = newAuto;
-		if (newAuto == true) {
-			hour = stoh;
-			min = stom;
-		} else {
-			hour = -1;
-			min = -1;
+		if (adapt.getReportTime() != null) {
+			adapt.setDeliveryTime(newTime);
+			hasAuto = newAuto;
+			if (newAuto == true) {
+				hour = stoh;
+				min = stom;
+			} else {
+				hour = -1;
+				min = -1;
+			}
 		}
 	}
 
