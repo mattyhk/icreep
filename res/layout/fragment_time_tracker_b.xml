@@ -22,15 +22,21 @@
 		        android:id="@+id/time_tracker_b_title"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:textColor="@color/OpenBoxGreen"
-		        android:text="@string/time_tracker" />
+		        android:text="@string/outside"
+		        android:textColor="@color/lightGreenForLabels"
+                android:textSize="@dimen/heading_text_size"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin" />
 	        
 	        <TextView
 		        android:id="@+id/time_tracker_b_user"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:text="@string/user_position"
 		        android:textColor="@color/whiteBackground"
-		        android:text="@string/user_position" />
+                android:textSize="@dimen/heading_text_size"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin" />
 	        
         </LinearLayout>
     	
