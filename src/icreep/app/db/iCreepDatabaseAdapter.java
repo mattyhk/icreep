@@ -79,8 +79,12 @@ public class iCreepDatabaseAdapter {
 					}while(cursor.moveToNext());
 				}
 			}
+			return timePlaces;
 		}
-		return timePlaces; 
+		else{
+			return null;
+		}
+		
 	}
 	
 	/*
