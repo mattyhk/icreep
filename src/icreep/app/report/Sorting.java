@@ -72,23 +72,34 @@ public class Sorting {
 	}
 
 	// descending
-	private ArrayList<TimePlace> secondarySortDescriptionDesc(
+	private ArrayList<TimePlace> secondarySortDescriptiondesc(
 			ArrayList<TimePlace> a) {
-		int in, out;
+		
+		ArrayList<TimePlace> toReturn = new ArrayList<TimePlace>();
+		toReturn.add(a.get(0));
 
-		for (out = 1; out < a.size(); out++) {
-			TimePlace temp = a.get(out);
-			in = out;
-
-			while (in > 0
-					&& a.get(in - 1).getLocation()
-							.compareTo(temp.getLocation()) > 0) {
-				a.set(in, a.get(in - 1));
-				--in;
+		for (int i = 0; i < a.size(); i++) {
+			TimePlace toAdd = a.get(i);
+			boolean added = false;
+			for (int j = 1; j < toReturn.size(); j++) 
+			{
+				String locAdd = toAdd.getLocation();
+				TimePlace cur = toReturn.get(j);
+				String locCur = cur.getLocation();
+				if (locAdd.compareTo(locCur) <0)
+				{
+					toReturn.add(j, toAdd);
+					added = true;
+					break ;					
+				}				
 			}
-			a.set(in, temp);
+			if (added == false)
+			{
+				toReturn.add(toAdd);
+			}
 		}
-		return a;
+		return toReturn;
+
 	}
 
 	// Asc

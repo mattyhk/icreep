@@ -30,11 +30,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
-import icreep.app.MainActivity;
 import icreep.app.R;
-import icreep.app.R.color;
-import icreep.app.R.id;
-import icreep.app.R.layout;
 import icreep.app.db.iCreepDatabaseAdapter;
 
 public class ReportAutoFragment extends Fragment {
@@ -47,6 +43,7 @@ public class ReportAutoFragment extends Fragment {
 		boolean hasAuto = false ;
 		boolean checkerIfEmailed = false ;
 		AlarmControlClass acc = new AlarmControlClass();
+		iCreepDatabaseAdapter adapt = null ;
 		//the following is how you get your text pixels to the correct size depending on the screen
     	//16*getResources().getDisplayMetrics().density	
 		
@@ -72,7 +69,7 @@ public class ReportAutoFragment extends Fragment {
 	                             Bundle savedInstanceState) {
 	        // Inflate the layout for this fragment
 	    	// Return inflater.inflate(R.layout., container, false);
-	    	
+	    	adapt = new iCreepDatabaseAdapter(getActivity());
 	    	View v = inflater.inflate(R.layout.fragment_reports_auto, container,false) ;
 	    	
 	    	save = (Button) v.findViewById(R.id.saveButton);
@@ -89,8 +86,8 @@ public class ReportAutoFragment extends Fragment {
 	    	save.setEnabled(false); //no changes thus button shouldn't be enabled	    	
 	    	
 	    	    	
-	    	TextView deli = (TextView) v.findViewById(R.id.Delivery);	    	
-	    	TextView deliTime = (TextView)v.findViewById(R.id.DeliveryTime);
+//	    	TextView deli = (TextView) v.findViewById(R.id.Delivery);	    	
+//	    	TextView deliTime = (TextView)v.findViewById(R.id.DeliveryTime);
 	    	
 	    	//tp.setEnabled(false);
 	    	//float correctTextpixel = 16*getResources().getDisplayMetrics().density;
@@ -217,7 +214,7 @@ public class ReportAutoFragment extends Fragment {
 	    	//if there is a auto time
 	    	//isAuto = true ;
 
-	    	iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(getActivity());
+	    	
 	    	String valueFromAdapt = adapt.getReportTime() ; // this will equal to something lie adapt.dasdasda
 	    	if (valueFromAdapt != null) //means auto is on
 	    	{
@@ -238,7 +235,7 @@ public class ReportAutoFragment extends Fragment {
 	 	*/ 	  
 	    private void updateTheTableForAutoMail(int stoh,int stom)
 	    {
-	    	iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(getActivity());
+	    	
 	    	boolean newAuto = switched.isChecked();
 	    	String newTime = "" + stoh + ":" + stom ;
 	    	// call the db update 	    	
