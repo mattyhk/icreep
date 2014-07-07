@@ -19,7 +19,11 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class GMailAutoMailer extends javax.mail.Authenticator {
+import android.content.Context;
+import android.os.Environment;
+
+public class GMailAutoMailer extends javax.mail.Authenticator
+{
 	private String user;
 	private String password;
 
@@ -40,57 +44,70 @@ public class GMailAutoMailer extends javax.mail.Authenticator {
 
 	private Multipart multipart;
 
-	public String getPassword() {
+	public String getPassword()
+	{
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
 
-	public String[] getTo() {
+	public String[] getTo()
+	{
 		return to;
 	}
 
-	public void setTo(String[] to) {
+	public void setTo(String[] to)
+	{
 		this.to = to;
 	}
 
-	public String getFrom() {
+	public String getFrom()
+	{
 		return from;
 	}
 
-	public void setFrom(String from) {
+	public void setFrom(String from)
+	{
 		this.from = from;
 	}
 
-	public String getHost() {
+	public String getHost()
+	{
 		return host;
 	}
 
-	public void setHost(String host) {
+	public void setHost(String host)
+	{
 		this.host = host;
 	}
 
-	public String getSubject() {
+	public String getSubject()
+	{
 		return subject;
 	}
 
-	public void setSubject(String subject) {
+	public void setSubject(String subject)
+	{
 		this.subject = subject;
 	}
 
-	public Multipart getMultipart() {
+	public Multipart getMultipart()
+	{
 		return multipart;
 	}
 
-	public void setMultipart(Multipart multipart) {
+	public void setMultipart(Multipart multipart)
+	{
 		this.multipart = multipart;
 	}
 
-	public GMailAutoMailer() {
-//		host = "smtp.googlemail.com"; // default smtp server old email maybe?
-		host = "smtp.gmail.com" ;
+	public GMailAutoMailer()
+	{
+		// host = "smtp.googlemail.com"; // default smtp server old email maybe?
+		host = "smtp.gmail.com";
 		port = "465"; // default smtp port
 		sport = "465"; // default socketfactory port
 
@@ -117,13 +134,15 @@ public class GMailAutoMailer extends javax.mail.Authenticator {
 		CommandMap.setDefaultCommandMap(mc);
 	}
 
-	public GMailAutoMailer(String user, String pass) {
+	public GMailAutoMailer(String user, String pass)
+	{
 		this();
 		this.user = user;
 		password = pass;
 	}
 
-	public boolean send() throws Exception {
+	public boolean send() throws Exception
+	{
 		Properties props = _setProperties();
 
 		if (!user.equals("") && !password.equals("") && to.length > 0
@@ -160,21 +179,27 @@ public class GMailAutoMailer extends javax.mail.Authenticator {
 		}
 	}
 
-	public void addAttachment(String filename) throws Exception {
+	public void addAttachment(String filename, Context c) throws Exception
+	{
 		BodyPart messageBodyPart = new MimeBodyPart();
-		DataSource source = new FileDataSource(filename);
+		File outFileDir = Environment.getExternalStorageDirectory();
+		DataSource source = new FileDataSource(
+				new File(outFileDir, filename).getAbsolutePath());
+		// DataSource source = new FileDataSource(filename);
 		messageBodyPart.setDataHandler(new DataHandler(source));
-		messageBodyPart.setFileName(new File(filename).getName());
+		messageBodyPart.setFileName(filename);
 
 		multipart.addBodyPart(messageBodyPart);
 	}
 
 	@Override
-	public PasswordAuthentication getPasswordAuthentication() {
+	public PasswordAuthentication getPasswordAuthentication()
+	{
 		return new PasswordAuthentication(user, password);
 	}
 
-	private Properties _setProperties() {
+	private Properties _setProperties()
+	{
 		Properties props = new Properties();
 
 		props.put("mail.smtp.host", host);
@@ -192,16 +217,20 @@ public class GMailAutoMailer extends javax.mail.Authenticator {
 		props.put("mail.smtp.socketFactory.class",
 				"javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.socketFactory.fallback", "false");
+		props.put("mail.smtp.socketFactory.class",
+				"javax.net.ssl.SSLSocketFactory");
 
 		return props;
 	}
 
 	// the getters and setters
-	public String getBody() {
+	public String getBody()
+	{
 		return body;
 	}
 
-	public void setBody(String _body) {
+	public void setBody(String _body)
+	{
 		this.body = _body;
 	}
 }

@@ -15,6 +15,8 @@ public class iCreepDatabaseAdapter {
 	
 	iCreepHelper helper;
 	
+	String userDetails;
+	
 	public iCreepDatabaseAdapter(Context context){
 		helper = new iCreepHelper(context);
 	}
@@ -64,11 +66,13 @@ public class iCreepDatabaseAdapter {
 			if(cursor.moveToFirst()){
 				if (cursor.getInt(0) != 0) {
 					do{
+						//retrieve user name and position for Time Tracker "John Doe: Developer"
+						userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
 						
 						String loc = cursor.getString(cursor.getColumnIndex(iCreepHelper.DESCRIPTION));
 						double totalTime =  cursor.getDouble(cursor.getColumnIndex(iCreepHelper.TIME_LEFT)) - cursor.getDouble(cursor.getColumnIndex(iCreepHelper.TIME_ENTERED));
 						String floor = cursor.getString(cursor.getColumnIndex(iCreepHelper.FLOOR));
-						
+												
 						TimePlace tp = new TimePlace(loc,totalTime,floor);
 						
 						timePlaces.add(tp);		
@@ -77,6 +81,54 @@ public class iCreepDatabaseAdapter {
 			}
 		}
 		return timePlaces; 
+	}
+	
+	/*
+	 * Pre-Conditions: > Go through database and retrieve user name and position for Reports
+	 * Post-conditions: > Return user details: "John Doe: Developer"
+	 */
+	public String getUserDetails(){
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		String query = "SELECT * FROM User, Reports WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
+		Cursor cursor = db.rawQuery(query, null);
+		
+		userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
+
+		return userDetails;
+	}
+	
+	/*
+	 * Pre-Conditions: > Go through database and retrieve user's report auto-delivery time
+	 * Post-conditions: > Return time in string format: "13:25"
+	 */
+	public String getReportTime(){
+		//SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = Reports.User_ID AND Auto_Delivery = true;
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+
+		String query = "SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if(cursor.getColumnIndex(iCreepHelper.AUTO_DELIVERY) == 1){
+			String time = cursor.getString(cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME));	
+			return time;
+		}else{
+			return null;
+		}		
+	}
+	
+	/*
+	 * Pre-Conditions: > Go through database and change/ set report auto-delivery time
+	 * Post-conditions: > update report delivery time in database
+	 */
+	public void setDeliveryTime(String newTime){
+		
+		String query = "UPDATE Reports (Auto_Delivery, Delivery_Time) SET (1," + newTime + ") WHERE User.User_ID = 1 AND User.User.ID = Reports.User_ID;";
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		db.rawQuery(query, null);
+	
 	}
 	
 	//this function clears the tables in the database
@@ -94,7 +146,7 @@ public class iCreepDatabaseAdapter {
 		private static final String DATABASE_NAME = "icreepdatabase";
 		
 		//version changes every time the structure of the db changes
-		private static final int DATABASE_VERSION = 4;
+		private static final int DATABASE_VERSION = 6;
 		
 		//define tables (1..6) in db
 		
@@ -152,7 +204,7 @@ public class iCreepDatabaseAdapter {
 		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + LOCATION_ID +" INTEGER, " + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " INTEGER NOT NULL, FOREIGN KEY (Location_ID) REFERENCES Location(Location_ID));";
 		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " DATETIME NOT NULL, " + TIME_LEFT +" DATETIME NOT NULL, " + LOCATION_DATE+ " DATE NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID), FOREIGN KEY (User_ID) REFERENCES User(User_ID));"; 
 		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME + " VARCHAR(75) NOT NULL," + SURNAME +" VARCHAR(75) NOT NULL, "+ EMAIL +" VARCHAR(100) NOT NULL," + EMPLOYEE_POSITION +" VARCHAR(50) NOT NULL, "+ PHOTO +" VARHCAR(255));";
-		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER, " + AUTO_DELIVERY +" BOOLEAN NOT NULL, " + DELIVERY_TIME +" DATETIME, FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
+		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER, " + AUTO_DELIVERY +" BOOLEAN NOT NULL, " + DELIVERY_TIME +" VARCHAR(10), FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
 
 		public int tableCount = 6;
 		private int createTableQueryCount = 6;
@@ -177,8 +229,7 @@ public class iCreepDatabaseAdapter {
 					//display error on toast if appeared
 					Message.message(context, ""+e);
 				}
-			}
-			
+			}			
 			//to see if onCreate was called
 			Message.message(context, " onCreate called");
 		}

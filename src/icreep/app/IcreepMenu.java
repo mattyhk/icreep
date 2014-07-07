@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import icreep.app.R;
+import icreep.app.db.iCreepDatabaseAdapter;
 
 public class IcreepMenu extends Activity {
 	
@@ -13,7 +14,7 @@ public class IcreepMenu extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_icreep_menu);
-		
+
 		//Proximity Button
 		location_button = (Button) findViewById(R.id.button1_location);
 		location_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.location.LocationActivity"));
