@@ -43,13 +43,12 @@
     <!--  Time Tracker Strings -->
     <string name="title_activity_time_tracker">Time Tracker</string>
     <string name="time_tracker">Time Tracker</string>
-    <string name="outside">Out of Office</string>
+    <string name="outside">In / Out Office</string>
 	<string name="in_office_label">In Office</string>
     <string name="out_office_label">Out Office</string>  
     
     <!--  Test Placeholder Strings -->
     <string name="user_position">Employee Name: Position</string>
-    <string name="Test">Marc Storebel: Developer</string>
     <string name="test2">6:18</string>
     <string name="timeInOffice">5:15</string>
     <string name="timeOutOffice">2:45</string>
@@ -68,6 +67,7 @@
     <string name="manualDelivery">Manual Delivery</string>
     <string name="save_report_time">Save</string>
     <color name="time_picker_color">#282828</color>
+    <string name="time_in_locations">Time in Locations</string>
 
 
 </resources>

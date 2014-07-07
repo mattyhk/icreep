@@ -58,7 +58,7 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		ActionBar.Tab tab1 = actionBar.newTab();
-		tab1.setText(getResources().getString(R.string.time_tracker));
+		tab1.setText(getResources().getString(R.string.time_in_locations));
 		tab1.setTabListener(this);
 
 		ActionBar.Tab tab2 = actionBar.newTab();
