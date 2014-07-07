@@ -60,7 +60,6 @@ public class ReportActivity extends FragmentActivity
 		//userDescrip.setTextSize(correctTextpixel);
 		//auto.setTextSize(correctTextpixel);
 		//manual.setTextSize(correctTextpixel);
-		// manual.setTextSize(correctTextpixel);
 
 		// This is called because we want this fragment to be added auto when we
 		// create this activity

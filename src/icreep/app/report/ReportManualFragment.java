@@ -30,7 +30,7 @@ public class ReportManualFragment extends Fragment
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState)
+			Bundle savedInstanceState){
 		//float correctTextpixel = 32 * getResources().getDisplayMetrics().density;
 		// float correctTextpixel = 32 *
 		// getResources().getDisplayMetrics().density;
