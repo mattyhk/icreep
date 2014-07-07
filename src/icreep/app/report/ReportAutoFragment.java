@@ -42,16 +42,13 @@ public class ReportAutoFragment extends Fragment {
 		Switch switched;
 		Button save ;
 		TimePicker tp ;
-		int hour = 0 ;
-		int min = 0 ;
+		int hour = -1 ;
+		int min = -1 ;
 		boolean hasAuto = false ;
 		boolean checkerIfEmailed = false ;
 		AlarmControlClass acc = new AlarmControlClass();
 		//the following is how you get your text pixels to the correct size depending on the screen
-    	//16*getResources().getDisplayMetrics().density
-		
-		
-		
+    	//16*getResources().getDisplayMetrics().density	
 		
 		/* please note that the switch will depend on the following possibly, db, shared preferences or 
 		 * savedInstanceState
@@ -59,7 +56,6 @@ public class ReportAutoFragment extends Fragment {
 		 * (non-Javadoc)
 		 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
 		 */
-		
 		
 		/* Pre-Conditions: This method occurs when they fragment is added to a activity
 	     * 
@@ -97,13 +93,13 @@ public class ReportAutoFragment extends Fragment {
 	    	TextView deliTime = (TextView)v.findViewById(R.id.DeliveryTime);
 	    	
 	    	//tp.setEnabled(false);
-	    	float correctTextpixel = 16*getResources().getDisplayMetrics().density;
+	    	//float correctTextpixel = 16*getResources().getDisplayMetrics().density;
 	    	
 	    	//ensuring all text pixels are the correct size
-	    	save.setTextSize(correctTextpixel);
-	    	deli.setTextSize(correctTextpixel);
-	    	deliTime.setTextSize(correctTextpixel);
-	    	switched.setTextSize(correctTextpixel);
+//	    	save.setTextSize(correctTextpixel);
+//	    	deli.setTextSize(correctTextpixel);
+//	    	deliTime.setTextSize(correctTextpixel);
+//	    	switched.setTextSize(correctTextpixel);
 	    	
 	    	//all the listeners using unnamed inner classes to avoid id checks
 	    	switched.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -149,13 +145,12 @@ public class ReportAutoFragment extends Fragment {
 					 * but had it before so save the new time as 0 to know it's not auto
 					 * if checked is true then save the new automated time
 					 */
-					if (switched.isEnabled() == true) //first test to see if it did update then disable save >> future
+					if (switched.isChecked() == true) //first test to see if it did update then disable save >> future
 					{					
 					int storehour = tp.getCurrentHour();
 					int storeminute = tp.getCurrentMinute();
 					updateTheTableForAutoMail(storehour, storeminute);
-					addAlarm(storehour, storeminute); //thisi is for testing purposes
-					boolean checkerIfEmailed = false ;
+					addAlarm(storehour, storeminute); //thisi is for testing purposes					
 					save.setEnabled(false);
 					}else
 					{
@@ -223,17 +218,17 @@ public class ReportAutoFragment extends Fragment {
 	    	//isAuto = true ;
 
 	    	iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(getActivity());
-	    	String valueFromAdapt = "" ; // this will equal to something lie adapt.dasdasda
+	    	String valueFromAdapt = adapt.getReportTime() ; // this will equal to something lie adapt.dasdasda
 	    	if (valueFromAdapt != null) //means auto is on
 	    	{
 	    		hasAuto = true ;
 	    		String[] times = valueFromAdapt.split(":");
 	    		hour = Integer.parseInt(times[0]);
 	    		min = Integer.parseInt(times[1]);	    		
-		    	switched.setEnabled(true);
-		    	
-	    	}
-	    	//setTheTimePicker(); not needed
+		    	switched.setEnabled(true);		    	
+	    	}	    	
+	    	// reason for not have a else is because of default values set as global variables
+	    	// setTheTimePicker(); not needed
 	    }
 	    
 	    /* Pre-Conditions: The new hour and minute for the DB
@@ -247,10 +242,17 @@ public class ReportAutoFragment extends Fragment {
 	    	boolean newAuto = switched.isChecked();
 	    	String newTime = "" + stoh + ":" + stom ;
 	    	// call the db update 	    	
-	    	
+	    	adapt.setDeliveryTime(newTime);
 	    	hasAuto = newAuto;
+	    	if (newAuto == true)
+	    	{	    	
 	    	hour = stoh ;
-	    	hour = stom;
+	    	min = stom;
+	    	}else
+	    	{
+	    	hour = -1 ;
+	    	min = -1 ;
+	    	}
 	    }
 	    
 	    /* Pre-Conditions: The hour and minute to set the time picker

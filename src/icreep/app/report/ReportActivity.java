@@ -51,11 +51,11 @@ public class ReportActivity extends FragmentActivity {
 		String foruserdesc = buildUserDescription();
 		// will do this userDescrip.setText(foruserdesc) ;
 
-		float correctTextpixel = 16 * getResources().getDisplayMetrics().density;
-		reports.setTextSize(correctTextpixel);
-		userDescrip.setTextSize(correctTextpixel);
-		auto.setTextSize(correctTextpixel);
-		manual.setTextSize(correctTextpixel);
+//		float correctTextpixel = 16 * getResources().getDisplayMetrics().density;
+//		reports.setTextSize(correctTextpixel);
+//		userDescrip.setTextSize(correctTextpixel);
+//		auto.setTextSize(correctTextpixel);
+//		manual.setTextSize(correctTextpixel);
 
 	        // This is called because we want this fragment to be added auto when we create this activity
 		// create this activity
