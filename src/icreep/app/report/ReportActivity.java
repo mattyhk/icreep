@@ -1,20 +1,12 @@
 package icreep.app.report;
 
 import icreep.app.R;
-import icreep.app.R.color;
-import icreep.app.R.id;
-import icreep.app.R.layout;
-import icreep.app.R.menu;
 import icreep.app.SwitchButtonListener;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class ReportActivity extends FragmentActivity {
 

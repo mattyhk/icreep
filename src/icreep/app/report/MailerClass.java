@@ -1,7 +1,5 @@
 package icreep.app.report;
 
-import icreep.app.db.iCreepDatabaseAdapter;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,11 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.util.Log;
 
 public class MailerClass {
@@ -37,7 +35,6 @@ public class MailerClass {
 		//String t = fie.getAbsolutePath();
 
 		File outFileDir = Environment.getExternalStorageDirectory();
-		String dir = outFileDir.getAbsolutePath();
 		File outFile = new File(outFileDir, "LatestReport.txt");
 
 		i.putExtra(Intent.EXTRA_TEXT, buildEmailBody());
@@ -59,6 +56,7 @@ public class MailerClass {
 	 * Post-conditions: > Build the report using string
 	 * handling > Create a fully formatted text file to attach to the email
 	 */
+	@SuppressLint("SimpleDateFormat") 
 	private void finalBuildEmailReport() {
 		String s = "This is the report for your daily statistics:";
 
@@ -96,7 +94,6 @@ public class MailerClass {
 		boolean g = false;
 		boolean f = false;
 		boolean se = false;
-		boolean should = false;
 		for (TimePlace t : list) {
 			if (t.getFloor().equals("Ground") && (g == false)) {
 				s = s + "\n=============================================";
@@ -143,7 +140,6 @@ public class MailerClass {
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
-		String Dated = sdf.format(d);
 
 		s = s + "\nOpen Box Software - iCreep app";
 		s = s + "\nThere when you least expect it ;)";
@@ -160,8 +156,8 @@ public class MailerClass {
 	 */
 	private void createReportTextFile(String in) {
 		File outFileDir = Environment.getExternalStorageDirectory();
-		String dir = outFileDir.getAbsolutePath();
-		File ttt = Environment.getDataDirectory();
+//		String dir = outFileDir.getAbsolutePath();
+//		File ttt = Environment.getDataDirectory();
 		// .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 		// File outFile = new File(outFileDir, "Reports2.txt");
 		File outFile = new File(outFileDir, "LatestReport.txt");
@@ -235,7 +231,7 @@ public class MailerClass {
 			mail.setBody("Message");
 		}
 		
-		String[] attachements = null ;
+		//String[] attachements = null ;
 		mail.setTo(new String[] { to });
 		/*
 		if (attachements != null) {

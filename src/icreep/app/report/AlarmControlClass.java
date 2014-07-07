@@ -40,8 +40,7 @@ public class AlarmControlClass {
         if(alarm.getTimeInMillis() <= now.getTimeInMillis())
             _alarm = alarm.getTimeInMillis() + (AlarmManager.INTERVAL_DAY+1);
         else
-            _alarm = alarm.getTimeInMillis();               
-        Date d = new Date();
+            _alarm = alarm.getTimeInMillis(); 
         	        
       
         myIntent = new Intent(context, ListenToAlarmForAutoEmail.class);

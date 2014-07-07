@@ -72,7 +72,7 @@ public class Sorting {
 	}
 
 	// descending
-	private ArrayList<TimePlace> secondarySortDescriptiondesc(
+	public ArrayList<TimePlace> secondarySortDescriptiondesc(
 			ArrayList<TimePlace> a) {
 		
 		ArrayList<TimePlace> toReturn = new ArrayList<TimePlace>();
