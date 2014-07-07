@@ -51,9 +51,9 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		TextView fragmentTitle = (TextView) v.findViewById(R.id.time_tracker_a_title);
 		TextView fragmentUser = (TextView) v.findViewById(R.id.time_tracker_a_user);
 		
-		float correctTextSize = 16*getResources().getDisplayMetrics().density;
-		fragmentTitle.setTextSize(correctTextSize);
-		fragmentUser.setTextSize(correctTextSize);
+		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
+		//fragmentTitle.setTextSize(correctTextSize);
+		//fragmentUser.setTextSize(correctTextSize);
 		
 		listView = (ListView) v.findViewById(R.id.time_tracker_listView_main);
 		mAdapter = new TimeTrackerListAdapter(getActivity(), items);

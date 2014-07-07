@@ -30,9 +30,9 @@ public class LocationFragmentA extends Fragment {
 		TextView fragmentTitle = (TextView) v.findViewById(R.id.location_a_title);
 		TextView fragmentUser = (TextView) v.findViewById(R.id.location_a_user);
 		
-		float correctTextSize = 16*getResources().getDisplayMetrics().density;
-		fragmentTitle.setTextSize(correctTextSize);
-		fragmentUser.setTextSize(correctTextSize);
+		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
+		//fragmentTitle.setTextSize(correctTextSize);
+		//fragmentUser.setTextSize(correctTextSize);
 		
 		home = (ImageButton) v.findViewById(R.id.home_button_location_current);
 		Activity c = getActivity();

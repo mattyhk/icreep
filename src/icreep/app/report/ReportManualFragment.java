@@ -30,14 +30,14 @@ public class ReportManualFragment extends Fragment
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState)
-	{
+			Bundle savedInstanceState){
+		//float correctTextpixel = 32 * getResources().getDisplayMetrics().density;
 		// float correctTextpixel = 32 *
 		// getResources().getDisplayMetrics().density;
 		View v = inflater.inflate(R.layout.fragment_reports_manual, container,
 				false);
 		sendreport = (Button) v.findViewById(R.id.sendReportButton);
-		// sendreport.setTextSize(correctTextpixel);
+		//sendreport.setTextSize(correctTextpixel);
 
 		sendreport.setOnClickListener(new OnClickListener()
 		{
