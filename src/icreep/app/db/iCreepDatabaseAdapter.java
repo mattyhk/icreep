@@ -89,6 +89,12 @@ public class iCreepDatabaseAdapter {
 	 */
 	public String getUserDetails(){
 		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		String query = "SELECT * FROM User, Reports WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
+		Cursor cursor = db.rawQuery(query, null);
+		
+		userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
+
 		return userDetails;
 	}
 	
@@ -225,8 +231,7 @@ public class iCreepDatabaseAdapter {
 					//display error on toast if appeared
 					Message.message(context, ""+e);
 				}
-			}
-			
+			}			
 			//to see if onCreate was called
 			Message.message(context, " onCreate called");
 		}

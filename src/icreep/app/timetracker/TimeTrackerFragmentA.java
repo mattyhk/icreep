@@ -6,14 +6,10 @@ import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
-import icreep.app.location.FloorItem;
 import icreep.app.location.ListItem;
 import icreep.app.report.Sorting;
 import icreep.app.report.TimePlace;
-import icreep.app.report.ReportActivity;
-import icreep.app.report.ReportManualFragment;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -72,7 +67,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         timePlaces = icreepHelper.getTimePlaces();
                
         if(timePlaces.size() != 0){
-            //user details: John Doe: Developer
+            //user details: "John Doe: Developer"
         	String userDetails = icreepHelper.getUserDetails();
         	fragmentUser.setText(userDetails);
             
