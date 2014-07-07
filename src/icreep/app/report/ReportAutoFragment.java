@@ -91,13 +91,13 @@ public class ReportAutoFragment extends Fragment {
 	    	TextView deliTime = (TextView)v.findViewById(R.id.DeliveryTime);
 	    	
 	    	//tp.setEnabled(false);
-	    	float correctTextpixel = 16*getResources().getDisplayMetrics().density;
+	    	//float correctTextpixel = 16*getResources().getDisplayMetrics().density;
 	    	
 	    	//ensuring all text pixels are the correct size
-	    	save.setTextSize(correctTextpixel);
-	    	deli.setTextSize(correctTextpixel);
-	    	deliTime.setTextSize(correctTextpixel);
-	    	switched.setTextSize(correctTextpixel);
+	    	//save.setTextSize(correctTextpixel);
+	    	//deli.setTextSize(correctTextpixel);
+	    	//deliTime.setTextSize(correctTextpixel);
+	    	//switched.setTextSize(correctTextpixel);
 	    	
 	    	//all the listeners using unnamed inner classes to avoid id checks
 	    	switched.setOnCheckedChangeListener(new OnCheckedChangeListener() {

@@ -34,9 +34,9 @@ public class TimeTrackerFragmentB extends Fragment {
 		TextView fragmentTitle = (TextView) v.findViewById(R.id.time_tracker_b_title);
 		TextView fragmentUser = (TextView) v.findViewById(R.id.time_tracker_b_user);
 		
-		float correctTextSize = 16*getResources().getDisplayMetrics().density;
-		fragmentTitle.setTextSize(correctTextSize);
-		fragmentUser.setTextSize(correctTextSize);
+		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
+		//fragmentTitle.setTextSize(correctTextSize);
+		//fragmentUser.setTextSize(correctTextSize);
 		
 		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
 		
