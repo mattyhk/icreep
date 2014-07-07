@@ -80,12 +80,14 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         //get timePlaces, tp (Description, totalTimeSpent, floor)        
         timePlaces = icreepHelper.getTimePlaces(); 
         if(timePlaces.size() != 0){
-        	timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
+        	//this function will sort the location with respect to their floors and description(locations)
+        	timePlaces = sortTimePlaces(timePlaces); 
         	
         	//now add these TimePlaces into ListView
         	
-        	//store Total-In-Time in bundle OR whatever for next fragment
-        	totalInTime();
+        	
+        	//store Total-Time in bundle OR whatever for next fragment
+        	totalTime(timePlaces);
         }
         else{
         	Message.message(fragActivity, "You haven't been anywhere");
@@ -133,17 +135,18 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	 * Pre-Conditions: > ArrayList of time places that is sorted according location(description), floor and total time spent.
 	 * Post-conditions: > this function will return the total time spent in all the floors, locations(Descriptions)
 	 */
-	public void totalInTime(){
+	public void totalTime(ArrayList<TimePlace> timePlaces){
 		
 		double total = 0;
-		ArrayList<TimePlace> timeInPlaces = timePlaces;
 		
-		for(TimePlace tp: timeInPlaces){
+		for(TimePlace tp: timePlaces){
 			double time = tp.getTimeSpent();
 			total+= time;
 		}		
 		
-		//find a way to pass this total to next fragment!!!
+		//send this total to TimeTracker Activity so that fragment B may access it from there
+		TimeTrackerActivity tTA = (TimeTrackerActivity) this.getActivity();
+		tTA.setTime(total);		
 	}
 
 	@Override

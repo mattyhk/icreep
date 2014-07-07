@@ -41,11 +41,12 @@ public class TimeTrackerFragmentB extends Fragment {
 		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
 		
 		//get in-time calculated from TimeTrackerFragmentA	
+		//get this from TimeTracker Activity - was passed to it by fragment A
+		TimeTrackerActivity t = (TimeTrackerActivity)this.getActivity();
+		Double inTimeHolder  = t.getTime();
 		
-				
 		// get percentage and set progress
 		mProgressBar.setProgress(calcPercentageTime(inTimeHolder));
-		
 		
 		home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_b);
 		Activity c = getActivity();

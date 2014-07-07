@@ -27,6 +27,8 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	ActionBar actionBar;
 	ViewPager viewPager;
 	
+	public double totalInTime = 0;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,6 +84,14 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		
+	}
+	
+	public double getTime(){
+		return totalInTime;
+	}
+	
+	public void setTime(double t){
+		totalInTime = t;
 	}
 
 }
