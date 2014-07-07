@@ -77,14 +77,20 @@ public class iCreepDatabaseAdapter {
 						
 						timePlaces.add(tp);		
 					}while(cursor.moveToNext());
+					
+					return timePlaces;
+				}
+				else{
+					return null;
 				}
 			}
-			return timePlaces;
+			else{
+				return null;
+			}
 		}
 		else{
 			return null;
-		}
-		
+		}		
 	}
 	
 	/*
@@ -130,18 +136,24 @@ public class iCreepDatabaseAdapter {
 		Cursor cursor = db.rawQuery(query, null);
 
 		if (cursor != null) {
-			if (cursor.getColumnIndex(iCreepHelper.AUTO_DELIVERY) == 1) {
-				String time = cursor.getString(cursor
-						.getColumnIndex(iCreepHelper.DELIVERY_TIME));
-				return time;
-			} 
-			else {
+			if(cursor.moveToFirst()){
+			
+				if (cursor.getColumnIndex(iCreepHelper.AUTO_DELIVERY) == 1) {
+					String time = cursor.getString(cursor
+							.getColumnIndex(iCreepHelper.DELIVERY_TIME));
+					return time;
+				} 
+				else {
+					return null;
+				}
+			}
+			else{
 				return null;
 			}
 		} 
 		else {
 			return null;
-		}
+		}		
 	}
 
 	/*
