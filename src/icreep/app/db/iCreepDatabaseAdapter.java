@@ -66,7 +66,7 @@ public class iCreepDatabaseAdapter {
 			if(cursor.moveToFirst()){
 				if (cursor.getInt(0) != 0) {
 					do{
-						
+						//retrieve user name and position for Time Tracker "John Doe: Developer"
 						userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
 						
 						String loc = cursor.getString(cursor.getColumnIndex(iCreepHelper.DESCRIPTION));
@@ -84,7 +84,7 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	/*
-	 * Pre-Conditions: > Go through database and retrieve user name and position
+	 * Pre-Conditions: > Go through database and retrieve user name and position for Reports
 	 * Post-conditions: > Return user details: "John Doe: Developer"
 	 */
 	public String getUserDetails(){
@@ -106,14 +106,12 @@ public class iCreepDatabaseAdapter {
 		//SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = Reports.User_ID AND Auto_Delivery = true;
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
-		
-		String time;
-		
+
 		String query = "SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
 		Cursor cursor = db.rawQuery(query, null);
 		
 		if(cursor.getColumnIndex(iCreepHelper.AUTO_DELIVERY) == 1){
-			time = cursor.getString(cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME));	
+			String time = cursor.getString(cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME));	
 			return time;
 		}else{
 			return null;
