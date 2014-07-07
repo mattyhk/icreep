@@ -27,6 +27,9 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	ActionBar actionBar;
 	ViewPager viewPager;
 	
+	public double totalInTime = 0;
+	public String userDetails;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,7 +58,7 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		ActionBar.Tab tab1 = actionBar.newTab();
-		tab1.setText(getResources().getString(R.string.time_tracker));
+		tab1.setText(getResources().getString(R.string.time_in_locations));
 		tab1.setTabListener(this);
 
 		ActionBar.Tab tab2 = actionBar.newTab();
@@ -83,6 +86,24 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		
 	}
+	
+	public double getTime(){
+		return totalInTime;
+	}
+	
+	public void setTime(double t){
+		totalInTime = t;
+	}
+	
+	public void setUserDetails(String ud){
+		userDetails = ud;
+	}
+	
+	public String getUserDetails(){
+		return userDetails;
+	}
+	
+	
 
 }
 

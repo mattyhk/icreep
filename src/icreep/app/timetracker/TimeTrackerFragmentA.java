@@ -6,14 +6,10 @@ import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
-import icreep.app.location.FloorItem;
 import icreep.app.location.ListItem;
 import icreep.app.report.Sorting;
 import icreep.app.report.TimePlace;
-import icreep.app.report.ReportActivity;
-import icreep.app.report.ReportManualFragment;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,7 +26,8 @@ import android.widget.Toast;
 public class TimeTrackerFragmentA extends Fragment implements OnItemClickListener {
 	
 	private ListView listView = null;
-	private ArrayList<ListItem> items = new ArrayList<ListItem>(); 
+	private ArrayList<ListItem> items = new ArrayList<ListItem>();
+	
 	private TimeTrackerListAdapter mAdapter;
 	private ImageButton home;
 	
@@ -39,6 +35,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	
 	//list to store timePlaces
 	public ArrayList<TimePlace> timePlaces;
+	
 	FragmentActivity fragActivity;
 	
 	public TimeTrackerFragmentA() {
@@ -54,47 +51,47 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		TextView fragmentTitle = (TextView) v.findViewById(R.id.time_tracker_a_title);
 		TextView fragmentUser = (TextView) v.findViewById(R.id.time_tracker_a_user);
 		
-		float correctTextSize = 16*getResources().getDisplayMetrics().density;
-		fragmentTitle.setTextSize(correctTextSize);
-		fragmentUser.setTextSize(correctTextSize);
+		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
+		//fragmentTitle.setTextSize(correctTextSize);
+		//fragmentUser.setTextSize(correctTextSize);
 		
 		listView = (ListView) v.findViewById(R.id.time_tracker_listView_main);
-		
-		items.add(new FloorItem("Ground Floor"));
-        items.add(new ZoneTimeItem("Gym", "South", "1:00"));
-        items.add(new ZoneTimeItem("Kitchen", "South", "2:00"));
-        items.add(new ZoneTimeItem("Boardroom", "West", "1:50"));
-        
-        items.add(new FloorItem("First Floor"));
-        items.add(new ZoneTimeItem("Boardroom", "South", "1:00"));
-        items.add(new ZoneTimeItem("Wing", "East", "3:00"));
-        
-        items.add(new FloorItem("Second Floor"));
-        items.add(new ZoneTimeItem("Boardroom", "South", "4:00"));
-        items.add(new ZoneTimeItem("Wing", "East", "1:00"));
+		mAdapter = new TimeTrackerListAdapter(getActivity(), items);
+        listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(this);
         
         //get time places that user has been to from the database       
         fragActivity = getActivity();
         icreepHelper = new iCreepDatabaseAdapter(fragActivity);
-       
-        //get timePlaces, tp (Description, totalTimeSpent, floor)        
-        timePlaces = icreepHelper.getTimePlaces(); 
+        
+        //get timePlaces (Description, totalTimeSpent, floor)        
+        timePlaces = icreepHelper.getTimePlaces();
+               
         if(timePlaces.size() != 0){
-        	timePlaces = sortTimePlaces(timePlaces); //this function will sort the location with respect to their floors and description(locations)
+            //user details: "John Doe: Developer"
+        	String userDetails = icreepHelper.getUserDetails();
+        	fragmentUser.setText(userDetails);
+            
+            TimeTrackerActivity tTA =  (TimeTrackerActivity) this.getActivity();
+            tTA.setUserDetails(userDetails);
+            
+        	//this function will sort the location with respect to their floors and description(locations)
+        	timePlaces = sortTimePlaces(timePlaces); 
         	
         	//now add these TimePlaces into ListView
+        	mAdapter.clear();
+        	for(TimePlace tp: timePlaces){
+        		mAdapter.add((ListItem) tp);
+        	}
         	
-        	//store Total-In-Time in bundle OR whatever for next fragment
-        	totalInTime();
+        	//calculate and put Total-Time in Time Tracker Activity
+        	totalTime(timePlaces);
         }
         else{
+        	fragmentUser.setText("");
         	Message.message(fragActivity, "You haven't been anywhere");
         }
-        
-        mAdapter = new TimeTrackerListAdapter(getActivity(), items);
-        listView.setAdapter(mAdapter);
-        listView.setOnItemClickListener(this);
-        
+                
         home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_a);
 		Activity c = getActivity();
 		if (c != null) {
@@ -125,7 +122,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 				sorted.add(toAdd);
 				toAdd=tp;
 			}
-		}	
+		}
 		return finalSortedTimePlaces;
 	}
 	
@@ -133,17 +130,18 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	 * Pre-Conditions: > ArrayList of time places that is sorted according location(description), floor and total time spent.
 	 * Post-conditions: > this function will return the total time spent in all the floors, locations(Descriptions)
 	 */
-	public void totalInTime(){
+	public void totalTime(ArrayList<TimePlace> timePlaces){
 		
 		double total = 0;
-		ArrayList<TimePlace> timeInPlaces = timePlaces;
 		
-		for(TimePlace tp: timeInPlaces){
+		for(TimePlace tp: timePlaces){
 			double time = tp.getTimeSpent();
 			total+= time;
 		}		
 		
-		//find a way to pass this total to next fragment!!!
+		//send this total to TimeTracker Activity so that fragment B may access it from there
+		TimeTrackerActivity tTA = (TimeTrackerActivity) this.getActivity();
+		tTA.setTime(total);		
 	}
 
 	@Override

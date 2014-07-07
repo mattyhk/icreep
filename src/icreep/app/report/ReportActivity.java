@@ -1,20 +1,13 @@
 package icreep.app.report;
 
 import icreep.app.R;
-import icreep.app.R.color;
-import icreep.app.R.id;
-import icreep.app.R.layout;
-import icreep.app.R.menu;
 import icreep.app.SwitchButtonListener;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
+import icreep.app.db.iCreepDatabaseAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,12 +17,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class ReportActivity extends FragmentActivity {
+public class ReportActivity extends FragmentActivity
+{
 
 	Button auto, manual;
 	ImageButton home;
 	boolean automated = true;
-
+	iCreepDatabaseAdapter adapt = null;
 	/*
 	 * Pre-Conditions: A bundle in case we need a saved state if we switch
 	 * screens and want to keep old information The trigger is that you have
@@ -40,32 +34,45 @@ public class ReportActivity extends FragmentActivity {
 	 * of events and will cover the different combination of inputs
 	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reports);
 		auto = (Button) findViewById(R.id.autoButton);
-	        manual = (Button) findViewById(R.id.manualButton);
-	        home = (ImageButton) findViewById(R.id.home_button_report);
-		TextView reports = (TextView) findViewById(R.id.textViewMain);
-		TextView userDescrip = (TextView) findViewById(R.id.userDescript);
-		String foruserdesc = buildUserDescription();
+		auto.setBackgroundColor(getResources().getColor(
+						R.color.lightGreenForLabels));
+		manual = (Button) findViewById(R.id.manualButton);
+		manual.setBackgroundColor(getResources().getColor(
+				R.color.greyForBackrounds));
+		home = (ImageButton) findViewById(R.id.home_button_report);
+		
+		adapt = new iCreepDatabaseAdapter(this) ;
+		
+		//build user description
+		buildUserDescription();
+		// TextView reports = (TextView) findViewById(R.id.textViewMain);
+		// TextView userDescrip = (TextView) findViewById(R.id.userDescript);
+		// String foruserdesc = buildUserDescription();
 		// will do this userDescrip.setText(foruserdesc) ;
 
-		float correctTextpixel = 16 * getResources().getDisplayMetrics().density;
-		reports.setTextSize(correctTextpixel);
-		userDescrip.setTextSize(correctTextpixel);
-		auto.setTextSize(correctTextpixel);
-		manual.setTextSize(correctTextpixel);
+		//float correctTextpixel = 16 * getResources().getDisplayMetrics().density;
+		//reports.setTextSize(correctTextpixel);
+		//userDescrip.setTextSize(correctTextpixel);
+		//auto.setTextSize(correctTextpixel);
+		//manual.setTextSize(correctTextpixel);
 
-	        // This is called because we want this fragment to be added auto when we create this activity
+		// This is called because we want this fragment to be added auto when we
+		// create this activity
 		// create this activity
 		addautoFragment(savedInstanceState);
 
-	        // Adding button handler for the auto report
-		auto.setOnClickListener(new OnClickListener() {
+		// Adding button handler for the auto report
+		auto.setOnClickListener(new OnClickListener()
+		{
 
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				// TODO Auto-generated method stub
 				switchtoautofrag();
 				// need to change the style to the button_style_blue
@@ -77,11 +84,13 @@ public class ReportActivity extends FragmentActivity {
 			}
 		});
 
-	        // Adding button handler for the manual report
-		manual.setOnClickListener(new OnClickListener() {
+		// Adding button handler for the manual report
+		manual.setOnClickListener(new OnClickListener()
+		{
 
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				// TODO Auto-generated method stub
 				switchtomanualfrag();
 				// need to change the style to the button_style_blue
@@ -89,24 +98,24 @@ public class ReportActivity extends FragmentActivity {
 						R.color.lightGreenForLabels));
 				auto.setBackgroundColor(getResources().getColor(
 						R.color.greyForBackrounds));
-				
+
 			}
 		});
-	        
-	        // Adding home button listener
-	        home.setOnClickListener(new SwitchButtonListener(this, "icreep.app.IcreepMenu"));
+
+		// Adding home button listener
+		home.setOnClickListener(new SwitchButtonListener(this,
+				"icreep.app.IcreepMenu"));
 
 	}
-	
-	
-	
+
 	/*
 	 * Pre-Conditions: none
 	 * 
 	 * Post-conditions: This will give us access to the auto fragment in case we
 	 * need information from it.
 	 */
-	public ReportAutoFragment gainAccessToAutoFragment() {
+	public ReportAutoFragment gainAccessToAutoFragment()
+	{
 		ReportAutoFragment fragment = (ReportAutoFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.autoFragLayout);
 
@@ -119,7 +128,8 @@ public class ReportActivity extends FragmentActivity {
 	 * Post-conditions: This will give us access to the manual fragment in case
 	 * we need information from it.
 	 */
-	public ReportManualFragment gainAccessToManualFragment() {
+	public ReportManualFragment gainAccessToManualFragment()
+	{
 		ReportManualFragment fragment = (ReportManualFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.reportManualLayout);
 		return fragment;
@@ -131,9 +141,11 @@ public class ReportActivity extends FragmentActivity {
 	 * Post-conditions return a string that will get the users name and surname
 	 * together with his/her job position to develop our interface for reports
 	 */
-	public String buildUserDescription() {
-
-		return "";
+	public void buildUserDescription()
+	{
+		TextView userDescrip = (TextView) findViewById(R.id.userDescript);
+		String needed = adapt.getUserDetails();
+		userDescrip.setText(needed);
 	}
 
 	/*
@@ -144,7 +156,8 @@ public class ReportActivity extends FragmentActivity {
 	 * will ensure that old fragment data is kept and that the view for the
 	 * activity is still active
 	 */
-	public void addautoFragment(Bundle save) {
+	public void addautoFragment(Bundle save)
+	{
 		Log.e("vince", "" + (R.id.autoFragLayout));
 		View t = findViewById(R.id.report);
 		if (t != null) {
@@ -173,7 +186,8 @@ public class ReportActivity extends FragmentActivity {
 	 * auto fragment > switch it to the manual fragment > this is done via
 	 * transaction > never forget commits
 	 */
-	public void switchtomanualfrag() {
+	public void switchtomanualfrag()
+	{
 
 		Fragment frag = new ReportManualFragment();
 		FragmentTransaction transaction = getSupportFragmentManager()
@@ -197,7 +211,8 @@ public class ReportActivity extends FragmentActivity {
 	 * manual fragment > switch it to the auto fragment > this is done via
 	 * transaction > never forget commits
 	 */
-	public void switchtoautofrag() {
+	public void switchtoautofrag()
+	{
 		ReportAutoFragment frag = new ReportAutoFragment();
 		FragmentTransaction transaction = getSupportFragmentManager()
 				.beginTransaction();
@@ -213,7 +228,8 @@ public class ReportActivity extends FragmentActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
 
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -221,7 +237,8 @@ public class ReportActivity extends FragmentActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
@@ -234,49 +251,57 @@ public class ReportActivity extends FragmentActivity {
 	}
 
 	@Override
-	protected void onStart() {
+	protected void onStart()
+	{
 		super.onStart();
 		Log.d("vince", "onStart");
 	}
 
 	@Override
-	protected void onResume() {
+	protected void onResume()
+	{
 		super.onResume();
 		Log.d("onResume", "onResume");
 	}
 
 	@Override
-	protected void onPause() {
+	protected void onPause()
+	{
 		super.onPause();
 		Log.d("onPause", "onPause");
 	}
 
 	@Override
-	protected void onStop() {
+	protected void onStop()
+	{
 		super.onStop();
 		Log.d("vince", "onStop");
 	}
 
 	@Override
-	protected void onRestart() {
+	protected void onRestart()
+	{
 		super.onRestart();
 		Log.d("onRestart", "onRestart");
 	}
 
 	@Override
-	protected void onDestroy() {
+	protected void onDestroy()
+	{
 		super.onDestroy();
 		Log.d("vince", "onDestroy");
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle out) {
+	protected void onSaveInstanceState(Bundle out)
+	{
 		super.onSaveInstanceState(out);
 
 	}
 
 	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+	protected void onRestoreInstanceState(Bundle savedInstanceState)
+	{
 		// TODO Auto-generated method stub
 		super.onRestoreInstanceState(savedInstanceState);
 
