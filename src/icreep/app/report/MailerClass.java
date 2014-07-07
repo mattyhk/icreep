@@ -30,8 +30,8 @@ public class MailerClass {
 
 		finalBuildEmailReport(); // this will create the latest report for data
 
-		File fie = new File(c.getCacheDir(), "Reports2.txt");
-		String t = fie.getAbsolutePath();
+		//File fie = new File(c.getCacheDir(), "Reports2.txt");
+		//String t = fie.getAbsolutePath();
 
 		File outFileDir = Environment.getExternalStorageDirectory();
 		String dir = outFileDir.getAbsolutePath();
@@ -198,7 +198,14 @@ public class MailerClass {
 		return s;
 	}
 
-	public boolean sendAutoMail() throws Exception {
+	
+	/*
+	 * Pre-Conditions: This is called by the broad coast receiver
+	 * Post-conditions: 
+	 * >  builds the email for auto email
+	 * >  sends the auto email
+	 */
+	public boolean sendAutoMail(Context c) throws Exception {
 		String to = "vreid@openboxsoftware.com";
 		String from = "Vincent";
 		String subject = "Manual Location report";
@@ -221,12 +228,15 @@ public class MailerClass {
 		
 		String[] attachements = null ;
 		mail.setTo(new String[] { to });
-
+		/*
 		if (attachements != null) {
 			for (String attachement : attachements) {
 				mail.addAttachment(attachement);
 			}
-		}
+		}*/
+		//error over here
+		finalBuildEmailReport();
+		mail.addAttachment("LatestReport.txt",c);
 	    
 		return mail.send();
 	}
