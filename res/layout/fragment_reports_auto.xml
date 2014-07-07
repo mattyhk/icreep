@@ -50,7 +50,7 @@
 	    android:layout_marginTop="@dimen/top_margin"
 	    android:layout_marginLeft="@dimen/left_margin"
 	    android:background="@drawable/time_picker"
-	    android:fadingEdge="vertical" />
+	    android:fadingEdge="vertical"/>
 	
 	<Button
         android:id="@+id/saveButton"

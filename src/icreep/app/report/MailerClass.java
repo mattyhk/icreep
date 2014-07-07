@@ -1,5 +1,7 @@
 package icreep.app.report;
 
+import icreep.app.db.iCreepDatabaseAdapter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,6 +24,7 @@ public class MailerClass {
 	 * Pre-Conditions: None Post-conditions: > Send the mail using the default
 	 * mailer for the user to add recipients if they want
 	 */
+	Context c = null ;
 	public void sendMail(Context c) {
 		Intent i = new Intent(Intent.ACTION_SENDTO);
 		i.setType("message/rfc822");
@@ -48,6 +51,7 @@ public class MailerClass {
 		} catch (android.content.ActivityNotFoundException ex) {
 			Log.e("vince", "couldn't send");
 		}
+		this.c = c ;
 	}
 
 	/*
@@ -75,10 +79,13 @@ public class MailerClass {
 		list.add(tp3);
 		list.add(tp5);
 		list.add(tp7);
-
+		
+		//This will be the array list that vinny's code generates 
+		//iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(c);
+		//list = adapt.getTimePlaces();
 		Sorting sorter = new Sorting();
 		list = sorter.InsertionSort(list);
-
+		
 		int max = 0;
 		for (TimePlace t : list) {
 			if (max < t.getLocation().length()) {

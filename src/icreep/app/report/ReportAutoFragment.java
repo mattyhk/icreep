@@ -35,6 +35,7 @@ import icreep.app.R;
 import icreep.app.R.color;
 import icreep.app.R.id;
 import icreep.app.R.layout;
+import icreep.app.db.iCreepDatabaseAdapter;
 
 public class ReportAutoFragment extends Fragment {
 		
@@ -79,14 +80,19 @@ public class ReportAutoFragment extends Fragment {
 	    	View v = inflater.inflate(R.layout.fragment_reports_auto, container,false) ;
 	    	
 	    	save = (Button) v.findViewById(R.id.saveButton);
-	    	switched = (Switch) v.findViewById(R.id.switchBar);	  
-	    	// need to make the color of switched more visible
-	    	switched.setBackgroundColor(getResources().getColor(R.color.whiteBackground));
 	    	
-	    	setTheHourMinuteSwitch() ; // switch on switched
+	    	
+	    	//the switched will default to not checked
+	    	switched = (Switch) v.findViewById(R.id.switchBar);	
+	    	tp = (TimePicker) v.findViewById(R.id.timePicker);	
+	    	setTheHourMinuteSwitch() ; // switch on switched >> this will automatically update the timepicker aswell
+	    	// need to make the color of switched more visible
+	    	//switched.setBackgroundColor(getResources().getColor(R.color.whiteBackground));
+	    	
+	    	
 	    	save.setEnabled(false); //no changes thus button shouldn't be enabled	    	
 	    	
-	    	tp = (TimePicker) v.findViewById(R.id.timePicker);	    	
+	    	    	
 	    	TextView deli = (TextView) v.findViewById(R.id.Delivery);	    	
 	    	TextView deliTime = (TextView)v.findViewById(R.id.DeliveryTime);
 	    	
@@ -118,7 +124,8 @@ public class ReportAutoFragment extends Fragment {
 						
 					}else
 					{
-						tp.setEnabled(false);
+						//tp.setEnabled(false);
+						setTheTimePicker();
 						if (hasAuto == true)
 						{
 						save.setEnabled(true);
@@ -138,7 +145,7 @@ public class ReportAutoFragment extends Fragment {
 					// TODO Auto-generated method stub
 				
 					/* The whole idea is the save button will work like
-					 * if checked is false then they won't want automated 
+					 * if checked is false then they don't want automated 
 					 * but had it before so save the new time as 0 to know it's not auto
 					 * if checked is true then save the new automated time
 					 */
@@ -146,7 +153,7 @@ public class ReportAutoFragment extends Fragment {
 					{					
 					int storehour = tp.getCurrentHour();
 					int storeminute = tp.getCurrentMinute();
-					writeToDB(storehour, storeminute);
+					updateTheTableForAutoMail(storehour, storeminute);
 					addAlarm(storehour, storeminute); //thisi is for testing purposes
 					boolean checkerIfEmailed = false ;
 					save.setEnabled(false);
@@ -154,7 +161,7 @@ public class ReportAutoFragment extends Fragment {
 					{
 						int storehour = 0;
 						int storeminute = 0;
-						writeToDB(storehour, storeminute);				
+						updateTheTableForAutoMail(storehour, storeminute);				
 					}
 				}
 			});
@@ -200,14 +207,8 @@ public class ReportAutoFragment extends Fragment {
 	    	}else
 	    	{
 	    		acc.turnOffAlarm();
-	    	}
-	    		
-	    	
+	    	}	    	
     	}
-	    
-
-	    
-	    
 	    
 	    /* Pre-Conditions: none
 	 	*
@@ -220,12 +221,36 @@ public class ReportAutoFragment extends Fragment {
 	    {
 	    	//if there is a auto time
 	    	//isAuto = true ;
-	    	
-	    	if ((hour != 0) && (min != 0))
+
+	    	iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(getActivity());
+	    	String valueFromAdapt = "" ; // this will equal to something lie adapt.dasdasda
+	    	if (valueFromAdapt != null) //means auto is on
 	    	{
-	    		switched.setEnabled(true);
-	    		setTheTimePicker();
+	    		hasAuto = true ;
+	    		String[] times = valueFromAdapt.split(":");
+	    		hour = Integer.parseInt(times[0]);
+	    		min = Integer.parseInt(times[1]);	    		
+		    	switched.setEnabled(true);
+		    	
 	    	}
+	    	//setTheTimePicker(); not needed
+	    }
+	    
+	    /* Pre-Conditions: The new hour and minute for the DB
+	     * 
+	 	 *  Post-conditions: // this will be invoked when the save button is clicked and will 
+	     // store the latest hour and minute that the user wants there auto report at
+	 	*/ 	  
+	    private void updateTheTableForAutoMail(int stoh,int stom)
+	    {
+	    	iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(getActivity());
+	    	boolean newAuto = switched.isChecked();
+	    	String newTime = "" + stoh + ":" + stom ;
+	    	// call the db update 	    	
+	    	
+	    	hasAuto = newAuto;
+	    	hour = stoh ;
+	    	hour = stom;
 	    }
 	    
 	    /* Pre-Conditions: The hour and minute to set the time picker
@@ -249,18 +274,8 @@ public class ReportAutoFragment extends Fragment {
 	    
 	    
 	    
-	    /* Pre-Conditions: The new hour and minute for the DB
-	     * 
-	 	 *  Post-conditions: // this will be invoked when the save button is clicked and will 
-	     // store the latest hour and minute that the user wants there auto report at
-	 	*/ 	    
-	    private void writeToDB(int stoh,int stom)
-	    {
-	    	//all code for writing to DB
-	    	
-	    	hour = stoh ;
-	    	min = stom;
-	    }
+	      
+	   
 	
 	 @Override
 	public void onStart() 
