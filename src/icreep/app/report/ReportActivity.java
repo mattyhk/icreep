@@ -46,16 +46,16 @@ public class ReportActivity extends FragmentActivity {
 		auto = (Button) findViewById(R.id.autoButton);
 	        manual = (Button) findViewById(R.id.manualButton);
 	        home = (ImageButton) findViewById(R.id.home_button_report);
-		TextView reports = (TextView) findViewById(R.id.textViewMain);
-		TextView userDescrip = (TextView) findViewById(R.id.userDescript);
-		String foruserdesc = buildUserDescription();
+//		TextView reports = (TextView) findViewById(R.id.textViewMain);
+//		TextView userDescrip = (TextView) findViewById(R.id.userDescript);
+//		String foruserdesc = buildUserDescription();
 		// will do this userDescrip.setText(foruserdesc) ;
 
-		float correctTextpixel = 16 * getResources().getDisplayMetrics().density;
-		reports.setTextSize(correctTextpixel);
-		userDescrip.setTextSize(correctTextpixel);
-		auto.setTextSize(correctTextpixel);
-		manual.setTextSize(correctTextpixel);
+//		float correctTextpixel = 16 * getResources().getDisplayMetrics().density;
+//		reports.setTextSize(correctTextpixel);
+//		userDescrip.setTextSize(correctTextpixel);
+//		auto.setTextSize(correctTextpixel);
+//		manual.setTextSize(correctTextpixel);
 
 	        // This is called because we want this fragment to be added auto when we create this activity
 		// create this activity

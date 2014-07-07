@@ -19,6 +19,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import android.content.Context;
+import android.os.Environment;
+
 public class GMailAutoMailer extends javax.mail.Authenticator {
 	private String user;
 	private String password;
@@ -160,14 +163,16 @@ public class GMailAutoMailer extends javax.mail.Authenticator {
 		}
 	}
 
-	public void addAttachment(String filename) throws Exception {
+	public void addAttachment(String filename,Context c) throws Exception {
 		BodyPart messageBodyPart = new MimeBodyPart();
-		DataSource source = new FileDataSource(filename);
+		File outFileDir = Environment.getExternalStorageDirectory();
+		DataSource source = new FileDataSource(new File(outFileDir,filename).getAbsolutePath());
+		//DataSource source = new FileDataSource(filename);
 		messageBodyPart.setDataHandler(new DataHandler(source));
-		messageBodyPart.setFileName(new File(filename).getName());
+		messageBodyPart.setFileName(filename);
 
 		multipart.addBodyPart(messageBodyPart);
-	}
+ 	}
 
 	@Override
 	public PasswordAuthentication getPasswordAuthentication() {
@@ -192,6 +197,7 @@ public class GMailAutoMailer extends javax.mail.Authenticator {
 		props.put("mail.smtp.socketFactory.class",
 				"javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.socketFactory.fallback", "false");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
 		return props;
 	}
