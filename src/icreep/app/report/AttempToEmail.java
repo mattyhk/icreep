@@ -24,9 +24,9 @@ public class AttempToEmail extends AsyncTask<String, Void, String>
 	protected String doInBackground(String... params)
 	{
 		// TODO Auto-generated method stub
-		MailerClass mail = new MailerClass();
+		MailerClass mail = new MailerClass(c);
 		try {
-			if (mail.sendAutoMail(c) == true) {
+			if (mail.sendAutoMail() == true) {
 				acc.alarmManager.cancel(acc.pendingIntent);
 				Log.e("vince", "THE MAIL WAS SENT YAY");
 			}

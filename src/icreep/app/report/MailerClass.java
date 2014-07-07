@@ -1,5 +1,7 @@
 package icreep.app.report;
 
+import icreep.app.db.iCreepDatabaseAdapter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,12 +26,21 @@ public class MailerClass
 	 * mailer for the user to add recipients if they want
 	 */
 	Context c = null;
-
-	public void sendMail(Context c)
+	iCreepDatabaseAdapter adapt ;
+	
+	public MailerClass(Context c)
 	{
+		this.c = c ;
+		adapt = new iCreepDatabaseAdapter(c) ;
+	}
+	public void sendMail()
+	{		
+		
+		String defaultEmailaddress = "vreid@openboxsoftware.com"; // this will come from SQL or SP
+		
 		Intent i = new Intent(Intent.ACTION_SENDTO);
 		i.setType("message/rfc822");
-		i.setData(Uri.parse("mailto:vreid@openboxsoftware.com"));
+		i.setData(Uri.parse("mailto:"+ defaultEmailaddress));
 		i.putExtra(Intent.EXTRA_SUBJECT, "Manual Location report");
 
 		finalBuildEmailReport(); // this will create the latest report for data
@@ -42,7 +53,8 @@ public class MailerClass
 
 		i.putExtra(Intent.EXTRA_TEXT, buildEmailBody());
 		i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(outFile));
-
+		// The phone number is never used, not sure if I should keep it in
+		// don't want to break anything ;)
 		i.putExtra(Intent.EXTRA_PHONE_NUMBER, "0834483431");
 		try {
 			c.startActivity(Intent.createChooser(i, "Send mail..."));
@@ -51,7 +63,6 @@ public class MailerClass
 		} catch (android.content.ActivityNotFoundException ex) {
 			Log.e("vince", "couldn't send");
 		}
-		this.c = c;
 	}
 
 	/*
@@ -66,24 +77,23 @@ public class MailerClass
 		s = s + "\n";
 
 		// mock data
-		TimePlace tp = new TimePlace("Kitchen", 2, "First");
-		TimePlace tp2 = new TimePlace("S3", 3, "Second");
-		TimePlace tp3 = new TimePlace("G3", 4, "Ground");
-		TimePlace tp4 = new TimePlace("G8", 4, "Ground");
-		TimePlace tp7 = new TimePlace("Bathroom", 50.46, "Second");
-		TimePlace tp5 = new TimePlace("Kitchen", 4, "Ground");
+//		TimePlace tp = new TimePlace("Kitchen", 2, "First");
+//		TimePlace tp2 = new TimePlace("S3", 3, "Second");
+//		TimePlace tp3 = new TimePlace("G3", 4, "Ground");
+//		TimePlace tp4 = new TimePlace("G8", 4, "Ground");
+//		TimePlace tp7 = new TimePlace("Bathroom", 50.46, "Second");
+//		TimePlace tp5 = new TimePlace("Kitchen", 4, "Ground");
 
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
-		list.add(tp);
-		list.add(tp2);
-		list.add(tp4);
-		list.add(tp3);
-		list.add(tp5);
-		list.add(tp7);
+//		list.add(tp);
+//		list.add(tp2);
+//		list.add(tp4);
+//		list.add(tp3);
+//		list.add(tp5);
+//		list.add(tp7);
 
 		// This will be the array list that vinny's code generates
-		// iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(c);
-		// list = adapt.getTimePlaces();
+		list = adapt.getTimePlaces();		
 		Sorting sorter = new Sorting();
 		list = sorter.InsertionSort(list);
 
@@ -192,8 +202,10 @@ public class MailerClass
 	 * be attached to the intent
 	 */
 	private String buildEmailBody()
-	{
-		String userName = "Logan Dunbar"; // can be retrieved from the DB
+	{		
+		String needed = adapt.getUserDetails();
+		String[] user = needed.split(":");
+		String userName = user[0]; // can be retrieved from the DB
 		String s = "";
 		s = s + "Hi there " + userName;
 		s = s + "\n";
@@ -211,16 +223,16 @@ public class MailerClass
 	 * Pre-Conditions: This is called by the broad coast receiver
 	 * Post-conditions: > builds the email for auto email > sends the auto email
 	 */
-	public boolean sendAutoMail(Context c) throws Exception
-	{
-		String to = "vreid@openboxsoftware.com";
-		String from = "Vincent";
-		String subject = "Manual Location report";
+	public boolean sendAutoMail() throws Exception
+	{	
+		String to = "vreid@openboxsoftware.com"; // this will come from SQL or SP
+		String from = "iCreep";
+		String subject = "Automatic Location report";
 		String message = buildEmailBody();
-		message = message + "\nThis was done by auto mailer";
+		//message = message + "\nThis was done by auto mailer"; //the subject hints at this
 
-		GMailAutoMailer mail = new GMailAutoMailer("hobolicious101@gmail.com",
-				"50837123");
+		GMailAutoMailer mail = new GMailAutoMailer("icreepatopenbox@gmail.com",
+				"OpenBoxSoftCreep");
 		if (subject != null && subject.length() > 0) {
 			mail.setSubject(subject);
 		} else {
@@ -240,7 +252,7 @@ public class MailerClass
 		 * if (attachements != null) { for (String attachement : attachements) {
 		 * mail.addAttachment(attachement); } }
 		 */
-		// error over here
+		// error over here >>> fixed
 		finalBuildEmailReport();
 		mail.addAttachment("LatestReport.txt", c);
 

@@ -51,8 +51,8 @@ public class ReportManualFragment extends Fragment
 				// gmail.
 				// hopefully the user will chose a proper option and do this
 				// properly >>> to test
-				MailerClass mail = new MailerClass();
-				mail.sendMail(getActivity());
+				MailerClass mail = new MailerClass(getActivity());
+				mail.sendMail();
 				// might want to cancel alarm, busy testing alarm
 			}
 		});

@@ -2,6 +2,7 @@ package icreep.app.report;
 
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
+import icreep.app.db.iCreepDatabaseAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class ReportActivity extends FragmentActivity
 {
@@ -21,7 +23,7 @@ public class ReportActivity extends FragmentActivity
 	Button auto, manual;
 	ImageButton home;
 	boolean automated = true;
-
+	iCreepDatabaseAdapter adapt = null;
 	/*
 	 * Pre-Conditions: A bundle in case we need a saved state if we switch
 	 * screens and want to keep old information The trigger is that you have
@@ -37,8 +39,17 @@ public class ReportActivity extends FragmentActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reports);
 		auto = (Button) findViewById(R.id.autoButton);
+		auto.setBackgroundColor(getResources().getColor(
+						R.color.lightGreenForLabels));
 		manual = (Button) findViewById(R.id.manualButton);
+		manual.setBackgroundColor(getResources().getColor(
+				R.color.greyForBackrounds));
 		home = (ImageButton) findViewById(R.id.home_button_report);
+		
+		adapt = new iCreepDatabaseAdapter(this) ;
+		
+		//build user description
+		buildUserDescription();
 		// TextView reports = (TextView) findViewById(R.id.textViewMain);
 		// TextView userDescrip = (TextView) findViewById(R.id.userDescript);
 		// String foruserdesc = buildUserDescription();
@@ -131,10 +142,11 @@ public class ReportActivity extends FragmentActivity
 	 * Post-conditions return a string that will get the users name and surname
 	 * together with his/her job position to develop our interface for reports
 	 */
-	public String buildUserDescription()
+	public void buildUserDescription()
 	{
-
-		return "";
+		TextView userDescrip = (TextView) findViewById(R.id.userDescript);
+		String needed = adapt.getUserDetails();
+		userDescrip.setText(needed);
 	}
 
 	/*
