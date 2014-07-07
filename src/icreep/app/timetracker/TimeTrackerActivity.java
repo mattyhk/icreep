@@ -28,6 +28,7 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	ViewPager viewPager;
 	
 	public double totalInTime = 0;
+	public String userDetails;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,16 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	public void setTime(double t){
 		totalInTime = t;
 	}
+	
+	public void setUserDetails(String ud){
+		userDetails = ud;
+	}
+	
+	public String getUserDetails(){
+		return userDetails;
+	}
+	
+	
 
 }
 

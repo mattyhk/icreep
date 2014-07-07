@@ -31,7 +31,8 @@ import android.widget.Toast;
 public class TimeTrackerFragmentA extends Fragment implements OnItemClickListener {
 	
 	private ListView listView = null;
-	private ArrayList<ListItem> items = new ArrayList<ListItem>(); 
+	private ArrayList<ListItem> items = new ArrayList<ListItem>();
+	
 	private TimeTrackerListAdapter mAdapter;
 	private ImageButton home;
 	
@@ -59,44 +60,42 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		fragmentUser.setTextSize(correctTextSize);
 		
 		listView = (ListView) v.findViewById(R.id.time_tracker_listView_main);
-		
-		items.add(new FloorItem("Ground Floor"));
-        items.add(new ZoneTimeItem("Gym", "South", "1:00"));
-        items.add(new ZoneTimeItem("Kitchen", "South", "2:00"));
-        items.add(new ZoneTimeItem("Boardroom", "West", "1:50"));
-        
-        items.add(new FloorItem("First Floor"));
-        items.add(new ZoneTimeItem("Boardroom", "South", "1:00"));
-        items.add(new ZoneTimeItem("Wing", "East", "3:00"));
-        
-        items.add(new FloorItem("Second Floor"));
-        items.add(new ZoneTimeItem("Boardroom", "South", "4:00"));
-        items.add(new ZoneTimeItem("Wing", "East", "1:00"));
+		mAdapter = new TimeTrackerListAdapter(getActivity(), items);
+        listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(this);
         
         //get time places that user has been to from the database       
         fragActivity = getActivity();
         icreepHelper = new iCreepDatabaseAdapter(fragActivity);
-       
-        //get timePlaces, tp (Description, totalTimeSpent, floor)        
-        timePlaces = icreepHelper.getTimePlaces(); 
+        
+        //get timePlaces (Description, totalTimeSpent, floor)        
+        timePlaces = icreepHelper.getTimePlaces();
+               
         if(timePlaces.size() != 0){
+            //user details: John Doe: Developer
+        	String userDetails = icreepHelper.getUserDetails();
+        	fragmentUser.setText(userDetails);
+            
+            TimeTrackerActivity tTA =  (TimeTrackerActivity) this.getActivity();
+            tTA.setUserDetails(userDetails);
+            
         	//this function will sort the location with respect to their floors and description(locations)
         	timePlaces = sortTimePlaces(timePlaces); 
         	
         	//now add these TimePlaces into ListView
+        	mAdapter.clear();
+        	for(TimePlace tp: timePlaces){
+        		mAdapter.add((ListItem) tp);
+        	}
         	
-        	
-        	//store Total-Time in bundle OR whatever for next fragment
+        	//calculate and put Total-Time in Time Tracker Activity
         	totalTime(timePlaces);
         }
         else{
+        	fragmentUser.setText("");
         	Message.message(fragActivity, "You haven't been anywhere");
         }
-        
-        mAdapter = new TimeTrackerListAdapter(getActivity(), items);
-        listView.setAdapter(mAdapter);
-        listView.setOnItemClickListener(this);
-        
+                
         home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_a);
 		Activity c = getActivity();
 		if (c != null) {
@@ -127,7 +126,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 				sorted.add(toAdd);
 				toAdd=tp;
 			}
-		}	
+		}
 		return finalSortedTimePlaces;
 	}
 	

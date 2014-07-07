@@ -20,6 +20,7 @@ public class TimeTrackerFragmentB extends Fragment {
 	private ImageButton home;
 	
 	public double inTimeHolder = 0;
+	public double outTimeHolder = 24.0;
 
 	public TimeTrackerFragmentB() {
 		// Required empty public constructor
@@ -33,6 +34,8 @@ public class TimeTrackerFragmentB extends Fragment {
 		
 		TextView fragmentTitle = (TextView) v.findViewById(R.id.time_tracker_b_title);
 		TextView fragmentUser = (TextView) v.findViewById(R.id.time_tracker_b_user);
+		TextView fragmentInTime = (TextView) v.findViewById(R.id.time_in_office);
+		TextView fragmentOutTime = (TextView) v.findViewById(R.id.time_out_office);
 		
 		float correctTextSize = 16*getResources().getDisplayMetrics().density;
 		fragmentTitle.setTextSize(correctTextSize);
@@ -43,17 +46,34 @@ public class TimeTrackerFragmentB extends Fragment {
 		//get in-time calculated from TimeTrackerFragmentA	
 		//get this from TimeTracker Activity - was passed to it by fragment A
 		TimeTrackerActivity t = (TimeTrackerActivity)this.getActivity();
+		
 		Double inTimeHolder  = t.getTime();
 		
 		// get percentage and set progress
 		mProgressBar.setProgress(calcPercentageTime(inTimeHolder));
 		
+		//get user details
+		fragmentUser.setText(t.getUserDetails());
+		
+		//display in & out of office times
+		//In office hours and minutes
+		String intime = Double.toString(inTimeHolder);		
+		int inHours = Integer.parseInt(intime.substring(0, intime.indexOf(".")));		
+		int inMinutes =  (int) (inTimeHolder - inHours)*60;
+				
+		//Out office hours and minutes
+		String outtime = Double.toString(outTimeHolder);
+		int outHours = Integer.parseInt(outtime.substring(0, outtime.indexOf(".")));		
+		int outMinutes =  (int) (outTimeHolder - outHours)*60;
+		
+		fragmentInTime.setText(inHours + ":" + inMinutes);
+		fragmentOutTime.setText(outHours + ":" + outMinutes);
+		
 		home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_b);
 		Activity c = getActivity();
 		if (c != null) {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
-		}
-				
+		}				
 		return v;
 	}
 	
@@ -73,7 +93,7 @@ public class TimeTrackerFragmentB extends Fragment {
 	 * @return percentage - the percentage rounded to nearest integer
 	 */
 	private int calcPercentageTime(double inOffice) {
-		
+		outTimeHolder -=inOffice; 
 		return (int) (inOffice/24)*100;
 	}
 
