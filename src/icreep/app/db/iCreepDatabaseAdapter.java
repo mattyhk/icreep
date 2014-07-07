@@ -97,9 +97,12 @@ public class iCreepDatabaseAdapter {
 		String query = "SELECT * FROM User, Reports WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
 		Cursor cursor = db.rawQuery(query, null);
 		
-		userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
-
-		return userDetails;
+		if(cursor != null){
+			userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
+			return userDetails;
+		}else{
+			return null;
+		}
 	}
 	
 	/*
@@ -107,20 +110,27 @@ public class iCreepDatabaseAdapter {
 	 * Post-conditions: > Return time in string format: "13:25"
 	 */
 	public String getReportTime(){
-		//SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = Reports.User_ID AND Auto_Delivery = true;
-		
+		// SELECT Delivery_Time FROM Reports, User WHERE User.User_ID =
+		// Reports.User_ID AND Auto_Delivery = true;
+
 		SQLiteDatabase db = helper.getWritableDatabase();
 
 		String query = "SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
 		Cursor cursor = db.rawQuery(query, null);
-		
-		if(cursor.getColumnIndex(iCreepHelper.AUTO_DELIVERY) == 1){
-			String time = cursor.getString(cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME));	
-			return time;
-		}else{
+
+		if (cursor != null) {
+			if (cursor.getColumnIndex(iCreepHelper.AUTO_DELIVERY) == 1) {
+				String time = cursor.getString(cursor
+						.getColumnIndex(iCreepHelper.DELIVERY_TIME));
+				return time;
+			} else {
+				return null;
+			}
+		} else {
 			return null;
-		}		
+		}
 	}
+
 	
 	/*
 	 * Pre-Conditions: > Go through database and change/ set report auto-delivery time
