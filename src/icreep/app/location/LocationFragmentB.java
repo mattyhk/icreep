@@ -44,9 +44,9 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		TextView fragmentTitle = (TextView) v.findViewById(R.id.location_b_title);
 		TextView fragmentUser = (TextView) v.findViewById(R.id.location_b_user);
 		
-		float correctTextSize = 16*getResources().getDisplayMetrics().density;
-		fragmentTitle.setTextSize(correctTextSize);
-		fragmentUser.setTextSize(correctTextSize);
+		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
+		//fragmentTitle.setTextSize(correctTextSize);
+		//fragmentUser.setTextSize(correctTextSize);
 		
 		listView = (ListView) v.findViewById(R.id.daily_movement_listView_main);
 		

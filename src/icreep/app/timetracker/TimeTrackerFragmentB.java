@@ -36,9 +36,9 @@ import android.widget.TextView;
 		TextView fragmentInTime = (TextView) v.findViewById(R.id.time_in_office);
 		TextView fragmentOutTime = (TextView) v.findViewById(R.id.time_out_office);
 		
-		float correctTextSize = 16*getResources().getDisplayMetrics().density;
-		fragmentTitle.setTextSize(correctTextSize);
-		fragmentUser.setTextSize(correctTextSize);
+		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
+		//fragmentTitle.setTextSize(correctTextSize);
+		//fragmentUser.setTextSize(correctTextSize);
 		
 		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
 		

@@ -83,6 +83,7 @@ public class ReportAutoFragment extends Fragment
 
 		// tp.setEnabled(false);
 		// float correctTextpixel =
+	    	//float correctTextpixel = 16*getResources().getDisplayMetrics().density;
 		// 16*getResources().getDisplayMetrics().density;
 
 		// ensuring all text pixels are the correct size
