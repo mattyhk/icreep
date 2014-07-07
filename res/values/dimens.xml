@@ -12,16 +12,24 @@
     <dimen name="top_margin_table">100dp</dimen>
     
     <dimen name="top_margin_10in">30dp</dimen>
+    <dimen name="top_margin_3.7in">12dp</dimen>
     
     <!--Text-->
     <dimen name="heading_text_size">20sp</dimen>
     <dimen name="sub_heading_text_size">17sp</dimen>
     
-    <dimen name="heading_text_size_10in">45sp</dimen>
-    <dimen name="in_out_office_labels_10in">35sp</dimen>
-    <dimen name="sub_heading_text_size_10in">40sp</dimen>
-    <dimen name="menu_button_text_size_10in">48sp</dimen>
+      <!--10 Inch Screen-->
+      <dimen name="heading_text_size_10in">45sp</dimen>
+      <dimen name="in_out_office_labels_10in">35sp</dimen>
+      <dimen name="sub_heading_text_size_10in">40sp</dimen>
+      <dimen name="menu_button_text_size_10in">48sp</dimen>
     
+      <!--3.7 Inch Screen-->
+      <dimen name="heading_text_size_3.7in">16sp</dimen>
+      <dimen name="in_out_office_labels_3.7in">35sp</dimen>
+      <dimen name="sub_heading_text_size_3.7in">14sp</dimen>
+      <dimen name="menu_button_text_size_3.7in">48sp</dimen>
+      
     <!--Buttons-->
     <dimen name="menu_button_padding_top_bottom_10in">30dp</dimen>
     <dimen name="save_button_padding_top_bottom_10in">15dp</dimen>
