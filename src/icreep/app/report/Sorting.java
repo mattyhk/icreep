@@ -2,14 +2,16 @@ package icreep.app.report;
 
 import java.util.ArrayList;
 
-public class Sorting {
+public class Sorting
+{
 
 	/*
 	 * Pre-Conditions: > ArrayList of time places that is unsorted.
 	 * Post-conditions: > Sorts the arrayList of time places > The sort is done
 	 * on the floor > items order: Ground Floor, First Floor, Second Floor
 	 */
-	public ArrayList<TimePlace> InsertionSort(ArrayList<TimePlace> a) {
+	public ArrayList<TimePlace> InsertionSort(ArrayList<TimePlace> a)
+	{
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
 		if (a.size() == 0) {
 			return new ArrayList<TimePlace>();
@@ -73,28 +75,26 @@ public class Sorting {
 
 	// descending
 	public ArrayList<TimePlace> secondarySortDescriptiondesc(
-			ArrayList<TimePlace> a) {
-		
+			ArrayList<TimePlace> a)
+	{
+
 		ArrayList<TimePlace> toReturn = new ArrayList<TimePlace>();
 		toReturn.add(a.get(0));
 
 		for (int i = 0; i < a.size(); i++) {
 			TimePlace toAdd = a.get(i);
 			boolean added = false;
-			for (int j = 1; j < toReturn.size(); j++) 
-			{
+			for (int j = 1; j < toReturn.size(); j++) {
 				String locAdd = toAdd.getLocation();
 				TimePlace cur = toReturn.get(j);
 				String locCur = cur.getLocation();
-				if (locAdd.compareTo(locCur) <0)
-				{
+				if (locAdd.compareTo(locCur) < 0) {
 					toReturn.add(j, toAdd);
 					added = true;
-					break ;					
-				}				
+					break;
+				}
 			}
-			if (added == false)
-			{
+			if (added == false) {
 				toReturn.add(toAdd);
 			}
 		}
@@ -104,27 +104,25 @@ public class Sorting {
 
 	// Asc
 	private ArrayList<TimePlace> secondarySortDescriptionAsc(
-			ArrayList<TimePlace> a) {
+			ArrayList<TimePlace> a)
+	{
 		ArrayList<TimePlace> toReturn = new ArrayList<TimePlace>();
 		toReturn.add(a.get(0));
 
 		for (int i = 1; i < a.size(); i++) {
 			TimePlace toAdd = a.get(i);
 			boolean added = false;
-			for (int j = 0; j < toReturn.size(); j++) 
-			{
+			for (int j = 0; j < toReturn.size(); j++) {
 				String locAdd = toAdd.getLocation();
 				TimePlace cur = toReturn.get(j);
 				String locCur = cur.getLocation();
-				if (locAdd.compareTo(locCur) <0)
-				{
+				if (locAdd.compareTo(locCur) < 0) {
 					toReturn.add(j, toAdd);
 					added = true;
-					break ;					
-				}				
+					break;
+				}
 			}
-			if (added == false)
-			{
+			if (added == false) {
 				toReturn.add(toAdd);
 			}
 		}

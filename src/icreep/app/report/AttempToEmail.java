@@ -1,35 +1,32 @@
 package icreep.app.report;
 
-
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class AttempToEmail extends AsyncTask<String, Void, String>{
+public class AttempToEmail extends AsyncTask<String, Void, String>
+{
 
-	private Context c ;
-	AlarmControlClass acc = new AlarmControlClass() ;
+	private Context c;
+	AlarmControlClass acc = new AlarmControlClass();
+
 	public AttempToEmail(Context in)
 	{
-		c = in ;
+		c = in;
 	}
-	
-	
+
 	/*
-	 * Pre-Conditions: This will be called from the broadcast receiver 
-	 * Post-conditions: 
-	 * >  Send auto generated email
-	 * >  if fail, will try again. The usual reason for failing is connection time out
-	 * 
+	 * Pre-Conditions: This will be called from the broadcast receiver
+	 * Post-conditions: > Send auto generated email > if fail, will try again.
+	 * The usual reason for failing is connection time out
 	 */
 	@Override
-	protected String doInBackground(String... params) {		
+	protected String doInBackground(String... params)
+	{
 		// TODO Auto-generated method stub
 		MailerClass mail = new MailerClass();
 		try {
-			if (mail.sendAutoMail(c) == true)
-			{
+			if (mail.sendAutoMail(c) == true) {
 				acc.alarmManager.cancel(acc.pendingIntent);
 				Log.e("vince", "THE MAIL WAS SENT YAY");
 			}
@@ -39,12 +36,13 @@ public class AttempToEmail extends AsyncTask<String, Void, String>{
 			acc.sendAutoEmailNow();
 			e.printStackTrace();
 			Log.e("vince", "Couldn't send, sorry");
-			
+
 		}
-		
-//		acc.alarmManager.cancel(acc.pendingIntent);
-//		Log.e("vince", "THE MAIL WAS SENT YAY"); // this might not be necessary :P only time will tell
-		return "" ;
+
+		// acc.alarmManager.cancel(acc.pendingIntent);
+		// Log.e("vince", "THE MAIL WAS SENT YAY"); // this might not be
+		// necessary :P only time will tell
+		return "";
 	}
 
 }

@@ -16,14 +16,17 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
-public class MailerClass {
+public class MailerClass
+{
 
 	/*
 	 * Pre-Conditions: None Post-conditions: > Send the mail using the default
 	 * mailer for the user to add recipients if they want
 	 */
-	Context c = null ;
-	public void sendMail(Context c) {
+	Context c = null;
+
+	public void sendMail(Context c)
+	{
 		Intent i = new Intent(Intent.ACTION_SENDTO);
 		i.setType("message/rfc822");
 		i.setData(Uri.parse("mailto:vreid@openboxsoftware.com"));
@@ -31,8 +34,8 @@ public class MailerClass {
 
 		finalBuildEmailReport(); // this will create the latest report for data
 
-		//File fie = new File(c.getCacheDir(), "Reports2.txt");
-		//String t = fie.getAbsolutePath();
+		// File fie = new File(c.getCacheDir(), "Reports2.txt");
+		// String t = fie.getAbsolutePath();
 
 		File outFileDir = Environment.getExternalStorageDirectory();
 		File outFile = new File(outFileDir, "LatestReport.txt");
@@ -48,16 +51,16 @@ public class MailerClass {
 		} catch (android.content.ActivityNotFoundException ex) {
 			Log.e("vince", "couldn't send");
 		}
-		this.c = c ;
+		this.c = c;
 	}
 
 	/*
-	 * Pre-Conditions: None 
-	 * Post-conditions: > Build the report using string
+	 * Pre-Conditions: None Post-conditions: > Build the report using string
 	 * handling > Create a fully formatted text file to attach to the email
 	 */
-	@SuppressLint("SimpleDateFormat") 
-	private void finalBuildEmailReport() {
+	@SuppressLint("SimpleDateFormat")
+	private void finalBuildEmailReport()
+	{
 		String s = "This is the report for your daily statistics:";
 
 		s = s + "\n";
@@ -77,13 +80,13 @@ public class MailerClass {
 		list.add(tp3);
 		list.add(tp5);
 		list.add(tp7);
-		
-		//This will be the array list that vinny's code generates 
-		//iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(c);
-		//list = adapt.getTimePlaces();
+
+		// This will be the array list that vinny's code generates
+		// iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(c);
+		// list = adapt.getTimePlaces();
 		Sorting sorter = new Sorting();
 		list = sorter.InsertionSort(list);
-		
+
 		int max = 0;
 		for (TimePlace t : list) {
 			if (max < t.getLocation().length()) {
@@ -154,10 +157,11 @@ public class MailerClass {
 	 * Post-conditions: > Write string to a textFile > Create a fully formatted
 	 * text file to attach to the email
 	 */
-	private void createReportTextFile(String in) {
+	private void createReportTextFile(String in)
+	{
 		File outFileDir = Environment.getExternalStorageDirectory();
-//		String dir = outFileDir.getAbsolutePath();
-//		File ttt = Environment.getDataDirectory();
+		// String dir = outFileDir.getAbsolutePath();
+		// File ttt = Environment.getDataDirectory();
 		// .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 		// File outFile = new File(outFileDir, "Reports2.txt");
 		File outFile = new File(outFileDir, "LatestReport.txt");
@@ -184,11 +188,11 @@ public class MailerClass {
 	}
 
 	/*
-	 * Pre-Conditions: None 
-	 * Post-conditions: > build the emails body that will
+	 * Pre-Conditions: None Post-conditions: > build the emails body that will
 	 * be attached to the intent
 	 */
-	private String buildEmailBody() {
+	private String buildEmailBody()
+	{
 		String userName = "Logan Dunbar"; // can be retrieved from the DB
 		String s = "";
 		s = s + "Hi there " + userName;
@@ -203,21 +207,20 @@ public class MailerClass {
 		return s;
 	}
 
-	
 	/*
 	 * Pre-Conditions: This is called by the broad coast receiver
-	 * Post-conditions: 
-	 * >  builds the email for auto email
-	 * >  sends the auto email
+	 * Post-conditions: > builds the email for auto email > sends the auto email
 	 */
-	public boolean sendAutoMail(Context c) throws Exception {
+	public boolean sendAutoMail(Context c) throws Exception
+	{
 		String to = "vreid@openboxsoftware.com";
 		String from = "Vincent";
 		String subject = "Manual Location report";
-		String message = buildEmailBody() ;
-		message = message +"\nThis was done by auto mailer";
-		
-		GMailAutoMailer mail = new GMailAutoMailer("hobolicious101@gmail.com","50837123");
+		String message = buildEmailBody();
+		message = message + "\nThis was done by auto mailer";
+
+		GMailAutoMailer mail = new GMailAutoMailer("hobolicious101@gmail.com",
+				"50837123");
 		if (subject != null && subject.length() > 0) {
 			mail.setSubject(subject);
 		} else {
@@ -230,19 +233,17 @@ public class MailerClass {
 		} else {
 			mail.setBody("Message");
 		}
-		
-		//String[] attachements = null ;
+
+		// String[] attachements = null ;
 		mail.setTo(new String[] { to });
 		/*
-		if (attachements != null) {
-			for (String attachement : attachements) {
-				mail.addAttachment(attachement);
-			}
-		}*/
-		//error over here
+		 * if (attachements != null) { for (String attachement : attachements) {
+		 * mail.addAttachment(attachement); } }
+		 */
+		// error over here
 		finalBuildEmailReport();
-		mail.addAttachment("LatestReport.txt",c);
-	    
+		mail.addAttachment("LatestReport.txt", c);
+
 		return mail.send();
 	}
 

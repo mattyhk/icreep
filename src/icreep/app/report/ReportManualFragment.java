@@ -13,12 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import icreep.app.R;
 
-
-public class ReportManualFragment extends Fragment {
+public class ReportManualFragment extends Fragment
+{
 
 	Button sendreport;
 	File outFile = null;
-	
 
 	/*
 	 * Pre-Conditions: A bundle in case we need a saved state if we switch
@@ -31,17 +30,21 @@ public class ReportManualFragment extends Fragment {
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		//float correctTextpixel = 32 * getResources().getDisplayMetrics().density;
+			Bundle savedInstanceState)
+	{
+		// float correctTextpixel = 32 *
+		// getResources().getDisplayMetrics().density;
 		View v = inflater.inflate(R.layout.fragment_reports_manual, container,
 				false);
 		sendreport = (Button) v.findViewById(R.id.sendReportButton);
-		//sendreport.setTextSize(correctTextpixel);
+		// sendreport.setTextSize(correctTextpixel);
 
-		sendreport.setOnClickListener(new OnClickListener() {
+		sendreport.setOnClickListener(new OnClickListener()
+		{
 
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				// TODO Auto-generated method stub
 				// this will call the method for the manual mailer
 				// i will just use the embedded two options for mailing, mail or
@@ -56,41 +59,45 @@ public class ReportManualFragment extends Fragment {
 
 		return v;
 	}
-	
-	
 
 	@Override
-	public void onStart() {
+	public void onStart()
+	{
 		super.onStart();
 		Log.d("onStart", "onStart");
 	}
 
 	@Override
-	public void onResume() {
+	public void onResume()
+	{
 		super.onResume();
 		Log.d("onResume", "onResume");
 	}
 
 	@Override
-	public void onPause() {
+	public void onPause()
+	{
 		super.onPause();
 		Log.d("onPause", "onPause");
 	}
 
 	@Override
-	public void onStop() {
+	public void onStop()
+	{
 		super.onStop();
 		Log.d("vince", "onStop");
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onDestroy()
+	{
 		super.onDestroy();
 		Log.d("vince", "onDestroy");
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle out) {
+	public void onSaveInstanceState(Bundle out)
+	{
 		super.onSaveInstanceState(out);
 
 	}
