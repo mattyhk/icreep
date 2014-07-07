@@ -51,7 +51,8 @@ public class MailerClass {
 	}
 
 	/*
-	 * Pre-Conditions: None Post-conditions: > Build the report using string
+	 * Pre-Conditions: None 
+	 * Post-conditions: > Build the report using string
 	 * handling > Create a fully formatted text file to attach to the email
 	 */
 	private void finalBuildEmailReport() {
@@ -180,7 +181,8 @@ public class MailerClass {
 	}
 
 	/*
-	 * Pre-Conditions: None Post-conditions: > build the emails body that will
+	 * Pre-Conditions: None 
+	 * Post-conditions: > build the emails body that will
 	 * be attached to the intent
 	 */
 	private String buildEmailBody() {

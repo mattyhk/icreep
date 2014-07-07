@@ -147,7 +147,7 @@ public class ReportAutoFragment extends Fragment {
 					int storehour = tp.getCurrentHour();
 					int storeminute = tp.getCurrentMinute();
 					writeToDB(storehour, storeminute);
-					addAlarm(storehour, storeminute);
+					addAlarm(storehour, storeminute); //thisi is for testing purposes
 					boolean checkerIfEmailed = false ;
 					save.setEnabled(false);
 					}else
@@ -184,6 +184,12 @@ public class ReportAutoFragment extends Fragment {
 	    	return v ;
 	    }	
 	    
+	    
+	    /* Pre-Conditions: a hour and minute for the auto alarm
+	 	*  Post-conditions: 
+	 	*  > This will add the alarm for the auto mailer
+	 	*  > Will be used for adding the alarm when the app starts up...
+	 	*/ 
 	    public void addAlarm(int hour, int min)
     	{
 	    	if (checkerIfEmailed == false)
