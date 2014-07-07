@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/report"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background = "@color/darkGreyForBackgrounds" 
+    >
+    
+    <LinearLayout
+        android:id = "@+id/report_layout_minor"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp" 
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp" >
+            
+            <TextView
+		        android:id="@+id/textViewMain"
+		        android:layout_width="wrap_content"
+		        android:layout_height= "wrap_content"
+		        android:text="@string/report"
+		        android:gravity="left"
+		        android:textColor="@color/lightGreenForLabels"
+                android:textSize="@dimen/heading_text_size_3.7in"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin" />
+            
+            <TextView
+		        android:id="@+id/userDescript"
+		        android:layout_width="wrap_content"
+		        android:layout_height= "wrap_content"
+		        android:text="@string/user_position"
+		        android:gravity="left"
+		        android:textColor="@color/whiteColor"
+                android:textSize="@dimen/heading_text_size_3.7in"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin"/>
+            
+        </LinearLayout>
+
+		<ImageButton
+	        android:id="@+id/home_button_report"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:background="@drawable/home"
+	        android:contentDescription="@string/home" 
+	        android:layout_gravity="right" />
+        
+    </LinearLayout>
+	
+	<LinearLayout 
+	    android:id = "@+id/llforbuttonsinreport"
+	    android:layout_width="fill_parent"
+        android:layout_height= "wrap_content"
+		android:orientation="horizontal"
+	        
+	    >
+
+		<Button
+		    android:id="@+id/autoButton"
+		    style="?android:attr/borderlessButtonStyle"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="2dp"
+		    android:layout_marginRight="2dp"
+		    android:layout_marginTop="@dimen/top_margin"
+		    android:layout_weight="1"
+		    android:background="@color/lightGreenForLabels"
+		    android:fontFamily="courier new"
+		    android:text="@string/autoButtonText"
+		    android:textSize="@dimen/heading_text_size_3.7in" />
+
+	    <Button
+	        android:id="@+id/manualButton"
+	        style="?android:attr/borderlessButtonStyle"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="2dp"
+	        android:layout_marginTop="@dimen/top_margin"
+	        android:layout_weight="1"
+	        android:fontFamily="courier new"
+	        android:text="@string/manualButtonText" 
+	        android:background = "@color/greyForBackrounds"	
+	        android:textSize="@dimen/heading_text_size_3.7in"/>
+	    
+	    </LinearLayout>
+	    
+	
+	
+	
+	
+
+
+	
+	
+</LinearLayout>
