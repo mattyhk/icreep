@@ -93,7 +93,13 @@ public class MailerClass
 //		list.add(tp7);
 
 		// This will be the array list that vinny's code generates
-		list = adapt.getTimePlaces();		
+		list = adapt.getTimePlaces();
+		if (list == null)
+		{
+			Log.e("vince", "no activity");
+			s = s + "\nNo Activity";
+			list = new ArrayList<TimePlace>();
+		}
 		Sorting sorter = new Sorting();
 		list = sorter.InsertionSort(list);
 
@@ -204,8 +210,17 @@ public class MailerClass
 	private String buildEmailBody()
 	{		
 		String needed = adapt.getUserDetails();
-		String[] user = needed.split(":");
-		String userName = user[0]; // can be retrieved from the DB
+		String[] user = null ;
+		if (needed == null)
+		{
+			needed = "no user available";
+		} else
+		{
+			user = needed.split(":");	
+			needed = user[0];
+		}
+		
+		String userName = needed; // can be retrieved from the DB
 		String s = "";
 		s = s + "Hi there " + userName;
 		s = s + "\n";
