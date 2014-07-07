@@ -98,9 +98,20 @@ public class iCreepDatabaseAdapter {
 		Cursor cursor = db.rawQuery(query, null);
 		
 		if(cursor != null){
-			userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
-			return userDetails;
-		}else{
+			if(cursor.moveToFirst()){
+				if(cursor.getInt(0) != 0){
+					userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
+					return userDetails;
+				}
+				else{
+					return null;
+				}
+			}
+			else{
+				return null;
+			}
+		}
+		else{
 			return null;
 		}
 	}
@@ -123,15 +134,16 @@ public class iCreepDatabaseAdapter {
 				String time = cursor.getString(cursor
 						.getColumnIndex(iCreepHelper.DELIVERY_TIME));
 				return time;
-			} else {
+			} 
+			else {
 				return null;
 			}
-		} else {
+		} 
+		else {
 			return null;
 		}
 	}
 
-	
 	/*
 	 * Pre-Conditions: > Go through database and change/ set report auto-delivery time
 	 * Post-conditions: > update report delivery time in database
