@@ -124,7 +124,7 @@ public class iCreepDatabaseAdapter {
 	 */
 	public void setDeliveryTime(String newTime){
 		
-		String query = "UPDATE Reports (Auto_Delivery, Delivery_Time) SET (1," + newTime + ") WHERE User.User_ID = 1 AND User.User.ID = Reports.User_ID;";
+		String query = "UPDATE Reports SET Auto_Delivery = 1, Delivery_Time = '" + newTime + "' WHERE User.User_ID = 1 AND User.User.ID = Reports.User_ID;";
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.rawQuery(query, null);

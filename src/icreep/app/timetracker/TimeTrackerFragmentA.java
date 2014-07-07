@@ -35,6 +35,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	
 	//list to store timePlaces
 	public ArrayList<TimePlace> timePlaces;
+	
 	FragmentActivity fragActivity;
 	
 	public TimeTrackerFragmentA() {

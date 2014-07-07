@@ -2,6 +2,7 @@ package icreep.app.timetracker;
 
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class TimeTrackerFragmentB extends Fragment {
+@SuppressLint("DefaultLocale") public class TimeTrackerFragmentB extends Fragment {
 	
 	private ProgressBar mProgressBar;
 	private ImageButton home;
@@ -24,7 +25,7 @@ public class TimeTrackerFragmentB extends Fragment {
 		// Required empty public constructor
 	}
 
-	@Override
+	@SuppressLint("DefaultLocale") @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
