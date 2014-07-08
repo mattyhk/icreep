@@ -143,8 +143,7 @@ public class iCreepDatabaseAdapter {
 			if(cursor.moveToFirst()){
 			
 				if (cursor.getColumnIndex(iCreepHelper.AUTO_DELIVERY) == 1) {
-					String time = cursor.getString(cursor
-							.getColumnIndex(iCreepHelper.DELIVERY_TIME));
+					String time = cursor.getString(cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME));
 					return time;
 				} 
 				else {
@@ -181,11 +180,16 @@ public class iCreepDatabaseAdapter {
 	//this function clears the tables in the database
 	public void clearDatabase(){
 		//SQLiteDatabase db = helper.getWritableDatabase();
-		String[] tables = {iCreepHelper.TABLE_NAME1,iCreepHelper.TABLE_NAME2,iCreepHelper.TABLE_NAME3,iCreepHelper.TABLE_NAME4,iCreepHelper.TABLE_NAME5,iCreepHelper.TABLE_NAME6}; 
-		for(int i=0; i< helper.tableCount;i++){
-			db.delete(tables[i], null,null); 
+		try {
+			String[] tables = {iCreepHelper.TABLE_NAME1,iCreepHelper.TABLE_NAME2,iCreepHelper.TABLE_NAME3,iCreepHelper.TABLE_NAME4,iCreepHelper.TABLE_NAME5,iCreepHelper.TABLE_NAME6}; 
+			for(int i=0; i< helper.tableCount;i++){
+				db.delete(tables[i], null,null); 
+			}
+			Message.message(c, "Database cleared");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Message.message(c, ""+e);
 		}
-		Message.message(c, "Database cleared");
 	}
 	
 	//database schema definition and creation 

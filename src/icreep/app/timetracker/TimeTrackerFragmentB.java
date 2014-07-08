@@ -43,7 +43,7 @@ import android.widget.TextView;
 		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
 		
 		//get in-time calculated from TimeTrackerFragmentA	
-		//get this from TimeTracker Activity - was passed to it by fragment A
+		//get it from TimeTracker Activity - was passed to it by fragment A
 		TimeTrackerActivity t = (TimeTrackerActivity)this.getActivity();
 		
 		Double inTimeHolder  = t.getTime();
