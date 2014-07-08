@@ -80,11 +80,9 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         	
         	//now add these TimePlaces into ListView
         	mAdapter.clear();
-        	for(TimePlace tp: timePlaces){
-        		mAdapter.add((ListItem) tp);
-        	}
-        	
-        	//calculate and put Total-Time in Time Tracker Activity
+        	mAdapter.addAll((ListItem) timePlaces);
+
+        	//calculate and put Total-Time in Time Tracker Activity for Activity B
         	totalTime(timePlaces);
         }
         else{
