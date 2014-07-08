@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import icreep.app.R;
-import icreep.app.db.iCreepDatabaseAdapter;
 
 public class IcreepMenu extends Activity {
 	
