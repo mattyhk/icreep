@@ -71,7 +71,7 @@ public class ProfileCreationActivity extends Activity
 			// set default values >>> from DB
 			listDetails= icreepHelper.userDetails();
 		}
-		if ((listDetails == null) && (userID == -1))
+		if ((listDetails == null) && (userID != -1))
 		{							
 			doMessage("No details were obtained about the user, will default to blank details");
 		}
@@ -99,9 +99,9 @@ public class ProfileCreationActivity extends Activity
 				String email = userEmail.getText().toString();
 				// must still add check for profile picture
 				if ((name.equals(listDetails.get(0)) == true)
-					|| (surname.equals(listDetails.get(1)) == true)
-					|| (position.equals(listDetails.get(2)) == true)
-					|| (email.equals(listDetails.get(3)) == true)) 
+					&& (surname.equals(listDetails.get(1)) == true)
+					&& (position.equals(listDetails.get(2)) == true)
+					&& (email.equals(listDetails.get(3)) == true)) 
 				{
 					if (listDetails.get(0).equals("") == true) 
 					{
