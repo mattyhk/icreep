@@ -52,14 +52,14 @@ public class iCreepDatabaseAdapter {
 	 * Pre-Conditions: > For an already existing user to be able update/change his/her details in the database 
 	 * Post-conditions: > update user details in the database and return true or false to check if the update has been successful or not
 	 */
-	public boolean updateUserDetails(String n, String s, String e, String ep, String p){
+	public boolean updateUserDetails(String n, String s, String ep, String e,  String p){
 		
 		ContentValues cVs = new ContentValues();
 		cVs.put(iCreepHelper.NAME, n);
 		cVs.put(iCreepHelper.SURNAME, s);
-		cVs.put(iCreepHelper.EMAIL, e);
 		cVs.put(iCreepHelper.EMPLOYEE_POSITION, ep);
-		cVs.put(iCreepHelper.EMPLOYEE_POSITION, p);
+		cVs.put(iCreepHelper.EMAIL, e);		
+		cVs.put(iCreepHelper.PHOTO, p);
 		
 		return db.update(iCreepHelper.TABLE_NAME5, cVs, iCreepHelper.USER_ID + " =" + 1, null) > 0;
 		
