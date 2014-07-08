@@ -71,7 +71,7 @@ public class ProfileCreationActivity extends Activity
 			// set default values >>> from DB
 			listDetails= icreepHelper.userDetails();
 		}
-		if ((listDetails == null) && (userID == -1))
+		if ((listDetails == null) && (userID != -1))
 		{							
 			doMessage("No details were obtained about the user, will default to blank details");
 		}
@@ -99,9 +99,9 @@ public class ProfileCreationActivity extends Activity
 				String email = userEmail.getText().toString();
 				// must still add check for profile picture
 				if ((name.equals(listDetails.get(0)) == true)
-					|| (surname.equals(listDetails.get(1)) == true)
-					|| (position.equals(listDetails.get(2)) == true)
-					|| (email.equals(listDetails.get(3)) == true)) 
+					&& (surname.equals(listDetails.get(1)) == true)
+					&& (position.equals(listDetails.get(2)) == true)
+					&& (email.equals(listDetails.get(3)) == true)) 
 				{
 					if (listDetails.get(0).equals("") == true) 
 					{
@@ -136,20 +136,25 @@ public class ProfileCreationActivity extends Activity
 	}// onCreate
 	
 	public void doUpdateOfProfile(String name, String surname,
-			String position, String email)
-	{
-		if (icreepHelper.updateUserDetails(name, surname, position, email, "") == false) //will add the correct pp name later
-		{
-			doMessage("The updating of profile was unsuccessful, please contact admin");			
-		}else
-		{
+			String position,String email) {
+		if (isValidEmail(email)) {
+			if (icreepHelper.updateUserDetails(name, surname, position, email,
+					"") == false) // will add the correct pp name later
+			{
+				doMessage("The updating of profile was unsuccessful, please contact admin");
+			} else {
 
-			listDetails.clear();
-			listDetails.add(name);
-			listDetails.add(surname);
-			listDetails.add(position);
-			listDetails.add(email);
-			doMessage("Updating of your proile was successful");
+				listDetails.clear();
+				listDetails.add(name);
+				listDetails.add(surname);
+				listDetails.add(position);
+				listDetails.add(email);
+				doMessage("Updating of your proile was successful");
+			}
+		}else {
+			doMessage("Invalid email address, please use valid email address");
+			doMessage("example: user1@gmail.com");
+			return;
 		}
 	}
 	
@@ -161,7 +166,7 @@ public class ProfileCreationActivity extends Activity
 					photo);
 
 			// check if insertion was successful
-			if (id != -1 || id < 0) {
+			if (id > 0) {
 				doMessage("User details saved");
 				spc.writeNewUserID((int)id);
 				switchToMainMenu();
