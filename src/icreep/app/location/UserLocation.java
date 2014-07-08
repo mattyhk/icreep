@@ -1,80 +1,119 @@
 package icreep.app.location;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A class that handles the current location of the user. The object receives 
  * the results of processing the beacon signals, and updates the current location of the
  * user. The class also handles updating the DB with the required information.
  * 
+ * Current Location has following definitions:
+ * -1 - the current location is outdoors
+ * -2 - the current location is unknown
+ * > 0 - the current location is defined
  * @author mkerr
  * 
  */
 public class UserLocation {
 	
-	private final static int MAX_COUNT = 5;
+	private final static int MAX_ENTRY_COUNT = 5;
+	private final static int MAX_EXIT_COUNT = 5;
+	private final static int UNKNOWN = -2;
 	
 	private int currentLocation;
-	private int currentLocationCount;
+	private int entryCount;
+	private int exitCount;
 	private int currentTempLocation;
-
+	
 	public UserLocation() {
-		this.currentLocation = -1;
-		this.currentLocationCount = 0;
+		this.currentLocation = UNKNOWN;
+		this.entryCount = 0;
+		this.exitCount = 0;
 	}
 	
 	
 	/**
 	 * Updates the current (temporary) location of the user. Depending on the number of times
 	 * the user has been in the same current location, different updates will take place.
-	 * If the user has been in the current temporary location for less than the MAX_COUNT times,
-	 * the currentLocationCount is incremented.
-	 * If the user has been in the current temporary location for more than the MAX_COUNT times,
-	 * it is assumed the user is not changing locations and has been in the same place. The temporary
-	 * and actual current locations are the same.
-	 * If the user has been in the current temporary location for the same amount of times as MAX_COUNT,
-	 * and the temporary location is different than the assumed current location, it is determined
-	 * that the user has changed locations and all necessary updates need to take place.
-	 * @param newLoc - the current location as determined by iBeacon signals
+	 * If the user is not in the same the current location, the exitCount is incremented.
+	 * Else, the exitCount is reset.
+	 * If the new location is the same as the temporary location, the entryCount is incremented.
+	 * Else, the entryCount is reset.
 	 */
 	
-	public void updateTempLocation(int newLoc) {
+	public void updateLocation(int newLoc) {
 		
-		if (newLoc != this.currentTempLocation) {
+		if (newLoc != this.currentLocation) {
+		
+			// Left current location		
+			this.exitCount++;		
+			// update leaving location
+			updateLeftCurrentLocation();
 			
-			this.currentTempLocation = newLoc;
-			this.currentLocationCount = 0;
+			if (newLoc != this.currentTempLocation) {
+				// Moving through locations
+				this.entryCount = 0;				
+			}
 			
+			else {				
+				this.entryCount++;			
+				// Entering a new location
+				updateEnterNewLocation();				
+			}	
 		}
 		
 		else {
 			
-			this.currentLocationCount ++;
+			// Staying (or returned) to current location
 			
-			if (this.currentLocationCount == 5) {
-				if (currentTempLocation != currentLocation) {
-					changedLocation();
-				}
+			this.exitCount = 0;
+			
+			if (newLoc != this.currentTempLocation) {				
+				// Returned to a previous location
+				this.entryCount = 0;			
+			}
+			
+			else {				
+				// Staying in the same location
+				this.entryCount = MAX_ENTRY_COUNT + 1;				
 			}
 		}
+		
+		this.currentTempLocation = newLoc;
 		
 	}
 
 	/**
-	 * The user has been in the current temp location enough times that it is determined
-	 * the user has changed locations. The current location is updated, and the necessary
-	 * DB entries are made.
+	 * The user is no longer in the same current location. 
+	 * Check if the user has left the current location for long enough that the current location 
+	 * has changed, and make the necessary DB updates.
 	 */
-	private void changedLocation() {
+	private void updateLeftCurrentLocation() {
 		
-		this.currentLocation = this.currentTempLocation;
+		if (this.exitCount == MAX_EXIT_COUNT) {
+			
+			// Update the DB - update the last location entry's exit time with the current time
+			// Need to make sure the DB has a last entry
+			
+			// The user's current location has changed
+			this.currentLocation = UNKNOWN;
+			
+		}
+	
+	}
+	
+	/**
+	 * The user is entering a new location.
+	 * If the user has been in the new location for more than the MAX_ENTRY_COUNT,
+	 * the current location is updated and the DB appended.
+	 */
+	private void updateEnterNewLocation() {
 		
-		/*
-		 *  If there is a previous Location DB entry without an exit time, update the time.
-		 *  Insert a new Location DB entry with the current time.
-		 */
+		if (this.entryCount == MAX_ENTRY_COUNT) {
+			
+			this.currentLocation = this.currentTempLocation;
+			
+			// Update the DB - ensure the DB is in order before adding
+		}
 		
 	}
 

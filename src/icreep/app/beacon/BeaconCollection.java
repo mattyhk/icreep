@@ -22,8 +22,9 @@ public class BeaconCollection {
 	private final static int MAJOR = 3;
 	private final static int NUMBEACONS = 15;
 	private final static double DEFAULT_ACCURACY = 30;
+	private final static int OUTDOOR = -1;
 	
-	private int closestBeacon = -1;
+	private int closestBeacon = OUTDOOR;
 	
 	private final List<BeaconModel> myBeacons = new ArrayList<BeaconModel>();
 	
@@ -130,8 +131,8 @@ public class BeaconCollection {
 	 */
 	public int getClosestBeaconMinor() {
 		
-		if (this.closestBeacon == -1) {
-			return -1;
+		if (this.closestBeacon == OUTDOOR) {
+			return OUTDOOR;
 		}
 		
 		else {
