@@ -138,16 +138,17 @@ public class ProfileCreationActivity extends Activity
 	public void doUpdateOfProfile(String name, String surname,
 			String position, String email)
 	{
-		if (icreepHelper.updateUserDetails(name, surname, position, email, "")) //will add the correct pp name later
+		if (icreepHelper.updateUserDetails(name, surname, position, email, "") == false) //will add the correct pp name later
 		{
+			doMessage("The updating of profile was unsuccessful, please contact admin");			
+		}else
+		{
+
 			listDetails.clear();
 			listDetails.add(name);
 			listDetails.add(surname);
 			listDetails.add(position);
 			listDetails.add(email);
-			doMessage("The updating of profile was unsuccessful, please contact admin");			
-		}else
-		{
 			doMessage("Updating of your proile was successful");
 		}
 	}
@@ -162,7 +163,7 @@ public class ProfileCreationActivity extends Activity
 			// check if insertion was successful
 			if (id != -1 || id < 0) {
 				doMessage("User details saved");
-				spc.writeNewUserID((int) id);
+				spc.writeNewUserID((int)id);
 				switchToMainMenu();
 			} else {
 				doMessage("User details not  saved, please contact ADMIN");
