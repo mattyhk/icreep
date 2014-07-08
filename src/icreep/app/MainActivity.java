@@ -22,7 +22,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		sharedPrefControl spc = new sharedPrefControl(this);
+		SharedPreferencesControl spc = new SharedPreferencesControl(this);
 		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
 		adapt.clearDatabase();
 		spc.clearSP(); // testing purposes

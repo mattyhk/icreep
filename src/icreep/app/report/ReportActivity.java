@@ -1,8 +1,8 @@
 package icreep.app.report;
 
 import icreep.app.R;
+import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
-import icreep.app.sharedPrefControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -50,7 +50,7 @@ public class ReportActivity extends FragmentActivity
 
 		adapt = new iCreepDatabaseAdapter(this);
 		
-		sharedPrefControl spc = new sharedPrefControl(this);
+		SharedPreferencesControl spc = new SharedPreferencesControl(this);
 		userID = spc.getUserID();
 		// build user description
 		buildUserDescription();

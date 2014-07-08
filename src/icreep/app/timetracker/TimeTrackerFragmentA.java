@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import icreep.app.Message;
 import icreep.app.R;
+import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
-import icreep.app.sharedPrefControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.location.ListItem;
 import icreep.app.report.Sorting;
@@ -55,7 +55,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
 		//fragmentTitle.setTextSize(correctTextSize);
 		//fragmentUser.setTextSize(correctTextSize);
-		sharedPrefControl spc = new sharedPrefControl(getActivity());
+		SharedPreferencesControl spc = new SharedPreferencesControl(getActivity());
 		userID = spc.getUserID();
 		
 		listView = (ListView) v.findViewById(R.id.time_tracker_listView_main);

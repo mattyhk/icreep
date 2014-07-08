@@ -1,6 +1,6 @@
 package icreep.app.report;
 
-import icreep.app.sharedPrefControl;
+import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 
 import java.io.File;
@@ -34,7 +34,7 @@ public class MailerClass
 	{
 		this.c = c ;
 		adapt = new iCreepDatabaseAdapter(c) ;
-		sharedPrefControl spc = new sharedPrefControl(c);
+		SharedPreferencesControl spc = new SharedPreferencesControl(c);
 		userID = spc.getUserID();
 	}
 	public void sendMail()

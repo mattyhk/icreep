@@ -16,7 +16,7 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 import icreep.app.R;
-import icreep.app.sharedPrefControl;
+import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 
 public class ReportAutoFragment extends Fragment
@@ -67,7 +67,7 @@ public class ReportAutoFragment extends Fragment
 		View v = inflater.inflate(R.layout.fragment_reports_auto, container,
 				false);
 		
-		sharedPrefControl spc = new sharedPrefControl(getActivity());
+		SharedPreferencesControl spc = new SharedPreferencesControl(getActivity());
 		userID = spc.getUserID();
 		
 		save = (Button) v.findViewById(R.id.saveButton);
