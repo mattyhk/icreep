@@ -1,18 +1,12 @@
 package icreep.app;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 import icreep.app.R;
-import icreep.app.db.iCreepDatabaseAdapter;
 
 public class MainActivity extends FragmentActivity {
 	
@@ -21,17 +15,34 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		SharedPreferences sp = getSharedPreferences("iCreepData", Context.MODE_PRIVATE);
+		String user = sp.getString("userID", "");
+		if (user.equals(""))
+		{
+			Intent i = new Intent();
+			i.setClassName(this, "icreep.app.ProfileCreationActivity");
+			//i.putExtra("sharedPreferFileName", "iCreepData"); //seems unnecessary since we are defining the iCreepData File
+			startActivity(i);
+//			SharedPreferences.Editor editor = sp.edit();
+//			editor.putString("userID", "vincent");			
+//			editor.commit();
+//			makeToast("YAY SAVED NEW USER");			
+		}else
+		{
+		Intent i = new Intent();
+		i.setClassName(this, "icreep.app.IcreepMenu");
+		startActivity(i);
+		}
 		// Check for Bluetooth capability
 //		if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
 //			finishActivityWithMessage("Device does not support Bluetooth LE");
 //		}
 		
-		Intent i = new Intent();
-		i.setClassName(this, "icreep.app.ProfileCreationActivity");
-		startActivity(i);
+		
 	}
-
+	
+	
+	
 	@Override
 	protected void onStart() {
 		super.onStart();
