@@ -1,8 +1,6 @@
 package icreep.app.location;
 
 import icreep.app.R;
-import icreep.app.R.id;
-import icreep.app.R.layout;
 
 import java.util.ArrayList;
 

@@ -3,8 +3,6 @@ package icreep.app.location;
 
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
-import icreep.app.R.id;
-import icreep.app.R.layout;
 
 import java.util.ArrayList;
 
@@ -16,11 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -40,13 +35,6 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 			Bundle savedInstanceState) {
 		
 		View v = inflater.inflate(R.layout.fragment_location_b, container, false);
-		
-		TextView fragmentTitle = (TextView) v.findViewById(R.id.location_b_title);
-		TextView fragmentUser = (TextView) v.findViewById(R.id.location_b_user);
-		
-		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
-		//fragmentTitle.setTextSize(correctTextSize);
-		//fragmentUser.setTextSize(correctTextSize);
 		
 		listView = (ListView) v.findViewById(R.id.daily_movement_listView_main);
 		

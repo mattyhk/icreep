@@ -80,10 +80,8 @@ public class ReportActivity extends FragmentActivity
 				// TODO Auto-generated method stub
 				switchtoautofrag();
 				// need to change the style to the button_style_blue
-				manual.setBackgroundColor(getResources().getColor(
-						R.color.greyForBackrounds));
-				auto.setBackgroundColor(getResources().getColor(
-						R.color.lightGreenForLabels));
+				manual.setBackground(getResources().getDrawable(R.drawable.reports_button_off));
+				auto.setBackground(getResources().getDrawable(R.drawable.reports_buttons_on));
 
 			}
 		});
@@ -98,10 +96,8 @@ public class ReportActivity extends FragmentActivity
 				// TODO Auto-generated method stub
 				switchtomanualfrag();
 				// need to change the style to the button_style_blue
-				manual.setBackgroundColor(getResources().getColor(
-						R.color.lightGreenForLabels));
-				auto.setBackgroundColor(getResources().getColor(
-						R.color.greyForBackrounds));
+				manual.setBackground(getResources().getDrawable(R.drawable.reports_buttons_on));
+				auto.setBackground(getResources().getDrawable(R.drawable.reports_button_off));
 
 			}
 		});

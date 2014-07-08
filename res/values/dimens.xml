@@ -7,6 +7,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="top_margin">18dp</dimen>
     <dimen name="left_margin">20dp</dimen>
+    <dimen name="right_margin">10dp</dimen>
     <dimen name="top_margin_save_button">40dp</dimen>
     <dimen name="top_margin_menu_buttons">50dp</dimen>
     <dimen name="top_margin_table">100dp</dimen>

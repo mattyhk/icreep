@@ -75,6 +75,9 @@
                 android:value="icreep.app.MainActivity" />
         </activity>
         
+        <service android:name="icreep.app.beacon.BeaconService" >
+        </service>
+        
         <service android:enabled="true"
 	        android:exported="true"
 	        android:isolatedProcess="false"
