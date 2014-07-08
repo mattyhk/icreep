@@ -4,27 +4,32 @@ import java.util.ArrayList;
 
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 public class ProfileCreationActivity extends Activity
 {
-
+	private static final int IMAGE_PICKER_SELECT = 999;
 	private Button save_button;
 	private ImageButton home_button;
-
+	private ImageButton profilePicture ;
+	private Bitmap originalProfile= null ;
+	private Bitmap profilePic = null ;
 	// Views to extract user details from
 	EditText userName, userSurname, userPosition, userEmail;
 	ArrayList<String> listDetails  = null;
-	// Find way to get photo
-	ImageView userPhoto;
 
 	String photo = "";
 	int userID = -1;
@@ -40,7 +45,19 @@ public class ProfileCreationActivity extends Activity
 
 		// Testing to see if the shared pref exists, thus disable home button
 		// ect.
-
+		profilePicture = (ImageButton) findViewById(R.id.imageView1_profile_picture);
+		profilePicture.setOnClickListener(new OnClickListener()
+		{
+			
+			@Override
+			public void onClick(View v)
+			{
+				// TODO Auto-generated method stub
+		        Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		        startActivityForResult(i, IMAGE_PICKER_SELECT);
+			}
+		});
+		
 		spc = new sharedPrefControl(this);
 		home_button = (ImageButton) findViewById(R.id.home_button_profile);
 		if (spc.sharedPrefTest() == true) {
@@ -82,7 +99,16 @@ public class ProfileCreationActivity extends Activity
 			{
 				listDetails.add("");
 			}
-		}		
+		}else 
+		{
+			userName.setText(listDetails.get(0));
+			userSurname.setText(listDetails.get(1));
+			userPosition.setText(listDetails.get(2));
+			userEmail.setText(listDetails.get(3));
+			BitmapController bmc = new BitmapController();
+			originalProfile = bmc.getbitmapImage(); // might need resizing
+			profilePicture.setImageBitmap(originalProfile);
+		}
 		
 		save_button = (Button) findViewById(R.id.button2_save_user_details);
 		save_button.setOnClickListener(new OnClickListener()
@@ -101,7 +127,8 @@ public class ProfileCreationActivity extends Activity
 				if ((name.equals(listDetails.get(0)) == true)
 					&& (surname.equals(listDetails.get(1)) == true)
 					&& (position.equals(listDetails.get(2)) == true)
-					&& (email.equals(listDetails.get(3)) == true)) 
+					&& (email.equals(listDetails.get(3)) == true)
+					&& (originalProfile == profilePic) == true) 
 				{
 					if (listDetails.get(0).equals("") == true) 
 					{
@@ -139,7 +166,7 @@ public class ProfileCreationActivity extends Activity
 			String position,String email) {
 		if (isValidEmail(email)) {
 			if (icreepHelper.updateUserDetails(name, surname, position, email,
-					"") == false) // will add the correct pp name later
+					"profilePic.png") == false) // will add the correct pp name later
 			{
 				doMessage("The updating of profile was unsuccessful, please contact admin");
 			} else {
@@ -163,11 +190,12 @@ public class ProfileCreationActivity extends Activity
 	{
 		if (isValidEmail(email)) {
 			long id = icreepHelper.enterNewUser(name, surname, position, email,
-					photo);
+					"profilePic.png"); // default profile pic filename
 
 			// check if insertion was successful
 			if (id > 0) {
 				doMessage("User details saved");
+				spc.writeProfilePicName("profilePic.png");
 				spc.writeNewUserID((int)id);
 				switchToMainMenu();
 			} else {
@@ -180,15 +208,6 @@ public class ProfileCreationActivity extends Activity
 			return;
 		}
 	}
-
-	public void uploadImage(View view)
-	{
-
-		// Intent intent = new Intent(this, ProfilePicture.class);
-
-		photo = "";
-
-	}// uploadImage
 
 	// listener to adddUser event - let's add new user to db
 	/*
@@ -241,5 +260,25 @@ public class ProfileCreationActivity extends Activity
 		Intent i = new Intent();
 		i.setClassName(this, "icreep.app.IcreepMenu");
 		startActivity(i);
-	}
+	}	
+	
+	// need to do some test to defensive code against failed attempts at selecting a picture
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == IMAGE_PICKER_SELECT  && resultCode == Activity.RESULT_OK) {
+            Bitmap bitmap = getBitmapFromCameraData(data, this);
+            profilePicture.setImageBitmap(bitmap);
+            profilePic = bitmap ;
+        }
+    }
+	
+	private static Bitmap getBitmapFromCameraData(Intent data, Context context){
+        Uri selectedImage = data.getData();
+        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+        cursor.moveToFirst();
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        String picturePath = cursor.getString(columnIndex);
+        cursor.close();
+        return BitmapFactory.decodeFile(picturePath);
+    }
 }

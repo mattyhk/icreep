@@ -30,6 +30,23 @@ public class sharedPrefControl
 		return user ;
 	}
 	
+	public boolean sharedProfilePicTest()
+	{
+		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
+		String user = sp.getString("profilePic", "");
+		if (user.equals(""))
+		{
+			return false ;
+		}else return true ;
+	}
+	
+	public String getProfilePicFilename()
+	{
+		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
+		String user = sp.getString("profilePic", "");
+		return user ;
+	}
+	
 	public void writeNewUserID(int userID)
 	{
 		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
@@ -37,5 +54,15 @@ public class sharedPrefControl
 		edit.putInt("userID", userID);
 		edit.commit();
 	}
+	
+	public void writeProfilePicName(String profilePicName)
+	{
+		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
+		SharedPreferences.Editor edit = sp.edit();
+		edit.putString("profilePic", profilePicName);
+		edit.commit();
+	}
+	
+	
 	
 }

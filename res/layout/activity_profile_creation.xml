@@ -118,7 +118,6 @@
         android:background="@color/greyForBackrounds"
         android:clickable="true"
         android:contentDescription="@string/content_descrip"
-        android:onClick="uploadImage"
         android:src="@drawable/profile_pic_icon"
         android:layout_marginTop="@dimen/top_margin"
         android:layout_marginLeft="@dimen/left_margin" />
