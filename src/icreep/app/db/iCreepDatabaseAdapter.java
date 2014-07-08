@@ -127,6 +127,40 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	/*
+	 * Pre-Conditions: > Go through database and retrieve user name, surname, email and position
+	 * Post-conditions: > Return user details in arrayList format
+	 */
+	public ArrayList<String> userDetails(){
+		ArrayList<String> ud = new ArrayList<String>();
+		
+		String query = "SELECT * FROM User WHERE User.User_ID = 1";
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if(cursor != null){
+			if(cursor.moveToFirst()){
+				if(cursor.getInt(0) != 0){
+					
+					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME))));
+					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME))));
+					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.EMAIL))));
+					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION))));
+					
+					return ud;
+				}
+				else{
+					return null;
+				}
+			}
+			else{
+				return null;
+			}
+		}
+		else{
+			return null;
+		}
+	}
+	
+	/*
 	 * Pre-Conditions: > Go through database and retrieve user's report auto-delivery time
 	 * Post-conditions: > Return time in string format: "13:25" or null
 	 */
