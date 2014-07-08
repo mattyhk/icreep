@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 import icreep.app.R;
+import icreep.app.db.iCreepDatabaseAdapter;
 
 public class MainActivity extends FragmentActivity {
 	
@@ -15,9 +16,11 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		SharedPreferences sp = getSharedPreferences("iCreepData", Context.MODE_PRIVATE);
-		String user = sp.getString("userID", "");
-		if (user.equals(""))
+		sharedPrefControl spc = new sharedPrefControl(this);
+		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
+		adapt.clearDatabase();
+		spc.clearSP(); // testing purposes
+		if (spc.sharedPrefTest()==true)
 		{
 			Intent i = new Intent();
 			i.setClassName(this, "icreep.app.ProfileCreationActivity");

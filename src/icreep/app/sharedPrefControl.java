@@ -17,10 +17,8 @@ public class sharedPrefControl
 	{
 		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
 		int user = sp.getInt("userID", -1);
-		if (user == -1)
-		{
-			return false ;
-		}else return true ;
+		boolean tc = (user == -1);
+		return tc ;
 	}
 	
 	public int getUserID()
@@ -62,6 +60,15 @@ public class sharedPrefControl
 		edit.putString("profilePic", profilePicName);
 		edit.commit();
 	}
+	
+	public void clearSP()
+	{
+		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
+		SharedPreferences.Editor edit = sp.edit();
+		edit.clear();
+		edit.commit();
+	}
+	
 	
 	
 	

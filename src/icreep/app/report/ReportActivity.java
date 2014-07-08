@@ -2,6 +2,7 @@ package icreep.app.report;
 
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
+import icreep.app.sharedPrefControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class ReportActivity extends FragmentActivity
 	ImageButton home;
 	boolean automated = true;
 	iCreepDatabaseAdapter adapt = null;
-
+	int userID = -1;
 	/*
 	 * Pre-Conditions: A bundle in case we need a saved state if we switch
 	 * screens and want to keep old information The trigger is that you have
@@ -48,7 +49,9 @@ public class ReportActivity extends FragmentActivity
 		home = (ImageButton) findViewById(R.id.home_button_report);
 
 		adapt = new iCreepDatabaseAdapter(this);
-
+		
+		sharedPrefControl spc = new sharedPrefControl(this);
+		userID = spc.getUserID();
 		// build user description
 		buildUserDescription();
 		// TextView reports = (TextView) findViewById(R.id.textViewMain);
@@ -145,7 +148,7 @@ public class ReportActivity extends FragmentActivity
 	public void buildUserDescription()
 	{
 		TextView userDescrip = (TextView) findViewById(R.id.userDescript);
-		String needed = adapt.getUserDetails();
+		String needed = adapt.getUserDetails(userID);
 		if (needed != null) {
 			userDescrip.setText(needed);
 		}else 

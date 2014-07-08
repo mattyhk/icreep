@@ -38,7 +38,7 @@ public class iCreepDatabaseAdapter {
 		newUser.put(iCreepHelper.EMPLOYEE_POSITION, position);
 		newUser.put(iCreepHelper.EMAIL, email);
 		//for the time being let the photo be empty string
-		photo = "";
+		
 		newUser.put(iCreepHelper.PHOTO, photo);
 		
 		//now insert record into DB User table
@@ -52,7 +52,7 @@ public class iCreepDatabaseAdapter {
 	 * Pre-Conditions: > For an already existing user to be able update/change his/her details in the database 
 	 * Post-conditions: > update user details in the database and return true or false to check if the update has been successful or not
 	 */
-	public boolean updateUserDetails(String n, String s, String ep, String e,  String p){
+	public boolean updateUserDetails(String n, String s, String ep, String e,  String p,int UserID){
 		
 		ContentValues cVs = new ContentValues();
 		cVs.put(iCreepHelper.NAME, n);
@@ -61,7 +61,7 @@ public class iCreepDatabaseAdapter {
 		cVs.put(iCreepHelper.EMAIL, e);		
 		cVs.put(iCreepHelper.PHOTO, p);
 		
-		return db.update(iCreepHelper.TABLE_NAME5, cVs, iCreepHelper.USER_ID + " =" + 1, null) > 0;
+		return db.update(iCreepHelper.TABLE_NAME5, cVs, iCreepHelper.USER_ID + " =" + UserID, null) > 0;
 		
 	}
 	
@@ -69,7 +69,7 @@ public class iCreepDatabaseAdapter {
 	 * Pre-Conditions: > Go through database and retrieve user floor, location(description) total time spent.
 	 * Post-conditions: > Return an ArrayList with floors, location(descriptions) and total time spent in location(description) or null
 	 */
-	public ArrayList<TimePlace> getTimePlaces(){
+	public ArrayList<TimePlace> getTimePlaces(int UserID){
 		
 		ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
 		
@@ -78,7 +78,7 @@ public class iCreepDatabaseAdapter {
 		
 		//SQLiteDatabase db = helper.getWritableDatabase();
 		
-		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID = 1 AND User.User_ID = Location.User_ID AND Location.Location_ID = Zone.Location_ID;";
+		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND User.User_ID = Location.User_ID AND Location.Location_ID = Zone.Location_ID;";
 		
 		//String[] toReturn = {iCreepHelper.USER_ID,iCreepHelper.FLOOR, iCreepHelper.DESCRIPTION, iCreepHelper.TIME_ENTERED, iCreepHelper.TIME_LEFT};
 		Cursor cursor = db.rawQuery(query, null);
@@ -118,10 +118,11 @@ public class iCreepDatabaseAdapter {
 	 * Pre-Conditions: > Go through database and retrieve user name and position for Reports
 	 * Post-conditions: > Return user details: "John Doe: Developer" or null
 	 */
-	public String getUserDetails(){
+	public String getUserDetails(int userID){
 		
 		//SQLiteDatabase db = helper.getWritableDatabase();
-		String query = "SELECT * FROM User, Reports WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
+		//String query = "SELECT * FROM User, Reports WHERE User.User_ID ="+userID+" AND User.User_ID = Reports.User_ID;";
+		String query = "SELECT * FROM User WHERE User.User_ID ="+userID+";";
 		Cursor cursor = db.rawQuery(query, null);
 		
 		if(cursor != null){
@@ -147,10 +148,10 @@ public class iCreepDatabaseAdapter {
 	 * Pre-Conditions: > Go through database and retrieve user name, surname, email and position
 	 * Post-conditions: > Return user details in arrayList format
 	 */
-	public ArrayList<String> userDetails(){
+	public ArrayList<String> userDetails(int UserID){
 		ArrayList<String> ud = new ArrayList<String>();
 		
-		String query = "SELECT * FROM User WHERE User.User_ID = 1;";
+		String query = "SELECT * FROM User WHERE User.User_ID = "+UserID+";";
 		Cursor cursor = db.rawQuery(query, null);
 		
 		if(cursor != null){
@@ -159,9 +160,8 @@ public class iCreepDatabaseAdapter {
 					
 					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME))));
 					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME))));
-					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.EMAIL))));
 					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION))));
-					
+					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.EMAIL))));					
 					return ud;
 				}
 				else{
@@ -181,19 +181,22 @@ public class iCreepDatabaseAdapter {
 	 * Pre-Conditions: > Go through database and retrieve user's report auto-delivery time
 	 * Post-conditions: > Return time in string format: "13:25" or null
 	 */
-	public String getReportTime(){
+	public String getReportTime(int userID){
 		// SELECT Delivery_Time FROM Reports, User WHERE User.User_ID =
 		// Reports.User_ID AND Auto_Delivery = true;
 
 		//SQLiteDatabase db = helper.getWritableDatabase();
 
-		String query = "SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
+		String query = "SELECT Reports.Delivery_Time,Reports.Auto_Delivery FROM Reports, User WHERE User.User_ID ="+userID+" AND User.User_ID = Reports.User_ID;";
 		Cursor cursor = db.rawQuery(query, null);
 
 		if (cursor != null) {
 			if(cursor.moveToFirst()){
 			
-				if (cursor.getColumnIndex(iCreepHelper.AUTO_DELIVERY) == 1) {
+				int index = cursor.getColumnIndex("Auto_Delivery");
+				int index2 = cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME);
+				int val = cursor.getInt(index);
+				if (val== 1) {
 					String time = cursor.getString(cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME));
 					return time;
 				} 
@@ -214,23 +217,64 @@ public class iCreepDatabaseAdapter {
 	 * Pre-Conditions: > Go through database and change/ set report auto-delivery time
 	 * Post-conditions: > update report delivery time in database
 	 */
-	public void setDeliveryTime(String newTime){
+	public boolean updateDeliveryTime(String newTime,int userID,boolean in){
 		
-		String query = "UPDATE Reports SET Auto_Delivery = 1, Delivery_Time = '" + newTime + "' WHERE User.User_ID = 1 AND User.User.ID = Reports.User_ID;";
+		int forDelivery = 0 ;
+		if (in == true)
+		{
+			forDelivery = 1;
+		}
 		
-		//SQLiteDatabase db = helper.getWritableDatabase();
+		//String query = "UPDATE Reports SET Auto_Delivery = "+forDelivery+", Delivery_Time = '" + newTime + "' WHERE User.User_ID ="+userID+" AND User.User_ID = Reports.User_ID;";
+		ContentValues cVs = new ContentValues();
+		cVs.put(iCreepHelper.AUTO_DELIVERY, forDelivery);
+		cVs.put(iCreepHelper.DELIVERY_TIME, newTime);
+		cVs.put(iCreepHelper.USER_ID, userID);
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
+			String[] args = {""+userID};
+			db.update(iCreepHelper.TABLE_NAME6,cVs,iCreepHelper.USER_ID + "=?",args);
+			return true ;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Message.message(c, "Report Delievery Time update unsuccessful");
+			return false ;
+		}	
+	}
+	
+	public boolean addDeliveryTime(String newTime, int userID)
+	{
+
+		/*String query = "UPDATE Reports SET Auto_Delivery = 1, Delivery_Time = '"
+				+ newTime
+				+ "' WHERE User.User_ID ="
+				+ userID
+				+ " AND User.User.ID = Reports.User_ID;";
+*/
+		ContentValues cVs = new ContentValues();
+		cVs.put(iCreepHelper.AUTO_DELIVERY, 1);
+		cVs.put(iCreepHelper.DELIVERY_TIME, newTime);
+		cVs.put(iCreepHelper.USER_ID, userID);
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		return db.insert(iCreepHelper.TABLE_NAME6,null, cVs) > 0;
+		
+		/*try {
 			db.execSQL(query);
 			Message.message(c, "Report Delivery Time updated");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Message.message(c, "Report Delievery Time update unsuccessful");;
-		}	
+			Message.message(c, "Report Delievery Time update unsuccessful");
+			;
+		*/
 	}
+	
 	
 	//this function clears the tables in the database
 	public void clearDatabase(){
-		//SQLiteDatabase db = helper.getWritableDatabase();
+		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
 			String[] tables = {iCreepHelper.TABLE_NAME1,iCreepHelper.TABLE_NAME2,iCreepHelper.TABLE_NAME3,iCreepHelper.TABLE_NAME4,iCreepHelper.TABLE_NAME5,iCreepHelper.TABLE_NAME6}; 
 			for(int i=0; i< helper.tableCount;i++){

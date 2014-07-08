@@ -3,6 +3,7 @@ package icreep.app.report;
 import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 import icreep.app.R;
+import icreep.app.sharedPrefControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 
 public class ReportAutoFragment extends Fragment
@@ -29,7 +31,7 @@ public class ReportAutoFragment extends Fragment
 	boolean checkerIfEmailed = false;
 	AlarmControlClass acc = new AlarmControlClass();
 	iCreepDatabaseAdapter adapt = null;
-
+	int userID = -1;
 	// the following is how you get your text pixels to the correct size
 	// depending on the screen
 	// 16*getResources().getDisplayMetrics().density
@@ -64,7 +66,10 @@ public class ReportAutoFragment extends Fragment
 		adapt = new iCreepDatabaseAdapter(getActivity());
 		View v = inflater.inflate(R.layout.fragment_reports_auto, container,
 				false);
-
+		
+		sharedPrefControl spc = new sharedPrefControl(getActivity());
+		userID = spc.getUserID();
+		
 		save = (Button) v.findViewById(R.id.saveButton);
 
 		// the switched will default to not checked
@@ -215,7 +220,7 @@ public class ReportAutoFragment extends Fragment
 		// if there is a auto time
 		// isAuto = true ;
 
-		String valueFromAdapt = adapt.getReportTime(); // this will equal to
+		String valueFromAdapt = adapt.getReportTime(userID); // this will equal to
 														// something lie
 														// adapt.dasdasda
 		if (valueFromAdapt != null) // means auto is on
@@ -224,7 +229,7 @@ public class ReportAutoFragment extends Fragment
 			String[] times = valueFromAdapt.split(":");
 			hour = Integer.parseInt(times[0]);
 			min = Integer.parseInt(times[1]);
-			switched.setEnabled(true);
+			switched.setChecked(true);
 		}
 		// reason for not have a else is because of default values set as global
 		// variables
@@ -241,17 +246,39 @@ public class ReportAutoFragment extends Fragment
 	private void updateTheTableForAutoMail(int stoh, int stom)
 	{
 		boolean newAuto = switched.isChecked();
-		String newTime = "" + stoh + ":" + stom;
+		
+		String newTime = "" + stoh + ":" ;
+		String needed = "" + stom ;
+		if (needed.length() == 1 )
+		{
+			newTime = newTime + "0"+stom ;
+		}else
+		{
+			newTime = newTime + stom ;
+		}
 		// call the db update
-		if (adapt.getReportTime() != null) {
-			adapt.setDeliveryTime(newTime);
-			hasAuto = newAuto;
-			if (newAuto == true) {
-				hour = stoh;
+		if (adapt.getReportTime(userID) != null) {
+			if (adapt.updateDeliveryTime(newTime, userID, newAuto) == true) {
+				hasAuto = newAuto;
+				if (newAuto == true) {
+					hour = stoh;
+					min = stom;
+					icreep.app.Message.message(getActivity(), "Update was successful");
+				} else {
+					hour = -1;
+					min = -1;
+				}
+			}
+		} else {
+			if ( adapt.addDeliveryTime(newTime, userID) == true)
+			{
+				icreep.app.Message.message(getActivity(),"The the insert was successful");
+				hasAuto = true ;
+				hour = stoh; 
 				min = stom;
-			} else {
-				hour = -1;
-				min = -1;
+			}else
+			{
+				icreep.app.Message.message(getActivity(),"The the insert was unsuccessful");
 			}
 		}
 	}

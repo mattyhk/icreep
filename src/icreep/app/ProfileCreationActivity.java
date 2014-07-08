@@ -18,13 +18,14 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class ProfileCreationActivity extends Activity
 {
 	private static final int IMAGE_PICKER_SELECT = 999;
 	private Button save_button;
 	private ImageButton home_button;
-	private ImageButton profilePicture ;
+	private ImageView profilePicture ;
 	private Bitmap originalProfile= null ;
 	private Bitmap profilePic = null ;
 	// Views to extract user details from
@@ -45,7 +46,7 @@ public class ProfileCreationActivity extends Activity
 
 		// Testing to see if the shared pref exists, thus disable home button
 		// ect.
-		profilePicture = (ImageButton) findViewById(R.id.imageView1_profile_picture);
+		profilePicture = (ImageView) findViewById(R.id.imageView1_profile_picture);
 		profilePicture.setOnClickListener(new OnClickListener()
 		{
 			
@@ -86,7 +87,7 @@ public class ProfileCreationActivity extends Activity
 		
 		if (userID != -1) {
 			// set default values >>> from DB
-			listDetails= icreepHelper.userDetails();
+			listDetails= icreepHelper.userDetails(userID);
 		}
 		if ((listDetails == null) && (userID != -1))
 		{							
@@ -94,7 +95,8 @@ public class ProfileCreationActivity extends Activity
 		}
 		
 		if ((listDetails == null))
-		{							
+		{		
+			listDetails = new ArrayList<String>();
 			for (int i = 0; i < 4; i++) 
 			{
 				listDetails.add("");
@@ -130,22 +132,22 @@ public class ProfileCreationActivity extends Activity
 					&& (email.equals(listDetails.get(3)) == true)
 					&& (originalProfile == profilePic) == true) 
 				{
-					if (listDetails.get(0).equals("") == true) 
-					{
-						doMessage("One of your inputs is still the default blank input, please correct");
-					} else 
-					{
+//					if (listDetails.get(0).equals("") == true) 
+//					{
+//						doMessage("One of your inputs is still the default blank input, please correct");
+//					} else 
+//					{
 						doMessage("You have made no changes, thus you can't save");
-					}
+//					}
 					return;
 				}
-				/*
-				if ((name.equals("") == false) || (surname.equals("") == false)
-						|| (position.equals("") == false)
-						|| (email.equals("") == false)) {
+				
+				if ((name.equals("") == true) || (surname.equals("") == true)
+						|| (position.equals("") == true)
+						|| (email.equals("") == true)) {
 					doMessage("One of your details isn't valid as it's blank");
 					return;
-				}*/
+				}
 
 				// before entering user into DB - can send or validate email
 				// first
@@ -166,7 +168,7 @@ public class ProfileCreationActivity extends Activity
 			String position,String email) {
 		if (isValidEmail(email)) {
 			if (icreepHelper.updateUserDetails(name, surname, position, email,
-					"profilePic.png") == false) // will add the correct pp name later
+					"profilePic.png",userID) == false) // will add the correct pp name later
 			{
 				doMessage("The updating of profile was unsuccessful, please contact admin");
 			} else {

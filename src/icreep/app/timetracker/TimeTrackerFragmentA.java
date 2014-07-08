@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
+import icreep.app.sharedPrefControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.location.ListItem;
 import icreep.app.report.Sorting;
@@ -30,7 +31,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	
 	private TimeTrackerListAdapter mAdapter;
 	private ImageButton home;
-	
+	int userID = -1;
 	iCreepDatabaseAdapter icreepHelper;
 	
 	//list to store timePlaces
@@ -54,6 +55,8 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
 		//fragmentTitle.setTextSize(correctTextSize);
 		//fragmentUser.setTextSize(correctTextSize);
+		sharedPrefControl spc = new sharedPrefControl(getActivity());
+		userID = spc.getUserID();
 		
 		listView = (ListView) v.findViewById(R.id.time_tracker_listView_main);
 		mAdapter = new TimeTrackerListAdapter(getActivity(), items);
@@ -65,11 +68,11 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         icreepHelper = new iCreepDatabaseAdapter(fragActivity);
         
         //get timePlaces (Description, totalTimeSpent, floor)        
-        timePlaces = icreepHelper.getTimePlaces();
+        timePlaces = icreepHelper.getTimePlaces(userID);
                
         if(timePlaces != null){
             //user details: "John Doe: Developer"
-        	String userDetails = icreepHelper.getUserDetails();
+        	String userDetails = icreepHelper.getUserDetails(userID);
         	fragmentUser.setText(userDetails);
             
             TimeTrackerActivity tTA =  (TimeTrackerActivity) this.getActivity();
