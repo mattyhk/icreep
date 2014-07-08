@@ -47,7 +47,7 @@ public class BeaconCollection {
 	 * is the closest. Sets the field to the beacon's index, otherwise sets it to -1 representing
 	 * Out of Office.
 	 */
-	public List<BeaconModel> processIBeacons(Collection<IBeacon> iBeacons) {
+	public void processIBeacons(Collection<IBeacon> iBeacons) {
 			
 		List<IBeacon> iBeaconList = new ArrayList<IBeacon>(iBeacons); 
 		
@@ -104,7 +104,6 @@ public class BeaconCollection {
 		 */
 		setClosestBeacon(closest);
 
-		return myBeacons;
 	}
 	
 	/**************************
