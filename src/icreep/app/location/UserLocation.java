@@ -5,31 +5,82 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A class that handles all of the location tracking functionality required by
- * the application The object should be instantiated each time an activity calls
- * the service that processes the tracking functionality The object checks the
- * greater application object upon creation to determine what the last known
- * zone is
+ * A class that handles the current location of the user. The object receives 
+ * the results of processing the beacon signals, and updates the current location of the
+ * user. The class also handles updating the DB with the required information.
  * 
  * @author mkerr
  * 
  */
 public class UserLocation {
+	
+	private final static int MAX_COUNT = 5;
+	
+	private int currentLocation;
+	private int currentLocationCount;
+	private int currentTempLocation;
 
-	private int currentZone;
-	private static final HashMap<Integer, String> zones = new HashMap<Integer, String>() {
-		{
-			put(0, "Outside");
+	public UserLocation() {
+		this.currentLocation = -1;
+		this.currentLocationCount = 0;
+	}
+	
+	
+	/**
+	 * Updates the current (temporary) location of the user. Depending on the number of times
+	 * the user has been in the same current location, different updates will take place.
+	 * If the user has been in the current temporary location for less than the MAX_COUNT times,
+	 * the currentLocationCount is incremented.
+	 * If the user has been in the current temporary location for more than the MAX_COUNT times,
+	 * it is assumed the user is not changing locations and has been in the same place. The temporary
+	 * and actual current locations are the same.
+	 * If the user has been in the current temporary location for the same amount of times as MAX_COUNT,
+	 * and the temporary location is different than the assumed current location, it is determined
+	 * that the user has changed locations and all necessary updates need to take place.
+	 * @param newLoc - the current location as determined by iBeacon signals
+	 */
+	
+	public void updateTempLocation(int newLoc) {
+		
+		if (newLoc != this.currentTempLocation) {
+			
+			this.currentTempLocation = newLoc;
+			this.currentLocationCount = 0;
+			
 		}
-	};
+		
+		else {
+			
+			this.currentLocationCount ++;
+			
+			if (this.currentLocationCount == 5) {
+				if (currentTempLocation != currentLocation) {
+					changedLocation();
+				}
+			}
+		}
+		
+	}
 
-	public UserLocation(int zone) {
-		currentZone = zone;
+	/**
+	 * The user has been in the current temp location enough times that it is determined
+	 * the user has changed locations. The current location is updated, and the necessary
+	 * DB entries are made.
+	 */
+	private void changedLocation() {
+		
+		this.currentLocation = this.currentTempLocation;
+		
+		/*
+		 *  If there is a previous Location DB entry without an exit time, update the time.
+		 *  Insert a new Location DB entry with the current time.
+		 */
+		
 	}
 
 	/**
 	 * Starts tracking the user's location Starts a Handler to schedule the
-	 * repeating task Checks if a user's zone has not changed for at least some
+	 * repeating task. Checks if a user's zone has not changed for at least some
 	 * minimum number of cycles If the zone has not changed, the user is
 	 * determined to be in that zone Checks if that zone is different from
 	 * currentZone If it is different, the location database is updated to
@@ -47,50 +98,23 @@ public class UserLocation {
 	public void stopTracking() {
 
 	}
-
-	/**
-	 * Determines the current zone of the user as determined by the signals
-	 * given by the iBeacon service
+	
+	/*******************
 	 * 
-	 * @return zone - returns the calculated zone
-	 */
-	private int findCurrentZone() {
-		return 0;
-
+	 * Getters and Setters
+	 * 
+	 ******************/
+	
+	public int getCurrentLocation() {
+		
+		return this.currentLocation;
+		
 	}
-
-	/**
-	 * Queries the Location database to determine which zones the user has
-	 * visited that day
-	 * 
-	 * @return zones - an array of all the zones visited
-	 */
-	public static ArrayList<String> findDailyMovements() {
-		return null;
-
-	}
-
-	/**
-	 * Queries the Location database to determine which zones the user has
-	 * visited that day and for how long. Creates a hash map that contains the
-	 * zone ID as a key and the time spent in that zone as the value
-	 * 
-	 * @return zoneTimes - hash map with the zones and durations
-	 */
-	public static HashMap<Integer, Float> findDailyTimes() {
-		return null;
-
-	}
-
-	/**
-	 * Calculates the amount of time spent out of the office that day The start
-	 * of the day is assumed to be 9:00 am
-	 * 
-	 * @return time - the amount of time spent outside of the office
-	 */
-	public static float calcOutofOfficeTime() {
-		return 0;
-
+	
+	public void setCurrentLocation(int i) {
+		
+		this.currentLocation = i;
+	
 	}
 
 }
