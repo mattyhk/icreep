@@ -22,7 +22,7 @@ public class ProfileCreationActivity extends Activity
 
 	// Views to extract user details from
 	EditText userName, userSurname, userPosition, userEmail;
-	ArrayList<String> listDetails = new ArrayList<String>();
+	ArrayList<String> listDetails  = null;
 	// Find way to get photo
 	ImageView userPhoto;
 
@@ -69,12 +69,21 @@ public class ProfileCreationActivity extends Activity
 		
 		if (userID != -1) {
 			// set default values >>> from DB
-		} else { // this looks to be possibly useless... could re-factor
-			listDetails.add("Enter name");
-			listDetails.add("Enter surname");
-			listDetails.add("Enter position");
-			listDetails.add("Enter email");
+			listDetails= icreepHelper.userDetails();
 		}
+		if ((listDetails == null) && (userID == -1))
+		{							
+			doMessage("No details were obtained about the user, will default to blank details");
+		}
+		
+		if ((listDetails == null))
+		{							
+			for (int i = 0; i < 4; i++) 
+			{
+				listDetails.add("");
+			}
+		}		
+		
 		save_button = (Button) findViewById(R.id.button2_save_user_details);
 		save_button.setOnClickListener(new OnClickListener()
 		{
@@ -89,27 +98,27 @@ public class ProfileCreationActivity extends Activity
 				String position = userPosition.getText().toString();
 				String email = userEmail.getText().toString();
 				// must still add check for profile picture
-				if ((name.equals(listDetails.get(0)) == false)
-					|| (surname.equals(listDetails.get(1)) == false)
-					|| (position.equals(listDetails.get(2)) == false)
-					|| (email.equals(listDetails.get(3)) == false)) 
+				if ((name.equals(listDetails.get(0)) == true)
+					|| (surname.equals(listDetails.get(1)) == true)
+					|| (position.equals(listDetails.get(2)) == true)
+					|| (email.equals(listDetails.get(3)) == true)) 
 				{
-					if (listDetails.get(0).equals("Enter name") == true) 
+					if (listDetails.get(0).equals("") == true) 
 					{
-						doMessage("One of your inputs is still the default input, please correct");
+						doMessage("One of your inputs is still the default blank input, please correct");
 					} else 
 					{
 						doMessage("You have made no changes, thus you can't save");
 					}
 					return;
 				}
-
+				/*
 				if ((name.equals("") == false) || (surname.equals("") == false)
 						|| (position.equals("") == false)
 						|| (email.equals("") == false)) {
 					doMessage("One of your details isn't valid as it's blank");
 					return;
-				}
+				}*/
 
 				// before entering user into DB - can send or validate email
 				// first
@@ -129,7 +138,18 @@ public class ProfileCreationActivity extends Activity
 	public void doUpdateOfProfile(String name, String surname,
 			String position, String email)
 	{
-		//make the db do update
+		if (icreepHelper.updateUserDetails(name, surname, position, email, "")) //will add the correct pp name later
+		{
+			listDetails.clear();
+			listDetails.add(name);
+			listDetails.add(surname);
+			listDetails.add(position);
+			listDetails.add(email);
+			doMessage("The updating of profile was unsuccessful, please contact admin");			
+		}else
+		{
+			doMessage("Updating of your proile was successful");
+		}
 	}
 	
 	public void doNewInsertionOfData(String name, String surname,
@@ -149,7 +169,7 @@ public class ProfileCreationActivity extends Activity
 				return;
 			}
 		} else {
-			doMessage("Invalid email address, please use valid email adress");
+			doMessage("Invalid email address, please use valid email address");
 			doMessage("example: user1@gmail.com");
 			return;
 		}
