@@ -1,5 +1,6 @@
 package icreep.app.beacon;
 
+import icreep.app.ICreepApplication;
 import icreep.app.location.UserLocation;
 
 import java.util.Collection;
@@ -35,6 +36,7 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	private static final Region BEACON_REGION = new Region("regionId", null, MAJOR, null);
 	
 	private IBeaconManager beaconManager;
+	private ICreepApplication mApplication;
 	
 	private BeaconCollection beaconCollection = new BeaconCollection();
 	private UserLocation userLocation = new UserLocation();
@@ -50,7 +52,6 @@ public class BeaconService extends Service implements IBeaconConsumer,
 		
 		@Override
 		public void handleMessage(Message msg) {
-			Log.d("TEST", "On handle message"); 
 			// Initialise the service functions
 			init();
 		}
@@ -59,8 +60,6 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d("TEST", "On start command");
-		
-		Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
 		
 		// Send message to thread handler to initiate new thread for service to run on
 		Message msg = mServiceHandler.obtainMessage();
@@ -72,7 +71,8 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	
 	@Override
 	public void onCreate() {
-		Log.d("TEST", "On create");
+		mApplication = (ICreepApplication) getApplicationContext();
+		userLocation.setCurrentLocation(mApplication.getCurrentLocation());
 		
 		// Start the background thread running the service
 		HandlerThread thread = new HandlerThread("BeaconService", Process.THREAD_PRIORITY_BACKGROUND);
@@ -107,6 +107,7 @@ public class BeaconService extends Service implements IBeaconConsumer,
 			currentLoc = userLocation.getCurrentLocation();
 		}
 		
+		mApplication.setCurrentLocation(currentLoc);
 	}
 	
 	/**

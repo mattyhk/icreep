@@ -1,20 +1,29 @@
 package icreep.app.location;
 
+import icreep.app.ICreepApplication;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class LocationFragmentA extends Fragment {
 	
-	ImageButton home;
+	private ImageButton home;
+	
+	private int INTERVAL = 5000;
+	private Handler mHandler;
+	
+	private ICreepApplication mApplication;
+	
+	private TextView floorTextView;
+	
 	
 	public LocationFragmentA() {
 		// Required empty public constructor
@@ -27,37 +36,31 @@ public class LocationFragmentA extends Fragment {
 		
 		View v = inflater.inflate(R.layout.fragment_location_a, container, false);
 		
-		TextView fragmentTitle = (TextView) v.findViewById(R.id.location_a_title);
-		TextView fragmentUser = (TextView) v.findViewById(R.id.location_a_user);
-		
-		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
-		//fragmentTitle.setTextSize(correctTextSize);
-		//fragmentUser.setTextSize(correctTextSize);
-		
 		home = (ImageButton) v.findViewById(R.id.home_button_location_current);
 		Activity c = getActivity();
 		if (c != null) {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
 		}
 		
+		mHandler = new Handler();
+		mApplication = (ICreepApplication) getActivity().getApplicationContext();
+		floorTextView = (TextView) v.findViewById(R.id.location_a_floor_text_view);
+		
 		return v;
 	}
 	
 	/**
-	 * Returns the current floor of the user
-	 * @return floor
+	 * Sets the map to be displayed as determined by the current zone and floor
 	 */
-	private int getFloor(){
-		return 0;
+	private void updateImage(){
+		int currentLocation = mApplication.getCurrentLocation();
 	}
 	
 	/**
-	 * Sets the map to be displayed as determined by the current zone and floor
-	 * @param floor
-	 * @param currentZone
+	 * Update the current floor displayed
 	 */
-	private void setImage(int floor, int currentZone){
-		
+	private void updateFloor() {
+		floorTextView.setText("Floor " + mApplication.getCurrentFloor());
 	}
 	
 	/**
@@ -67,7 +70,36 @@ public class LocationFragmentA extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		
+		// May need to move this to activity - can call it to run only when tab is selected
+		startRepeatingTask();
 	}
 	
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		
+		// Again may need to move this to activity
+		stopRepeatingTask();
+	}
+	
+	private Runnable mLocChecker = new Runnable() {
+		
+		@Override
+		public void run() {
+			updateImage();
+			updateFloor();
+			mHandler.postDelayed(mLocChecker, INTERVAL);
+		}
+	};
+	
+	private void startRepeatingTask() {
+		mLocChecker.run();
+	}
+	
+	private void stopRepeatingTask() {
+		mLocChecker.run();
+	}
 
 }
