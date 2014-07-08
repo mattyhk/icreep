@@ -30,7 +30,7 @@ public class ProfileCreationActivity extends Activity
 	int userID = -1;
 	// Create db helper object
 	iCreepDatabaseAdapter icreepHelper;
-	sharedPrefControl spc;
+	SharedPreferencesControl spc;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -41,7 +41,7 @@ public class ProfileCreationActivity extends Activity
 		// Testing to see if the shared pref exists, thus disable home button
 		// ect.
 
-		spc = new sharedPrefControl(this);
+		spc = new SharedPreferencesControl(this);
 		home_button = (ImageButton) findViewById(R.id.home_button_profile);
 		if (spc.sharedPrefTest() == true) {
 			home_button.setEnabled(false);

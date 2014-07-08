@@ -3,13 +3,13 @@ package icreep.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class sharedPrefControl
+public class SharedPreferencesControl
 {
 	
 	// might adapt this class to accept many different preference filenames
 	String defaultFileName = "iCreepData"; 
 	Context c = null ;
-	public sharedPrefControl(Context c)
+	public SharedPreferencesControl(Context c)
 	{
 		this.c = c ;
 	}
