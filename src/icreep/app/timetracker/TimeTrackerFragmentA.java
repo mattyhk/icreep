@@ -67,7 +67,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         //get timePlaces (Description, totalTimeSpent, floor)        
         timePlaces = icreepHelper.getTimePlaces();
                
-        if(timePlaces.size() != 0){
+        if(timePlaces != null){
             //user details: "John Doe: Developer"
         	String userDetails = icreepHelper.getUserDetails();
         	fragmentUser.setText(userDetails);
