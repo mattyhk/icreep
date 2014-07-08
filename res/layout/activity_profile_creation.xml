@@ -142,7 +142,6 @@
         android:layout_below="@+id/imageView1_profile_picture"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
-        android:onClick="saveDetails"
         android:text="@string/save_user_details"
         android:layout_marginTop="@dimen/top_margin_save_button"
         android:layout_marginLeft="@dimen/left_margin"  />
