@@ -14,11 +14,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class iCreepDatabaseAdapter {
 	
 	iCreepHelper helper;
+	Context c;
+	SQLiteDatabase db;
 	
 	String userDetails;
 	
 	public iCreepDatabaseAdapter(Context context){
-		helper = new iCreepHelper(context);
+		c = context;
+		helper = new iCreepHelper(c);
+		db = helper.getWritableDatabase();
 	}
 	
 	/*
@@ -38,7 +42,7 @@ public class iCreepDatabaseAdapter {
 		newUser.put(iCreepHelper.PHOTO, photo);
 		
 		//now insert record into DB User table
-		SQLiteDatabase db = helper.getWritableDatabase();
+		//SQLiteDatabase db = helper.getWritableDatabase();
 		long id = db.insert(iCreepHelper.TABLE_NAME5, null, newUser); //id to check if insertion was successful
 		
 		return id;				
@@ -46,7 +50,7 @@ public class iCreepDatabaseAdapter {
 	
 	/*
 	 * Pre-Conditions: > Go through database and retrieve user floor, location(description) total time spent.
-	 * Post-conditions: > Return an ArrayList with floors, location(descriptions) and total time spent in location(description)
+	 * Post-conditions: > Return an ArrayList with floors, location(descriptions) and total time spent in location(description) or null
 	 */
 	public ArrayList<TimePlace> getTimePlaces(){
 		
@@ -55,9 +59,9 @@ public class iCreepDatabaseAdapter {
 		//sql to get all of the user's locations
 		//SELECT User_ID, Floor, Description, Time_Entered, Time_Left FROM User, Zone, Location WHERE User.User_ID = Location.User_ID, Location.User_ID = Zone.Location_ID
 		
-		SQLiteDatabase db = helper.getWritableDatabase();
+		//SQLiteDatabase db = helper.getWritableDatabase();
 		
-		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID = 1 AND User.User_ID = Location.User_ID AND Location.Location_ID = Zone.Location_ID;";
+		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID = 1 AND User.User_ID = Location.User_ID AND Location.Location_ID = Zone.Location_ID";
 		
 		//String[] toReturn = {iCreepHelper.USER_ID,iCreepHelper.FLOOR, iCreepHelper.DESCRIPTION, iCreepHelper.TIME_ENTERED, iCreepHelper.TIME_LEFT};
 		Cursor cursor = db.rawQuery(query, null);
@@ -95,12 +99,12 @@ public class iCreepDatabaseAdapter {
 	
 	/*
 	 * Pre-Conditions: > Go through database and retrieve user name and position for Reports
-	 * Post-conditions: > Return user details: "John Doe: Developer"
+	 * Post-conditions: > Return user details: "John Doe: Developer" or null
 	 */
 	public String getUserDetails(){
 		
-		SQLiteDatabase db = helper.getWritableDatabase();
-		String query = "SELECT * FROM User, Reports WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
+		//SQLiteDatabase db = helper.getWritableDatabase();
+		String query = "SELECT * FROM User, Reports WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID";
 		Cursor cursor = db.rawQuery(query, null);
 		
 		if(cursor != null){
@@ -124,15 +128,15 @@ public class iCreepDatabaseAdapter {
 	
 	/*
 	 * Pre-Conditions: > Go through database and retrieve user's report auto-delivery time
-	 * Post-conditions: > Return time in string format: "13:25"
+	 * Post-conditions: > Return time in string format: "13:25" or null
 	 */
 	public String getReportTime(){
 		// SELECT Delivery_Time FROM Reports, User WHERE User.User_ID =
 		// Reports.User_ID AND Auto_Delivery = true;
 
-		SQLiteDatabase db = helper.getWritableDatabase();
+		//SQLiteDatabase db = helper.getWritableDatabase();
 
-		String query = "SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
+		String query = "SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID";
 		Cursor cursor = db.rawQuery(query, null);
 
 		if (cursor != null) {
@@ -162,20 +166,26 @@ public class iCreepDatabaseAdapter {
 	 */
 	public void setDeliveryTime(String newTime){
 		
-		String query = "UPDATE Reports SET Auto_Delivery = 1, Delivery_Time = '" + newTime + "' WHERE User.User_ID = 1 AND User.User.ID = Reports.User_ID;";
+		String query = "UPDATE Reports SET Auto_Delivery = 1, Delivery_Time = '" + newTime + "' WHERE User.User_ID = 1 AND User.User.ID = Reports.User_ID";
 		
-		SQLiteDatabase db = helper.getWritableDatabase();
-		db.rawQuery(query, null);
-	
+		//SQLiteDatabase db = helper.getWritableDatabase();
+		try {
+			db.execSQL(query);
+			Message.message(c, "Report Delivery Time updated");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Message.message(c, "Report Delievery Time update unsuccessful");;
+		}	
 	}
 	
 	//this function clears the tables in the database
 	public void clearDatabase(){
-		SQLiteDatabase db = helper.getWritableDatabase();
+		//SQLiteDatabase db = helper.getWritableDatabase();
 		String[] tables = {iCreepHelper.TABLE_NAME1,iCreepHelper.TABLE_NAME2,iCreepHelper.TABLE_NAME3,iCreepHelper.TABLE_NAME4,iCreepHelper.TABLE_NAME5,iCreepHelper.TABLE_NAME6}; 
 		for(int i=0; i< helper.tableCount;i++){
 			db.delete(tables[i], null,null); 
 		}
+		Message.message(c, "Database cleared");
 	}
 	
 	//database schema definition and creation 
