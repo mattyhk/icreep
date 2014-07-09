@@ -20,20 +20,29 @@ public class AttempToEmail extends AsyncTask<String, Void, String>
 	 * Post-conditions: > Send auto generated email > if fail, will try again.
 	 * The usual reason for failing is connection time out
 	 */
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(Params[])
+	 */
 	@Override
 	protected String doInBackground(String... params)
 	{
 		// TODO Auto-generated method stub
 		MailerClass mail = new MailerClass(c);
+
+		boolean sent = false ;
 		try {
-			if (mail.sendAutoMail() == true) {
+			sent =mail.sendAutoMail();
+			if (sent == true) {
 				acc.alarmManager.cancel(acc.pendingIntent);
 				Log.e("vince", "THE MAIL WAS SENT YAY");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			if (sent == false)
+			{
 			acc.setAlarm(0, 0, c);
 			acc.sendAutoEmailNow();
+			}
 			e.printStackTrace();
 			Log.e("vince", "Couldn't send, sorry");
 
