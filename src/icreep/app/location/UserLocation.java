@@ -1,13 +1,17 @@
 package icreep.app.location;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
+import icreep.app.report.TimePlace;
 
 
 /**
@@ -34,6 +38,7 @@ public class UserLocation {
 	private int currentTempLocation;
 	private int userID;
 	private long lastLocationID = 0;
+	private Set<TimePlace> visitedZones = new HashSet<TimePlace>();
 	
 	private iCreepDatabaseAdapter db;
 	
@@ -135,8 +140,12 @@ public class UserLocation {
 	 * The user is entering a new location.
 	 * If the user has been in the new location for more than the MAX_ENTRY_COUNT,
 	 * the current location is updated and the DB appended.
+	 * Also, checks if the location has been added to the set of visited locations. If not,
+	 * adds the location.
 	 */
 	private void updateEnterNewLocation() {
+		
+		// Need to implement adding location to the set of visited locations
 		
 		if (this.entryCount == MAX_ENTRY_COUNT) {
 			
@@ -158,6 +167,7 @@ public class UserLocation {
 				else {
 					Log.d("TEST", "New Location was not entered successfully");
 				}
+				
 			}		
 		}
 	}
@@ -186,6 +196,27 @@ public class UserLocation {
 		return formatted;
 	}
 	
+	/**
+	 * If the DB has not been queried that day,
+	 * queries the DB to find all of the locations the User has visited that day.
+	 * Else, has no effect.
+	 * Modifies the set of visited zones.
+	 * @return 
+	 */
+	private void findVisitedZones() {
+
+		this.visitedZones.clear();
+		
+		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
+		
+		if (visited != null) {
+			for (TimePlace tp: visited) {
+				this.visitedZones.add(tp);
+			}
+		}
+
+	}
+	
 	/*******************
 	 * 
 	 * Getters and Setters
@@ -203,5 +234,18 @@ public class UserLocation {
 		this.currentLocation = i;
 	
 	}
+	
+	public Set<TimePlace> getVisitedZones() { 
+		
+		findVisitedZones();
+		
+		return this.visitedZones;
+	}
+	
+	public int getUserID() {
+		return this.userID;
+	}
+	
+	
 
 }
