@@ -152,6 +152,7 @@ public class iCreepDatabaseAdapter {
 		
 		String query = "SELECT * FROM User WHERE User.User_ID = "+UserID+";";
 		
+		SQLiteDatabase db = helper.getWritableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		
 		if(cursor != null){
@@ -195,7 +196,6 @@ public class iCreepDatabaseAdapter {
 			if(cursor.moveToFirst()){
 			
 				int index = cursor.getColumnIndex("Auto_Delivery");
-				int index2 = cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME);
 				int val = cursor.getInt(index);
 				if (val== 1) {
 					String time = cursor.getString(cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME));
@@ -246,13 +246,6 @@ public class iCreepDatabaseAdapter {
 	
 	public boolean addDeliveryTime(String newTime, int userID)
 	{
-
-		/*String query = "UPDATE Reports SET Auto_Delivery = 1, Delivery_Time = '"
-				+ newTime
-				+ "' WHERE User.User_ID ="
-				+ userID
-				+ " AND User.User.ID = Reports.User_ID;";
-*/
 		ContentValues cVs = new ContentValues();
 		cVs.put(iCreepHelper.AUTO_DELIVERY, 1);
 		cVs.put(iCreepHelper.DELIVERY_TIME, newTime);
@@ -261,15 +254,7 @@ public class iCreepDatabaseAdapter {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
 		return db.insert(iCreepHelper.TABLE_NAME6,null, cVs) > 0;
-		
-		/*try {
-			db.execSQL(query);
-			Message.message(c, "Report Delivery Time updated");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			Message.message(c, "Report Delievery Time update unsuccessful");
-			;
-		*/
+
 	}
 	
 	

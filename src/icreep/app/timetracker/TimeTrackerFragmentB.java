@@ -44,8 +44,7 @@ import android.widget.TextView;
 		
 		//get in-time calculated from TimeTrackerFragmentA	
 		//get it from TimeTracker Activity - was passed to it by fragment A
-		TimeTrackerActivity t = (TimeTrackerActivity)this.getActivity();
-		
+		TimeTrackerActivity t = (TimeTrackerActivity)this.getActivity();		
 		Double inTimeHolder  = t.getTime();
 		
 		if(inTimeHolder != 0){

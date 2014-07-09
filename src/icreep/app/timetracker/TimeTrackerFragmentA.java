@@ -89,7 +89,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         	totalTime(timePlaces);
         }
         else{
-        	fragmentUser.setText(null);        	
+        	fragmentUser.setText("Unknown User");        	
         	Message.message(fragActivity, "You haven't been anywhere");
         }
                 
