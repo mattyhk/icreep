@@ -25,7 +25,10 @@ public class MainActivity extends FragmentActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		SharedPreferencesControl spc = new SharedPreferencesControl(this);
+		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
+		adapt.clearDatabase();
+		spc.clearSP(); // testing purposes
 		// Check for Bluetooth capability
 		if (!getPackageManager().hasSystemFeature(
 				PackageManager.FEATURE_BLUETOOTH_LE)) {
