@@ -15,6 +15,10 @@
     <dimen name="top_margin_10in">30dp</dimen>
     <dimen name="top_margin_3.7in">12dp</dimen>
     
+    <!--Profile Picture width and height-->
+    <dimen name="profile_pic_width_7in">125dp</dimen>
+    <dimen name="profile_pic_height_7in">125dp</dimen>
+    
     <!--Text-->
     <dimen name="heading_text_size">20sp</dimen>
     <dimen name="sub_heading_text_size">17sp</dimen>
