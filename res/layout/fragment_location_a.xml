@@ -7,6 +7,7 @@
     tools:context="icreep.app.location.LocationFragmentA" >
 	
     <LinearLayout 
+        android:id="@+id/linearLayoutLocation"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -59,13 +60,14 @@
         android:contentDescription="@string/zone_map"
         android:background="@color/darkGreyForBackgrounds"
         android:gravity="center"
-        android:padding = "25dp" />
+        android:padding = "25dp"
+        android:layout_below="@+id/location_a_floor_text_view"/>
 
     <TextView
         android:id="@+id/location_a_floor_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/location_a_zone_map"
+        android:layout_below="@+id/linearLayoutLocation"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp"
         android:textColor="@color/whiteColor" />
