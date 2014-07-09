@@ -13,95 +13,120 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 import icreep.app.R;
 import icreep.app.db.iCreepDatabaseAdapter;
+import icreep.app.report.AlarmControlClass;
 
-public class MainActivity extends FragmentActivity {
-	
+public class MainActivity extends FragmentActivity
+{
+
 	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
-	
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		SharedPreferencesControl spc = new SharedPreferencesControl(this);
-		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
-		adapt.clearDatabase();
-		spc.clearSP(); // testing purposes
-		if (spc.sharedPrefTest()==true)
-		{
-			Intent i = new Intent();
-			i.setClassName(this, "icreep.app.ProfileCreationActivity");
-			//i.putExtra("sharedPreferFileName", "iCreepData"); //seems unnecessary since we are defining the iCreepData File
-			startActivity(i);
-//			SharedPreferences.Editor editor = sp.edit();
-//			editor.putString("userID", "vincent");			
-//			editor.commit();
-//			makeToast("YAY SAVED NEW USER");			
-		}else
-		{
-		Intent i = new Intent();
-		i.setClassName(this, "icreep.app.IcreepMenu");
-		startActivity(i);
-		}
-		
 		// Check for Bluetooth capability
-		if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+		if (!getPackageManager().hasSystemFeature(
+				PackageManager.FEATURE_BLUETOOTH_LE)) {
 			finishActivityWithMessage("Device does not support Bluetooth LE");
+			SharedPreferencesControl spc = new SharedPreferencesControl(this);
+			iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
+			// adapt.clearDatabase();
+			// spc.clearSP(); // testing purposes
+			if (spc.sharedPrefTest() == true) {
+				String time = "";
+				time = adapt.getReportTime(spc.getUserID());
+				if (time != null) {
+					String[] times = time.split(":");
+					int hour = Integer.parseInt(times[0]);
+					int min = Integer.parseInt(times[1]);
+					AlarmControlClass acc = new AlarmControlClass();
+					acc.setAlarm(hour, min, this);
+					acc.sendAutoEmailRepeat();
+					Message.message(this, "Alarm is set");
+				}
+
+				Intent i = new Intent();
+				i.setClassName(this, "icreep.app.ProfileCreationActivity");
+				// i.putExtra("sharedPreferFileName", "iCreepData"); //seems
+				// unnecessary since we are defining the iCreepData File
+				startActivity(i);
+				// SharedPreferences.Editor editor = sp.edit();
+				// editor.putString("userID", "vincent");
+				// editor.commit();
+				// makeToast("YAY SAVED NEW USER");
+			} else {
+				Intent i = new Intent();
+				i.setClassName(this, "icreep.app.IcreepMenu");
+				startActivity(i);
+			}
+
 		}
 
 	}
 
 	@Override
-	protected void onStart() {
+	protected void onStart()
+	{
 		super.onStart();
 	}
 
 	@Override
-	protected void onResume() {
+	protected void onResume()
+	{
 		super.onResume();
-		
+
 		registerBluetoothReceiver();
-    	
-    	BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    	if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
-    		Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-    		startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
-    	}
+
+		BluetoothAdapter bluetoothAdapter = BluetoothAdapter
+				.getDefaultAdapter();
+		if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+			Intent enableBtIntent = new Intent(
+					BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
+		}
 	}
 
 	@Override
-	protected void onPause() {
+	protected void onPause()
+	{
 		super.onPause();
-		
+
 		unregisterBluetoothReceiver();
 	}
 
 	@Override
-	protected void onStop() {
+	protected void onStop()
+	{
 		super.onStop();
 	}
 
 	@Override
-	protected void onRestart() {
+	protected void onRestart()
+	{
 		super.onRestart();
 	}
 
 	@Override
-	protected void onDestroy() {
+	protected void onDestroy()
+	{
 		super.onDestroy();
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle out) {
+	protected void onSaveInstanceState(Bundle out)
+	{
 		super.onSaveInstanceState(out);
 
 	}
 
 	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+	protected void onRestoreInstanceState(Bundle savedInstanceState)
+	{
 		super.onRestoreInstanceState(savedInstanceState);
 
 	}
-	
+
 	private void finishActivityWithMessage(String message)
 	{
 		// Notify the user of the problem
@@ -111,51 +136,58 @@ public class MainActivity extends FragmentActivity {
 		// End the activity
 		finish();
 	}
-	
+
 	/*********************
 	 * 
-	 * Bluetooth Checker
-	 * Makes Sure the Bluetooth functionality is on
-	 * May need to move it into every activity
+	 * Bluetooth Checker Makes Sure the Bluetooth functionality is on May need
+	 * to move it into every activity
 	 * 
 	 ********************/
-	
+
 	@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	// TODO Auto-generated method stub
-    	super.onActivityResult(requestCode, resultCode, data);
-    	
-    	switch (requestCode) {
-    		case ENABLE_BLUETOOTH_REQUEST:
-    			if (resultCode != Activity.RESULT_OK) {
-    				finishActivityWithMessage("Bluetooth must be on");
-    			}
-    			break;
-    		default:
-    			break;
-    	}
-    }
-	
-	private void registerBluetoothReceiver() {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (requestCode)
+		{
+			case ENABLE_BLUETOOTH_REQUEST:
+				if (resultCode != Activity.RESULT_OK) {
+					finishActivityWithMessage("Bluetooth must be on");
+				}
+				break;
+			default:
+				break;
+		}
+	}
+
+	private void registerBluetoothReceiver()
+	{
 		final IntentFilter filter = new IntentFilter();
 		filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-		
+
 		registerReceiver(this.bluetoothChangedReceiver, filter);
 	}
-	
-	private void unregisterBluetoothReceiver() {
+
+	private void unregisterBluetoothReceiver()
+	{
 		unregisterReceiver(this.bluetoothChangedReceiver);
 	}
-	
-	private BroadcastReceiver bluetoothChangedReceiver = new BroadcastReceiver() {
-		
+
+	private BroadcastReceiver bluetoothChangedReceiver = new BroadcastReceiver()
+	{
+
 		@Override
-		public void onReceive(Context context, Intent intent) {
-			
+		public void onReceive(Context context, Intent intent)
+		{
+
 			final String action = intent.getAction();
 			if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
-				final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
-				switch (state) {
+				final int state = intent.getIntExtra(
+						BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+				switch (state)
+				{
 					case BluetoothAdapter.STATE_TURNING_ON:
 						break;
 					case BluetoothAdapter.STATE_ON:
