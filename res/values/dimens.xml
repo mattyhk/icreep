@@ -20,21 +20,36 @@
     <dimen name="sub_heading_text_size">17sp</dimen>
     
       <!--10 Inch Screen-->
+      <dimen name="icreep_logo_10in">150sp</dimen>
       <dimen name="heading_text_size_10in">45sp</dimen>
       <dimen name="in_out_office_labels_10in">35sp</dimen>
       <dimen name="sub_heading_text_size_10in">40sp</dimen>
       <dimen name="menu_button_text_size_10in">48sp</dimen>
+      
+      <!--7 Inch Screen-->
+      <dimen name="icreep_logo_7in">100sp</dimen>
+      <dimen name="heading_text_size_7in">35sp</dimen>
+      <dimen name="in_out_office_labels_7in">28sp</dimen>
+      <dimen name="sub_heading_text_size_7in">30sp</dimen>
+      <dimen name="menu_button_text_size_7in">48sp</dimen>
+      
     
       <!--3.7 Inch Screen-->
       <dimen name="heading_text_size_3.7in">16sp</dimen>
       <dimen name="in_out_office_labels_3.7in">35sp</dimen>
       <dimen name="sub_heading_text_size_3.7in">14sp</dimen>
-      <dimen name="menu_button_text_size_3.7in">48sp</dimen>
       
     <!--Buttons-->
-    <dimen name="menu_button_padding_top_bottom_10in">30dp</dimen>
-    <dimen name="save_button_padding_top_bottom_10in">15dp</dimen>
-    <dimen name="save_button_padding_left_right_10in">15dp</dimen>
-    <dimen name="menu_button_width_10in">400dp</dimen>
+      <!--10 Inch Screen-->
+      <dimen name="menu_button_padding_top_bottom_10in">30dp</dimen>
+      <dimen name="save_button_padding_top_bottom_10in">15dp</dimen>
+      <dimen name="save_button_padding_left_right_10in">15dp</dimen>
+      <dimen name="menu_button_width_10in">400dp</dimen>
+    
+      <!--7 Inch Screen-->
+      <dimen name="menu_button_padding_top_bottom_7in">22dp</dimen>
+      <dimen name="save_button_padding_top_bottom_7in">8dp</dimen>
+      <dimen name="save_button_padding_left_right_7in">8dp</dimen>
+      <dimen name="menu_button_width_7in">375dp</dimen>
 
 </resources>

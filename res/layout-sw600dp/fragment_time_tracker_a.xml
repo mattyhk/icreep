@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkGreyForBackgrounds"
+    android:orientation="vertical"
+    tools:context="icreep.app.timetracker.TimeTrackerFragmentA" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/time_tracker_a_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/left_margin"
+                android:layout_marginTop="@dimen/top_margin"
+                android:text="@string/time_in_locations"
+                android:textColor="@color/lightGreenForLabels"
+                android:textSize="@dimen/heading_text_size_7in" />
+
+            <TextView
+                android:id="@+id/time_tracker_a_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="@dimen/left_margin"
+                android:layout_marginTop="@dimen/top_margin"
+                android:text="@string/user_position"
+                android:textColor="@color/whiteBackground"
+                android:textSize="@dimen/sub_heading_text_size_7in" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/home_button_time_tracker_a"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:background="@drawable/home"
+            android:contentDescription="@string/home" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/time_tracker_listView_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:background="@color/darkGreyForBackgrounds"
+        android:layout_marginLeft="@dimen/left_margin" >
+    </ListView>
+
+</RelativeLayout>
