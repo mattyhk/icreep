@@ -351,11 +351,20 @@ public class iCreepDatabaseAdapter {
 	//function to create Beacons
 	public void createBeacons(){
 		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		ContentValues cV = new ContentValues();
+		cV.put(iCreepHelper.BEACON_ID, -1);
+		cV.put(iCreepHelper.MAJOR, -1);
+		cV.put(iCreepHelper.MINOR, -1);
+		
+		db.insert(iCreepHelper.TABLE_NAME1, null, cV);
+				
 		int beacons = 11;
 		int major = 3;
-				
+		
 		for(int i=1; i<= beacons; i++){
-			SQLiteDatabase db = helper.getWritableDatabase();
+			db = helper.getWritableDatabase();
 			
 			ContentValues cVs = new ContentValues();
 			cVs.put(iCreepHelper.MAJOR, major);
