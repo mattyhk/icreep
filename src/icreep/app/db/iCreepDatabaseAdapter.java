@@ -1,5 +1,7 @@
 package icreep.app.db;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import icreep.app.Message;
@@ -90,7 +92,23 @@ public class iCreepDatabaseAdapter {
 						userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
 						
 						String loc = cursor.getString(cursor.getColumnIndex(iCreepHelper.DESCRIPTION));
-						double totalTime =  cursor.getDouble(cursor.getColumnIndex(iCreepHelper.TIME_LEFT)) - cursor.getDouble(cursor.getColumnIndex(iCreepHelper.TIME_ENTERED));
+						
+						//get times from DB and convert to int
+						String timeL = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));						
+						int hoursTimeLeft = Integer.parseInt((timeL.split(":"))[0]);
+						int minsTimeLeft = Integer.parseInt((timeL.split(":"))[1]);
+						
+						String timeE = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_ENTERED));
+						int hoursTimeEntered = Integer.parseInt((timeE.split(":"))[0]);
+						int minsTimeEntered = Integer.parseInt((timeE.split(":"))[1]);
+														
+						//subtract times;
+						int totalHours = hoursTimeLeft - hoursTimeEntered;						
+						int totalMins = minsTimeLeft - minsTimeEntered;
+						
+						//calculate total time
+						double totalTime = totalHours + totalMins/60;
+								
 						String floor = cursor.getString(cursor.getColumnIndex(iCreepHelper.FLOOR));
 												
 						TimePlace tp = new TimePlace(loc,totalTime,floor);
@@ -339,7 +357,7 @@ public class iCreepDatabaseAdapter {
 		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " INTEGER NOT NULL,"+ MINOR +" INTEGER NOT NULL);";
 		//private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
 		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + BEACON_ID +" INTEGER UNIQUE, " + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " INTEGER NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
-		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " DATETIME NOT NULL, " + TIME_LEFT +" DATETIME NOT NULL, " + LOCATION_DATE+ " DATE NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON DELETE CASCADE ON UPDATE CASCADE);"; 
+		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " VARCHAR(10) NOT NULL, " + TIME_LEFT +" VARCHAR(10) NOT NULL, " + LOCATION_DATE+ " DATE NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON DELETE CASCADE ON UPDATE CASCADE);"; 
 		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME + " VARCHAR(75) NOT NULL," + SURNAME +" VARCHAR(75) NOT NULL, "+ EMAIL +" VARCHAR(100) NOT NULL," + EMPLOYEE_POSITION +" VARCHAR(50) NOT NULL, "+ PHOTO +" VARHCAR(255));";
 		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER UNIQUE, " + AUTO_DELIVERY +" BOOLEAN NOT NULL, " + DELIVERY_TIME +" VARCHAR(10), FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
 
