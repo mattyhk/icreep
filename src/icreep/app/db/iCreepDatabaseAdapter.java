@@ -382,7 +382,7 @@ public class iCreepDatabaseAdapter {
 		
 		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzel Zone","Focus Room","Kabir Zone","S2","S1","Second Floor","Water Zone"};
 		
-		for(int i=1; i<description.length; i++){
+		for(int i=0; i<description.length; i++){
 			db = helper.getWritableDatabase();
 			
 			ContentValues cV = new ContentValues();
