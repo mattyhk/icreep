@@ -366,21 +366,32 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	//create zones and match with the relevant Beacon
-	public void createZoneLocations(){
+	public void createZone(){
 		createBeacons();
-
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		ContentValues cVs = new ContentValues();
+		
+		cVs.put(iCreepHelper.ZONE_ID, -1);
+		cVs.put(iCreepHelper.DESCRIPTION, "Outside");
+		cVs.put(iCreepHelper.FLOOR,"Outside");
+		cVs.put(iCreepHelper.BEACON_ID, -1);
+		
+		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
+		
 		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzel Zone","Focus Room","Kabir Zone","S2","S1","Second Floor","Water Zone"};
 		
-		for(int i=0; i<description.length; i++){
-			SQLiteDatabase db = helper.getWritableDatabase();
+		for(int i=1; i<description.length; i++){
+			db = helper.getWritableDatabase();
 			
-			ContentValues cVs = new ContentValues();
-			cVs.put(iCreepHelper.DESCRIPTION, description[i]);
-			cVs.put(iCreepHelper.FLOOR,"Second Floor");
+			ContentValues cV = new ContentValues();
+			cV.put(iCreepHelper.DESCRIPTION, description[i]);
+			cV.put(iCreepHelper.FLOOR,"Second Floor");
 			int b_ID = i+1;
-			cVs.put(iCreepHelper.BEACON_ID, b_ID);
+			cV.put(iCreepHelper.BEACON_ID, b_ID);
 			
-			db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
+			db.insert(iCreepHelper.TABLE_NAME3, null, cV);
 		}	
 	}
 	
