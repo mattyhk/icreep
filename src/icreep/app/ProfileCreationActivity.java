@@ -18,6 +18,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -226,6 +227,7 @@ public class ProfileCreationActivity extends Activity
 				
 				doMessage("User details saved");				
 				spc.writeNewUserID((int)id);
+				iCreepDatabaseAdapter.createZone();
 				switchToMainMenu();
 			} else {
 				doMessage("User details not  saved, please contact ADMIN");
