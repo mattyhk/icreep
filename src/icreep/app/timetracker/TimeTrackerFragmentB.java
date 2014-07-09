@@ -18,7 +18,7 @@ import android.widget.TextView;
 	private ProgressBar mProgressBar;
 	private ImageButton home;
 	
-	public double inTimeHolder = 0;
+	public double inTimeHolder = 0.0;
 	public double outTimeHolder = 24.0;
 
 	public TimeTrackerFragmentB() {
@@ -58,14 +58,14 @@ import android.widget.TextView;
 			
 			//display in & out of office times
 			//In office hours and minutes
-			String intime = Double.toString(inTimeHolder);		
-			int inHours = Integer.parseInt(intime.substring(0, intime.indexOf(".")));		
+			String[] intime = (Double.toString(inTimeHolder)).split(".");		
+			int inHours = Integer.parseInt(intime[0]);		
 			int inMinutes =  (int) (inTimeHolder - inHours)*60;
 			String inminutes = String.format("%02d",inMinutes);
 					
 			//Out office hours and minutes
-			String outtime = Double.toString(outTimeHolder);
-			int outHours = Integer.parseInt(outtime.substring(0, outtime.indexOf(".")));		
+			String[] outtime = (Double.toString(outTimeHolder)).split(".");
+			int outHours = Integer.parseInt(outtime[0]);		
 			int outMinutes =  (int) (outTimeHolder - outHours)*60;
 			String outminutes = String.format("%02d",outMinutes);
 			

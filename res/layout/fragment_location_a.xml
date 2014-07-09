@@ -59,8 +59,7 @@
         android:layout_marginTop = "@dimen/top_margin"
         android:contentDescription="@string/zone_map"
         android:background="@color/darkGreyForBackgrounds"
-        android:padding = "25dp"
-        android:src="@drawable/second_floor_all_zones" />
+        android:padding = "25dp" />
 
     <TextView
         android:id="@+id/location_a_floor_text_view"
