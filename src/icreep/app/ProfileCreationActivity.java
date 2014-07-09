@@ -86,10 +86,10 @@ public class ProfileCreationActivity extends Activity
 		userPosition = (EditText) findViewById(R.id.editText4_user_position);
 		userEmail = (EditText) findViewById(R.id.editText3_user_email);
 		
-		/*userName.setText("Vincent");
+		userName.setText("Vincent");
 		userSurname.setText("Reid");
 		userPosition.setText("BOSS");
-		userEmail.setText("hobolicious101@gmail.com");*/
+		userEmail.setText("hobolicious101@gmail.com");
 		// rename helper for db management
 		icreepHelper = new iCreepDatabaseAdapter(this);
 		

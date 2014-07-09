@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class iCreepDatabaseAdapter {
 	
-	iCreepHelper helper;
+	static iCreepHelper helper;
 	Context c;
 	
 	String userDetails;
@@ -349,13 +349,22 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	//function to create Beacons
-	public void createBeacons(){
+	public static void createBeacons(){
 		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		ContentValues cV = new ContentValues();
+		cV.put(iCreepHelper.BEACON_ID, -1);
+		cV.put(iCreepHelper.MAJOR, -1);
+		cV.put(iCreepHelper.MINOR, -1);
+		
+		db.insert(iCreepHelper.TABLE_NAME1, null, cV);
+				
 		int beacons = 11;
 		int major = 3;
-				
+		
 		for(int i=1; i<= beacons; i++){
-			SQLiteDatabase db = helper.getWritableDatabase();
+			db = helper.getWritableDatabase();
 			
 			ContentValues cVs = new ContentValues();
 			cVs.put(iCreepHelper.MAJOR, major);
@@ -366,21 +375,32 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	//create zones and match with the relevant Beacon
-	public void createZoneLocations(){
+	public static void createZone(){
 		createBeacons();
-
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		ContentValues cVs = new ContentValues();
+		
+		cVs.put(iCreepHelper.ZONE_ID, -1);
+		cVs.put(iCreepHelper.DESCRIPTION, "Outside");
+		cVs.put(iCreepHelper.FLOOR,"Outside");
+		cVs.put(iCreepHelper.BEACON_ID, -1);
+		
+		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
+		
 		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzel Zone","Focus Room","Kabir Zone","S2","S1","Second Floor","Water Zone"};
 		
 		for(int i=0; i<description.length; i++){
-			SQLiteDatabase db = helper.getWritableDatabase();
+			db = helper.getWritableDatabase();
 			
-			ContentValues cVs = new ContentValues();
-			cVs.put(iCreepHelper.DESCRIPTION, description[i]);
-			cVs.put(iCreepHelper.FLOOR,"Second Floor");
+			ContentValues cV = new ContentValues();
+			cV.put(iCreepHelper.DESCRIPTION, description[i]);
+			cV.put(iCreepHelper.FLOOR,"Second Floor");
 			int b_ID = i+1;
-			cVs.put(iCreepHelper.BEACON_ID, b_ID);
+			cV.put(iCreepHelper.BEACON_ID, b_ID);
 			
-			db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
+			db.insert(iCreepHelper.TABLE_NAME3, null, cV);
 		}	
 	}
 	
@@ -390,7 +410,7 @@ public class iCreepDatabaseAdapter {
 		private static final String DATABASE_NAME = "icreepdatabase";
 		
 		//version changes every time the structure of the db changes
-		private static final int DATABASE_VERSION = 11;
+		private static final int DATABASE_VERSION = 12;
 		
 		//define tables (1..6) in db
 		
@@ -470,7 +490,10 @@ public class iCreepDatabaseAdapter {
 			
 			for(int i=0; i<createTableQueryCount; i++){
 				try {
+					//create tables
 					db.execSQL(createTableQueries[i]);
+					//create beacons and zones
+					iCreepDatabaseAdapter.createZone();
 				} catch (SQLException e) {
 					//display error on toast if appeared
 					Message.message(context, ""+e);

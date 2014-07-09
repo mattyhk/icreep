@@ -26,8 +26,8 @@ public class MainActivity extends FragmentActivity
 		setContentView(R.layout.activity_main);
 		SharedPreferencesControl spc = new SharedPreferencesControl(this);
 		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
-		//adapt.clearDatabase();
-		//spc.clearSP(); // testing purposes
+		adapt.clearDatabase();
+		spc.clearSP(); // testing purposes
 		// Check for Bluetooth capability
 		if (!getPackageManager().hasSystemFeature(
 				PackageManager.FEATURE_BLUETOOTH_LE)) {
@@ -49,13 +49,7 @@ public class MainActivity extends FragmentActivity
 
 			Intent i = new Intent();
 			i.setClassName(this, "icreep.app.ProfileCreationActivity");
-			// i.putExtra("sharedPreferFileName", "iCreepData"); //seems
-			// unnecessary since we are defining the iCreepData File
 			startActivity(i);
-			// SharedPreferences.Editor editor = sp.edit();
-			// editor.putString("userID", "vincent");
-			// editor.commit();
-			// makeToast("YAY SAVED NEW USER");
 		} 
 		
 		else {
