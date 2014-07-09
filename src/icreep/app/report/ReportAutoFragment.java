@@ -70,7 +70,8 @@ public class ReportAutoFragment extends Fragment
 		userID = spc.getUserID();
 		
 		save = (Button) v.findViewById(R.id.saveButton);
-
+		save.setBackground(getResources().getDrawable(R.drawable.button_style_disabled));
+		save.setEnabled(false); // no changes thus button shouldn't be enabled
 		// the switched will default to not checked
 		switched = (Switch) v.findViewById(R.id.switchBar);
 		tp = (TimePicker) v.findViewById(R.id.timePicker);
@@ -80,7 +81,7 @@ public class ReportAutoFragment extends Fragment
 		// need to make the color of switched more visible
 		// switched.setBackgroundColor(getResources().getColor(R.color.whiteBackground));
 
-		save.setEnabled(false); // no changes thus button shouldn't be enabled
+		
 
 		// TextView deli = (TextView) v.findViewById(R.id.Delivery);
 		// TextView deliTime = (TextView)v.findViewById(R.id.DeliveryTime);
@@ -114,16 +115,22 @@ public class ReportAutoFragment extends Fragment
 					// this exact current time
 					if (hasAuto == true) {
 						save.setEnabled(false);
+						save.setBackground(getResources().getDrawable(R.drawable.button_style_disabled));
 					} else
+					{
 						save.setEnabled(true);
+						save.setBackground(getResources().getDrawable(R.drawable.button_style));
+					}
 
 				} else {
 					// tp.setEnabled(false);
 					setTheTimePicker();
 					if (hasAuto == true) {
 						save.setEnabled(true);
+						save.setBackground(getResources().getDrawable(R.drawable.button_style));
 					} else
 						save.setEnabled(false);
+						save.setBackground(getResources().getDrawable(R.drawable.button_style_disabled));
 					// will have to remove the automatic time from the database
 				}
 			}
@@ -155,6 +162,7 @@ public class ReportAutoFragment extends Fragment
 					//addAlarm(storehour, storeminute); // thisi is for testing
 														// purposes
 					save.setEnabled(false);
+					save.setBackground(getResources().getDrawable(R.drawable.button_style_disabled));
 				} else {
 					int storehour = 0;
 					int storeminute = 0;
@@ -181,8 +189,13 @@ public class ReportAutoFragment extends Fragment
 				// TODO Auto-generated method stub
 				if (!((hourOfDay == hour) && (minute == min))) {
 					save.setEnabled(true);
+					save.setBackground(getResources().getDrawable(R.drawable.button_style));
+					
 				} else
+				{
 					save.setEnabled(false);
+					save.setBackground(getResources().getDrawable(R.drawable.button_style_disabled));
+				}
 
 			}
 		});
