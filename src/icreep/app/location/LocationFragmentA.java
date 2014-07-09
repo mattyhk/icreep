@@ -19,6 +19,8 @@ public class LocationFragmentA extends Fragment {
 	
 	private int INTERVAL = 5000;
 	private String FILE_FRAGMENT = "zones_3_";
+	private int UNKNOWN = -2;
+	private int OUTDOORS = -1;
 	
 	private Handler mHandler;
 	
@@ -63,14 +65,14 @@ public class LocationFragmentA extends Fragment {
 		Log.d("TEST", "Updating Image with current location as " + currentLocation);
 		if (currentLocation == -2) {
 			// Location is unknown
-			// drawID = getActivity().getResources()
-//						.getIdentifier("zones_all", "drawable", getActivity().getPackageName());
+			 drawID = getActivity().getResources()
+						.getIdentifier("zones_all", "drawable", getActivity().getPackageName());
 		}
 		
 		else if (currentLocation == -1) {
-			// Location is out of office
-			// drawID = getActivity().getResources()
-//						.getIdentifier("zones_outdoor", "drawable", getActivity().getPackageName());
+//			 Location is out of office
+			 drawID = getActivity().getResources()
+						.getIdentifier("zones_outdoors", "drawable", getActivity().getPackageName());
 		}
 		
 		else {
@@ -88,14 +90,19 @@ public class LocationFragmentA extends Fragment {
 	 * Update the current floor displayed
 	 */
 	private void updateFloor() {
-		Log.d("TEST", "Updating floor with " + mApplication.getCurrentFloor());
-		if (floorTextView != null) {
-			floorTextView.setText("Floor " + mApplication.getCurrentFloor());
+		String floor;
+		
+		if (mApplication.getCurrentLocation() == UNKNOWN) {
+			floor = "";
+		}
+		else if (mApplication.getCurrentLocation() == OUTDOORS) {
+			floor = "Out of Office";
 		}
 		else {
-			Log.d("TEST", "floor text view is null");
+			floor = "Floor " + mApplication.getCurrentFloor();
 		}
 		
+		floorTextView.setText(floor);
 	}
 	
 	/**
