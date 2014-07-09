@@ -357,7 +357,7 @@ public class iCreepDatabaseAdapter {
 		private static final String DATABASE_NAME = "icreepdatabase";
 		
 		//version changes every time the structure of the db changes
-		private static final int DATABASE_VERSION = 9;
+		private static final int DATABASE_VERSION = 10;
 		
 		//define tables (1..6) in db
 		
