@@ -1,7 +1,10 @@
 package icreep.app.location;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -34,6 +37,9 @@ public class UserLocation {
 	private int currentTempLocation;
 	private int userID;
 	private long lastLocationID = 0;
+	private Boolean hasQueriedDatabase = false;
+	private String lastQueriedDate;
+	private Set<Integer> visitedZones = new HashSet<Integer>();
 	
 	private iCreepDatabaseAdapter db;
 	
@@ -42,6 +48,7 @@ public class UserLocation {
 		this.entryCount = 0;
 		this.exitCount = 0;
 		this.db = new iCreepDatabaseAdapter(context);
+		this.lastQueriedDate = getDate();
 		
 		SharedPreferencesControl spc = new SharedPreferencesControl(context);
 		this.userID = spc.getUserID();
@@ -135,8 +142,12 @@ public class UserLocation {
 	 * The user is entering a new location.
 	 * If the user has been in the new location for more than the MAX_ENTRY_COUNT,
 	 * the current location is updated and the DB appended.
+	 * Also, checks if the location has been added to the set of visited locations. If not,
+	 * adds the location.
 	 */
 	private void updateEnterNewLocation() {
+		
+		// Need to implement adding location to the set of visited locations
 		
 		if (this.entryCount == MAX_ENTRY_COUNT) {
 			
@@ -186,6 +197,24 @@ public class UserLocation {
 		return formatted;
 	}
 	
+	/**
+	 * If the DB has not been queried that day,
+	 * queries the DB to find all of the locations the User has visited that day.
+	 * Else, has no effect.
+	 * Modifies the set of visited zones.
+	 */
+	private void findVisitedZones() {
+		
+		if (lastQueriedDate != getDate() || hasQueriedDatabase == false) {
+			// Check database for visited locations
+			
+			this.lastQueriedDate = getDate();
+			this.hasQueriedDatabase = true;
+		}
+		
+
+	}
+	
 	/*******************
 	 * 
 	 * Getters and Setters
@@ -202,6 +231,13 @@ public class UserLocation {
 		
 		this.currentLocation = i;
 	
+	}
+	
+	public Set<Integer> getVisitedZones() { 
+		
+		findVisitedZones();
+		
+		return this.visitedZones;
 	}
 
 }
