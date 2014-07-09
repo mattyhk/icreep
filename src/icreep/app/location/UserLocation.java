@@ -1,35 +1,125 @@
 package icreep.app.location;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * A class that handles all of the location tracking functionality required by
- * the application The object should be instantiated each time an activity calls
- * the service that processes the tracking functionality The object checks the
- * greater application object upon creation to determine what the last known
- * zone is
+ * A class that handles the current location of the user. The object receives 
+ * the results of processing the beacon signals, and updates the current location of the
+ * user. The class also handles updating the DB with the required information.
  * 
+ * Current Location has following definitions:
+ * -1 - the current location is outdoors
+ * -2 - the current location is unknown
+ * > 0 - the current location is defined
  * @author mkerr
  * 
  */
 public class UserLocation {
-
-	private int currentZone;
-	private static final HashMap<Integer, String> zones = new HashMap<Integer, String>() {
-		{
-			put(0, "Outside");
+	
+	private final static int MAX_ENTRY_COUNT = 5;
+	private final static int MAX_EXIT_COUNT = 5;
+	private final static int UNKNOWN = -2;
+	
+	private int currentLocation;
+	private int entryCount;
+	private int exitCount;
+	private int currentTempLocation;
+	
+	public UserLocation() {
+		this.currentLocation = UNKNOWN;
+		this.entryCount = 0;
+		this.exitCount = 0;
+	}
+	
+	
+	/**
+	 * Updates the current (temporary) location of the user. Depending on the number of times
+	 * the user has been in the same current location, different updates will take place.
+	 * If the user is not in the same the current location, the exitCount is incremented.
+	 * Else, the exitCount is reset.
+	 * If the new location is the same as the temporary location, the entryCount is incremented.
+	 * Else, the entryCount is reset.
+	 */
+	
+	public void updateLocation(int newLoc) {
+		
+		if (newLoc != this.currentLocation) {
+		
+			// Left current location		
+			this.exitCount++;		
+			// update leaving location
+			updateLeftCurrentLocation();
+			
+			if (newLoc != this.currentTempLocation) {
+				// Moving through locations
+				this.entryCount = 0;				
+			}
+			
+			else {				
+				this.entryCount++;			
+				// Entering a new location
+				updateEnterNewLocation();				
+			}	
 		}
-	};
+		
+		else {
+			
+			// Staying (or returned) to current location
+			
+			this.exitCount = 0;
+			
+			if (newLoc != this.currentTempLocation) {				
+				// Returned to a previous location
+				this.entryCount = 0;			
+			}
+			
+			else {				
+				// Staying in the same location
+				this.entryCount = MAX_ENTRY_COUNT + 1;				
+			}
+		}
+		
+		this.currentTempLocation = newLoc;
+		
+	}
 
-	public UserLocation(int zone) {
-		currentZone = zone;
+	/**
+	 * The user is no longer in the same current location. 
+	 * Check if the user has left the current location for long enough that the current location 
+	 * has changed, and make the necessary DB updates.
+	 */
+	private void updateLeftCurrentLocation() {
+		
+		if (this.exitCount == MAX_EXIT_COUNT) {
+			
+			// Update the DB - update the last location entry's exit time with the current time
+			// Need to make sure the DB has a last entry
+			
+			// The user's current location has changed
+			this.currentLocation = UNKNOWN;
+			
+		}
+	
+	}
+	
+	/**
+	 * The user is entering a new location.
+	 * If the user has been in the new location for more than the MAX_ENTRY_COUNT,
+	 * the current location is updated and the DB appended.
+	 */
+	private void updateEnterNewLocation() {
+		
+		if (this.entryCount == MAX_ENTRY_COUNT) {
+			
+			this.currentLocation = this.currentTempLocation;
+			
+			// Update the DB - ensure the DB is in order before adding
+		}
+		
 	}
 
 	/**
 	 * Starts tracking the user's location Starts a Handler to schedule the
-	 * repeating task Checks if a user's zone has not changed for at least some
+	 * repeating task. Checks if a user's zone has not changed for at least some
 	 * minimum number of cycles If the zone has not changed, the user is
 	 * determined to be in that zone Checks if that zone is different from
 	 * currentZone If it is different, the location database is updated to
@@ -47,50 +137,23 @@ public class UserLocation {
 	public void stopTracking() {
 
 	}
-
-	/**
-	 * Determines the current zone of the user as determined by the signals
-	 * given by the iBeacon service
+	
+	/*******************
 	 * 
-	 * @return zone - returns the calculated zone
-	 */
-	private int findCurrentZone() {
-		return 0;
-
+	 * Getters and Setters
+	 * 
+	 ******************/
+	
+	public int getCurrentLocation() {
+		
+		return this.currentLocation;
+		
 	}
-
-	/**
-	 * Queries the Location database to determine which zones the user has
-	 * visited that day
-	 * 
-	 * @return zones - an array of all the zones visited
-	 */
-	public static ArrayList<String> findDailyMovements() {
-		return null;
-
-	}
-
-	/**
-	 * Queries the Location database to determine which zones the user has
-	 * visited that day and for how long. Creates a hash map that contains the
-	 * zone ID as a key and the time spent in that zone as the value
-	 * 
-	 * @return zoneTimes - hash map with the zones and durations
-	 */
-	public static HashMap<Integer, Float> findDailyTimes() {
-		return null;
-
-	}
-
-	/**
-	 * Calculates the amount of time spent out of the office that day The start
-	 * of the day is assumed to be 9:00 am
-	 * 
-	 * @return time - the amount of time spent outside of the office
-	 */
-	public static float calcOutofOfficeTime() {
-		return 0;
-
+	
+	public void setCurrentLocation(int i) {
+		
+		this.currentLocation = i;
+	
 	}
 
 }

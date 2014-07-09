@@ -2,13 +2,11 @@ package icreep.app.location;
 
 import icreep.app.R;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
-import android.app.Activity;
 import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.app.FragmentTransaction;
@@ -17,12 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
 public class LocationActivity extends FragmentActivity implements TabListener {
 
@@ -66,45 +59,6 @@ public class LocationActivity extends FragmentActivity implements TabListener {
 
 		actionBar.addTab(tab1);
 		actionBar.addTab(tab2);
-	}
-
-	/**
-	 * Queries the Location object to find which zone the user is currently in
-	 * 
-	 * @param location
-	 *            - the location object
-	 * @return zone - the current zone
-	 */
-	private int getCurrentZone(UserLocation location) {
-		return 0;
-
-	}
-
-	/**
-	 * Updates the displayed map with the current location of the user
-	 */
-	private void updateMap() {
-
-	}
-
-	/**
-	 * Queries the Location object to determine where the user has been that day
-	 * 
-	 * @param location
-	 *            - the location object
-	 * @return zones - an array representing all of the zones the user has
-	 *         visited that day
-	 */
-	private ArrayList<Integer> findDailyMovements(UserLocation location) {
-		return null ;
-	}
-
-	/**
-	 * Updates the table that displays all of the zones the user has been that
-	 * day
-	 */
-	private void updateDailyTable() {
-
 	}
 
 	@Override

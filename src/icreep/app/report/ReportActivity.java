@@ -1,6 +1,7 @@
 package icreep.app.report;
 
 import icreep.app.R;
+import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -24,7 +25,7 @@ public class ReportActivity extends FragmentActivity
 	ImageButton home;
 	boolean automated = true;
 	iCreepDatabaseAdapter adapt = null;
-
+	int userID = -1;
 	/*
 	 * Pre-Conditions: A bundle in case we need a saved state if we switch
 	 * screens and want to keep old information The trigger is that you have
@@ -48,7 +49,9 @@ public class ReportActivity extends FragmentActivity
 		home = (ImageButton) findViewById(R.id.home_button_report);
 
 		adapt = new iCreepDatabaseAdapter(this);
-
+		
+		SharedPreferencesControl spc = new SharedPreferencesControl(this);
+		userID = spc.getUserID();
 		// build user description
 		buildUserDescription();
 		// TextView reports = (TextView) findViewById(R.id.textViewMain);
@@ -77,10 +80,8 @@ public class ReportActivity extends FragmentActivity
 				// TODO Auto-generated method stub
 				switchtoautofrag();
 				// need to change the style to the button_style_blue
-				manual.setBackgroundColor(getResources().getColor(
-						R.color.greyForBackrounds));
-				auto.setBackgroundColor(getResources().getColor(
-						R.color.lightGreenForLabels));
+				manual.setBackground(getResources().getDrawable(R.drawable.reports_button_off));
+				auto.setBackground(getResources().getDrawable(R.drawable.reports_buttons_on));
 
 			}
 		});
@@ -95,10 +96,8 @@ public class ReportActivity extends FragmentActivity
 				// TODO Auto-generated method stub
 				switchtomanualfrag();
 				// need to change the style to the button_style_blue
-				manual.setBackgroundColor(getResources().getColor(
-						R.color.lightGreenForLabels));
-				auto.setBackgroundColor(getResources().getColor(
-						R.color.greyForBackrounds));
+				manual.setBackground(getResources().getDrawable(R.drawable.reports_buttons_on));
+				auto.setBackground(getResources().getDrawable(R.drawable.reports_button_off));
 
 			}
 		});
@@ -145,7 +144,7 @@ public class ReportActivity extends FragmentActivity
 	public void buildUserDescription()
 	{
 		TextView userDescrip = (TextView) findViewById(R.id.userDescript);
-		String needed = adapt.getUserDetails();
+		String needed = adapt.getUserDetails(userID);
 		if (needed != null) {
 			userDescrip.setText(needed);
 		}else 

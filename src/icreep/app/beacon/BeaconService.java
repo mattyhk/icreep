@@ -1,5 +1,8 @@
 package icreep.app.beacon;
 
+import icreep.app.ICreepApplication;
+import icreep.app.location.UserLocation;
+
 import java.util.Collection;
 
 import android.app.Service;
@@ -23,6 +26,8 @@ import com.radiusnetworks.ibeacon.Region;
 public class BeaconService extends Service implements IBeaconConsumer,
 		RangeNotifier {
 	
+	private final static int OUTDOOR = -1;
+	
 	private Looper mServiceLooper;
 	private ServiceHandler mServiceHandler;
 	
@@ -31,6 +36,10 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	private static final Region BEACON_REGION = new Region("regionId", null, MAJOR, null);
 	
 	private IBeaconManager beaconManager;
+	private ICreepApplication mApplication;
+	
+	private BeaconCollection beaconCollection = new BeaconCollection();
+	private UserLocation userLocation = new UserLocation();
 	
 	/*
 	 *  Handles messages from the thread started by the service
@@ -43,8 +52,6 @@ public class BeaconService extends Service implements IBeaconConsumer,
 		
 		@Override
 		public void handleMessage(Message msg) {
-			Log.d("TEST", "On handle message");
-			 
 			// Initialise the service functions
 			init();
 		}
@@ -53,8 +60,6 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d("TEST", "On start command");
-		
-		Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
 		
 		// Send message to thread handler to initiate new thread for service to run on
 		Message msg = mServiceHandler.obtainMessage();
@@ -66,7 +71,8 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	
 	@Override
 	public void onCreate() {
-		Log.d("TEST", "On create");
+		mApplication = (ICreepApplication) getApplicationContext();
+		userLocation.setCurrentLocation(mApplication.getCurrentLocation());
 		
 		// Start the background thread running the service
 		HandlerThread thread = new HandlerThread("BeaconService", Process.THREAD_PRIORITY_BACKGROUND);
@@ -85,26 +91,23 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	/**
 	 *  Function is called when the beacon manager completes a cycle.
 	 *  The iBeacons found in the cycle are passed in.
-	 *  The found iBeacons should be processed and the current location determined
-	 *  If the location has changed, the DB is updated
+	 *  The found iBeacons (if any) are processed and the current location updated.
+	 *  If the location has changed, the DB is updated.
 	 */
 	@Override
 	public void didRangeBeaconsInRegion(Collection<IBeacon> iBeacons,
 			Region region) {
 		
-		// New thread
-		// Probably not necessary
+		int currentLoc = OUTDOOR;
 		
-		Handler handler = new Handler(Looper.getMainLooper());
+		if (iBeacons != null) {
+			beaconCollection.processIBeacons(iBeacons);
+			int newLoc = beaconCollection.getClosestBeaconMinor();
+			userLocation.updateLocation(newLoc);
+			currentLoc = userLocation.getCurrentLocation();
+		}
 		
-		handler.post(new Runnable() {
-			
-			@Override
-			public void run() {
-				Log.d("TEST", "Cycle of ranging");
-			}
-		});
-
+		mApplication.setCurrentLocation(currentLoc);
 	}
 	
 	/**
@@ -115,7 +118,6 @@ public class BeaconService extends Service implements IBeaconConsumer,
 		try {
 			this.beaconManager.startRangingBeaconsInRegion(BEACON_REGION);
 		}
-		
 		catch (RemoteException e) {
 			e.printStackTrace();
 		}

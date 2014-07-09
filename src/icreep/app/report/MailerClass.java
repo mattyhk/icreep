@@ -1,5 +1,6 @@
 package icreep.app.report;
 
+import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 
 import java.io.File;
@@ -27,11 +28,14 @@ public class MailerClass
 	 */
 	Context c = null;
 	iCreepDatabaseAdapter adapt ;
+	int userID = -1;
 	
 	public MailerClass(Context c)
 	{
 		this.c = c ;
 		adapt = new iCreepDatabaseAdapter(c) ;
+		SharedPreferencesControl spc = new SharedPreferencesControl(c);
+		userID = spc.getUserID();
 	}
 	public void sendMail()
 	{		
@@ -93,7 +97,7 @@ public class MailerClass
 //		list.add(tp7);
 
 		// This will be the array list that vinny's code generates
-		list = adapt.getTimePlaces();
+		list = adapt.getTimePlaces(userID);
 		if (list == null)
 		{
 			Log.e("vince", "no activity");
@@ -209,7 +213,7 @@ public class MailerClass
 	 */
 	private String buildEmailBody()
 	{		
-		String needed = adapt.getUserDetails();
+		String needed = adapt.getUserDetails(userID);
 		String[] user = null ;
 		if (needed == null)
 		{

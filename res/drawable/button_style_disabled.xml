@@ -6,7 +6,7 @@
     >
     
     <solid 
-        android:color="#6699FF"/> 
+        android:color="@color/greyForBackrounds"/> 
     
     <corners
         android:bottomRightRadius="10dp"
