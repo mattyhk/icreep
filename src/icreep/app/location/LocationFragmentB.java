@@ -1,6 +1,7 @@
 package icreep.app.location;
 
 
+import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
@@ -124,6 +125,9 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		
 		mAdapter.clear();
 		Set<TimePlace> z = user.getVisitedZones();
+		if (z.size() == 0) {
+			Message.message(getActivity(), "You haven't been anywhere");
+		}
 		for (TimePlace tp : z){
 			mAdapter.add(tp);
 		}

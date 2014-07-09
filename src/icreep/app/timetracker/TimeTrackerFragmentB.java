@@ -27,7 +27,7 @@ import android.widget.TextView;
 	private double timeIn = 0.0;
 	private double timeOut = 24.0;
 
-	private Handler mHandler; 
+	private Handler mHandler = new Handler(); 
 	private TimeTrackerActivity timeTracker;
 	
 	public TimeTrackerFragmentB() {

@@ -27,7 +27,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	
 	private int INTERVAL = 10000;
 	
-	private ListView listView = null;
+	private ListView listView;
 	private ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
 	
 	private ImageButton home;
@@ -36,7 +36,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	
 	private iCreepDatabaseAdapter icreepHelper;
 	private TimeTrackerListAdapter mAdapter;
-	private Handler mHandler;
+	private Handler mHandler = new Handler();
 	
 	public TimeTrackerFragmentA() {
 		// Required empty public constructor
@@ -47,6 +47,10 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_time_tracker_a, container, false);
+		
+		//get time places that user has been to from the database       
+        icreepHelper = new iCreepDatabaseAdapter(getActivity());
+        mAdapter = new TimeTrackerListAdapter(getActivity(), timePlaces);
 		
 		TextView fragmentUser = (TextView) v.findViewById(R.id.time_tracker_a_user);
 
@@ -59,9 +63,6 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
 		}
 
-        //get time places that user has been to from the database       
-        icreepHelper = new iCreepDatabaseAdapter(getActivity());
-        
         String userDetails = icreepHelper.getUserDetails(userID);
     	fragmentUser.setText(userDetails);
     	
@@ -69,7 +70,6 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         tTA.setUserDetails(userDetails);
         
         listView = (ListView) v.findViewById(R.id.time_tracker_listView_main);
-		mAdapter = new TimeTrackerListAdapter(getActivity(), timePlaces);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
         
@@ -79,11 +79,10 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         if(timePlaces != null){ 
         	updateList();
         }
-        else{
-        	fragmentUser.setText("Unknown User");        	
+        else{       	
         	Message.message(getActivity(), "You haven't been anywhere");
         }
-                		
+        
 		return v;
 	}
 	
@@ -176,9 +175,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	}
 	
 	private void updateList() {
-		
-		mAdapter.clear();
-		
+
 		timePlaces = icreepHelper.getTimePlaces(userID);
         
         if(timePlaces != null){ 
@@ -192,7 +189,10 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 
         	//calculate and put Total-Time in Time Tracker Activity for Activity B
         	totalTime(timePlaces);
+        	
         }
-		
+        else {
+        	Message.message(getActivity(), "You haven't been anywhere");
+        }
 	}
 }
