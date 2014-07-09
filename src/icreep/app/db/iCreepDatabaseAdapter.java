@@ -7,6 +7,7 @@ import icreep.app.report.TimePlace;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -184,34 +185,32 @@ public class iCreepDatabaseAdapter {
 	 * Post-conditions: > Return time in string format: "13:25" or null
 	 */
 	public String getReportTime(int userID){
-		// SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND
+		// SELECT Delivery_Time FROM Reports, User WHERE User.User_ID =
 		// Reports.User_ID AND Auto_Delivery = true;
 
-		SQLiteDatabase db = helper.getWritableDatabase();
+		//SQLiteDatabase db = helper.getWritableDatabase();
 
 		String query = "SELECT Reports.Delivery_Time,Reports.Auto_Delivery FROM Reports, User WHERE User.User_ID ="+userID+" AND User.User_ID = Reports.User_ID;";
+		SQLiteDatabase db = helper.getWritableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 
 		if (cursor != null) {
-			if(cursor.moveToFirst()){
-			
+			if (cursor.moveToFirst()) {
+
 				int index = cursor.getColumnIndex("Auto_Delivery");
+				int index2 = cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME);
 				int val = cursor.getInt(index);
-				if (val== 1) {
-					String time = cursor.getString(cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME));
-					return time;
-				} 
-				else {
-					return null;
-				}
-			}
-			else{
+				String time = cursor.getString(cursor
+						.getColumnIndex(iCreepHelper.DELIVERY_TIME));
+				time = time + "+" + val;
+				return time;
+			} else {
 				return null;
 			}
-		} 
-		else {
+		} else {
 			return null;
-		}		
+		}
+
 	}
 
 	/*

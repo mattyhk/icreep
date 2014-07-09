@@ -115,7 +115,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_below="@+id/textView4_profile_picture"
-        android:background="@color/greyForBackrounds"
+        android:background="@color/darkGreyForBackgrounds"
         android:clickable="true"
         android:contentDescription="@string/content_descrip"
         android:src="@drawable/profile_pic_icon"
