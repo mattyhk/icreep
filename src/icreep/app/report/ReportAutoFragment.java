@@ -3,7 +3,6 @@ package icreep.app.report;
 import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -153,7 +152,7 @@ public class ReportAutoFragment extends Fragment
 					int storehour = tp.getCurrentHour();
 					int storeminute = tp.getCurrentMinute();
 					updateTheTableForAutoMail(storehour, storeminute);
-					addAlarm(storehour, storeminute); // thisi is for testing
+					//addAlarm(storehour, storeminute); // thisi is for testing
 														// purposes
 					save.setEnabled(false);
 				} else {
