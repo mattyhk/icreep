@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 import icreep.app.R;
+import icreep.app.beacon.BeaconService;
 import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.report.AlarmControlClass;
 
@@ -25,44 +26,49 @@ public class MainActivity extends FragmentActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		// Check for Bluetooth capability
 		if (!getPackageManager().hasSystemFeature(
 				PackageManager.FEATURE_BLUETOOTH_LE)) {
 			finishActivityWithMessage("Device does not support Bluetooth LE");
-			SharedPreferencesControl spc = new SharedPreferencesControl(this);
-			iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
-			// adapt.clearDatabase();
-			// spc.clearSP(); // testing purposes
-			if (spc.sharedPrefTest() == true) {
-				String time = "";
-				time = adapt.getReportTime(spc.getUserID());
-				if (time != null) {
-					String[] times = time.split(":");
-					int hour = Integer.parseInt(times[0]);
-					int min = Integer.parseInt(times[1]);
-					AlarmControlClass acc = new AlarmControlClass();
-					acc.setAlarm(hour, min, this);
-					acc.sendAutoEmailRepeat();
-					Message.message(this, "Alarm is set");
-				}
-
-				Intent i = new Intent();
-				i.setClassName(this, "icreep.app.ProfileCreationActivity");
-				// i.putExtra("sharedPreferFileName", "iCreepData"); //seems
-				// unnecessary since we are defining the iCreepData File
-				startActivity(i);
-				// SharedPreferences.Editor editor = sp.edit();
-				// editor.putString("userID", "vincent");
-				// editor.commit();
-				// makeToast("YAY SAVED NEW USER");
-			} else {
-				Intent i = new Intent();
-				i.setClassName(this, "icreep.app.IcreepMenu");
-				startActivity(i);
+		}
+		
+		Intent trackingIntent = new Intent(this, BeaconService.class);
+		startService(trackingIntent);
+		
+		SharedPreferencesControl spc = new SharedPreferencesControl(this);
+		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
+		// adapt.clearDatabase();
+		// spc.clearSP(); // testing purposes
+		if (spc.sharedPrefTest() == true) {
+			String time = "";
+			time = adapt.getReportTime(spc.getUserID());
+			if (time != null) {
+				String[] times = time.split(":");
+				int hour = Integer.parseInt(times[0]);
+				int min = Integer.parseInt(times[1]);
+				AlarmControlClass acc = new AlarmControlClass();
+				acc.setAlarm(hour, min, this);
+				acc.sendAutoEmailRepeat();
+				Message.message(this, "Alarm is set");
 			}
 
+			Intent i = new Intent();
+			i.setClassName(this, "icreep.app.ProfileCreationActivity");
+			// i.putExtra("sharedPreferFileName", "iCreepData"); //seems
+			// unnecessary since we are defining the iCreepData File
+			startActivity(i);
+			// SharedPreferences.Editor editor = sp.edit();
+			// editor.putString("userID", "vincent");
+			// editor.commit();
+			// makeToast("YAY SAVED NEW USER");
+		} 
+		
+		else {
+			Intent i = new Intent();
+			i.setClassName(this, "icreep.app.IcreepMenu");
+			startActivity(i);
 		}
-
 	}
 
 	@Override
@@ -75,7 +81,6 @@ public class MainActivity extends FragmentActivity
 	protected void onResume()
 	{
 		super.onResume();
-
 		registerBluetoothReceiver();
 
 		BluetoothAdapter bluetoothAdapter = BluetoothAdapter
@@ -85,6 +90,7 @@ public class MainActivity extends FragmentActivity
 					BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
 		}
+
 	}
 
 	@Override
@@ -139,7 +145,7 @@ public class MainActivity extends FragmentActivity
 
 	/*********************
 	 * 
-	 * Bluetooth Checker Makes Sure the Bluetooth functionality is on May need
+	 * Bluetooth Checker Makes Sure the Bluetooth functionality is on. May need
 	 * to move it into every activity
 	 * 
 	 ********************/
