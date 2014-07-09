@@ -35,10 +35,6 @@ public class MainActivity extends FragmentActivity
 			finishActivityWithMessage("Device does not support Bluetooth LE");
 		}
 		
-		SharedPreferencesControl spc = new SharedPreferencesControl(this);
-		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
-		// adapt.clearDatabase();
-		// spc.clearSP(); // testing purposes
 		if (spc.sharedPrefTest() == true) {
 			String time = "";
 			time = adapt.getReportTime(spc.getUserID());
