@@ -1,5 +1,6 @@
 package icreep.app;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import icreep.app.db.iCreepDatabaseAdapter;
@@ -9,6 +10,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -179,7 +182,7 @@ public class ProfileCreationActivity extends Activity
 				listDetails.add(surname);
 				listDetails.add(position);
 				listDetails.add(email);
-				doMessage("Updating of your proile was successful");
+				doMessage("Updating of your profile was successful");
 			}
 		}else {
 			doMessage("Invalid email address, please use valid email address");
@@ -269,6 +272,16 @@ public class ProfileCreationActivity extends Activity
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == IMAGE_PICKER_SELECT  && resultCode == Activity.RESULT_OK) {
             Bitmap bitmap = getBitmapFromCameraData(data, this);
+            //first have to force image to be horizontal
+            if (bitmap == null)
+            {
+            	Message.message(this, "Sorry the file you selected isn't a picture");
+            	return ;
+            }
+            //ExifInterface exif = new ExifInterface(bitmap);
+            //You can then grab the orientation of the image:
+            //double orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+            
             profilePicture.setImageBitmap(bitmap);
             profilePic = bitmap ;
         }
@@ -282,6 +295,47 @@ public class ProfileCreationActivity extends Activity
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         String picturePath = cursor.getString(columnIndex);
         cursor.close();
-        return BitmapFactory.decodeFile(picturePath);
+     
+        
+        //check that the file is picture!!!        
+        String[] checker = picturePath.split("\\.");
+        if ((checker[1].equals("jpg")) || (checker[1].equals("png")) || (checker[1].equals("GIF")) || 
+        		(checker[1].equals("tif")) )
+        {
+        	double orientation = -1 ;
+        	 try {
+				ExifInterface exif = new ExifInterface(picturePath);
+				//You can then grab the orientation of the image:
+	            orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	Bitmap generated = BitmapFactory.decodeFile(picturePath);
+        	Bitmap finalBit = null ;
+        	Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            
+            // http://sylvana.net/jpegcrop/exif_orientation.html >> USEFUL
+            if (orientation == 6)
+            {            	
+                finalBit = Bitmap.createBitmap(generated,0,0,generated.getWidth(),generated.getHeight(),matrix,true);
+            }else if (orientation == 8)
+            {
+            	matrix.postRotate(-180);
+                finalBit = Bitmap.createBitmap(generated,0,0,generated.getWidth(),generated.getHeight(),matrix,true);
+            }else if (orientation == 3)
+            {
+            	matrix.postRotate(-90);
+            	finalBit = Bitmap.createBitmap(generated,0,0,generated.getWidth(),generated.getHeight(),matrix,true);
+            }
+            else
+            {
+            	return generated;
+            }
+        	return finalBit;
+        }
+        
+        return null ;
     }
 }

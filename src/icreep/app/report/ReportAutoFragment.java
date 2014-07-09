@@ -234,11 +234,24 @@ public class ReportAutoFragment extends Fragment
 
 		String valueFromAdapt = adapt.getReportTime(userID); // this will equal to
 														// something lie
-														// adapt.dasdasda
-		if (valueFromAdapt != null) // means auto is on
+												// adapt.dasdasda
+		if (valueFromAdapt == null)
+		{
+			return ;
+		}
+		String[] reportArray = valueFromAdapt.split("\\+");
+		boolean doIT = false ;
+		String workWith ="";
+		if (Integer.parseInt(reportArray[1]) == 1)
+		{
+			doIT = true;
+			workWith= reportArray[0];
+		}
+		
+		if (doIT == true) // means auto is on
 		{
 			hasAuto = true;
-			String[] times = valueFromAdapt.split(":");
+			String[] times = workWith.split(":");
 			hour = Integer.parseInt(times[0]);
 			min = Integer.parseInt(times[1]);
 			switched.setChecked(true);
@@ -269,7 +282,10 @@ public class ReportAutoFragment extends Fragment
 			newTime = newTime + stom ;
 		}
 		// call the db update
-		if (adapt.getReportTime(userID) != null) {
+		String reportTime = adapt.getReportTime(userID);
+		
+		if (reportTime != null) {
+			
 			if (adapt.updateDeliveryTime(newTime, userID, newAuto) == true) {
 				hasAuto = newAuto;
 				if (newAuto == true) {
@@ -279,6 +295,7 @@ public class ReportAutoFragment extends Fragment
 				} else {
 					hour = -1;
 					min = -1;
+					icreep.app.Message.message(getActivity(), "Update was successful");
 				}
 			}
 		} else {
