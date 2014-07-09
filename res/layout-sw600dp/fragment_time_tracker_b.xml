@@ -1,0 +1,126 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkGreyForBackgrounds"
+    android:orientation="vertical"
+    tools:context="icreep.app.timetracker.TimeTrackerFragmentB" >
+	
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+        <LinearLayout 
+            android:layout_height="wrap_content"
+            android:layout_width="0dp" 
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp" >
+            
+            <TextView
+		        android:id="@+id/time_tracker_b_title"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/outside"
+		        android:textColor="@color/lightGreenForLabels"
+                android:textSize="@dimen/heading_text_size_7in"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin"/>
+	        
+	        <TextView
+		        android:id="@+id/time_tracker_b_user"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/user_position"
+		        android:textColor="@color/whiteBackground"
+                android:textSize="@dimen/sub_heading_text_size_7in"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin" />
+	        
+        </LinearLayout>
+    	
+        <ImageButton
+	        android:id="@+id/home_button_time_tracker_b"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:background="@drawable/home"
+	        android:contentDescription="@string/home" 
+	        android:layout_gravity="right" />
+        
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/time_tracker_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:minWidth="500dp"
+        android:minHeight="75dp"
+        android:progressDrawable="@drawable/progress_bar"
+        android:progress="50" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/time_tracker_progress_bar"
+        android:layout_alignLeft="@+id/time_tracker_progress_bar"
+        android:layout_alignRight="@+id/time_tracker_progress_bar" 
+        android:orientation="horizontal"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp">
+
+        <TextView
+            android:id="@+id/in_office"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/in_office_label"
+            android:textColor="@color/whiteColor"
+            android:textSize="@dimen/in_out_office_labels_7in" />
+        
+        <TextView
+            android:id="@+id/out_office"
+            android:layout_height ="wrap_content"
+            android:layout_width="fill_parent"
+            android:textColor="@color/whiteColor"
+            android:gravity="right" 
+            android:text="@string/out_office_label"
+            android:textSize="@dimen/in_out_office_labels_7in"/>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time_tracker_progress_bar"
+        android:layout_alignLeft="@+id/time_tracker_progress_bar"
+        android:layout_alignRight="@+id/time_tracker_progress_bar" 
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp">
+        
+        <TextView
+            android:id="@+id/time_in_office"
+            android:layout_height ="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/whiteColor"
+            android:layout_gravity="left" 
+            android:text="@string/timeInOffice"
+            android:textSize="@dimen/in_out_office_labels_7in"/>
+        
+        <TextView
+            android:id="@+id/time_out_office"
+            android:layout_height ="wrap_content"
+            android:layout_width="fill_parent"
+            android:textColor="@color/whiteColor"
+            android:gravity="right" 
+            android:text="@string/timeOutOffice"
+            android:textSize="@dimen/in_out_office_labels_7in"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

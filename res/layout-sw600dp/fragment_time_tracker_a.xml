@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkGreyForBackgrounds"
     android:orientation="vertical"
-    tools:context="icreep.app.location.LocationFragmentA" >
+    tools:context="icreep.app.timetracker.TimeTrackerFragmentA" >
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -20,28 +20,29 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/location_a_title"
+                android:id="@+id/time_tracker_a_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/left_margin"
                 android:layout_marginTop="@dimen/top_margin"
-                android:text="@string/title_location_current"
+                android:text="@string/time_in_locations"
                 android:textColor="@color/lightGreenForLabels"
-                android:textSize="@dimen/heading_text_size_3.7in" />
+                android:textSize="@dimen/heading_text_size_7in" />
 
             <TextView
-                android:id="@+id/location_a_user"
+                android:id="@+id/time_tracker_a_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="@dimen/left_margin"
                 android:layout_marginTop="@dimen/top_margin"
                 android:text="@string/user_position"
-                android:textColor="@color/whiteColor"
-                android:textSize="@dimen/heading_text_size_3.7in" />
+                android:textColor="@color/whiteBackground"
+                android:textSize="@dimen/sub_heading_text_size_7in" />
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/home_button_location_current"
+            android:id="@+id/home_button_time_tracker_a"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="right"
@@ -49,24 +50,14 @@
             android:contentDescription="@string/home" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/location_a_zone_map"
+    <ListView
+        android:id="@+id/time_tracker_listView_main"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/linearLayout1"
-        android:layout_marginTop="28dp"
         android:background="@color/darkGreyForBackgrounds"
-        android:contentDescription="@string/zone_map"
-        android:gravity="center"
-        android:padding="25dp" />
-
-    <TextView
-        android:id="@+id/location_a_floor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/location_a_zone_map"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/whiteColor" />
+        android:layout_marginLeft="@dimen/left_margin" >
+    </ListView>
 
 </RelativeLayout>
