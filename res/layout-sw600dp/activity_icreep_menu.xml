@@ -18,18 +18,18 @@
         android:fontFamily="helvetica"
         android:text="@string/icreep_main_menu_logo"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/icreep_logo_10in"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/icreep_logo_7in"
         android:textStyle="bold" />
 
 <!--Buttons-->
 
     <Button
         android:id="@+id/button1_location"
-        android:layout_width="@dimen/menu_button_width_10in"
+        android:layout_width="@dimen/menu_button_width_7in"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/menu_button_padding_top_bottom_10in"
-        android:paddingBottom="@dimen/menu_button_padding_top_bottom_10in"
+        android:paddingTop="@dimen/menu_button_padding_top_bottom_7in"
+        android:paddingBottom="@dimen/menu_button_padding_top_bottom_7in"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/top_margin_menu_buttons"
@@ -37,12 +37,12 @@
         android:fontFamily="courier new"
         android:onClick="userProximity"
         android:text="@string/select_proximity"
-        android:textSize="@dimen/menu_button_text_size_10in"
+        android:textSize="@dimen/menu_button_text_size_7in"
          />
 
     <Button
         android:id="@+id/button3_reports"
-        android:layout_width="@dimen/menu_button_width_10in"
+        android:layout_width="@dimen/menu_button_width_7in"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button2_time_tracker"
         android:layout_below="@+id/button2_time_tracker"
@@ -51,13 +51,13 @@
         android:fontFamily="courier new"
         android:onClick="userReports"
         android:text="@string/report"
-        android:paddingBottom="@dimen/menu_button_padding_top_bottom_10in"
-        android:paddingTop="@dimen/menu_button_padding_top_bottom_10in"
-        android:textSize="@dimen/menu_button_text_size_10in" />
+        android:paddingBottom="@dimen/menu_button_padding_top_bottom_7in"
+        android:paddingTop="@dimen/menu_button_padding_top_bottom_7in"
+        android:textSize="@dimen/menu_button_text_size_7in" />
 
     <Button
         android:id="@+id/button4_profile"
-        android:layout_width="@dimen/menu_button_width_10in"
+        android:layout_width="@dimen/menu_button_width_7in"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button3_reports"
         android:layout_below="@+id/button3_reports"
@@ -66,13 +66,13 @@
         android:fontFamily="courier new"
         android:onClick="userProfile"
         android:text="@string/profile"
-        android:paddingBottom="@dimen/menu_button_padding_top_bottom_10in"
-        android:paddingTop="@dimen/menu_button_padding_top_bottom_10in"
-        android:textSize="@dimen/menu_button_text_size_10in" />
+        android:paddingBottom="@dimen/menu_button_padding_top_bottom_7in"
+        android:paddingTop="@dimen/menu_button_padding_top_bottom_7in"
+        android:textSize="@dimen/menu_button_text_size_7in" />
 
     <Button
         android:id="@+id/button2_time_tracker"
-        android:layout_width="@dimen/menu_button_width_10in"
+        android:layout_width="@dimen/menu_button_width_7in"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1_location"
         android:layout_centerHorizontal="true"
@@ -80,10 +80,10 @@
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
         android:onClick="timeTracker"
-        android:paddingBottom="@dimen/menu_button_padding_top_bottom_10in"
-        android:paddingTop="@dimen/menu_button_padding_top_bottom_10in"
+        android:paddingBottom="@dimen/menu_button_padding_top_bottom_7in"
+        android:paddingTop="@dimen/menu_button_padding_top_bottom_7in"
         android:text="@string/time_tracker"
-        android:textSize="@dimen/menu_button_text_size_10in" />
+        android:textSize="@dimen/menu_button_text_size_7in" />
 
 </RelativeLayout>
 

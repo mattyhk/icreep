@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/autoFragLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation= "vertical"
+    android:background = "@color/darkGreyForBackgrounds"
+    >
+    
+    
+	<TextView
+        android:id="@+id/Delivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/autoDelivery"
+        android:gravity="center"
+        android:textColor= "@color/lightGreenForLabels"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:textSize="@dimen/sub_heading_text_size_7in"
+        />
+
+	<Switch
+	    android:id="@+id/switchBar"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:checked="false"
+	    android:textOff="OFF"
+	    android:textOn="ON"	    
+	    android:layout_marginTop="@dimen/top_margin_10in"
+	    android:layout_marginLeft="@dimen/left_margin" 	    
+	    />
+		    
+	<TextView
+        android:id="@+id/DeliveryTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/deliveryTimeText"
+        android:gravity="left"
+        android:textColor="@color/lightGreenForLabels"
+        android:layout_marginTop="@dimen/top_margin_10in" 
+        android:layout_marginLeft="@dimen/left_margin"  
+        android:textSize="@dimen/sub_heading_text_size_7in"     
+         />
+
+	<TimePicker
+	    android:id="@+id/timePicker"
+	    android:layout_width="315dp"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="@dimen/left_margin"
+	    android:layout_marginRight="@dimen/left_margin"
+	    android:layout_marginTop="@dimen/top_margin_10in"
+	    android:background="@drawable/time_picker"
+	    android:fadingEdge="vertical" />
+
+	<Button
+	    android:id="@+id/saveButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="@dimen/left_margin"
+	    android:layout_marginTop="60dp"
+	    android:background="@drawable/button_style"
+	    android:enabled="false"
+	    android:fontFamily="courier new"
+	    android:onClick="saveDetails"
+	    android:paddingBottom="@dimen/save_button_padding_top_bottom_7in"
+	    android:paddingLeft="@dimen/save_button_padding_left_right_7in"
+	    android:paddingRight="@dimen/save_button_padding_left_right_7in"
+	    android:paddingTop="@dimen/save_button_padding_top_bottom_7in"
+	    android:text="@string/save_report_time"
+	    android:textColor="@color/blackColor"
+	    android:textSize="@dimen/menu_button_text_size_7in" />
+	    
+</LinearLayout>
