@@ -60,7 +60,7 @@
         android:minWidth="500dp"
         android:minHeight="75dp"
         android:progressDrawable="@drawable/progress_bar"
-        android:progress="50" />
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
