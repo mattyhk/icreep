@@ -81,7 +81,7 @@ public class iCreepDatabaseAdapter {
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
-		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND User.User_ID = Location.User_ID AND Location.Location_ID = Zone.Location_ID;";
+		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND User.User_ID = Location.User_ID AND Location.Zone_ID = Zone.Zone_ID;";
 		
 		//String[] toReturn = {iCreepHelper.USER_ID,iCreepHelper.FLOOR, iCreepHelper.DESCRIPTION, iCreepHelper.TIME_ENTERED, iCreepHelper.TIME_LEFT};
 		Cursor cursor = db.rawQuery(query, null);
