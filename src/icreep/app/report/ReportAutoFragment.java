@@ -199,7 +199,7 @@ public class ReportAutoFragment extends Fragment
 	{
 		if (checkerIfEmailed == false) {
 			acc.setAlarm(hour, min, getActivity());
-			acc.sendAutoEmailNow();
+			acc.sendAutoEmailRepeat();
 			checkerIfEmailed = true;
 		} else {
 			acc.turnOffAlarm();
