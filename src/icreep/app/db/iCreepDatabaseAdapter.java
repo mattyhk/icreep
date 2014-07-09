@@ -262,7 +262,7 @@ public class iCreepDatabaseAdapter {
 	public void clearDatabase(){
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
-			String[] tables = {iCreepHelper.TABLE_NAME1,iCreepHelper.TABLE_NAME2,iCreepHelper.TABLE_NAME3,iCreepHelper.TABLE_NAME4,iCreepHelper.TABLE_NAME5,iCreepHelper.TABLE_NAME6}; 
+			String[] tables = {iCreepHelper.TABLE_NAME1,iCreepHelper.TABLE_NAME3,iCreepHelper.TABLE_NAME4,iCreepHelper.TABLE_NAME5,iCreepHelper.TABLE_NAME6}; 
 			for(int i=0; i< helper.tableCount;i++){
 				db.delete(tables[i], null,null);
 				String[] args = {tables[i]};
@@ -281,7 +281,7 @@ public class iCreepDatabaseAdapter {
 		private static final String DATABASE_NAME = "icreepdatabase";
 		
 		//version changes every time the structure of the db changes
-		private static final int DATABASE_VERSION = 8;
+		private static final int DATABASE_VERSION = 9;
 		
 		//define tables (1..6) in db
 		
@@ -294,11 +294,13 @@ public class iCreepDatabaseAdapter {
 		private static final String MAJOR = "Major";
 		private static final String MINOR = "Minor";
 		
+		/*
 		//create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "( ZoneBeacon_ID INTEGER PRIMARY KEY AUTOMINCREMENT, Beacon_ID INTEGER, Zone_ID INTEGER, ThreshholdValue FLOAT, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID), FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID));";
 		private static final String TABLE_NAME2 = "ZoneBeacon";
 		
 		private static final String ZONEBEACON_ID = "ZoneBeacon_ID";
 		private static final String THRESHHOLD_VALUE = "Threshhold_Value";
+		*/
 		
 		//create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "( Zone_ID INTEGER PRIMARY KEY AUTOMINCREMENT, Description VARCHAR(255), Floor INTEGER);";
 		private static final String TABLE_NAME3 = "Zone";
@@ -335,14 +337,14 @@ public class iCreepDatabaseAdapter {
 			
 		//CREATE_TABLE QUERIES for db		
 		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " INTEGER NOT NULL,"+ MINOR +" INTEGER NOT NULL);";
-		private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
-		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + LOCATION_ID +" INTEGER, " + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " INTEGER NOT NULL, FOREIGN KEY (Location_ID) REFERENCES Location(Location_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
+		//private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
+		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + BEACON_ID +" INTEGER UNIQUE, " + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " INTEGER NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
 		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " DATETIME NOT NULL, " + TIME_LEFT +" DATETIME NOT NULL, " + LOCATION_DATE+ " DATE NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON DELETE CASCADE ON UPDATE CASCADE);"; 
 		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME + " VARCHAR(75) NOT NULL," + SURNAME +" VARCHAR(75) NOT NULL, "+ EMAIL +" VARCHAR(100) NOT NULL," + EMPLOYEE_POSITION +" VARCHAR(50) NOT NULL, "+ PHOTO +" VARHCAR(255));";
 		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER UNIQUE, " + AUTO_DELIVERY +" BOOLEAN NOT NULL, " + DELIVERY_TIME +" VARCHAR(10), FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
 
-		public int tableCount = 6;
-		private int createTableQueryCount = 6;
+		public int tableCount = 5;
+		private int createTableQueryCount = 5;
 		
 		private Context context;
 		
@@ -355,7 +357,7 @@ public class iCreepDatabaseAdapter {
 		public void onCreate(SQLiteDatabase db) {
 			// when creating the db for the first time (executing the CREATE TABLE SQL) - execute CREATE_TABLE queries here
 			
-			String[] createTableQueries = {create_Beacon_query,create_Zone_query,create_ZoneBeacon_query,create_User_query,create_Location_query,create_Reprts_query};	
+			String[] createTableQueries = {create_Beacon_query,create_Zone_query,create_User_query,create_Location_query,create_Reprts_query};	
 			
 			for(int i=0; i<createTableQueryCount; i++){
 				try {
@@ -377,7 +379,7 @@ public class iCreepDatabaseAdapter {
 			//to see onUpgrade was called
 			Message.message(context, " onUpgrade called");
 			
-			String[] tables = {TABLE_NAME1,TABLE_NAME2,TABLE_NAME3,TABLE_NAME4,TABLE_NAME5,TABLE_NAME6};
+			String[] tables = {TABLE_NAME1,TABLE_NAME3,TABLE_NAME4,TABLE_NAME5,TABLE_NAME6};
 			
 			//dropping existing tables upon db structure changes (if oldVersion != newVersion)
 			for(int i=0;i<tableCount;i++){
