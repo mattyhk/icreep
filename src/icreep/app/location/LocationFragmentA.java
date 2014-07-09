@@ -11,18 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LocationFragmentA extends Fragment {
 	
-	private ImageButton home;
-	
 	private int INTERVAL = 5000;
+	private String FILE_FRAGMENT = "zones_3_";
+	
 	private Handler mHandler;
 	
 	private ICreepApplication mApplication;
 	
 	private TextView floorTextView;
+	private ImageButton home;
+	private ImageView zoneMap;
 	
 	
 	public LocationFragmentA() {
@@ -45,15 +48,39 @@ public class LocationFragmentA extends Fragment {
 		mHandler = new Handler();
 		mApplication = (ICreepApplication) getActivity().getApplicationContext();
 		floorTextView = (TextView) v.findViewById(R.id.location_a_floor_text_view);
+		zoneMap = (ImageView) v.findViewById(R.id.location_a_zone_map);
 		
 		return v;
 	}
 	
 	/**
-	 * Sets the map to be displayed as determined by the current zone and floor
+	 * Sets the map to be displayed as determined by the current zone
 	 */
 	private void updateImage(){
 		int currentLocation = mApplication.getCurrentLocation();
+		Integer drawID = null;
+		
+		if (currentLocation == -2) {
+			// Location is unknown
+			drawID = getActivity().getResources()
+						.getIdentifier("zones_all", "drawable", getActivity().getPackageName());
+		}
+		
+		else if (currentLocation == -1) {
+			// Location is out of office
+			drawID = getActivity().getResources()
+						.getIdentifier("zones_outdoor", "drawable", getActivity().getPackageName());
+		}
+		
+		else {
+			drawID = getActivity().getResources()
+						.getIdentifier(FILE_FRAGMENT + currentLocation, "drawable", getActivity()
+							.getPackageName());
+		}
+		
+		if (drawID != null) {
+			zoneMap.setImageResource(drawID);
+		}
 	}
 	
 	/**

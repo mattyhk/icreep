@@ -92,7 +92,7 @@ public class UserLocation {
 		if (this.exitCount == MAX_EXIT_COUNT) {
 			
 			// Update the DB - update the last location entry's exit time with the current time
-			// Need to make sure the DB has a last entry
+			// Need to make sure the DB has a last entry with empty exit time
 			
 			// The user's current location has changed
 			this.currentLocation = UNKNOWN;
@@ -112,7 +112,7 @@ public class UserLocation {
 			
 			this.currentLocation = this.currentTempLocation;
 			
-			// Update the DB - ensure the DB is in order before adding
+			// Update the DB - ensure the DB is in order before adding new location entry
 		}
 		
 	}
