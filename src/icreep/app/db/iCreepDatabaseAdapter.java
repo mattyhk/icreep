@@ -15,14 +15,12 @@ public class iCreepDatabaseAdapter {
 	
 	iCreepHelper helper;
 	Context c;
-	SQLiteDatabase db;
 	
 	String userDetails;
 	
 	public iCreepDatabaseAdapter(Context context){
 		c = context;
 		helper = new iCreepHelper(c);
-		db = helper.getWritableDatabase();
 	}
 	
 	/*
@@ -42,7 +40,7 @@ public class iCreepDatabaseAdapter {
 		newUser.put(iCreepHelper.PHOTO, photo);
 		
 		//now insert record into DB User table
-		//SQLiteDatabase db = helper.getWritableDatabase();
+		SQLiteDatabase db = helper.getWritableDatabase();
 		long id = db.insert(iCreepHelper.TABLE_NAME5, null, newUser); //id to check if insertion was successful
 		
 		return id;				
@@ -55,14 +53,15 @@ public class iCreepDatabaseAdapter {
 	public boolean updateUserDetails(String n, String s, String ep, String e,  String p){
 		
 		ContentValues cVs = new ContentValues();
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
 		cVs.put(iCreepHelper.NAME, n);
 		cVs.put(iCreepHelper.SURNAME, s);
 		cVs.put(iCreepHelper.EMPLOYEE_POSITION, ep);
 		cVs.put(iCreepHelper.EMAIL, e);		
 		cVs.put(iCreepHelper.PHOTO, p);
 		
-		return db.update(iCreepHelper.TABLE_NAME5, cVs, iCreepHelper.USER_ID + " =" + 1, null) > 0;
-		
+		return db.update(iCreepHelper.TABLE_NAME5, cVs, iCreepHelper.USER_ID + " =" + 1, null) > 0;		
 	}
 	
 	/*
@@ -76,7 +75,7 @@ public class iCreepDatabaseAdapter {
 		//sql to get all of the user's locations
 		//SELECT User_ID, Floor, Description, Time_Entered, Time_Left FROM User, Zone, Location WHERE User.User_ID = Location.User_ID, Location.User_ID = Zone.Location_ID
 		
-		//SQLiteDatabase db = helper.getWritableDatabase();
+		SQLiteDatabase db = helper.getWritableDatabase();
 		
 		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID = 1 AND User.User_ID = Location.User_ID AND Location.Location_ID = Zone.Location_ID;";
 		
@@ -120,7 +119,7 @@ public class iCreepDatabaseAdapter {
 	 */
 	public String getUserDetails(){
 		
-		//SQLiteDatabase db = helper.getWritableDatabase();
+		SQLiteDatabase db = helper.getWritableDatabase();
 		String query = "SELECT * FROM User, Reports WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
 		Cursor cursor = db.rawQuery(query, null);
 		
@@ -144,11 +143,13 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	/*
-	 * Pre-Conditions: > Go through database and retrieve user name, surname, email and position
+	 * Pre-Conditions: > Go through database and retrieve user name, surname, position and email
 	 * Post-conditions: > Return user details in arrayList format
 	 */
 	public ArrayList<String> userDetails(){
 		ArrayList<String> ud = new ArrayList<String>();
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
 		
 		String query = "SELECT * FROM User WHERE User.User_ID = 1;";
 		Cursor cursor = db.rawQuery(query, null);
@@ -159,9 +160,9 @@ public class iCreepDatabaseAdapter {
 					
 					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME))));
 					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME))));
-					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.EMAIL))));
 					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION))));
-					
+					ud.add((cursor.getString(cursor.getColumnIndex(iCreepHelper.EMAIL))));
+									
 					return ud;
 				}
 				else{
@@ -182,12 +183,12 @@ public class iCreepDatabaseAdapter {
 	 * Post-conditions: > Return time in string format: "13:25" or null
 	 */
 	public String getReportTime(){
-		// SELECT Delivery_Time FROM Reports, User WHERE User.User_ID =
+		// SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND
 		// Reports.User_ID AND Auto_Delivery = true;
 
-		//SQLiteDatabase db = helper.getWritableDatabase();
+		SQLiteDatabase db = helper.getWritableDatabase();
 
-		String query = "SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND User.User_ID = Reports.User_ID;";
+		String query = "SELECT Delivery_Time FROM Reports, User WHERE User.User_ID = 1 AND Reports.Auto_Delivery = 1 AND User.User_ID = Reports.User_ID;";
 		Cursor cursor = db.rawQuery(query, null);
 
 		if (cursor != null) {
@@ -218,7 +219,7 @@ public class iCreepDatabaseAdapter {
 		
 		String query = "UPDATE Reports SET Auto_Delivery = 1, Delivery_Time = '" + newTime + "' WHERE User.User_ID = 1 AND User.User.ID = Reports.User_ID;";
 		
-		//SQLiteDatabase db = helper.getWritableDatabase();
+		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
 			db.execSQL(query);
 			Message.message(c, "Report Delivery Time updated");
@@ -230,11 +231,13 @@ public class iCreepDatabaseAdapter {
 	
 	//this function clears the tables in the database
 	public void clearDatabase(){
-		//SQLiteDatabase db = helper.getWritableDatabase();
+		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
 			String[] tables = {iCreepHelper.TABLE_NAME1,iCreepHelper.TABLE_NAME2,iCreepHelper.TABLE_NAME3,iCreepHelper.TABLE_NAME4,iCreepHelper.TABLE_NAME5,iCreepHelper.TABLE_NAME6}; 
 			for(int i=0; i< helper.tableCount;i++){
-				db.delete(tables[i], null,null); 
+				db.delete(tables[i], null,null);
+				String[] args = {tables[i]};
+				db.delete("SQLITE_SEQUENCE", "name=?", args);
 			}
 			Message.message(c, "Database cleared");
 		} catch (Exception e) {
@@ -249,7 +252,7 @@ public class iCreepDatabaseAdapter {
 		private static final String DATABASE_NAME = "icreepdatabase";
 		
 		//version changes every time the structure of the db changes
-		private static final int DATABASE_VERSION = 6;
+		private static final int DATABASE_VERSION = 8;
 		
 		//define tables (1..6) in db
 		
@@ -303,11 +306,11 @@ public class iCreepDatabaseAdapter {
 			
 		//CREATE_TABLE QUERIES for db		
 		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " INTEGER NOT NULL,"+ MINOR +" INTEGER NOT NULL);";
-		private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID), FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID));";
-		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + LOCATION_ID +" INTEGER, " + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " INTEGER NOT NULL, FOREIGN KEY (Location_ID) REFERENCES Location(Location_ID));";
-		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " DATETIME NOT NULL, " + TIME_LEFT +" DATETIME NOT NULL, " + LOCATION_DATE+ " DATE NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID), FOREIGN KEY (User_ID) REFERENCES User(User_ID));"; 
+		private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
+		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + LOCATION_ID +" INTEGER, " + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " INTEGER NOT NULL, FOREIGN KEY (Location_ID) REFERENCES Location(Location_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
+		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " DATETIME NOT NULL, " + TIME_LEFT +" DATETIME NOT NULL, " + LOCATION_DATE+ " DATE NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON DELETE CASCADE ON UPDATE CASCADE);"; 
 		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME + " VARCHAR(75) NOT NULL," + SURNAME +" VARCHAR(75) NOT NULL, "+ EMAIL +" VARCHAR(100) NOT NULL," + EMPLOYEE_POSITION +" VARCHAR(50) NOT NULL, "+ PHOTO +" VARHCAR(255));";
-		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER, " + AUTO_DELIVERY +" BOOLEAN NOT NULL, " + DELIVERY_TIME +" VARCHAR(10), FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
+		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER UNIQUE, " + AUTO_DELIVERY +" BOOLEAN NOT NULL, " + DELIVERY_TIME +" VARCHAR(10), FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
 
 		public int tableCount = 6;
 		private int createTableQueryCount = 6;
