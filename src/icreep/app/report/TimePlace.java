@@ -5,6 +5,7 @@ public class TimePlace
 	private String location = "";
 	private double hours = 0;
 	private String floor = "";
+	private int zoneID;
 
 	/*
 	 * Pre-Conditions: The String Location and the amount of hours spent and
@@ -15,6 +16,14 @@ public class TimePlace
 		location = loc;
 		hours = h;
 		floor = f;
+	}
+	
+	public TimePlace(String loc, double h, String f, int zID)
+	{
+		location = loc;
+		hours = h;
+		floor = f;
+		zoneID = zID;
 	}
 
 	/*
@@ -49,6 +58,40 @@ public class TimePlace
 	public String getFloor()
 	{
 		return floor;
+	}
+	
+	public void setZoneID(int id) {
+		this.zoneID = id;
+	}
+	
+	public int getZoneID() {
+		return this.zoneID;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		
+		final TimePlace other = (TimePlace) obj;
+		if (zoneID == other.getZoneID()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.zoneID;
 	}
 
 }

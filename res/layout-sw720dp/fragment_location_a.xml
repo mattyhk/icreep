@@ -32,7 +32,6 @@
 		        android:id="@+id/location_a_user"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:text="@string/user_position"
 		        android:textColor="@color/whiteColor"
                 android:textSize="@dimen/sub_heading_text_size_10in"
                 android:layout_marginTop = "@dimen/top_margin"
@@ -53,7 +52,7 @@
     <ImageView
         android:id="@+id/location_a_zone_map"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop = "@dimen/top_margin"

@@ -2,7 +2,9 @@ package icreep.app.location;
 
 import icreep.app.ICreepApplication;
 import icreep.app.R;
+import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
+import icreep.app.db.iCreepDatabaseAdapter;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,8 +29,12 @@ public class LocationFragmentA extends Fragment {
 	private ICreepApplication mApplication;
 	
 	private TextView floorTextView;
+	private TextView userName;
 	private ImageButton home;
 	private ImageView zoneMap;
+	private iCreepDatabaseAdapter iCreepHelper;
+	private int userID;
+	private SharedPreferencesControl spc;
 	
 	
 	public LocationFragmentA() {
@@ -48,10 +54,15 @@ public class LocationFragmentA extends Fragment {
 			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
 		}
 		
+		spc = new SharedPreferencesControl(getActivity());
+		userID = spc.getUserID();
+		iCreepHelper = new iCreepDatabaseAdapter(getActivity());
 		mHandler = new Handler();
 		mApplication = (ICreepApplication) getActivity().getApplicationContext();
 		floorTextView = (TextView) v.findViewById(R.id.location_a_floor_text_view);
 		zoneMap = (ImageView) v.findViewById(R.id.location_a_zone_map);
+		userName = (TextView) v.findViewById(R.id.location_a_user);
+		userName.setText(iCreepHelper.getUserDetails(userID));
 		
 		return v;
 	}
@@ -141,7 +152,7 @@ public class LocationFragmentA extends Fragment {
 	}
 	
 	private void stopRepeatingTask() {
-		mLocChecker.run();
+		mHandler.removeCallbacks(mLocChecker);
 	}
 
 }

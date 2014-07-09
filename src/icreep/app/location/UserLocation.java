@@ -11,6 +11,7 @@ import android.content.Context;
 import android.util.Log;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
+import icreep.app.report.TimePlace;
 
 
 /**
@@ -37,9 +38,7 @@ public class UserLocation {
 	private int currentTempLocation;
 	private int userID;
 	private long lastLocationID = 0;
-	private Boolean hasQueriedDatabase = false;
-	private String lastQueriedDate;
-	private Set<Integer> visitedZones = new HashSet<Integer>();
+	private Set<TimePlace> visitedZones = new HashSet<TimePlace>();
 	
 	private iCreepDatabaseAdapter db;
 	
@@ -48,7 +47,6 @@ public class UserLocation {
 		this.entryCount = 0;
 		this.exitCount = 0;
 		this.db = new iCreepDatabaseAdapter(context);
-		this.lastQueriedDate = getDate();
 		
 		SharedPreferencesControl spc = new SharedPreferencesControl(context);
 		this.userID = spc.getUserID();
@@ -169,6 +167,7 @@ public class UserLocation {
 				else {
 					Log.d("TEST", "New Location was not entered successfully");
 				}
+				
 			}		
 		}
 	}
@@ -202,16 +201,17 @@ public class UserLocation {
 	 * queries the DB to find all of the locations the User has visited that day.
 	 * Else, has no effect.
 	 * Modifies the set of visited zones.
+	 * @return 
 	 */
 	private void findVisitedZones() {
+
+		this.visitedZones.clear();
 		
-		if (lastQueriedDate != getDate() || hasQueriedDatabase == false) {
-			// Check database for visited locations
-			
-			this.lastQueriedDate = getDate();
-			this.hasQueriedDatabase = true;
+		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
+		
+		for (TimePlace tp: visited) {
+			this.visitedZones.add(tp);
 		}
-		
 
 	}
 	
@@ -233,11 +233,17 @@ public class UserLocation {
 	
 	}
 	
-	public Set<Integer> getVisitedZones() { 
+	public Set<TimePlace> getVisitedZones() { 
 		
 		findVisitedZones();
 		
 		return this.visitedZones;
 	}
+	
+	public int getUserID() {
+		return this.userID;
+	}
+	
+	
 
 }

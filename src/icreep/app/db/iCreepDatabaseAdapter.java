@@ -95,6 +95,8 @@ public class iCreepDatabaseAdapter {
 						
 						String loc = cursor.getString(cursor.getColumnIndex(iCreepHelper.DESCRIPTION));
 						
+						int id = cursor.getInt(cursor.getColumnIndex(iCreepHelper.ZONE_ID));
+						
 						//get times from DB and convert to int
 						String timeL = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));						
 						int hoursTimeLeft = Integer.parseInt((timeL.split(":"))[0]);
@@ -113,7 +115,7 @@ public class iCreepDatabaseAdapter {
 								
 						String floor = cursor.getString(cursor.getColumnIndex(iCreepHelper.FLOOR));
 												
-						TimePlace tp = new TimePlace(loc,totalTime,floor);
+						TimePlace tp = new TimePlace(loc,totalTime,floor, id);
 						
 						timePlaces.add(tp);		
 					}while(cursor.moveToNext());
