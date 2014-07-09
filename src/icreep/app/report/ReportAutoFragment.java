@@ -74,6 +74,7 @@ public class ReportAutoFragment extends Fragment
 		save.setEnabled(false); // no changes thus button shouldn't be enabled
 		// the switched will default to not checked
 		switched = (Switch) v.findViewById(R.id.switchBar);
+		switched.setBackground(getResources().getDrawable(R.color.whiteBackground));
 		tp = (TimePicker) v.findViewById(R.id.timePicker);
 		setTheHourMinuteSwitch(); // switch on switched >> this will
 									// automatically update the timepicker
@@ -129,8 +130,10 @@ public class ReportAutoFragment extends Fragment
 						save.setEnabled(true);
 						save.setBackground(getResources().getDrawable(R.drawable.button_style));
 					} else
+					{
 						save.setEnabled(false);
 						save.setBackground(getResources().getDrawable(R.drawable.button_style_disabled));
+					}
 					// will have to remove the automatic time from the database
 				}
 			}
@@ -166,6 +169,8 @@ public class ReportAutoFragment extends Fragment
 				} else {
 					int storehour = 0;
 					int storeminute = 0;
+					save.setEnabled(false);
+					save.setBackground(getResources().getDrawable(R.drawable.button_style_disabled));
 					updateTheTableForAutoMail(storehour, storeminute);
 				}
 			}
