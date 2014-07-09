@@ -22,6 +22,7 @@
     <!--Text-->
     <dimen name="heading_text_size">20sp</dimen>
     <dimen name="sub_heading_text_size">17sp</dimen>
+    <dimen name="floor_text_size">26sp</dimen>
     
       <!--10 Inch Screen-->
       <dimen name="icreep_logo_10in">150sp</dimen>
