@@ -32,9 +32,6 @@ public class MainActivity extends FragmentActivity
 			finishActivityWithMessage("Device does not support Bluetooth LE");
 		}
 		
-		Intent trackingIntent = new Intent(this, BeaconService.class);
-		startService(trackingIntent);
-		
 		SharedPreferencesControl spc = new SharedPreferencesControl(this);
 		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
 		// adapt.clearDatabase();

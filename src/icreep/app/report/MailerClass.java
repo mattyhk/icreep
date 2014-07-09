@@ -39,8 +39,16 @@ public class MailerClass
 	}
 	public void sendMail()
 	{		
+		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(c);
+		ArrayList<String> userDet = adapt.userDetails(userID);
+		if (userDet==null)
+		{
+			icreep.app.Message.message(c, "There are no user details, thus we can't send email");
+			return ;			
+		}
 		
-		String defaultEmailaddress = "vreid@openboxsoftware.com"; // this will come from SQL or SP
+		
+		String defaultEmailaddress = userDet.get(3); // this will come from SQL or SP
 		
 		Intent i = new Intent(Intent.ACTION_SENDTO);
 		i.setType("message/rfc822");
