@@ -41,11 +41,7 @@ public class ReportActivity extends FragmentActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reports);
 		auto = (Button) findViewById(R.id.autoButton);
-		auto.setBackgroundColor(getResources().getColor(
-				R.color.lightGreenForLabels));
 		manual = (Button) findViewById(R.id.manualButton);
-		manual.setBackgroundColor(getResources().getColor(
-				R.color.greyForBackrounds));
 		home = (ImageButton) findViewById(R.id.home_button_report);
 
 		adapt = new iCreepDatabaseAdapter(this);

@@ -26,9 +26,11 @@
 	    android:layout_height="wrap_content"
 	    android:checked="false"
 	    android:textOff="OFF"
-	    android:textOn="ON"	    
 	    android:layout_marginTop="@dimen/top_margin_10in"
-	    android:layout_marginLeft="@dimen/left_margin" 	    
+	    android:layout_marginLeft="@dimen/left_margin"
+	    android:textOn="ON              "	
+	    android:textSize="50sp"
+	    android:background="@color/whiteBackground" 	    
 	    />
 		    
 	<TextView
@@ -69,6 +71,6 @@
 	    android:paddingTop="@dimen/save_button_padding_top_bottom_7in"
 	    android:text="@string/save_report_time"
 	    android:textColor="@color/blackColor"
-	    android:textSize="@dimen/menu_button_text_size_7in" />
+	    android:textSize="@dimen/save_button_text_size_7in" />
 	    
 </LinearLayout>

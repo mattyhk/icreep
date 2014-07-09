@@ -85,7 +85,11 @@ public class ProfileCreationActivity extends Activity
 		userSurname = (EditText) findViewById(R.id.editText2_user_surname);
 		userPosition = (EditText) findViewById(R.id.editText4_user_position);
 		userEmail = (EditText) findViewById(R.id.editText3_user_email);
-
+		
+		userName.setText("Vincent");
+		userSurname.setText("Reid");
+		userPosition.setText("BOSS");
+		userEmail.setText("hobolicious101@gmail.com");
 		// rename helper for db management
 		icreepHelper = new iCreepDatabaseAdapter(this);
 		
@@ -111,9 +115,12 @@ public class ProfileCreationActivity extends Activity
 			userSurname.setText(listDetails.get(1));
 			userPosition.setText(listDetails.get(2));
 			userEmail.setText(listDetails.get(3));
+			if (spc.sharedProfilePicTest() == true)
+			{
 			BitmapController bmc = new BitmapController();
 			originalProfile = bmc.getbitmapImage(); // might need resizing
 			profilePicture.setImageBitmap(originalProfile);
+			}
 		}
 		
 		save_button = (Button) findViewById(R.id.button2_save_user_details);
@@ -176,9 +183,16 @@ public class ProfileCreationActivity extends Activity
 			{
 				doMessage("The updating of profile was unsuccessful, please contact admin");
 			} else {
-				BitmapController bmc = new BitmapController();
-				bmc.storeImage(profilePic);
-				originalProfile = profilePic;
+				if (profilePic != null)
+				{
+					BitmapController bmc = new BitmapController();
+					bmc.storeImage(profilePic);
+					originalProfile = profilePic;
+					if (spc.sharedProfilePicTest() == false)
+					{
+					spc.writeProfilePicName("profilePic.png");
+					}
+				}
 				listDetails.clear();
 				listDetails.add(name);
 				listDetails.add(surname);
@@ -202,11 +216,15 @@ public class ProfileCreationActivity extends Activity
 			
 			// check if insertion was successful
 			if (id > 0) {
-				BitmapController bmc = new BitmapController();
-				bmc.storeImage(profilePic);
-				originalProfile = profilePic;
-				doMessage("User details saved");
-				spc.writeProfilePicName("profilePic.png");
+				if (profilePic != null)
+				{
+					BitmapController bmc = new BitmapController();
+					bmc.storeImage(profilePic);
+					originalProfile = profilePic;
+					spc.writeProfilePicName("profilePic.png");
+				}
+				
+				doMessage("User details saved");				
 				spc.writeNewUserID((int)id);
 				switchToMainMenu();
 			} else {
@@ -336,8 +354,9 @@ public class ProfileCreationActivity extends Activity
             }
             else
             {
-            	return generated;
+            	finalBit = generated;            	
             }
+            finalBit = Bitmap.createScaledBitmap(finalBit, 320, 240, false);
         	return finalBit;
         }
         

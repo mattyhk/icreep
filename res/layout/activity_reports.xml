@@ -71,7 +71,7 @@
 		    android:layout_marginRight="2dp"
 		    android:layout_marginTop="@dimen/top_margin"
 		    android:layout_weight="1"
-		    android:background="@color/lightGreenForLabels"
+		    android:background="@drawable/reports_buttons_on"
 		    android:fontFamily="courier new"
 		    android:text="@string/autoButtonText" />
 
@@ -85,7 +85,7 @@
 	        android:layout_weight="1"
 	        android:fontFamily="courier new"
 	        android:text="@string/manualButtonText" 
-	        android:background = "@color/greyForBackrounds"	/>
+	        android:background = "@drawable/reports_button_off"/>
 	    
 	    </LinearLayout>
 	    

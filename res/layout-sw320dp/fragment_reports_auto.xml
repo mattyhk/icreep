@@ -27,7 +27,9 @@
 	    android:layout_marginTop="@dimen/top_margin_3.7in" 
 	    android:checked="false" 
 	    android:textOff="OFF" 
-	    android:textOn="ON"/>
+	    android:textOn="ON              "	
+	    android:textSize="45sp"
+	    android:background="@color/whiteBackground"/>
 		    
 	<TextView
         android:id="@+id/DeliveryTime"
