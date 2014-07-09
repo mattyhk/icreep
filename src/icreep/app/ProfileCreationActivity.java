@@ -336,8 +336,9 @@ public class ProfileCreationActivity extends Activity
             }
             else
             {
-            	return generated;
+            	finalBit = generated;            	
             }
+            finalBit = Bitmap.createScaledBitmap(finalBit, 320, 240, false);
         	return finalBit;
         }
         
