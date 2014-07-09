@@ -37,9 +37,9 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	
 	private IBeaconManager beaconManager;
 	private ICreepApplication mApplication;
-	
+	private UserLocation userLocation;
 	private BeaconCollection beaconCollection = new BeaconCollection();
-	private UserLocation userLocation = new UserLocation(this);
+	
 	
 	/*
 	 *  Handles messages from the thread started by the service
@@ -71,7 +71,10 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	
 	@Override
 	public void onCreate() {
+		Log.d("TEST", "Service onCreate");
 		mApplication = (ICreepApplication) getApplicationContext();
+		this.userLocation = new UserLocation(this);
+		
 		userLocation.setCurrentLocation(mApplication.getCurrentLocation());
 		
 		// Start the background thread running the service
