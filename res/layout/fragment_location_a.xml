@@ -61,7 +61,7 @@
         android:background="@color/darkGreyForBackgrounds"
         android:gravity="center"
         android:padding = "25dp"
-        android:layout_alignBottom="@+id/location_a_floor_text_view"/>
+        android:layout_below="@+id/location_a_floor_text_view"/>
 
     <TextView
         android:id="@+id/location_a_floor_text_view"
