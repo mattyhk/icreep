@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class iCreepDatabaseAdapter {
 	
-	iCreepHelper helper;
+	static iCreepHelper helper;
 	Context c;
 	
 	String userDetails;
@@ -349,7 +349,7 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	//function to create Beacons
-	public void createBeacons(){
+	public static void createBeacons(){
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
@@ -375,7 +375,7 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	//create zones and match with the relevant Beacon
-	public void createZone(){
+	public static void createZone(){
 		createBeacons();
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
@@ -410,7 +410,7 @@ public class iCreepDatabaseAdapter {
 		private static final String DATABASE_NAME = "icreepdatabase";
 		
 		//version changes every time the structure of the db changes
-		private static final int DATABASE_VERSION = 11;
+		private static final int DATABASE_VERSION = 12;
 		
 		//define tables (1..6) in db
 		
@@ -490,7 +490,10 @@ public class iCreepDatabaseAdapter {
 			
 			for(int i=0; i<createTableQueryCount; i++){
 				try {
+					//create tables
 					db.execSQL(createTableQueries[i]);
+					//create beacons and zones
+					iCreepDatabaseAdapter.createZone();
 				} catch (SQLException e) {
 					//display error on toast if appeared
 					Message.message(context, ""+e);
