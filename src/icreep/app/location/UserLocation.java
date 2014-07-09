@@ -209,8 +209,10 @@ public class UserLocation {
 		
 		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
 		
-		for (TimePlace tp: visited) {
-			this.visitedZones.add(tp);
+		if (visited != null) {
+			for (TimePlace tp: visited) {
+				this.visitedZones.add(tp);
+			}
 		}
 
 	}

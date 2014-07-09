@@ -71,6 +71,8 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
         listView.setOnItemClickListener(this);
         
         mHandler = new Handler();
+        
+        updateList();
 
 		return v;
 	}
