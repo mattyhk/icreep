@@ -24,7 +24,8 @@
         
         <activity
             android:name="icreep.app.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +36,8 @@
         <activity
             android:name="icreep.app.ProfileCreationActivity"
             android:label="@string/profile"
-            android:parentActivityName="icreep.app.MainActivity" >
+            android:parentActivityName="icreep.app.MainActivity" 
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="icreep.app.MainActivity" />
@@ -44,7 +46,8 @@
         <activity
             android:name="icreep.app.IcreepMenu"
             android:label="@string/title_activity_icreep_menu"
-            android:parentActivityName="icreep.app.MainActivity" >
+            android:parentActivityName="icreep.app.MainActivity" 
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="icreep.app.MainActivity" />
@@ -52,7 +55,8 @@
         
         <activity
 	        android:name="icreep.app.location.LocationActivity"
-    	    android:label="@string/title_activity_location" >
+    	    android:label="@string/title_activity_location" 
+    	    android:screenOrientation="portrait">
         	<meta-data
             	android:name="android.support.PARENT_ACTIVITY"
             	android:value="icreep.app.MainActivity" />
@@ -61,7 +65,8 @@
         <activity
             android:name="icreep.app.report.ReportActivity"
             android:label="@string/report"
-            android:parentActivityName="icreep.app.MainActivity" >
+            android:parentActivityName="icreep.app.MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="icreep.app.MainActivity" />
@@ -70,7 +75,8 @@
         <activity
             android:name="icreep.app.timetracker.TimeTrackerActivity"
             android:label="@string/title_activity_time_tracker" 
-            android:parentActivityName="icreep.app.MainActivity" >
+            android:parentActivityName="icreep.app.MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="icreep.app.MainActivity" />
