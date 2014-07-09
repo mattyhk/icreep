@@ -150,7 +150,7 @@
         android:fontFamily="courier new"
         android:onClick="saveDetails"
         android:text="@string/save_user_details"
-        android:textSize="@dimen/menu_button_text_size_7in"
+        android:textSize="@dimen/save_button_text_size_7in"
         android:paddingLeft="@dimen/save_button_padding_left_right_7in"
         android:paddingRight="@dimen/save_button_padding_left_right_7in"
         android:paddingTop="@dimen/save_button_padding_top_bottom_7in"

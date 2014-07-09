@@ -69,6 +69,6 @@
 	    android:paddingTop="@dimen/save_button_padding_top_bottom_7in"
 	    android:text="@string/save_report_time"
 	    android:textColor="@color/blackColor"
-	    android:textSize="@dimen/menu_button_text_size_7in" />
+	    android:textSize="@dimen/save_button_text_size_7in" />
 	    
 </LinearLayout>
