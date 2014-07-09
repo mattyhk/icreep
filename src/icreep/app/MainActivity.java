@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 import icreep.app.R;
-import icreep.app.beacon.BeaconService;
 import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.report.AlarmControlClass;
 

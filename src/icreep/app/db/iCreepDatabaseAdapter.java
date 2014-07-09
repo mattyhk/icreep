@@ -1,7 +1,5 @@
 package icreep.app.db;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import icreep.app.Message;
@@ -9,7 +7,6 @@ import icreep.app.report.TimePlace;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -219,7 +216,6 @@ public class iCreepDatabaseAdapter {
 			if (cursor.moveToFirst()) {
 
 				int index = cursor.getColumnIndex("Auto_Delivery");
-				int index2 = cursor.getColumnIndex(iCreepHelper.DELIVERY_TIME);
 				int val = cursor.getInt(index);
 				String time = cursor.getString(cursor
 						.getColumnIndex(iCreepHelper.DELIVERY_TIME));
