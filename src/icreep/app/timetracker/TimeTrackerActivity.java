@@ -1,12 +1,8 @@
 package icreep.app.timetracker;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import icreep.app.R;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
-import android.app.Activity;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -15,12 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
 public class TimeTrackerActivity extends FragmentActivity implements TabListener {
 	
@@ -110,9 +101,6 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 class MyAdapter extends FragmentPagerAdapter {
 
 	private final int NUMSCREENS = 2;
-	
-	// Provides reference to instantiated fragments, allows for call in onPageSelected
-	private final Map<Integer, Fragment> mPageReferenceMap = new HashMap<Integer, Fragment>();
 
 	public MyAdapter(FragmentManager fm) {
 		super(fm);
@@ -125,11 +113,9 @@ class MyAdapter extends FragmentPagerAdapter {
 
 		if (arg0 == 0) {
 			fragment = new TimeTrackerFragmentA();
-			mPageReferenceMap.put(arg0, fragment);
 		}
 		if (arg0 == 1) {
 			fragment = new TimeTrackerFragmentB();
-			mPageReferenceMap.put(arg0, fragment);
 		}
 
 		return fragment;
@@ -143,9 +129,5 @@ class MyAdapter extends FragmentPagerAdapter {
 	@Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
 		super.destroyItem(container, position, object);
-	}
-	
-	public Fragment getFragment(int position){
-		return mPageReferenceMap.get(position);
 	}
 }

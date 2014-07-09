@@ -1,9 +1,6 @@
 package icreep.app.timetracker;
 
 import icreep.app.R;
-import icreep.app.location.FloorItem;
-import icreep.app.location.ListItem;
-import icreep.app.location.ZoneItem;
 import icreep.app.report.TimePlace;
 
 import java.util.ArrayList;
@@ -17,7 +14,6 @@ import android.widget.TextView;
 
 public class TimeTrackerListAdapter extends ArrayAdapter<TimePlace> {
 	
-	private Context context;
 	private ArrayList<TimePlace> zones;
 	private LayoutInflater vi;
 	
@@ -25,7 +21,6 @@ public class TimeTrackerListAdapter extends ArrayAdapter<TimePlace> {
 		
 		super(context, 0, zones);
 		
-		this.context = context;
 		this.zones = zones;
 		vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);		
 	}
