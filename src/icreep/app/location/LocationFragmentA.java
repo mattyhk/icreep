@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,21 +60,21 @@ public class LocationFragmentA extends Fragment {
 	private void updateImage(){
 		int currentLocation = mApplication.getCurrentLocation();
 		Integer drawID = null;
-		
+		Log.d("TEST", "Updating Image with current location as " + currentLocation);
 		if (currentLocation == -2) {
 			// Location is unknown
-			drawID = getActivity().getResources()
-						.getIdentifier("zones_all", "drawable", getActivity().getPackageName());
+			// drawID = getActivity().getResources()
+//						.getIdentifier("zones_all", "drawable", getActivity().getPackageName());
 		}
 		
 		else if (currentLocation == -1) {
 			// Location is out of office
-			drawID = getActivity().getResources()
-						.getIdentifier("zones_outdoor", "drawable", getActivity().getPackageName());
+			// drawID = getActivity().getResources()
+//						.getIdentifier("zones_outdoor", "drawable", getActivity().getPackageName());
 		}
 		
 		else {
-			drawID = getActivity().getResources()
+			 drawID = getActivity().getResources()
 						.getIdentifier(FILE_FRAGMENT + currentLocation, "drawable", getActivity()
 							.getPackageName());
 		}
@@ -87,7 +88,14 @@ public class LocationFragmentA extends Fragment {
 	 * Update the current floor displayed
 	 */
 	private void updateFloor() {
-		floorTextView.setText("Floor " + mApplication.getCurrentFloor());
+		Log.d("TEST", "Updating floor with " + mApplication.getCurrentFloor());
+		if (floorTextView != null) {
+			floorTextView.setText("Floor " + mApplication.getCurrentFloor());
+		}
+		else {
+			Log.d("TEST", "floor text view is null");
+		}
+		
 	}
 	
 	/**

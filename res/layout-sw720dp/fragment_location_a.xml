@@ -62,12 +62,11 @@
         android:padding = "25dp" />
 
     <TextView
-        android:id="@+id/location_a_textView3"
+        android:id="@+id/location_a_floor_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/location_a_zone_map"
         android:layout_centerHorizontal="true"
-        android:text="@string/second_floor"
         android:textColor="@color/whiteColor"
         android:textSize="@dimen/sub_heading_text_size_10in" />
 
