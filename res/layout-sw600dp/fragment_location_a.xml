@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkGreyForBackgrounds"
+    android:orientation="vertical"
+    tools:context="icreep.app.location.LocationFragmentA" >
+	
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+        <LinearLayout 
+            android:layout_height="wrap_content"
+            android:layout_width="0dp" 
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp" >
+            
+            <TextView
+		        android:id="@+id/location_a_title"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"		       
+		        android:text="@string/title_location_current" 
+                android:textColor="@color/lightGreenForLabels"
+                android:textSize="@dimen/heading_text_size_10in"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin"/>
+            
+            <TextView
+		        android:id="@+id/location_a_user"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/user_position"
+		        android:textColor="@color/whiteColor"
+                android:textSize="@dimen/sub_heading_text_size_10in"
+                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginLeft = "@dimen/left_margin" />
+            
+        </LinearLayout>
+	
+        <ImageButton
+	        android:id="@+id/home_button_location_current"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:background="@drawable/home"
+	        android:contentDescription="@string/home" 
+	        android:layout_gravity="right" />
+        
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/location_a_zone_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "@dimen/top_margin"
+        android:contentDescription="@string/zone_map"
+        android:background="@color/darkGreyForBackgrounds"
+        android:padding = "25dp" />
+
+    <TextView
+        android:id="@+id/location_a_textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/location_a_zone_map"
+        android:layout_centerHorizontal="true"
+        android:text="@string/second_floor"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/sub_heading_text_size_10in" />
+
+</RelativeLayout>

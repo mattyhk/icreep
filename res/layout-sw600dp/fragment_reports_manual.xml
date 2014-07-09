@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/reportManualLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background = "@color/darkGreyForBackgrounds">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginTop="@dimen/top_margin"
+        android:gravity="center"
+        android:text="@string/manualDelivery"
+        android:textColor="@color/lightGreenForLabels"
+        android:textSize="@dimen/sub_heading_text_size_7in" />
+
+    <Button
+        android:id="@+id/sendReportButton"
+        android:layout_width="@dimen/menu_button_width_7in"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingTop="@dimen/menu_button_padding_top_bottom_7in"
+        android:paddingBottom="@dimen/menu_button_padding_top_bottom_7in"
+        android:background="@drawable/button_style"
+        android:enabled="true"
+        android:fontFamily="courier new"
+        android:text="@string/sendReportText"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/menu_button_text_size_7in" />
+
+</RelativeLayout >

@@ -176,7 +176,9 @@ public class ProfileCreationActivity extends Activity
 			{
 				doMessage("The updating of profile was unsuccessful, please contact admin");
 			} else {
-
+				BitmapController bmc = new BitmapController();
+				bmc.storeImage(profilePic);
+				originalProfile = profilePic;
 				listDetails.clear();
 				listDetails.add(name);
 				listDetails.add(surname);
@@ -197,9 +199,12 @@ public class ProfileCreationActivity extends Activity
 		if (isValidEmail(email)) {
 			long id = icreepHelper.enterNewUser(name, surname, position, email,
 					"profilePic.png"); // default profile pic filename
-
+			
 			// check if insertion was successful
 			if (id > 0) {
+				BitmapController bmc = new BitmapController();
+				bmc.storeImage(profilePic);
+				originalProfile = profilePic;
 				doMessage("User details saved");
 				spc.writeProfilePicName("profilePic.png");
 				spc.writeNewUserID((int)id);

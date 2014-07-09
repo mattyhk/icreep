@@ -24,7 +24,7 @@
 		        android:layout_height="wrap_content"
 		        android:text="@string/outside"
 		        android:textColor="@color/lightGreenForLabels"
-                android:textSize="@dimen/heading_text_size_10in"
+                android:textSize="@dimen/heading_text_size_7in"
                 android:layout_marginTop = "@dimen/top_margin"
                 android:layout_marginLeft = "@dimen/left_margin"/>
 	        
@@ -34,7 +34,7 @@
 		        android:layout_height="wrap_content"
 		        android:text="@string/user_position"
 		        android:textColor="@color/whiteBackground"
-                android:textSize="@dimen/sub_heading_text_size_10in"
+                android:textSize="@dimen/sub_heading_text_size_7in"
                 android:layout_marginTop = "@dimen/top_margin"
                 android:layout_marginLeft = "@dimen/left_margin" />
 	        
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:text="@string/in_office_label"
             android:textColor="@color/whiteColor"
-            android:textSize="@dimen/in_out_office_labels_10in" />
+            android:textSize="@dimen/in_out_office_labels_7in" />
         
         <TextView
             android:id="@+id/out_office"
@@ -88,7 +88,7 @@
             android:textColor="@color/whiteColor"
             android:gravity="right" 
             android:text="@string/out_office_label"
-            android:textSize="@dimen/in_out_office_labels_10in"/>
+            android:textSize="@dimen/in_out_office_labels_7in"/>
 
     </LinearLayout>
     
@@ -110,7 +110,7 @@
             android:textColor="@color/whiteColor"
             android:layout_gravity="left" 
             android:text="@string/timeInOffice"
-            android:textSize="@dimen/in_out_office_labels_10in"/>
+            android:textSize="@dimen/in_out_office_labels_7in"/>
         
         <TextView
             android:id="@+id/time_out_office"
@@ -119,7 +119,7 @@
             android:textColor="@color/whiteColor"
             android:gravity="right" 
             android:text="@string/timeOutOffice"
-            android:textSize="@dimen/in_out_office_labels_10in"/>
+            android:textSize="@dimen/in_out_office_labels_7in"/>
 
     </LinearLayout>
 

@@ -135,10 +135,12 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		
 		double total = 0;
 		
-		for(TimePlace tp: timePlaces){
-			double time = tp.getTimeSpent();
-			total+= time;
-		}		
+		if(timePlaces != null){
+			for(TimePlace tp: timePlaces){
+				double time = tp.getTimeSpent();
+				total+= time;
+			}
+		}
 		
 		//send this total to TimeTracker Activity so that fragment B may access it from there
 		TimeTrackerActivity tTA = (TimeTrackerActivity) this.getActivity();
