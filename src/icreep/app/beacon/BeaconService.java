@@ -39,7 +39,7 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	private ICreepApplication mApplication;
 	
 	private BeaconCollection beaconCollection = new BeaconCollection();
-	private UserLocation userLocation = new UserLocation();
+	private UserLocation userLocation = new UserLocation(this);
 	
 	/*
 	 *  Handles messages from the thread started by the service

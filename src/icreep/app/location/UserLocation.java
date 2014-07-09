@@ -1,5 +1,14 @@
 package icreep.app.location;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.util.Log;
+import icreep.app.SharedPreferencesControl;
+import icreep.app.db.iCreepDatabaseAdapter;
+
 
 /**
  * A class that handles the current location of the user. The object receives 
@@ -23,11 +32,19 @@ public class UserLocation {
 	private int entryCount;
 	private int exitCount;
 	private int currentTempLocation;
+	private int userID;
+	private long lastLocationID = 0;
 	
-	public UserLocation() {
+	private iCreepDatabaseAdapter db;
+	
+	public UserLocation(Context context) {
 		this.currentLocation = UNKNOWN;
 		this.entryCount = 0;
 		this.exitCount = 0;
+		this.db = new iCreepDatabaseAdapter(context);
+		
+		SharedPreferencesControl spc = new SharedPreferencesControl(context);
+		this.userID = spc.getUserID();
 	}
 	
 	
@@ -93,6 +110,19 @@ public class UserLocation {
 			
 			// Update the DB - update the last location entry's exit time with the current time
 			// Need to make sure the DB has a last entry with empty exit time
+			if (this.lastLocationID > 0) {
+				
+				String time = getTime();
+				
+				if (this.db.updateExitTime(time, this.lastLocationID)) {
+					Log.d("TEST", "Exit time was updated correctly");
+					this.lastLocationID = 0;
+				}
+				
+				else {
+					Log.d("TEST", "Exit time was not updated correctly");
+				}
+			}
 			
 			// The user's current location has changed
 			this.currentLocation = UNKNOWN;
@@ -112,30 +142,48 @@ public class UserLocation {
 			
 			this.currentLocation = this.currentTempLocation;
 			
-			// Update the DB - ensure the DB is in order before adding new location entry
+			if (this.currentLocation != UNKNOWN) {
+				
+				String time = getTime();
+				String date = getDate();
+				
+				long tempID = this.db.addNewLocation(this.userID, this.currentLocation, time, date);
+				
+				// Update the DB - ensure the DB is in order before adding new location entry
+				if (tempID > 0) {
+					Log.d("TEST", "Enter New Location Successfully");
+					this.lastLocationID = tempID;
+					
+				}
+				else {
+					Log.d("TEST", "New Location was not entered successfully");
+				}
+			}		
 		}
-		
 	}
-
+	
 	/**
-	 * Starts tracking the user's location Starts a Handler to schedule the
-	 * repeating task. Checks if a user's zone has not changed for at least some
-	 * minimum number of cycles If the zone has not changed, the user is
-	 * determined to be in that zone Checks if that zone is different from
-	 * currentZone If it is different, the location database is updated to
-	 * reflect the change by editing the exit time of the last entry, and
-	 * inserting a new entry with the entry time
+	 * Returns the current time in 24 hour format as "22:10"
+	 * @return time
 	 */
-	public void startTracking() {
-
+	private String getTime() {
+		Calendar c = Calendar.getInstance();
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		String time = "" + hour + ":" + minute;
+		return time;
 	}
-
+	
 	/**
-	 * Stops tracking the user's location The last entry in the location
-	 * database is updated with the exit time
+	 * Returns the current date
+	 * @return date
 	 */
-	public void stopTracking() {
-
+	@SuppressLint("SimpleDateFormat") 
+	private String getDate() {
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String formatted = format.format(c.getTime());
+		return formatted;
 	}
 	
 	/*******************

@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class iCreepDatabaseAdapter {
 	
@@ -255,6 +256,63 @@ public class iCreepDatabaseAdapter {
 		
 		return db.insert(iCreepHelper.TABLE_NAME6,null, cVs) > 0;
 
+	}
+	
+	
+	public long addNewLocation(int userID, int zoneID, String time, String date) {
+		ContentValues cV = new ContentValues();
+		
+		cV.put(iCreepHelper.TIME_ENTERED, time);
+		cV.put(iCreepHelper.TIME_LEFT, "");
+		cV.put(iCreepHelper.LOCATION_DATE, date);
+		cV.put(iCreepHelper.ZONE_ID, zoneID);
+		cV.put(iCreepHelper.USER_ID, userID);
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		long success = db.insert(iCreepHelper.TABLE_NAME4, null, cV);
+		
+		if (success > 0) {
+			return success;
+		}
+		
+		else {
+			// Failed to enter
+			return -1;
+		}
+	}
+	
+	public boolean updateExitTime(String time, long lastEntryID) {
+		ContentValues cV = new ContentValues();
+		
+		cV.put(iCreepHelper.TIME_LEFT, time);
+		
+		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		String query = "SELECT Location.Time_Left FROM Location WHERE Location.Location_ID ="+lastEntryID+";";
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				String timeLeft = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));
+				if (timeLeft == "") {
+					String[] args = {""+lastEntryID};
+					db.update(iCreepHelper.TABLE_NAME4, cV, iCreepHelper.LOCATION_ID + "=?", args);
+					return true;
+				}
+				else {
+					Log.d("TEST", "Time Left was not empty");
+				}
+			}
+			else {
+				Log.d("TEST", "Cursor is empty");
+			}
+		}
+		else {
+			Log.d("TEST", "Cursor is null");
+		}
+		
+		return false;
 	}
 	
 	
