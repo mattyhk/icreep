@@ -177,35 +177,53 @@ public class ProfileCreationActivity extends Activity
 	
 	public void doUpdateOfProfile(String name, String surname,
 			String position,String email) {
+		
 		if (isValidEmail(email)) {
-			if (icreepHelper.updateUserDetails(name, surname, position, email,
-					"profilePic.png",userID) == false) // will add the correct pp name later
-			{
-				doMessage("The updating of profile was unsuccessful, please contact admin");
-			} else {
-				if (profilePic != null)
-				{
-					BitmapController bmc = new BitmapController();
-					bmc.storeImage(profilePic);
-					originalProfile = profilePic;
-					if (spc.sharedProfilePicTest() == false)
-					{
-					spc.writeProfilePicName("profilePic.png");
+			if (isValidName(name)) {
+				if (isValidSurname(surname)) {
+					if (isValidPosition(position)) {
+						if (icreepHelper.updateUserDetails(name, surname,
+								position, email, "profilePic.png", userID) == false) // will
+																						// add
+																						// the
+																						// correct
+																						// pp
+																						// name
+																						// later
+						{
+							doMessage("The updating of profile was unsuccessful, please contact admin");
+						} else {
+							if (profilePic != null) {
+								BitmapController bmc = new BitmapController();
+								bmc.storeImage(profilePic);
+								originalProfile = profilePic;
+								if (spc.sharedProfilePicTest() == false) {
+									spc.writeProfilePicName("profilePic.png");
+								}
+							}
+							listDetails.clear();
+							listDetails.add(name);
+							listDetails.add(surname);
+							listDetails.add(position);
+							listDetails.add(email);
+							doMessage("Updating of your profile was successful");
+						}
+					} else {
+						doMessage("Invalid position, please enter valid employee position");
+						doMessage("example: Developer");
 					}
+				} else {
+					doMessage("Invalid surname, please enter valid surname");
 				}
-				listDetails.clear();
-				listDetails.add(name);
-				listDetails.add(surname);
-				listDetails.add(position);
-				listDetails.add(email);
-				doMessage("Updating of your profile was successful");
+			} else {
+				doMessage("Invalid name, please enter valid name");
 			}
-		}else {
+		} else {
 			doMessage("Invalid email address, please use valid email address");
 			doMessage("example: user1@gmail.com");
-			return;
 		}
 	}
+
 	
 	public void doNewInsertionOfData(String name, String surname,
 			String position, String email)
@@ -238,20 +256,16 @@ public class ProfileCreationActivity extends Activity
 					}else{
 						doMessage("Invalid position, please enter valid employee position");
 						doMessage("example: Developer");
-						return;
 					}
 				}else{
 					doMessage("Invalid surname, please enter valid surname");
-					return;
 				}
 			}else{
 				doMessage("Invalid name, please enter valid name");
-				return;
 			}
 		} else {
 			doMessage("Invalid email address, please use valid email address");
 			doMessage("example: user1@gmail.com");
-			return;
 		}
 		
 	}
