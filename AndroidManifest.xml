@@ -102,7 +102,7 @@
 	        </intent-filter>
 	    </service>  
         
-	    <receiver android:name="icreep.app.report.ListenToAlarmForAutoEmail"/>
+	    <receiver android:name="icreep.app.report.AutoAlarmListener"/>
     </application>
 
 </manifest>
