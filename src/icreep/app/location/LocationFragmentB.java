@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +82,6 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		Log.d("TEST", "Clicked");
 		TimePlace item = (TimePlace) zones.get(position);
 		Toast t = new Toast(getActivity());
 		LayoutInflater inflater = getActivity().getLayoutInflater();
