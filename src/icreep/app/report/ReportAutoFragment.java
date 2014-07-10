@@ -291,6 +291,7 @@ public class ReportAutoFragment extends Fragment
 		// call the db update
 		String reportTime = adapt.getReportTime(userID);
 		boolean updated = false ;
+		boolean wasntUpdated = false;
 		if (reportTime != null) {
 			
 			if (adapt.updateDeliveryTime(newTime, userID, newAuto) == true) {
@@ -318,6 +319,7 @@ public class ReportAutoFragment extends Fragment
 			}else
 			{
 				icreep.app.Message.message(getActivity(),"The auto time was set unsuccessful");
+				wasntUpdated = true ;
 			}
 		}
 		if (updated == true)
@@ -334,7 +336,10 @@ public class ReportAutoFragment extends Fragment
 			}
 		}else
 		{
+			if (wasntUpdated == false)
+			{
 			acc.turnOffAlarm();
+			}
 		}
 	}
 
