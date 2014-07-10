@@ -32,6 +32,7 @@ public class ReportAutoFragment extends Fragment
 	AlarmControlClass acc = new AlarmControlClass();
 	iCreepDatabaseAdapter adapt = null;
 	int userID = -1;
+	AlarmControlClass acc;
 	// the following is how you get your text pixels to the correct size
 	// depending on the screen
 	// 16*getResources().getDisplayMetrics().density
@@ -66,7 +67,7 @@ public class ReportAutoFragment extends Fragment
 		adapt = new iCreepDatabaseAdapter(getActivity());
 		View v = inflater.inflate(R.layout.fragment_reports_auto, container,
 				false);
-		
+		acc = new AlarmControlClass();
 		SharedPreferencesControl spc = new SharedPreferencesControl(getActivity());
 		userID = spc.getUserID();
 		
@@ -331,6 +332,9 @@ public class ReportAutoFragment extends Fragment
 				acc.sendAutoEmailRepeat();
 				Message.message(getActivity(), "Alarm is set");
 			}
+		}else
+		{
+			acc.turnOffAlarm();
 		}
 	}
 
