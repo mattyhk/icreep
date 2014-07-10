@@ -18,7 +18,7 @@ import android.widget.TextView;
 @SuppressLint("DefaultLocale") public class TimeTrackerFragmentB extends Fragment {
 	
 	private int INTERVAL = 10000;
-	private double TIMEOUT = 1.0 * 60 * 60;
+	private double TIMEOUT = 8.0 * 60 * 60;
 	
 	private ProgressBar mProgressBar;
 	private ImageButton home;
@@ -127,7 +127,8 @@ import android.widget.TextView;
 	 * @param inOffice - time spent in the office
 	 * @return percentage - the percentage rounded to nearest integer
 	 */
-	private double calcPercentageTime(double inOffice) { 
+	private double calcPercentageTime(double inOffice) {
+		inOffice = inOffice % (8.0 * 60 * 60);
 		return (inOffice/TIMEOUT)*100.0;
 	}
 	
