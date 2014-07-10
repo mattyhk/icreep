@@ -137,5 +137,39 @@ public class Sorting
 		return toReturn;
 
 	}
+	
+	public ArrayList<TimePlace> join(ArrayList<TimePlace> in)
+	{
+		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
+		if (in.size() == 0) {
+			return finalSortedTimePlaces;
+		}
+		if (in.size() > 1) {
+			TimePlace toAdd = in.get(0);
+//			Log.d("TEST", "toAdd is " + toAdd.getZoneID());
+			in.remove(0);
+			
+			for(TimePlace tp : in)
+			{
+				if(tp.equals(toAdd))
+				{
+					toAdd.increaseTimeSpent(tp.getTimeSpent());
+				} 
+				else{
+					finalSortedTimePlaces.add(toAdd);
+					toAdd=tp;
+				}
+			}
+			finalSortedTimePlaces.add(toAdd);
+		}else 
+			{
+				return in;
+			}
+			
+			
+		
+	return finalSortedTimePlaces;
+	}
+	
 
 }

@@ -100,7 +100,7 @@ public class MailerClass
 		}
 		Sorting sorter = new Sorting();
 		list = sorter.InsertionSort(list);
-
+		list = sorter.join(list);
 		int max = 0;
 		for (TimePlace t : list) {
 			if (max < t.getLocation().length()) {
