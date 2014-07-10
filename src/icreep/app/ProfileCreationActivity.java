@@ -210,26 +210,42 @@ public class ProfileCreationActivity extends Activity
 	public void doNewInsertionOfData(String name, String surname,
 			String position, String email)
 	{
-		if (isValidEmail(email)) {
-			long id = icreepHelper.enterNewUser(name, surname, position, email,
-					"profilePic.png"); // default profile pic filename
-			
-			// check if insertion was successful
-			if (id > 0) {
-				if (profilePic != null)
-				{
-					BitmapController bmc = new BitmapController();
-					bmc.storeImage(profilePic);
-					originalProfile = profilePic;
-					spc.writeProfilePicName("profilePic.png");
+		if (isValidEmail(email)){
+			if(isValidName(name)){
+				if(isValidSurname(surname)){
+					if(isValidPosition(position)) {							
+						long id = icreepHelper.enterNewUser(name, surname, position, email,
+								"profilePic.png"); // default profile pic filename
+						
+						// check if insertion was successful
+						if (id > 0) {
+							if (profilePic != null)
+							{
+								BitmapController bmc = new BitmapController();
+								bmc.storeImage(profilePic);
+								originalProfile = profilePic;
+								spc.writeProfilePicName("profilePic.png");
+							}
+							
+							doMessage("User details saved");				
+							spc.writeNewUserID((int)id);
+							iCreepDatabaseAdapter.createZone();
+							switchToMainMenu();
+						} else {
+								doMessage("User details not  saved, please contact ADMIN");
+								return;
+							}
+					}else{
+						doMessage("Invalid position, please enter valid employee position");
+						doMessage("example: Developer");
+						return;
+					}
+				}else{
+					doMessage("Invalid surname, please enter valid surname");
+					return;
 				}
-				
-				doMessage("User details saved");				
-				spc.writeNewUserID((int)id);
-				iCreepDatabaseAdapter.createZone();
-				switchToMainMenu();
-			} else {
-				doMessage("User details not  saved, please contact ADMIN");
+			}else{
+				doMessage("Invalid name, please enter valid name");
 				return;
 			}
 		} else {
@@ -237,6 +253,7 @@ public class ProfileCreationActivity extends Activity
 			doMessage("example: user1@gmail.com");
 			return;
 		}
+		
 	}
 
 	// listener to adddUser event - let's add new user to db
@@ -266,10 +283,36 @@ public class ProfileCreationActivity extends Activity
 	// function to validate email addresses against an email Regular Expression
 	public boolean isValidEmail(String email)
 	{
-
 		String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 		if (email.matches(emailRegex)) {
+			return true;
+		}
+		return false;
+	}
+	
+	// function to validate name against a name Regular Expression
+	public boolean isValidName(String name){
+		String nameRegex = "[A-Z][a-zA-Z]*";
+		if(name.matches(nameRegex)){
+			return true;
+		}
+		return false;
+	}
+	
+	// function to validate surname against a surname Regular Expression
+	public boolean isValidSurname(String surname){
+		String surnameRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*" ;
+		if(surname.matches(surnameRegex)){
+			return true;
+		}
+		return false;
+	}
+	
+	// function to validate employee position against a employee position Regular Expression
+	public boolean isValidPosition(String position){
+		String employeePosRegex = "[A-Z][a-z]+( [A-Z][a-z]+)?";
+		if(position.matches(employeePosRegex)){
 			return true;
 		}
 		return false;
