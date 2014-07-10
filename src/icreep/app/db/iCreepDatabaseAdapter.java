@@ -101,17 +101,20 @@ public class iCreepDatabaseAdapter {
 						if (!timeL.equals("")){
 							int hoursTimeLeft = Integer.parseInt((timeL.split(":"))[0]);
 							int minsTimeLeft = Integer.parseInt((timeL.split(":"))[1]);
+							int secsTimeLeft = Integer.parseInt((timeL.split(":"))[2]);
 							
 							String timeE = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_ENTERED));
 							int hoursTimeEntered = Integer.parseInt((timeE.split(":"))[0]);
 							int minsTimeEntered = Integer.parseInt((timeE.split(":"))[1]);
-															
+							int secsTimeEntered = Integer.parseInt((timeE.split(":"))[2]);
+							
 							//subtract times;
 							int totalHours = hoursTimeLeft - hoursTimeEntered;						
 							int totalMins = minsTimeLeft - minsTimeEntered;
+							int totalSecs = secsTimeLeft - secsTimeEntered;
 							
 							//calculate total time
-							double totalTime = totalHours + totalMins/60;
+							double totalTime = totalHours + totalMins/60 + totalSecs/3600;
 									
 							String floor = cursor.getString(cursor.getColumnIndex(iCreepHelper.FLOOR));
 													
