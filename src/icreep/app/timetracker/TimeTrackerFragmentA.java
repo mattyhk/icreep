@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,21 +95,34 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		
 		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
 		
+		if (timePlaces.size() == 0) {
+			return finalSortedTimePlaces;
+		}
+		
 		Sorting sorter = new Sorting();
 		ArrayList<TimePlace> sorted = sorter.InsertionSort(timePlaces);
 		
-		TimePlace toAdd = sorted.get(0);
-		sorted.remove(0);
-		
-		for(TimePlace tp : sorted){
-			if(tp.getFloor().equals(toAdd.getFloor()) && tp.getLocation().equals(toAdd.getLocation())){
-				toAdd.increaseTimeSpent(tp.getTimeSpent());				
-			} 
-			else{
-				sorted.add(toAdd);
-				toAdd=tp;
+		if (sorted.size() > 1) {
+			TimePlace toAdd = sorted.get(0);
+			sorted.remove(0);
+			
+			for(TimePlace tp : sorted){
+				if(tp.equals(toAdd)){
+					toAdd.increaseTimeSpent(tp.getTimeSpent());
+				} 
+				else{
+					finalSortedTimePlaces.add(toAdd);
+					toAdd=tp;
+				}
 			}
+			
+			finalSortedTimePlaces.add(toAdd);
 		}
+		
+		else {
+			return sorted;
+		}
+		
 		return finalSortedTimePlaces;
 	}
 	
@@ -175,13 +189,13 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	}
 	
 	private void updateList() {
-
+		
+		
 		timePlaces = icreepHelper.getTimePlaces(userID);
-        
+		
         if(timePlaces != null){ 
         	//this function will sort the location with respect to their floors and description(locations)
         	timePlaces = sortTimePlaces(timePlaces); 
-        	
         	//now add these TimePlaces into ListView
         	mAdapter.clear();
         	mAdapter.addAll(timePlaces);

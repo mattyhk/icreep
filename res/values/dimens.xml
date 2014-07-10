@@ -13,6 +13,7 @@
     <dimen name="top_margin_table">100dp</dimen>
     
     <dimen name="top_margin_10in">30dp</dimen>
+    <dimen name="top_margin_7in">16dp</dimen>
     <dimen name="top_margin_3.7in">12dp</dimen>
     
     <!--Profile Picture width and height-->
@@ -33,16 +34,16 @@
       
       <!--7 Inch Screen-->
       <dimen name="icreep_logo_7in">100sp</dimen>
-      <dimen name="heading_text_size_7in">35sp</dimen>
+      <dimen name="heading_text_size_7in">32sp</dimen>
       <dimen name="in_out_office_labels_7in">28sp</dimen>
-      <dimen name="sub_heading_text_size_7in">30sp</dimen>
+      <dimen name="sub_heading_text_size_7in">28sp</dimen>
       <dimen name="menu_button_text_size_7in">48sp</dimen>
       <dimen name="save_button_text_size_7in">38sp</dimen>
     
       <!--3.7 Inch Screen-->
-      <dimen name="heading_text_size_3.7in">16sp</dimen>
+      <dimen name="heading_text_size_3.7in">14sp</dimen>
       <dimen name="in_out_office_labels_3.7in">35sp</dimen>
-      <dimen name="sub_heading_text_size_3.7in">14sp</dimen>
+      <dimen name="sub_heading_text_size_3.7in">12sp</dimen>
       
     <!--Buttons-->
       <!--10 Inch Screen-->

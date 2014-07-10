@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/left_margin"
-                android:layout_marginTop="@dimen/top_margin"
+                android:layout_marginTop="@dimen/top_margin_7in"
                 android:text="@string/time_in_locations"
                 android:textColor="@color/lightGreenForLabels"
                 android:textSize="@dimen/heading_text_size_7in" />
@@ -35,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="@dimen/left_margin"
-                android:layout_marginTop="@dimen/top_margin"
                 android:text="@string/user_position"
                 android:textColor="@color/whiteBackground"
                 android:textSize="@dimen/sub_heading_text_size_7in" />

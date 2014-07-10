@@ -217,6 +217,7 @@ public class UserLocation {
 		this.visitedZones.clear();
 		
 		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
+		Log.d("TEST", "getTimePlaces with size " + visited.size());
 		
 		if (visited != null) {
 			for (TimePlace tp: visited) {

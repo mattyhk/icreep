@@ -28,9 +28,9 @@
 	    android:textOff="OFF"
 	    android:layout_marginTop="@dimen/top_margin_10in"
 	    android:layout_marginLeft="@dimen/left_margin"
-	    android:textOn="ON              "	
-	    android:textSize="50sp"
-	    android:background="@color/whiteBackground" 	    
+	    android:textOn="       ON       "	
+	    android:textSize="24sp"
+	    android:background="@drawable/on_off_switch_style" 	    
 	    />
 		    
 	<TextView

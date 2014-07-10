@@ -1,7 +1,5 @@
 package icreep.app.location;
 
-
-import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;

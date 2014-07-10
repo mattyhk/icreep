@@ -6,8 +6,9 @@ public class ICreepApplication extends Application {
 	
 	private static ICreepApplication singleton;
 	
-	int currentLocation = -1;
-	int currentFloor = 2;
+	private boolean hasStartedRanging = false;
+	private int currentLocation = -1;
+	private int currentFloor = 2;
 	
 	public ICreepApplication getInstance(){
 		return singleton;
@@ -41,6 +42,18 @@ public class ICreepApplication extends Application {
 	
 	public void setCurrentFloor(int newFloor) {
 		this.currentFloor = newFloor;
+	}
+	
+	public boolean hasStartedRanging() {
+		return this.hasStartedRanging;
+	}
+	
+	public void startedRanging() {
+		this.hasStartedRanging = true;
+	}
+	
+	public void stoppedRanging() {
+		this.hasStartedRanging = false;
 	}
 	
 	

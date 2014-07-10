@@ -99,7 +99,6 @@ public class iCreepDatabaseAdapter {
 						String timeL = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));	
 						
 						if (!timeL.equals("")){
-							Log.d("TEST", "leaving time is not empty " + timeL);
 							int hoursTimeLeft = Integer.parseInt((timeL.split(":"))[0]);
 							int minsTimeLeft = Integer.parseInt((timeL.split(":"))[1]);
 							
