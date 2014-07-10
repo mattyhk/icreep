@@ -42,7 +42,8 @@ public class ReportActivity extends FragmentActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reports);
 		ActionBar actionBar = getActionBar();
-		actionBar.hide();
+		actionBar.removeAllTabs();
+		//actionBar.hide(); //hides action bar completely
 		auto = (Button) findViewById(R.id.autoButton);
 		manual = (Button) findViewById(R.id.manualButton);
 		home = (ImageButton) findViewById(R.id.home_button_report);
