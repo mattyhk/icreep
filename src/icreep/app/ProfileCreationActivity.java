@@ -286,11 +286,12 @@ public class ProfileCreationActivity extends Activity
 	//validate entered details character lengths
 	public boolean checkDetails(String name, String surname, String position, String email){
 		String[] checks = {name,surname,position, email};
+		String[] holders = {"name", "surname", "Employee Position","Email"};
 		int[] lengths = {30,30,255,30};
 				
 		for(int i=0; i<checks.length; i++){
-			if(checks[i].length() != lengths[i]){
-				invalidEntry = checks[i];
+			if(checks[i].length() > lengths[i]){
+				invalidEntry = holders[i];
 				return false;				
 			}
 		}		
