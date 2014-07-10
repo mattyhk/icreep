@@ -40,7 +40,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	private int userID;
 	private Handler mHandler;
 	private UserLocation user;
-	
+	private Toast t = new Toast(getActivity());
 
 	public LocationFragmentB() {
 		// Required empty public constructor
@@ -83,7 +83,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		TimePlace item = (TimePlace) zones.get(position);
-		Toast t = new Toast(getActivity());
+		t.cancel();
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		View layout = inflater.inflate(R.layout.location_toast,
 		                               (ViewGroup)getActivity().findViewById(R.id.toast_layout_root));
