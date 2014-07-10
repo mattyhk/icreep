@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +40,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	private int userID;
 	private Handler mHandler;
 	private UserLocation user;
-	private Toast t = new Toast(getActivity());
+	private Toast t;
 
 	public LocationFragmentB() {
 		// Required empty public constructor
@@ -57,6 +56,8 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		
 		userID = user.getUserID();
 		iCreepHelper = new iCreepDatabaseAdapter(getActivity());
+		
+		t = new Toast(getActivity());
 		
 		home = (ImageButton) v.findViewById(R.id.home_button_location_movement);
 		Activity c = getActivity();
@@ -83,9 +84,10 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		Log.d("TEST", "Clicked");
+		
 		TimePlace item = (TimePlace) zones.get(position);
 		t.cancel();
+		t = new Toast(getActivity());
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		View layout = inflater.inflate(R.layout.location_toast,
 		                               (ViewGroup)getActivity().findViewById(R.id.toast_layout_root));

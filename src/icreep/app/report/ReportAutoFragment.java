@@ -14,6 +14,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
+import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
@@ -31,6 +32,7 @@ public class ReportAutoFragment extends Fragment
 	AlarmControlClass acc = new AlarmControlClass();
 	iCreepDatabaseAdapter adapt = null;
 	int userID = -1;
+	AlarmControlClass acc;
 	// the following is how you get your text pixels to the correct size
 	// depending on the screen
 	// 16*getResources().getDisplayMetrics().density
@@ -65,7 +67,7 @@ public class ReportAutoFragment extends Fragment
 		adapt = new iCreepDatabaseAdapter(getActivity());
 		View v = inflater.inflate(R.layout.fragment_reports_auto, container,
 				false);
-		
+		acc = new AlarmControlClass();
 		SharedPreferencesControl spc = new SharedPreferencesControl(getActivity());
 		userID = spc.getUserID();
 		
@@ -288,7 +290,8 @@ public class ReportAutoFragment extends Fragment
 		}
 		// call the db update
 		String reportTime = adapt.getReportTime(userID);
-		
+		boolean updated = false ;
+		boolean wasntUpdated = false;
 		if (reportTime != null) {
 			
 			if (adapt.updateDeliveryTime(newTime, userID, newAuto) == true) {
@@ -296,6 +299,7 @@ public class ReportAutoFragment extends Fragment
 				if (newAuto == true) {
 					hour = stoh;
 					min = stom;
+					updated = true ;
 					icreep.app.Message.message(getActivity(), "Update was successful");
 				} else {
 					hour = -1;
@@ -310,9 +314,31 @@ public class ReportAutoFragment extends Fragment
 				hasAuto = true ;
 				hour = stoh; 
 				min = stom;
+				updated = true ;
+				
 			}else
 			{
 				icreep.app.Message.message(getActivity(),"The auto time was set unsuccessful");
+				wasntUpdated = true ;
+			}
+		}
+		if (updated == true)
+		{
+			String time = adapt.getReportTime(userID);
+			if (time != null) {
+				String[] times = time.split(":");
+				int hour = Integer.parseInt(times[0]);
+				int min = Integer.parseInt(times[1]);
+				AlarmControlClass acc = new AlarmControlClass();
+				acc.setAlarm(hour, min, getActivity());
+				acc.sendAutoEmailRepeat();
+				Message.message(getActivity(), "Alarm is set");
+			}
+		}else
+		{
+			if (wasntUpdated == false)
+			{
+			acc.turnOffAlarm();
 			}
 		}
 	}

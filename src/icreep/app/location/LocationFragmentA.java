@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class LocationFragmentA extends Fragment {
 	 */
 	private void updateImage(){
 		int currentLocation = mApplication.getCurrentLocation();
-		Integer drawID = null;
+		 Integer drawID = null;
 		if (currentLocation == -2) {
 			// Location is unknown
 			 drawID = getActivity().getResources()
