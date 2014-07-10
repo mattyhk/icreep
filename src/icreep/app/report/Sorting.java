@@ -140,7 +140,7 @@ public class Sorting
 	
 	public ArrayList<TimePlace> join(ArrayList<TimePlace> in)
 	{
-		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
+		ArrayList<TimePlace> finalSortedTimePlaces = InsertionSort(in);
 		if (in.size() == 0) {
 			return finalSortedTimePlaces;
 		}
