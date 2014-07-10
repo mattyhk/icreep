@@ -210,7 +210,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         	
         }
         else {
-        	Message.message(getActivity(), "You haven't been anywhere");
+        	Message.message(getActivity(), "You have yet to visit a zone");
         }
 	}
 }
