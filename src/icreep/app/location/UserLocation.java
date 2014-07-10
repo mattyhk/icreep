@@ -116,15 +116,12 @@ public class UserLocation {
 		
 		if (this.exitCount == MAX_EXIT_COUNT) {
 			
-			Toast.makeText(context, "Left location", Toast.LENGTH_SHORT).show();
 			
 			// Update the DB - update the last location entry's exit time with the current time
 			// Need to make sure the DB has a last entry with empty exit time
 			if (this.lastLocationID > 0) {
 				
 				String time = getTime();
-				
-				Toast.makeText(context, "Trying to update", Toast.LENGTH_SHORT).show();
 				
 				if (this.db.updateExitTime(time, this.lastLocationID)) {
 					
@@ -217,7 +214,6 @@ public class UserLocation {
 		this.visitedZones.clear();
 		
 		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
-		Log.d("TEST", "getTimePlaces with size " + visited.size());
 		
 		if (visited != null) {
 			for (TimePlace tp: visited) {

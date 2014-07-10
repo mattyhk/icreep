@@ -72,6 +72,7 @@ public class LocationFragmentA extends Fragment {
 	 */
 	private void updateImage(){
 		int currentLocation = mApplication.getCurrentLocation();
+		Log.d("TEST","Updating image with location " + currentLocation);
 		Integer drawID = null;
 		if (currentLocation == -2) {
 			// Location is unknown
