@@ -74,7 +74,7 @@ public class ReportAutoFragment extends Fragment
 		save.setEnabled(false); // no changes thus button shouldn't be enabled
 		// the switched will default to not checked
 		switched = (Switch) v.findViewById(R.id.switchBar);
-		switched.setBackground(getResources().getDrawable(R.color.whiteBackground));
+		//switched.setBackground(getResources().getDrawable(R.color.whiteBackground));
 		tp = (TimePicker) v.findViewById(R.id.timePicker);
 		setTheHourMinuteSwitch(); // switch on switched >> this will
 									// automatically update the timepicker
