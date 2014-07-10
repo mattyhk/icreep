@@ -12,12 +12,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,7 +83,27 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 			long id) {
 		
 		TimePlace item = (TimePlace) zones.get(position);
-		Toast.makeText(getActivity(), "You clicked " + item.getZoneID() , Toast.LENGTH_SHORT).show();
+		Toast t = new Toast(getActivity());
+		LayoutInflater inflater = getActivity().getLayoutInflater();
+		View layout = inflater.inflate(R.layout.location_toast,
+		                               (ViewGroup)getActivity().findViewById(R.id.toast_layout_root));
+		TextView tv = (TextView) layout.findViewById(R.id.toast_title);
+		String FILE_FRAGMENT = "zones_3_";
+		Integer drawID =  getActivity().getResources()
+				.getIdentifier(FILE_FRAGMENT + item.getLocation(), "drawable", getActivity()
+						.getPackageName());;
+						
+		ImageView forMap = (ImageView) layout.findViewById(R.id.toast_map);
+		if (drawID != null) {
+			forMap.setImageResource(drawID);
+		}
+		
+		
+		tv.setText(item.getFloor() + ":" + item.getLocation());
+		t.setGravity(Gravity.BOTTOM, 0, 0);
+		t.setDuration(Toast.LENGTH_LONG);
+		t.setView(layout);
+		t.show();
 		
 	}
 	
