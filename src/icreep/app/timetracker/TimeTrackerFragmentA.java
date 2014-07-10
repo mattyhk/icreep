@@ -97,16 +97,17 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		Sorting sorter = new Sorting();
 		ArrayList<TimePlace> sorted = sorter.InsertionSort(timePlaces);
 		
+
 		TimePlace toAdd = sorted.get(0);
 		sorted.remove(0);
-		
-		for(TimePlace tp : sorted){
-			if(tp.getFloor().equals(toAdd.getFloor()) && tp.getLocation().equals(toAdd.getLocation())){
-				toAdd.increaseTimeSpent(tp.getTimeSpent());				
-			} 
-			else{
+
+		for (TimePlace tp : sorted) {
+			if (tp.getFloor().equals(toAdd.getFloor())
+					&& tp.getLocation().equals(toAdd.getLocation())) {
+				toAdd.increaseTimeSpent(tp.getTimeSpent());
+			} else {
 				sorted.add(toAdd);
-				toAdd=tp;
+				toAdd = tp;
 			}
 		}
 		return finalSortedTimePlaces;
