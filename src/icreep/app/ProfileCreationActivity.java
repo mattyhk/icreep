@@ -40,6 +40,8 @@ public class ProfileCreationActivity extends Activity
 	// Create db helper object
 	iCreepDatabaseAdapter icreepHelper;
 	SharedPreferencesControl spc;
+	
+	String invalidEntry;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -146,6 +148,13 @@ public class ProfileCreationActivity extends Activity
 
 					doMessage("You have made no changes, thus you can't save");
 					
+//					if (listDetails.get(0).equals("") == true) 
+//					{
+//						doMessage("One of your inputs is still the default blank input, please correct");
+//					} else 
+//					{
+						doMessage("You have made no changes, thus you can't save");
+//					}
 					return;
 				}
 				
@@ -174,49 +183,54 @@ public class ProfileCreationActivity extends Activity
 	public void doUpdateOfProfile(String name, String surname,
 			String position,String email) {
 		
-		if (isValidEmail(email)) {
-			if (isValidName(name)) {
-				if (isValidSurname(surname)) {
-					if (isValidPosition(position)) {
-						if (icreepHelper.updateUserDetails(name, surname,
-								position, email, "profilePic.png", userID) == false) // will
-																						// add
-																						// the
-																						// correct
-																						// pp
-																						// name
-																						// later
-						{
+		if(checkDetails(name, surname,position,email)){
+			if (isValidEmail(email)) {
+				if (isValidName(name)) {
+					if (isValidSurname(surname)) {
+						if (isValidPosition(position)) {
+							if (icreepHelper.updateUserDetails(name, surname,
+									position, email, "profilePic.png", userID) == false) // will
+																							// add
+																							// the
+																							// correct
+																							// pp
+																							// name
+																							// later
+							{
 							doMessage("Update unsuccessful, please contact Admin");
-						} else {
-							if (profilePic != null) {
-								BitmapController bmc = new BitmapController();
-								bmc.storeImage(profilePic);
-								originalProfile = profilePic;
-								if (spc.sharedProfilePicTest() == false) {
-									spc.writeProfilePicName("profilePic.png");
+							} else {
+								if (profilePic != null) {
+									BitmapController bmc = new BitmapController();
+									bmc.storeImage(profilePic);
+									originalProfile = profilePic;
+									if (spc.sharedProfilePicTest() == false) {
+										spc.writeProfilePicName("profilePic.png");
+									}
 								}
-							}
-							listDetails.clear();
-							listDetails.add(name);
-							listDetails.add(surname);
-							listDetails.add(position);
-							listDetails.add(email);
+								listDetails.clear();
+								listDetails.add(name);
+								listDetails.add(surname);
+								listDetails.add(position);
+								listDetails.add(email);
 							doMessage("Update successful");
-						}
-					} else {
+							}
+						} else {
 						doMessage("Invalid position, please enter a valid employee position");
 						doMessage("Example: Developer");
+						}
+					} else {
+					doMessage("Invalid surname, please enter a valid surname");
 					}
 				} else {
-					doMessage("Invalid surname, please enter a valid surname");
+				doMessage("Invalid name, please enter a valid name");
 				}
 			} else {
-				doMessage("Invalid name, please enter a valid name");
-			}
-		} else {
 			doMessage("Invalid email address, please use a valid email address");
 			doMessage("Example: user1@gmail.com");
+			}
+		}
+		else{
+			doMessage("Invalid " + invalidEntry + " please enter valid " + invalidEntry);
 		}
 	}
 
@@ -224,48 +238,65 @@ public class ProfileCreationActivity extends Activity
 	public void doNewInsertionOfData(String name, String surname,
 			String position, String email)
 	{
-		if (isValidEmail(email)){
-			if(isValidName(name)){
-				if(isValidSurname(surname)){
-					if(isValidPosition(position)) {							
-						long id = icreepHelper.enterNewUser(name, surname, position, email,
-								"profilePic.png"); // default profile pic filename
-						
-						// check if insertion was successful
-						if (id > 0) {
-							if (profilePic != null)
-							{
-								BitmapController bmc = new BitmapController();
-								bmc.storeImage(profilePic);
-								originalProfile = profilePic;
-								spc.writeProfilePicName("profilePic.png");
-							}
+		if(checkDetails(name, surname,position,email)){
+			if (isValidEmail(email)){
+				if(isValidName(name)){
+					if(isValidSurname(surname)){
+						if(isValidPosition(position)) {							
+							long id = icreepHelper.enterNewUser(name, surname, position, email,
+									"profilePic.png"); // default profile pic filename
 							
-							doMessage("User details saved");				
-							spc.writeNewUserID((int)id);
-							iCreepDatabaseAdapter.createZone();
-							switchToMainMenu();
-						} else {
+							// check if insertion was successful
+							if (id > 0) {
+								if (profilePic != null)
+								{
+									BitmapController bmc = new BitmapController();
+									bmc.storeImage(profilePic);
+									originalProfile = profilePic;
+									spc.writeProfilePicName("profilePic.png");
+								}
+								
+								doMessage("User details saved");				
+								spc.writeNewUserID((int)id);
+								iCreepDatabaseAdapter.createZone();
+								switchToMainMenu();
+							} else {
 								doMessage("User details not saved, please contact Admin");
-								return;
-							}
+									return;
+								}
+						}else{
+							doMessage("Invalid position, please enter valid employee position");
+							doMessage("example: Developer");
+						}
 					}else{
-						doMessage("Invalid position, please enter valid employee position");
-						doMessage("example: Developer");
+					doMessage("Invalid surname, please enter a valid surname");
 					}
 				}else{
-					doMessage("Invalid surname, please enter a valid surname");
-				}
-			}else{
 				doMessage("Invalid name, please enter a valid name");
-			}
-		} else {
+				}
+			} else {
 			doMessage("Invalid email address, please use a valid email address");
 			doMessage("Example: user1@gmail.com");
+			}
+		}else{
+			doMessage("Invalid " + invalidEntry + " please enter valid " + invalidEntry);
 		}
-		
 	}
 
+	//validate entered details character lengths
+	public boolean checkDetails(String name, String surname, String position, String email){
+		String[] checks = {name,surname,position, email};
+		int[] lengths = {30,30,255,30};
+				
+		for(int i=0; i<checks.length; i++){
+			if(checks[i].length() != lengths[i]){
+				invalidEntry = checks[i];
+				return false;				
+			}
+		}		
+		return true;
+	}
+	
 	// function to validate email addresses against an email Regular Expression
 	public boolean isValidEmail(String email)
 	{
