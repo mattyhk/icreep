@@ -6,7 +6,7 @@ import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.report.TimePlace;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -144,10 +144,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	private void updateList() {
 		
 		mAdapter.clear();
-		Set<TimePlace> z = user.getVisitedZones();
-		if (z.size() == 0) {
-//			Message.message(getActivity(), "You haven't been anywhere");
-		}
+		List<TimePlace> z = user.getVisitedZones();
 		for (TimePlace tp : z){
 			mAdapter.add(tp);
 		}

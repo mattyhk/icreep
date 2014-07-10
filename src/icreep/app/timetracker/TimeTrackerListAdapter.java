@@ -45,9 +45,9 @@ public class TimeTrackerListAdapter extends ArrayAdapter<TimePlace> {
 				int hours = (int) ((timeSpent / 3600) % 60);
 				
 				if (title != null)
-					title.setText(String.valueOf(timePlace.getZoneID()));
+					title.setText(timePlace.getLocation());
 				if (subtitle != null)
-					subtitle.setText(timePlace.getLocation());
+					subtitle.setText(timePlace.getFloor());
 				if (time != null)
 					time.setText(String.format
 							("%02d:%02d:%02d", hours, minutes, seconds));;

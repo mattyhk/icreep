@@ -51,6 +51,9 @@ import android.widget.TextView;
 		
 		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
 		mProgressBar.setMax(100);
+		
+		fragmentInTime.setText("00:00:00");
+		fragmentOutTime.setText("8:00:00");
 
 		timeTracker = (TimeTrackerActivity) this.getActivity();		
 
