@@ -143,13 +143,9 @@ public class ProfileCreationActivity extends Activity
 					&& (email.equals(listDetails.get(3)) == true)
 					&& (originalProfile == profilePic) == true) 
 				{
-//					if (listDetails.get(0).equals("") == true) 
-//					{
-//						doMessage("One of your inputs is still the default blank input, please correct");
-//					} else 
-//					{
-						doMessage("You have made no changes, thus you can't save");
-//					}
+
+					doMessage("You have made no changes, thus you can't save");
+					
 					return;
 				}
 				
@@ -191,7 +187,7 @@ public class ProfileCreationActivity extends Activity
 																						// name
 																						// later
 						{
-							doMessage("The updating of profile was unsuccessful, please contact admin");
+							doMessage("Update unsuccessful, please contact Admin");
 						} else {
 							if (profilePic != null) {
 								BitmapController bmc = new BitmapController();
@@ -206,21 +202,21 @@ public class ProfileCreationActivity extends Activity
 							listDetails.add(surname);
 							listDetails.add(position);
 							listDetails.add(email);
-							doMessage("Updating of your profile was successful");
+							doMessage("Update successful");
 						}
 					} else {
-						doMessage("Invalid position, please enter valid employee position");
-						doMessage("example: Developer");
+						doMessage("Invalid position, please enter a valid employee position");
+						doMessage("Example: Developer");
 					}
 				} else {
-					doMessage("Invalid surname, please enter valid surname");
+					doMessage("Invalid surname, please enter a valid surname");
 				}
 			} else {
-				doMessage("Invalid name, please enter valid name");
+				doMessage("Invalid name, please enter a valid name");
 			}
 		} else {
-			doMessage("Invalid email address, please use valid email address");
-			doMessage("example: user1@gmail.com");
+			doMessage("Invalid email address, please use a valid email address");
+			doMessage("Example: user1@gmail.com");
 		}
 	}
 
@@ -250,7 +246,7 @@ public class ProfileCreationActivity extends Activity
 							iCreepDatabaseAdapter.createZone();
 							switchToMainMenu();
 						} else {
-								doMessage("User details not  saved, please contact ADMIN");
+								doMessage("User details not saved, please contact Admin");
 								return;
 							}
 					}else{
@@ -258,41 +254,17 @@ public class ProfileCreationActivity extends Activity
 						doMessage("example: Developer");
 					}
 				}else{
-					doMessage("Invalid surname, please enter valid surname");
+					doMessage("Invalid surname, please enter a valid surname");
 				}
 			}else{
-				doMessage("Invalid name, please enter valid name");
+				doMessage("Invalid name, please enter a valid name");
 			}
 		} else {
-			doMessage("Invalid email address, please use valid email address");
-			doMessage("example: user1@gmail.com");
+			doMessage("Invalid email address, please use a valid email address");
+			doMessage("Example: user1@gmail.com");
 		}
 		
 	}
-
-	// listener to adddUser event - let's add new user to db
-	/*
-	 * public void saveDetails(View view){
-	 * 
-	 * //Intent intent = new Intent(this, SaveUserDetails.class);
-	 * 
-	 * //get user details String name = userName.getText().toString(); String
-	 * surname = userSurname.getText().toString(); String position =
-	 * userPosition.getText().toString(); String email =
-	 * userEmail.getText().toString();
-	 * 
-	 * //before entering user into DB - can send or validate email first //if
-	 * validation email bounces than user not entered in DB else add to DB
-	 * if(isValidEmail(email)){ long id = icreepHelper.enterNewUser(name,
-	 * surname, position, email, photo); //userID =(int) id ; //check if
-	 * insertion was successful if(id != -1 || id < 0){ Message.message(this,
-	 * "User details saved"); switchToMainMenu(); // I'm not sure that this
-	 * would work, test >>> possibly needs direct intent, not listener }else{
-	 * Message.message(this, "User details not  saved. Check the DB"); } } else{
-	 * Message.message(this,"invalid email address"); }
-	 * 
-	 * }//saveDetails method
-	 */
 
 	// function to validate email addresses against an email Regular Expression
 	public boolean isValidEmail(String email)
