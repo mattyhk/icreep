@@ -107,8 +107,8 @@ import android.widget.TextView;
 		}
 		
 		else{
-			fragmentInTime.setText("0:00");
-			fragmentOutTime.setText("24:00");
+			fragmentInTime.setText("0:00:00");
+			fragmentOutTime.setText("24:00:00");
 		}
 		
 	}
