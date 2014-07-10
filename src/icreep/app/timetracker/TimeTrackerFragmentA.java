@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,21 +95,36 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		
 		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
 		
+		if (timePlaces.size() == 0) {
+			return finalSortedTimePlaces;
+		}
+		
 		Sorting sorter = new Sorting();
+		Log.d("TEST", "Sorting timePlaces with size " + timePlaces.size());
 		ArrayList<TimePlace> sorted = sorter.InsertionSort(timePlaces);
+		Log.d("TEST", "Size of sorted is intially " + sorted.size());
 		
-		TimePlace toAdd = sorted.get(0);
-		sorted.remove(0);
-		
-		for(TimePlace tp : sorted){
-			if(tp.getFloor().equals(toAdd.getFloor()) && tp.getLocation().equals(toAdd.getLocation())){
-				toAdd.increaseTimeSpent(tp.getTimeSpent());				
-			} 
-			else{
-				sorted.add(toAdd);
-				toAdd=tp;
+		if (sorted.size() > 1) {
+			Log.d("TEST", "Size of sorted is " + sorted.size());
+			TimePlace toAdd = sorted.get(0);
+			sorted.remove(0);
+			
+			for(TimePlace tp : sorted){
+				if(tp.equals(toAdd)){
+					toAdd.increaseTimeSpent(tp.getTimeSpent());				
+				} 
+				else{
+					finalSortedTimePlaces.add(toAdd);
+					toAdd=tp;
+				}
 			}
 		}
+		
+		else {
+			Log.d("TEST", "Size of sorted should be 1 is  " + sorted.size());
+			return sorted;
+		}
+		
 		return finalSortedTimePlaces;
 	}
 	
