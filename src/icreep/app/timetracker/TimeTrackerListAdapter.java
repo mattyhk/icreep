@@ -39,12 +39,18 @@ public class TimeTrackerListAdapter extends ArrayAdapter<TimePlace> {
 				final TextView subtitle = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_time_summary);
 				final TextView time = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_time);
 				
+				double timeSpent = timePlace.getTimeSpent() * 3600.0;
+				int seconds = (int) (timeSpent % 60);
+				int minutes = (int) ((timeSpent / 60) % 60);
+				int hours = (int) ((timeSpent / 3600) % 60);
+				
 				if (title != null)
 					title.setText(String.valueOf(timePlace.getZoneID()));
 				if (subtitle != null)
 					subtitle.setText(timePlace.getLocation());
 				if (time != null)
-					subtitle.setText(String.valueOf(timePlace.getTimeSpent()));
+					time.setText(String.format
+							("%02d:%02d:%02d", hours, minutes, seconds));;
 		}
 		
 		return v;

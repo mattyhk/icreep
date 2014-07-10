@@ -109,15 +109,14 @@ public class iCreepDatabaseAdapter {
 							int secsTimeEntered = Integer.parseInt((timeE.split(":"))[2]);
 							
 							//subtract times;
-							int totalHours = hoursTimeLeft - hoursTimeEntered;						
-							int totalMins = minsTimeLeft - minsTimeEntered;
-							int totalSecs = secsTimeLeft - secsTimeEntered;
+							double totalHours = hoursTimeLeft - hoursTimeEntered;						
+							double totalMins = minsTimeLeft - minsTimeEntered;
+							double totalSecs = secsTimeLeft - secsTimeEntered;
 							
 							//calculate total time
 							double totalTime = totalHours + totalMins/60 + totalSecs/3600;
 									
 							String floor = cursor.getString(cursor.getColumnIndex(iCreepHelper.FLOOR));
-													
 							TimePlace tp = new TimePlace(loc,totalTime,floor, id);
 							
 							timePlaces.add(tp);

@@ -101,13 +101,17 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		
 		Sorting sorter = new Sorting();
 		ArrayList<TimePlace> sorted = sorter.InsertionSort(timePlaces);
+//		Log.d("TEST", "Sorting time places");
 		
 		if (sorted.size() > 1) {
 			TimePlace toAdd = sorted.get(0);
+//			Log.d("TEST", "toAdd is " + toAdd.getZoneID());
 			sorted.remove(0);
 			
 			for(TimePlace tp : sorted){
+//				Log.d("TEST", "tp is " + tp.getZoneID());
 				if(tp.equals(toAdd)){
+//					Log.d("TEST", "Adding time by " + tp.getTimeSpent());
 					toAdd.increaseTimeSpent(tp.getTimeSpent());
 				} 
 				else{
@@ -206,7 +210,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         	
         }
         else {
-        	Message.message(getActivity(), "You haven't been anywhere");
+        	Message.message(getActivity(), "You have yet to visit a zone");
         }
 	}
 }
