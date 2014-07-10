@@ -183,7 +183,7 @@ public class MailerClass
 			int hoursIn = (int) ((time / 3600) % 60);
 			s = s + (hoursIn) + "hrs " + minutesIn + "min " + secondsIn + "secs";
 		}
-		s = s + "\n=============================================";
+		s = s + "\n==================================================";
 		s = s + "\n";
 
 		Date d = new Date();
