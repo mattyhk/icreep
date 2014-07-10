@@ -255,8 +255,8 @@ public class iCreepDatabaseAdapter {
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
-			String[] args = {""+userID};
-			db.update(iCreepHelper.TABLE_NAME6,cVs,iCreepHelper.USER_ID + "=?",args);
+			//String[] args = {""+userID};
+			db.update(iCreepHelper.TABLE_NAME6,cVs,iCreepHelper.USER_ID + "=" + userID,null);
 			return true ;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -317,8 +317,8 @@ public class iCreepDatabaseAdapter {
 			if (cursor.moveToFirst()) {
 				String timeLeft = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));
 				if (timeLeft.equals("")) {
-					String[] args = {""+lastEntryID};
-					db.update(iCreepHelper.TABLE_NAME4, cV, iCreepHelper.LOCATION_ID + "=?", args);
+					//String[] args = {""+lastEntryID};
+					db.update(iCreepHelper.TABLE_NAME4, cV, iCreepHelper.LOCATION_ID + "=" + lastEntryID, null);
 					return true;
 				}
 				else {
