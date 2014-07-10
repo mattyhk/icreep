@@ -2,7 +2,6 @@ package icreep.app.db;
 
 import java.util.ArrayList;
 
-import icreep.app.Message;
 import icreep.app.report.TimePlace;
 import android.content.ContentValues;
 import android.content.Context;
@@ -261,7 +260,6 @@ public class iCreepDatabaseAdapter {
 			return true ;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Message.message(c, "Report Delievery Time update unsuccessful");
 			return false ;
 		}	
 	}
@@ -304,7 +302,6 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	public boolean updateExitTime(String time, long lastEntryID) {
-//		Message.message(c, "updating leaving time");
 		ContentValues cV = new ContentValues();
 		
 		cV.put(iCreepHelper.TIME_LEFT, time);
@@ -333,7 +330,6 @@ public class iCreepDatabaseAdapter {
 		else {
 			Log.d("TEST", "Cursor is null");
 		}
-//		Message.message(c, "cursor is null");
 		return false;
 	}
 	
@@ -348,10 +344,8 @@ public class iCreepDatabaseAdapter {
 				String[] args = {tables[i]};
 				db.delete("SQLITE_SEQUENCE", "name=?", args);
 			}
-			Message.message(c, "Database cleared");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			Message.message(c, ""+e);
 		}
 	}
 	
@@ -501,11 +495,8 @@ public class iCreepDatabaseAdapter {
 					db.execSQL(createTableQueries[i]);
 				} catch (SQLException e) {
 					//display error on toast if appeared
-					Message.message(context, ""+e);
 				}
 			}			
-			//to see if onCreate was called
-			Message.message(context, " onCreate called");
 		}
 
 		@Override
@@ -513,8 +504,6 @@ public class iCreepDatabaseAdapter {
 			// u can backup db online (after changes), alter table, drop table and such here...
 			// on upgrade, drop older tables
 			
-			//to see onUpgrade was called
-			Message.message(context, " onUpgrade called");
 			
 			String[] tables = {TABLE_NAME1,TABLE_NAME3,TABLE_NAME4,TABLE_NAME5,TABLE_NAME6};
 			
@@ -525,8 +514,6 @@ public class iCreepDatabaseAdapter {
 					//need to drop tables if DB structure changes
 					db.execSQL("DROP TABLE IF EXISTS " + tables[i]);
 				} catch (SQLException e) {
-					//display error on toast if appeared
-					Message.message(context, ""+e);
 				}
 			}
 			
