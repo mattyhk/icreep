@@ -70,6 +70,7 @@
         android:layout_below="@+id/linearLayoutLocation"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp"
-        android:textColor="@color/whiteColor" />
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/floor_text_size" />
 
 </RelativeLayout>

@@ -9,6 +9,7 @@ import java.util.Set;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.report.TimePlace;
@@ -39,6 +40,7 @@ public class UserLocation {
 	private int userID;
 	private long lastLocationID = 0;
 	private Set<TimePlace> visitedZones = new HashSet<TimePlace>();
+	private Context context;
 	
 	private iCreepDatabaseAdapter db;
 	
@@ -47,6 +49,7 @@ public class UserLocation {
 		this.entryCount = 0;
 		this.exitCount = 0;
 		this.db = new iCreepDatabaseAdapter(context);
+		this.context = context;
 		
 		SharedPreferencesControl spc = new SharedPreferencesControl(context);
 		this.userID = spc.getUserID();
@@ -113,13 +116,18 @@ public class UserLocation {
 		
 		if (this.exitCount == MAX_EXIT_COUNT) {
 			
+			Toast.makeText(context, "Left location", Toast.LENGTH_SHORT).show();
+			
 			// Update the DB - update the last location entry's exit time with the current time
 			// Need to make sure the DB has a last entry with empty exit time
 			if (this.lastLocationID > 0) {
 				
 				String time = getTime();
 				
+				Toast.makeText(context, "Trying to update", Toast.LENGTH_SHORT).show();
+				
 				if (this.db.updateExitTime(time, this.lastLocationID)) {
+					
 					Log.d("TEST", "Exit time was updated correctly");
 					this.lastLocationID = 0;
 				}
@@ -161,6 +169,7 @@ public class UserLocation {
 				// Update the DB - ensure the DB is in order before adding new location entry
 				if (tempID > 0) {
 					Log.d("TEST", "Enter New Location Successfully");
+					Toast.makeText(context, "Entered new entry", Toast.LENGTH_SHORT).show();
 					this.lastLocationID = tempID;
 					
 				}

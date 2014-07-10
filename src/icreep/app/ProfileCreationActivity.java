@@ -226,6 +226,7 @@ public class ProfileCreationActivity extends Activity
 				
 				doMessage("User details saved");				
 				spc.writeNewUserID((int)id);
+				iCreepDatabaseAdapter.createZone();
 				switchToMainMenu();
 			} else {
 				doMessage("User details not  saved, please contact ADMIN");

@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class TimeTrackerFragmentA extends Fragment implements OnItemClickListener {
 	
-	private int INTERVAL = 10000;
+	private int INTERVAL = 5000;
 	
 	private ListView listView;
 	private ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();

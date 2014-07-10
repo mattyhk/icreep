@@ -21,6 +21,18 @@
         android:textColor="#ffffff"
         android:textSize="@dimen/icreep_logo_10in"
         android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/top_margin"
+        android:layout_marginRight="@dimen/left_margin"
+        android:text="@string/icreep_version_number"
+        android:textColor="@color/lightGreenForLabels"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 <!--Buttons-->
 
