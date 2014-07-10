@@ -26,7 +26,6 @@ public class Sorting
 		
 		list.add(a.get(0));
 		for (int i = 1; i < a.size(); i++) {
-			Log.d("TEST", "Trying to index at position " + i + " but size is " + a.size());
 			TimePlace t = a.get(i);
 			if (t.getFloor().equals("Ground Floor")) {
 				list.add(0, t);

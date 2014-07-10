@@ -100,28 +100,26 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		}
 		
 		Sorting sorter = new Sorting();
-		Log.d("TEST", "Sorting timePlaces with size " + timePlaces.size());
 		ArrayList<TimePlace> sorted = sorter.InsertionSort(timePlaces);
-		Log.d("TEST", "Size of sorted is intially " + sorted.size());
 		
 		if (sorted.size() > 1) {
-			Log.d("TEST", "Size of sorted is " + sorted.size());
 			TimePlace toAdd = sorted.get(0);
 			sorted.remove(0);
 			
 			for(TimePlace tp : sorted){
 				if(tp.equals(toAdd)){
-					toAdd.increaseTimeSpent(tp.getTimeSpent());				
+					toAdd.increaseTimeSpent(tp.getTimeSpent());
 				} 
 				else{
 					finalSortedTimePlaces.add(toAdd);
 					toAdd=tp;
 				}
 			}
+			
+			finalSortedTimePlaces.add(toAdd);
 		}
 		
 		else {
-			Log.d("TEST", "Size of sorted should be 1 is  " + sorted.size());
 			return sorted;
 		}
 		
@@ -191,13 +189,13 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	}
 	
 	private void updateList() {
-
+		
+		
 		timePlaces = icreepHelper.getTimePlaces(userID);
-        
+		
         if(timePlaces != null){ 
         	//this function will sort the location with respect to their floors and description(locations)
         	timePlaces = sortTimePlaces(timePlaces); 
-        	
         	//now add these TimePlaces into ListView
         	mAdapter.clear();
         	mAdapter.addAll(timePlaces);
