@@ -26,6 +26,7 @@
         android:contentDescription="@string/zone_map"
         android:background="@color/darkGreyForBackgrounds"
         android:gravity="top|center"
-        android:padding = "25dp"/>
+        android:padding = "25dp"
+        android:layout_below="@+id/toast_title"/>
 
 </RelativeLayout>

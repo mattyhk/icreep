@@ -21,7 +21,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class TimeTrackerFragmentA extends Fragment implements OnItemClickListener {
 	
@@ -148,9 +147,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
-		TimePlace zone = (TimePlace) timePlaces.get(position);
-		Toast.makeText(getActivity(), "You clicked " + zone.getZoneID() , Toast.LENGTH_SHORT).show();
-	}
+		}
 	
 	/**
 	 * Needs to update the list displayed

@@ -1,5 +1,6 @@
 package icreep.app.location;
 
+import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
@@ -12,6 +13,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +83,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		
+		Log.d("TEST", "Clicked");
 		TimePlace item = (TimePlace) zones.get(position);
 		Toast t = new Toast(getActivity());
 		LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -90,18 +92,18 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		TextView tv = (TextView) layout.findViewById(R.id.toast_title);
 		String FILE_FRAGMENT = "zones_3_";
 		Integer drawID =  getActivity().getResources()
-				.getIdentifier(FILE_FRAGMENT + item.getLocation(), "drawable", getActivity()
-						.getPackageName());;
+				.getIdentifier(FILE_FRAGMENT + item.getZoneID(), "drawable", getActivity()
+						.getPackageName());
 						
-		ImageView forMap = (ImageView) layout.findViewById(R.id.toast_map);
+		ImageView zoneMap = (ImageView) layout.findViewById(R.id.toast_map);
 		if (drawID != null) {
-			forMap.setImageResource(drawID);
+			zoneMap.setImageResource(drawID);
 		}
 		
 		
-		tv.setText(item.getFloor() + ":" + item.getLocation());
+		tv.setText(item.getFloor() + " : " + item.getLocation());
 		t.setGravity(Gravity.BOTTOM, 0, 0);
-		t.setDuration(Toast.LENGTH_LONG);
+		t.setDuration(Toast.LENGTH_SHORT);
 		t.setView(layout);
 		t.show();
 		
@@ -145,9 +147,15 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		
 		mAdapter.clear();
 		List<TimePlace> z = user.getVisitedZones();
-		for (TimePlace tp : z){
-			mAdapter.add(tp);
+		if (z.size() > 0){
+			for (TimePlace tp : z){
+				mAdapter.add(tp);
+			}
 		}
+		else {
+			Message.message(getActivity(), "You have yet to visit a zone");
+		}
+		
 		mAdapter.notifyDataSetChanged();
 	}
 

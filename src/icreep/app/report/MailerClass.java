@@ -98,8 +98,7 @@ public class MailerClass
 			s = s + "\nNo Activity";
 			list = new ArrayList<TimePlace>();
 		}
-		Sorting sorter = new Sorting();
-		list = sorter.join(list);
+		list = Sorting.join(list);
 		int max = 0;
 		for (TimePlace t : list) {
 			if (max < t.getLocation().length()) {
