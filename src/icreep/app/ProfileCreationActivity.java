@@ -311,7 +311,7 @@ public class ProfileCreationActivity extends Activity
 	
 	// function to validate name against a name Regular Expression
 	public boolean isValidName(String name){
-		String nameRegex = "[A-Z][a-zA-Z]*";
+		String nameRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*";
 		if(name.matches(nameRegex)){
 			return true;
 		}
