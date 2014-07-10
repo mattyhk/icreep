@@ -16,7 +16,7 @@
         android:gravity="center"
         android:text="@string/manualDelivery"
         android:textColor="@color/lightGreenForLabels"
-        android:textSize="@dimen/sub_heading_text_size_3.7in" />
+        android:textSize="@dimen/heading_text_size_3.7in" />
 
     <Button
         android:id="@+id/sendReportButton"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="167dp"
+        android:layout_marginTop="82dp"
         android:background="@drawable/button_style"
         android:enabled="true"
         android:fontFamily="courier new"

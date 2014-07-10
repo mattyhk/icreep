@@ -17,7 +17,7 @@
         android:textColor= "@color/lightGreenForLabels"
         android:layout_marginTop="@dimen/top_margin"
         android:layout_marginLeft="@dimen/left_margin"
-        android:textSize="@dimen/sub_heading_text_size_3.7in"
+        android:textSize="@dimen/heading_text_size_3.7in"
         />
 	<Switch 
 	    android:id="@+id/switchBar" 
