@@ -25,6 +25,7 @@ public class Sorting
 		}
 		
 		list.add(a.get(0));
+		ArrayList<TimePlace> listOut = new ArrayList<TimePlace>();
 		boolean hasMinus = false ;
 		int posi = -1 ;
 		for (int i = 1; i < a.size(); i++) {
@@ -48,7 +49,7 @@ public class Sorting
 
 			}
 		}
-		ArrayList<TimePlace> listOut = new ArrayList<TimePlace>();
+		
 		listOut.add(a.get(posi));
 		ArrayList<TimePlace> listG = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listF = new ArrayList<TimePlace>();
