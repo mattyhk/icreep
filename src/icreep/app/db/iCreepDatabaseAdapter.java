@@ -476,11 +476,8 @@ public class iCreepDatabaseAdapter {
 		public int tableCount = 5;
 		private int createTableQueryCount = 5;
 		
-		private Context context;
-		
 		public iCreepHelper(Context context) {
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
-			this.context = context;
 		}
 
 		@Override
