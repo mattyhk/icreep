@@ -12,6 +12,10 @@ public class Sorting
 	 */
 	public ArrayList<TimePlace> InsertionSort(ArrayList<TimePlace> a)
 	{
+		if (a == null)
+		{
+			return new ArrayList<TimePlace>();
+		}
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
 		if (a.size() == 0) {
 			return new ArrayList<TimePlace>();
