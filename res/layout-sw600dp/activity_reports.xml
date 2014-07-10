@@ -27,7 +27,7 @@
 		        android:text="@string/report"
 		        android:gravity="left"
 		        android:textColor="@color/lightGreenForLabels"
-                android:layout_marginTop = "@dimen/top_margin"
+                android:layout_marginTop = "@dimen/top_margin_7in"
                 android:layout_marginLeft = "@dimen/left_margin"
                 android:textSize="@dimen/heading_text_size_7in" />
             
@@ -38,8 +38,7 @@
 		        android:text="@string/user_position"
 		        android:gravity="left"
 		        android:textColor="@color/whiteColor"
-                android:textSize="@dimen/heading_text_size_7in"
-                android:layout_marginTop = "@dimen/top_margin"
+                android:textSize="@dimen/sub_heading_text_size_7in"
                 android:layout_marginLeft = "@dimen/left_margin"/>
             
         </LinearLayout>
