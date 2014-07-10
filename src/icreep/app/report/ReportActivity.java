@@ -5,6 +5,7 @@ import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -40,10 +42,17 @@ public class ReportActivity extends FragmentActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reports);
+		ActionBar actionBar = getActionBar();
+		actionBar.removeAllTabs();
+		//actionBar.hide(); //hides action bar completely
 		auto = (Button) findViewById(R.id.autoButton);
 		manual = (Button) findViewById(R.id.manualButton);
 		home = (ImageButton) findViewById(R.id.home_button_report);
-
+			
+		
+		this.getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		
 		adapt = new iCreepDatabaseAdapter(this);
 		
 		SharedPreferencesControl spc = new SharedPreferencesControl(this);
@@ -227,15 +236,6 @@ public class ReportActivity extends FragmentActivity
 
 		// Commit the transaction
 		transaction.commit();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 
 	@Override

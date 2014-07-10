@@ -126,13 +126,13 @@ public class MailerClass
 		boolean f = false;
 		boolean se = false;
 		for (TimePlace t : list) {
-			if (t.getFloor().equals("Ground") && (g == false)) {
+			if (t.getFloor().equals("Ground Floor") && (g == false)) {
 				s = s + "\n=============================================";
 				s = s + "\nGround Floor";
 				s = s + "\n---------------------------------------------";
 				g = true;
 			}
-			if (t.getFloor().equals("First") && (f == false)) {
+			if (t.getFloor().equals("First Floor") && (f == false)) {
 				if (g == false) {
 					s = s + "\n=============================================";
 					s = s + "\nGround Floor";
@@ -143,7 +143,7 @@ public class MailerClass
 				s = s + "\nFirst Floor";
 				s = s + "\n---------------------------------------------";
 				f = true;
-			} else if (t.getFloor().equals("Second") && (se == false)) {
+			} else if (t.getFloor().equals("Second Floor") && (se == false)) {
 				if (f == false) {
 					s = s + "\n=============================================";
 					s = s + "\nGround Floor";
