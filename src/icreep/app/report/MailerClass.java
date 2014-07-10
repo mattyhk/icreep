@@ -88,21 +88,7 @@ public class MailerClass
 
 		s = s + "\n";
 
-		// mock data
-//		TimePlace tp = new TimePlace("Kitchen", 2, "First");
-//		TimePlace tp2 = new TimePlace("S3", 3, "Second");
-//		TimePlace tp3 = new TimePlace("G3", 4, "Ground");
-//		TimePlace tp4 = new TimePlace("G8", 4, "Ground");
-//		TimePlace tp7 = new TimePlace("Bathroom", 50.46, "Second");
-//		TimePlace tp5 = new TimePlace("Kitchen", 4, "Ground");
-
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
-//		list.add(tp);
-//		list.add(tp2);
-//		list.add(tp4);
-//		list.add(tp3);
-//		list.add(tp5);
-//		list.add(tp7);
 
 		// This will be the array list that vinny's code generates
 		list = adapt.getTimePlaces(userID);
@@ -165,7 +151,7 @@ public class MailerClass
 			
 			double time = t.getTimeSpent();
 			int hours = (int) Math.floor(time) ;
-			int minutes = (int)(time%1);
+			int minutes = (int) Math.floor((time%1) * 60);
 			s = s + (hours) + " hrs " + minutes + "min";
 		}
 		s = s + "\n=============================================";
