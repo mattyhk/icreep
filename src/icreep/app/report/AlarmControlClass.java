@@ -14,9 +14,10 @@ public class AlarmControlClass
 
 	Intent myIntent = null;
 	PendingIntent pendingIntent = null;
+	PendingIntent manualIntent = null ;
 	AlarmManager alarmManager = null;
 	long _alarm = 0;
-
+	Context c = null ;
 	public AlarmControlClass()
 	{
 		// TODO Auto-generated constructor stub
@@ -42,14 +43,15 @@ public class AlarmControlClass
 		alarm.set(Calendar.HOUR_OF_DAY, hour);
 		alarm.set(Calendar.MINUTE, min);
 		alarm.set(Calendar.SECOND, 0);
-
+		c = context;
 		if (alarm.getTimeInMillis() <= now.getTimeInMillis())
 			_alarm = alarm.getTimeInMillis() + (AlarmManager.INTERVAL_DAY + 1);
 		else
 			_alarm = alarm.getTimeInMillis();
 
-		myIntent = new Intent(context, ListenToAlarmForAutoEmail.class);
+		myIntent = new Intent(context, AutoAlarmListener.class);
 		pendingIntent = PendingIntent.getBroadcast(context, 0, myIntent, 0);
+		
 
 		alarmManager = (AlarmManager) context
 				.getSystemService(Activity.ALARM_SERVICE);
@@ -61,8 +63,9 @@ public class AlarmControlClass
 	 */
 	public void sendAutoEmailNow()
 	{
+		manualIntent = PendingIntent.getBroadcast(c, 0, myIntent, 0);
 		alarmManager.set(AlarmManager.RTC, ((new Date()).getTime() + 4 * 1000),
-				pendingIntent);
+				manualIntent);
 	}
 
 	/*
