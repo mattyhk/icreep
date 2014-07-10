@@ -95,26 +95,31 @@ public class iCreepDatabaseAdapter {
 						int id = cursor.getInt(cursor.getColumnIndex(iCreepHelper.ZONE_ID));
 						
 						//get times from DB and convert to int
-						String timeL = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));						
-						int hoursTimeLeft = Integer.parseInt((timeL.split(":"))[0]);
-						int minsTimeLeft = Integer.parseInt((timeL.split(":"))[1]);
 						
-						String timeE = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_ENTERED));
-						int hoursTimeEntered = Integer.parseInt((timeE.split(":"))[0]);
-						int minsTimeEntered = Integer.parseInt((timeE.split(":"))[1]);
-														
-						//subtract times;
-						int totalHours = hoursTimeLeft - hoursTimeEntered;						
-						int totalMins = minsTimeLeft - minsTimeEntered;
+						String timeL = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));	
 						
-						//calculate total time
-						double totalTime = totalHours + totalMins/60;
-								
-						String floor = cursor.getString(cursor.getColumnIndex(iCreepHelper.FLOOR));
-												
-						TimePlace tp = new TimePlace(loc,totalTime,floor, id);
-						
-						timePlaces.add(tp);		
+						if (!timeL.equals("")){
+							Log.d("TEST", "leaving time is not empty " + timeL);
+							int hoursTimeLeft = Integer.parseInt((timeL.split(":"))[0]);
+							int minsTimeLeft = Integer.parseInt((timeL.split(":"))[1]);
+							
+							String timeE = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_ENTERED));
+							int hoursTimeEntered = Integer.parseInt((timeE.split(":"))[0]);
+							int minsTimeEntered = Integer.parseInt((timeE.split(":"))[1]);
+															
+							//subtract times;
+							int totalHours = hoursTimeLeft - hoursTimeEntered;						
+							int totalMins = minsTimeLeft - minsTimeEntered;
+							
+							//calculate total time
+							double totalTime = totalHours + totalMins/60;
+									
+							String floor = cursor.getString(cursor.getColumnIndex(iCreepHelper.FLOOR));
+													
+							TimePlace tp = new TimePlace(loc,totalTime,floor, id);
+							
+							timePlaces.add(tp);
+						}						
 					}while(cursor.moveToNext());
 					
 					return timePlaces;
@@ -250,8 +255,8 @@ public class iCreepDatabaseAdapter {
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
-			String[] args = {""+userID};
-			db.update(iCreepHelper.TABLE_NAME6,cVs,iCreepHelper.USER_ID + "=?",args);
+			//String[] args = {""+userID};
+			db.update(iCreepHelper.TABLE_NAME6,cVs,iCreepHelper.USER_ID + "=" + userID,null);
 			return true ;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -298,6 +303,7 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	public boolean updateExitTime(String time, long lastEntryID) {
+//		Message.message(c, "updating leaving time");
 		ContentValues cV = new ContentValues();
 		
 		cV.put(iCreepHelper.TIME_LEFT, time);
@@ -310,9 +316,9 @@ public class iCreepDatabaseAdapter {
 		if (cursor != null) {
 			if (cursor.moveToFirst()) {
 				String timeLeft = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));
-				if (timeLeft == "") {
-					String[] args = {""+lastEntryID};
-					db.update(iCreepHelper.TABLE_NAME4, cV, iCreepHelper.LOCATION_ID + "=?", args);
+				if (timeLeft.equals("")) {
+					//String[] args = {""+lastEntryID};
+					db.update(iCreepHelper.TABLE_NAME4, cV, iCreepHelper.LOCATION_ID + "=" + lastEntryID, null);
 					return true;
 				}
 				else {
@@ -326,7 +332,7 @@ public class iCreepDatabaseAdapter {
 		else {
 			Log.d("TEST", "Cursor is null");
 		}
-		
+//		Message.message(c, "cursor is null");
 		return false;
 	}
 	
@@ -392,7 +398,7 @@ public class iCreepDatabaseAdapter {
 		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzel Zone","Focus Room","Kabir Zone","S2","S1","Second Floor","Water Zone"};
 		
 		for(int i=0; i<description.length; i++){
-			db = helper.getWritableDatabase();
+//			db = helper.getWritableDatabase();
 			
 			ContentValues cV = new ContentValues();
 			cV.put(iCreepHelper.DESCRIPTION, description[i]);
@@ -492,8 +498,6 @@ public class iCreepDatabaseAdapter {
 				try {
 					//create tables
 					db.execSQL(createTableQueries[i]);
-					//create beacons and zones
-					iCreepDatabaseAdapter.createZone();
 				} catch (SQLException e) {
 					//display error on toast if appeared
 					Message.message(context, ""+e);

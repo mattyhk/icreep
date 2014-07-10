@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	
-	private int INTERVAL = 10000;
+	private int INTERVAL = 5000;
 	
 	private ListView listView = null;
 	private TextView userName;
@@ -126,7 +126,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		mAdapter.clear();
 		Set<TimePlace> z = user.getVisitedZones();
 		if (z.size() == 0) {
-			Message.message(getActivity(), "You haven't been anywhere");
+//			Message.message(getActivity(), "You haven't been anywhere");
 		}
 		for (TimePlace tp : z){
 			mAdapter.add(tp);
