@@ -306,13 +306,13 @@ public class ReportAutoFragment extends Fragment
 		} else {
 			if ( adapt.addDeliveryTime(newTime, userID) == true)
 			{
-				icreep.app.Message.message(getActivity(),"The the insert was successful");
+				icreep.app.Message.message(getActivity(),"The auto time was set successfully");
 				hasAuto = true ;
 				hour = stoh; 
 				min = stom;
 			}else
 			{
-				icreep.app.Message.message(getActivity(),"The the insert was unsuccessful");
+				icreep.app.Message.message(getActivity(),"The auto time was set unsuccessful");
 			}
 		}
 	}

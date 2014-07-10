@@ -5,6 +5,7 @@ import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,8 @@ public class ReportActivity extends FragmentActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_reports);
+		ActionBar actionBar = getActionBar();
+		actionBar.hide();
 		auto = (Button) findViewById(R.id.autoButton);
 		manual = (Button) findViewById(R.id.manualButton);
 		home = (ImageButton) findViewById(R.id.home_button_report);
