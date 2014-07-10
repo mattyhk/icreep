@@ -26,59 +26,34 @@ public class Sorting
 		
 		list.add(a.get(0));
 		ArrayList<TimePlace> listOut = new ArrayList<TimePlace>();
-		boolean hasMinus = false ;
-		int posi = -1 ;
-		for (int i = 1; i < a.size(); i++) {
-			TimePlace t = a.get(i);
-			if (t.getFloor().equals("Outside"))
-			{
-				hasMinus = true ;
-				posi = i ;
-			}
-			else if (t.getFloor().equals("Ground Floor")) {
-				list.add(0, t);
-			} else if (t.getFloor().equals("Second Floor")) {
-				list.add(list.size(), t);
-			} else {
-				int j = 0;
-				while (!(list.get(j).getFloor().equals("First Floor"))
-						&& (list.get(j) != null)) {
-					j = i + 1;
-				}
-				list.add(j, t);
 
-			}
-		}
-		
-		listOut.add(a.get(posi));
 		ArrayList<TimePlace> listG = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listF = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listSE = new ArrayList<TimePlace>();
 
-		for (TimePlace tt : list) {
-			if (tt.getFloor().equals("Ground Floor")) {
-				listG.add(tt);
+		for (int i = 1; i < a.size(); i++) {
+			TimePlace t = a.get(i);
+			if (t.getFloor().equals("Outside"))
+			{
+				listOut.add(t);
 			}
-		}
-
-		for (TimePlace tt : list) {
-			if (tt.getFloor().equals("First Floor")) {
-				listF.add(tt);
+			else if (t.getFloor().equals("Ground Floor")) {
+				listG.add(t);
+			} else if (t.getFloor().equals("Second Floor")) {
+				listF.add(t);
+			} else {
+				listSE.add(t);
 			}
-		}
-
-		for (TimePlace tt : list) {
-			if (tt.getFloor().equals("Second Floor")) {
-				listSE.add(tt);
-			}
-		}
+		}		
+		listOut = secondarySortDescriptionAsc(listOut);
 		listG = secondarySortDescriptionAsc(listG);
 		listF = secondarySortDescriptionAsc(listF);
 		listSE = secondarySortDescriptionAsc(listSE);
 		list.clear();
-		if (hasMinus == true)
-		{
-			list.add(listOut.get(0));
+		
+		
+		for (TimePlace tt : listOut) {
+			list.add(tt);
 		}
 		
 		for (TimePlace tt : listG) {
