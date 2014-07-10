@@ -162,8 +162,11 @@ public class MailerClass
 			}
 			s = s + "\n" + locate;
 			s = s + "\t \t \t \t";
-
-			s = s + (t.getTimeSpent() * 1.00) + " hrs";
+			
+			double time = t.getTimeSpent();
+			int hours = (int) Math.floor(time) ;
+			int minutes = (int)(time%1);
+			s = s + (hours) + " hrs " + minutes + "min";
 		}
 		s = s + "\n=============================================";
 		s = s + "\n";
