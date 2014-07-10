@@ -99,7 +99,6 @@ public class MailerClass
 			list = new ArrayList<TimePlace>();
 		}
 		Sorting sorter = new Sorting();
-		list = sorter.InsertionSort(list);
 		list = sorter.join(list);
 		int max = 0;
 		for (TimePlace t : list) {

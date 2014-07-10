@@ -26,6 +26,7 @@ public class Sorting
 		
 		list.add(a.get(0));
 		ArrayList<TimePlace> listOut = new ArrayList<TimePlace>();
+
 		ArrayList<TimePlace> listG = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listF = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listSE = new ArrayList<TimePlace>();
@@ -139,7 +140,7 @@ public class Sorting
 	
 	public ArrayList<TimePlace> join(ArrayList<TimePlace> in)
 	{
-		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
+		ArrayList<TimePlace> finalSortedTimePlaces = InsertionSort(in);
 		if (in.size() == 0) {
 			return finalSortedTimePlaces;
 		}
