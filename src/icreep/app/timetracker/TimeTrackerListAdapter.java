@@ -35,12 +35,12 @@ public class TimeTrackerListAdapter extends ArrayAdapter<TimePlace> {
 		if (timePlace != null) {
 
 				v = vi.inflate(R.layout.list_item_zone_time, null);
-				final TextView title = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_title);
-				final TextView subtitle = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_summary);
+				final TextView title = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_time_title);
+				final TextView subtitle = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_time_summary);
 				final TextView time = (TextView) v.findViewById(R.id.time_tracker_list_item_zone_time);
 				
 				if (title != null)
-					title.setText(timePlace.getZoneID());
+					title.setText(String.valueOf(timePlace.getZoneID()));
 				if (subtitle != null)
 					subtitle.setText(timePlace.getLocation());
 				if (time != null)

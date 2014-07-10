@@ -10,15 +10,22 @@ import icreep.app.beacon.BeaconService;
 public class IcreepMenu extends Activity {
 	
 	Button location_button, time_tracker_button, reports_button, profile_button;
+	ICreepApplication mApplication;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_icreep_menu);
+		mApplication = (ICreepApplication) getApplicationContext();
 		
-		Intent trackingIntent = new Intent(this, BeaconService.class);
-		startService(trackingIntent);
+		if (!mApplication.hasStartedRanging()) {
 
+			Intent trackingIntent = new Intent(this, BeaconService.class);
+			startService(trackingIntent);
+			mApplication.startedRanging();
+			
+		}
+			
 		//Proximity Button
 		location_button = (Button) findViewById(R.id.button1_location);
 		location_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.location.LocationActivity"));

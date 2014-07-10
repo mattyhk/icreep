@@ -2,6 +2,8 @@ package icreep.app.report;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 public class Sorting
 {
 
@@ -17,19 +19,21 @@ public class Sorting
 			return new ArrayList<TimePlace>();
 		}
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
+		
 		if (a.size() == 0) {
 			return new ArrayList<TimePlace>();
 		}
+		
 		list.add(a.get(0));
 		for (int i = 1; i < a.size(); i++) {
 			TimePlace t = a.get(i);
-			if (t.getFloor().equals("Ground")) {
+			if (t.getFloor().equals("Ground Floor")) {
 				list.add(0, t);
-			} else if (t.getFloor().equals("Second")) {
+			} else if (t.getFloor().equals("Second Floor")) {
 				list.add(list.size(), t);
 			} else {
 				int j = 0;
-				while (!(list.get(j).getFloor().equals("First"))
+				while (!(list.get(j).getFloor().equals("First Floor"))
 						&& (list.get(j) != null)) {
 					j = i + 1;
 				}
@@ -42,19 +46,19 @@ public class Sorting
 		ArrayList<TimePlace> listSE = new ArrayList<TimePlace>();
 
 		for (TimePlace tt : list) {
-			if (tt.getFloor() == "Ground") {
+			if (tt.getFloor().equals("Ground Floor")) {
 				listG.add(tt);
 			}
 		}
 
 		for (TimePlace tt : list) {
-			if (tt.getFloor() == "First") {
+			if (tt.getFloor().equals("First Floor")) {
 				listF.add(tt);
 			}
 		}
 
 		for (TimePlace tt : list) {
-			if (tt.getFloor() == "Second") {
+			if (tt.getFloor().equals("Second Floor")) {
 				listSE.add(tt);
 			}
 		}
@@ -81,8 +85,13 @@ public class Sorting
 	public ArrayList<TimePlace> secondarySortDescriptiondesc(
 			ArrayList<TimePlace> a)
 	{
-
+		
 		ArrayList<TimePlace> toReturn = new ArrayList<TimePlace>();
+		
+		if (a.size() == 0) {
+			return toReturn;
+		}
+		
 		toReturn.add(a.get(0));
 
 		for (int i = 0; i < a.size(); i++) {
@@ -111,6 +120,11 @@ public class Sorting
 			ArrayList<TimePlace> a)
 	{
 		ArrayList<TimePlace> toReturn = new ArrayList<TimePlace>();
+		
+		if (a.size() == 0) {
+			return toReturn;
+		}
+		
 		toReturn.add(a.get(0));
 
 		for (int i = 1; i < a.size(); i++) {
