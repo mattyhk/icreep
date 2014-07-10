@@ -108,7 +108,6 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 			
 			for(TimePlace tp : sorted){
 				if(tp.equals(toAdd)){
-					&& tp.getLocation().equals(toAdd.getLocation())) {
 					toAdd.increaseTimeSpent(tp.getTimeSpent());
 				} 
 				else{
