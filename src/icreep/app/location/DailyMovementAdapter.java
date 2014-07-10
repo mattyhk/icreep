@@ -40,9 +40,9 @@ public class DailyMovementAdapter extends ArrayAdapter<TimePlace> {
 				final TextView subtitle = (TextView) v.findViewById(R.id.daily_movement_list_item_zone_summary);
 				
 				if (title != null)
-					title.setText(String.valueOf(tp.getZoneID()));
+					title.setText(tp.getLocation());
 				if (subtitle != null)
-					subtitle.setText(tp.getLocation());
+					subtitle.setText(tp.getFloor());
 			
 		}
 		

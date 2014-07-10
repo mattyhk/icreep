@@ -3,8 +3,7 @@ package icreep.app.location;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
+import icreep.app.report.Sorting;
 import icreep.app.report.TimePlace;
 
 
@@ -39,7 +39,7 @@ public class UserLocation {
 	private int currentTempLocation;
 	private int userID;
 	private long lastLocationID = 0;
-	private Set<TimePlace> visitedZones = new HashSet<TimePlace>();
+	private List<TimePlace> visitedZones = new ArrayList<TimePlace>();
 	private Context context;
 	
 	private iCreepDatabaseAdapter db;
@@ -215,13 +215,8 @@ public class UserLocation {
 		this.visitedZones.clear();
 		
 		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
+		this.visitedZones = Sorting.join(visited);
 		
-		if (visited != null) {
-			for (TimePlace tp: visited) {
-				this.visitedZones.add(tp);
-			}
-		}
-
 	}
 	
 	/*******************
@@ -242,7 +237,7 @@ public class UserLocation {
 	
 	}
 	
-	public Set<TimePlace> getVisitedZones() { 
+	public List<TimePlace> getVisitedZones() { 
 		
 		findVisitedZones();
 		

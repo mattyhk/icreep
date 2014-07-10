@@ -2,8 +2,6 @@ package icreep.app.report;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 public class Sorting
 {
 
@@ -12,7 +10,7 @@ public class Sorting
 	 * Post-conditions: > Sorts the arrayList of time places > The sort is done
 	 * on the floor > items order: Ground Floor, First Floor, Second Floor
 	 */
-	public ArrayList<TimePlace> InsertionSort(ArrayList<TimePlace> a)
+	public static ArrayList<TimePlace> InsertionSort(ArrayList<TimePlace> a)
 	{
 		if (a == null)
 		{
@@ -39,7 +37,7 @@ public class Sorting
 			}
 			else if (t.getFloor().equals("Ground Floor")) {
 				listG.add(t);
-			} else if (t.getFloor().equals("Second Floor")) {
+			} else if (t.getFloor().equals("First Floor")) {
 				listF.add(t);
 			} else {
 				listSE.add(t);
@@ -51,28 +49,16 @@ public class Sorting
 		listSE = secondarySortDescriptionAsc(listSE);
 		list.clear();
 		
-		
-		for (TimePlace tt : listOut) {
-			list.add(tt);
-		}
-		
-		for (TimePlace tt : listG) {
-			list.add(tt);
-		}
-
-		for (TimePlace tt : listF) {
-			list.add(tt);
-		}
-
-		for (TimePlace tt : listSE) {
-			list.add(tt);
-		}
+		list.addAll(listOut);
+		list.addAll(listG);
+		list.addAll(listF);
+		list.addAll(listSE);
 
 		return list;
 	}
 
 	// descending
-	public ArrayList<TimePlace> secondarySortDescriptiondesc(
+	public static ArrayList<TimePlace> secondarySortDescriptiondesc(
 			ArrayList<TimePlace> a)
 	{
 		
@@ -106,7 +92,7 @@ public class Sorting
 	}
 
 	// Asc
-	private ArrayList<TimePlace> secondarySortDescriptionAsc(
+	private static ArrayList<TimePlace> secondarySortDescriptionAsc(
 			ArrayList<TimePlace> a)
 	{
 		ArrayList<TimePlace> toReturn = new ArrayList<TimePlace>();
@@ -138,15 +124,16 @@ public class Sorting
 
 	}
 	
-	public ArrayList<TimePlace> join(ArrayList<TimePlace> in)
-	{
-		ArrayList<TimePlace> finalSortedTimePlaces = InsertionSort(in);
+	public static ArrayList<TimePlace> join(ArrayList<TimePlace> in) {
+		
+		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
+		in = InsertionSort(in);
+		
 		if (in.size() == 0) {
-			return finalSortedTimePlaces;
+			return in;
 		}
 		if (in.size() > 1) {
 			TimePlace toAdd = in.get(0);
-//			Log.d("TEST", "toAdd is " + toAdd.getZoneID());
 			in.remove(0);
 			
 			for(TimePlace tp : in)

@@ -151,7 +151,8 @@ public class MailerClass
 			double time = t.getTimeSpent();
 			int hours = (int) Math.floor(time) ;
 			int minutes = (int) Math.floor((time%1) * 60);
-			s = s + (hours) + " hrs " + minutes + "min";
+			int seconds =  (int)Math.floor(((time%1) * 60*60));
+			s = s + (hours) + "hrs " + minutes + "min " + seconds + "secs";
 		}
 		s = s + "\n=============================================";
 		s = s + "\n";
