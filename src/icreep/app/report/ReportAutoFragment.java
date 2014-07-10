@@ -32,10 +32,6 @@ public class ReportAutoFragment extends Fragment
 	AlarmControlClass acc = new AlarmControlClass();
 	iCreepDatabaseAdapter adapt = null;
 	int userID = -1;
-	AlarmControlClass acc;
-	// the following is how you get your text pixels to the correct size
-	// depending on the screen
-	// 16*getResources().getDisplayMetrics().density
 
 	/*
 	 * please note that the switch will depend on the following possibly, db,
@@ -310,7 +306,7 @@ public class ReportAutoFragment extends Fragment
 		} else {
 			if ( adapt.addDeliveryTime(newTime, userID) == true)
 			{
-				icreep.app.Message.message(getActivity(),"The auto time was set successfully");
+				icreep.app.Message.message(getActivity(),"Save Successful");
 				hasAuto = true ;
 				hour = stoh; 
 				min = stom;
@@ -318,13 +314,15 @@ public class ReportAutoFragment extends Fragment
 				
 			}else
 			{
-				icreep.app.Message.message(getActivity(),"The auto time was set unsuccessful");
+				icreep.app.Message.message(getActivity(),"Save Unsuccessful");
 				wasntUpdated = true ;
 			}
 		}
 		if (updated == true)
 		{
 			String time = adapt.getReportTime(userID);
+			String[] splitted = time.split("\\+");
+			time = splitted[0];
 			if (time != null) {
 				String[] times = time.split(":");
 				int hour = Integer.parseInt(times[0]);
