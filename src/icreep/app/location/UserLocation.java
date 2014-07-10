@@ -186,7 +186,8 @@ public class UserLocation {
 		Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY);
 		int minute = c.get(Calendar.MINUTE);
-		String time = "" + hour + ":" + minute;
+		int seconds = c.get(Calendar.SECOND);
+		String time = "" + hour + ":" + minute + ":" + seconds;
 		return time;
 	}
 	
