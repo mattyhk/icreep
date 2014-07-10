@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 @SuppressLint("DefaultLocale") public class TimeTrackerFragmentB extends Fragment {
 	
 	private int INTERVAL = 10000;
+	private double TIMEOUT = 1.0 * 60 * 60;
 	
 	private ProgressBar mProgressBar;
 	private ImageButton home;
@@ -25,7 +27,7 @@ import android.widget.TextView;
 	private TextView fragmentOutTime;
 	
 	private double timeIn = 0.0;
-	private double timeOut = 24.0;
+	
 
 	private Handler mHandler = new Handler(); 
 	private TimeTrackerActivity timeTracker;
@@ -49,6 +51,7 @@ import android.widget.TextView;
 		//fragmentUser.setTextSize(correctTextSize);
 		
 		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
+		mProgressBar.setMax(100);
 
 		timeTracker = (TimeTrackerActivity) this.getActivity();		
 
@@ -67,48 +70,37 @@ import android.widget.TextView;
 	
 	private void updateBar() {
 		
-		timeIn = timeTracker.getTime();
-		
-		if(timeIn != 0){
-			timeOut -= timeIn;
+		if (timeIn != timeTracker.getTime()) {
 			
-			// get percentage and set progress
-			mProgressBar.setProgress(calcPercentageTime(timeIn));
-
-			//display in & out of office times
-			//In office hours, minutes & seconds
-			String[] intime = (Double.toString(timeIn)).split(".");		
-			int inHours = Integer.parseInt(intime[0]);	
+			timeIn = timeTracker.getTime() * 60 * 60;
 			
-			int inMinutesIn =  (int) (timeIn - inHours)*60;
-
-			String[] sInMinutes = (Double.toString(inMinutesIn)).split(".");						
-			int inMinutes = Integer.parseInt(sInMinutes[0]);
-			String inminutes = String.format("%02d",inMinutes);
+			if(timeIn != 0){
+				double timeOutTemp = TIMEOUT - timeIn;
+				
+				// get percentage and set progress
+				mProgressBar.setProgress(0);
+				mProgressBar.setProgress((int) calcPercentageTime(timeIn));
+				
+				
+				int secondsIn = (int) (timeIn % 60);
+				int minutesIn = (int) ((timeIn / 60) % 60);
+				int hoursIn = (int) ((timeIn / 3600) % 60);
+				
+	
+				int secondsOut = (int) (timeOutTemp % 60);
+				int minutesOut = (int) ((timeOutTemp / 60) % 60);
+				int hoursOut = (int) ((timeOutTemp / 3600) % 60);
+				
+				fragmentInTime.setText(String.format
+						("%02d:%02d:%02d", hoursIn, minutesIn, secondsIn));
+				fragmentOutTime.setText(String.format
+						("%02d:%02d:%02d", hoursOut, minutesOut, secondsOut));
+			}
 			
-			int inSeconds =  (int) (inMinutesIn - (inMinutes))*10;
-			String inseconds = String.format("%02d",inSeconds);
-								
-			//Out office hours, minutes & seconds
-			String[] outtime = (Double.toString(timeOut)).split(".");
-			int outHours = Integer.parseInt(outtime[0]);	
-			
-			int outMinutesOut =  (int) (timeOut - outHours)*60;
-			
-			String[] sOutMinutes = (Double.toString(outMinutesOut)).split(".");						
-			int outMinutes = Integer.parseInt(sOutMinutes[0]);
-			String outminutes = String.format("%02d",outMinutes);
-			
-			int outSeconds =  (int) (outMinutesOut - (outMinutes))*10;
-			String outseconds = String.format("%02d",outSeconds);
-			
-			fragmentInTime.setText(inHours + ":" + inminutes + ":" + inseconds);
-			fragmentOutTime.setText(outHours + ":" + outminutes+ ":" + outseconds);
-		}
-		
-		else{
-			fragmentInTime.setText("0:00:00");
-			fragmentOutTime.setText("24:00:00");
+			else{
+				fragmentInTime.setText("00:00:00");
+				fragmentOutTime.setText("24:00:00");
+			}
 		}
 		
 	}
@@ -135,8 +127,8 @@ import android.widget.TextView;
 	 * @param inOffice - time spent in the office
 	 * @return percentage - the percentage rounded to nearest integer
 	 */
-	private int calcPercentageTime(double inOffice) { 
-		return (int) (inOffice/24)*100;
+	private double calcPercentageTime(double inOffice) { 
+		return (inOffice/TIMEOUT)*100.0;
 	}
 	
 	private Runnable mBarUpdater = new Runnable() {
