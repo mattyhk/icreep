@@ -290,7 +290,7 @@ public class ProfileCreationActivity extends Activity
 		int[] lengths = {30,30,255,30};
 				
 		for(int i=0; i<checks.length; i++){
-			if(checks[i].length() != lengths[i]){
+			if(checks[i].length() > lengths[i]){
 				invalidEntry = holders[i];
 				return false;				
 			}
