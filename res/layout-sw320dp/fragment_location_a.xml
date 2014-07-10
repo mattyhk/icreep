@@ -66,10 +66,11 @@
         android:id="@+id/location_a_floor_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/linearLayoutLocation"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="45dp"
         android:textColor="@color/whiteColor"
-        android:textSize="@dimen/heading_text_size_3.7in" />
+        android:textSize="@dimen/heading_text_size_3.7in"
+        android:textStyle="bold" />
 
 </RelativeLayout>
