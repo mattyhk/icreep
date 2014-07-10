@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -47,7 +48,11 @@ public class ReportActivity extends FragmentActivity
 		auto = (Button) findViewById(R.id.autoButton);
 		manual = (Button) findViewById(R.id.manualButton);
 		home = (ImageButton) findViewById(R.id.home_button_report);
-
+			
+		
+		this.getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		
 		adapt = new iCreepDatabaseAdapter(this);
 		
 		SharedPreferencesControl spc = new SharedPreferencesControl(this);
