@@ -390,7 +390,7 @@ public class iCreepDatabaseAdapter {
 		
 		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
 		
-		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzel Zone","Focus Room","Kabir Zone","S2","S1","Second Floor Kitchen","Water Zone"};
+		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzil Zone","Focus Room","Kabir Zone","S2","S1","Second Floor Kitchen","Water Zone"};
 		
 		for(int i=0; i<description.length; i++){
 			
