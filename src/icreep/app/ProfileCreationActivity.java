@@ -231,7 +231,7 @@ public class ProfileCreationActivity extends Activity
 			}
 		} else {
 			doMessage("Invalid " + invalidEntry + ". " + invalidEntry
-					+ " length mus not exceed " + chars + " characters");
+					+ " length must not exceed " + chars + " characters");
 		}
 	}
 
@@ -283,7 +283,7 @@ public class ProfileCreationActivity extends Activity
 			}
 		} else {
 			doMessage("Invalid " + invalidEntry + ". " + invalidEntry
-					+ " length mus not exceed " + chars + " characters");
+					+ " length must not exceed " + chars + " characters");
 		}
 	}
 
