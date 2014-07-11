@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+import icreep.app.ICreepApplication;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.report.Sorting;
@@ -41,6 +42,7 @@ public class UserLocation {
 	private long lastLocationID = 0;
 	private List<TimePlace> visitedZones = new ArrayList<TimePlace>();
 	private Context context;
+	private ICreepApplication mApplication;
 	
 	private iCreepDatabaseAdapter db;
 	
@@ -50,6 +52,7 @@ public class UserLocation {
 		this.exitCount = 0;
 		this.db = new iCreepDatabaseAdapter(context);
 		this.context = context;
+		this.mApplication = (ICreepApplication) context.getApplicationContext();
 		
 		SharedPreferencesControl spc = new SharedPreferencesControl(context);
 		this.userID = spc.getUserID();
@@ -215,6 +218,10 @@ public class UserLocation {
 		this.visitedZones.clear();
 		
 		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
+		
+		double timeSpent = System.currentTimeMillis() - mApplication.getTime();
+		
+		TimePlace tp = new TimePlace()
 		
 		this.visitedZones = Sorting.join(visited);
 		
