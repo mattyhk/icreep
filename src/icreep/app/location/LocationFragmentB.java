@@ -29,6 +29,8 @@ import android.widget.Toast;
 public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	
 	private int INTERVAL = 5000;
+	private String FILE_FRAGMENT = "zones_3_";
+	private int OUTDOORS = -1;
 	
 	private ListView listView = null;
 	private TextView userName;
@@ -92,12 +94,22 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		View layout = inflater.inflate(R.layout.location_toast,
 		                               (ViewGroup)getActivity().findViewById(R.id.toast_layout_root));
 		TextView tv = (TextView) layout.findViewById(R.id.toast_title);
-		String FILE_FRAGMENT = "zones_3_";
-		Integer drawID =  getActivity().getResources()
-				.getIdentifier(FILE_FRAGMENT + item.getZoneID(), "drawable", getActivity()
-						.getPackageName());
+		
+		Integer drawID;
+		
+		if (item.getZoneID() == OUTDOORS) {
+			drawID = getActivity().getResources()
+					.getIdentifier("zones_outdoors", "drawable", getActivity().getPackageName());
+		}
+		
+		else {
+			drawID =  getActivity().getResources()
+					.getIdentifier(FILE_FRAGMENT + item.getZoneID(), "drawable", getActivity()
+							.getPackageName());
+		}
 						
 		ImageView zoneMap = (ImageView) layout.findViewById(R.id.toast_map);
+		
 		if (drawID != null) {
 			zoneMap.setImageResource(drawID);
 		}

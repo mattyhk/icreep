@@ -72,13 +72,13 @@ public class LocationFragmentA extends Fragment {
 	private void updateImage(){
 		int currentLocation = mApplication.getCurrentLocation();
 		 Integer drawID = null;
-		if (currentLocation == -2) {
+		if (currentLocation == UNKNOWN) {
 			// Location is unknown
 			 drawID = getActivity().getResources()
 						.getIdentifier("zones_all", "drawable", getActivity().getPackageName());
 		}
 		
-		else if (currentLocation == -1) {
+		else if (currentLocation == OUTDOORS) {
 //			 Location is out of office
 			 drawID = getActivity().getResources()
 						.getIdentifier("zones_outdoors", "drawable", getActivity().getPackageName());
