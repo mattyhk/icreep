@@ -218,7 +218,7 @@ public class ReportAutoFragment extends Fragment
 			acc.sendAutoEmailRepeat();
 			checkerIfEmailed = true;
 		} else {
-			acc.turnOffAlarm();
+			//acc.turnOffAlarm();
 		}
 	}
 
@@ -336,7 +336,9 @@ public class ReportAutoFragment extends Fragment
 		{
 			if (wasntUpdated == false)
 			{
-			acc.turnOffAlarm();
+			acc.setAlarm(0, 0, getActivity());
+			acc.turnOffAlarmAuto();
+			Message.message(getActivity(), "Alarm switched off");
 			}
 		}
 	}
