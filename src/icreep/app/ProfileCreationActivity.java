@@ -316,6 +316,7 @@ public class ProfileCreationActivity extends Activity
 	
 	// function to validate name against a name Regular Expression
 	public boolean isValidName(String name){
+		//if(!name.get(0).isChar())
 		String nameRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*";
 		if(name.matches(nameRegex)){
 			return true;
@@ -325,7 +326,7 @@ public class ProfileCreationActivity extends Activity
 
 	// function to validate employee position against a employee position Regular Expression
 	public boolean isValidPosition(String position){
-		String employeePosRegex = "[A-Z][a-z]+( [A-Z][a-z]+)?";
+		String employeePosRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*";
 		if(position.matches(employeePosRegex)){
 			return true;
 		}
