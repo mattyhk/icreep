@@ -105,5 +105,10 @@ public class TimePlace
 	public int hashCode() {
 		return this.zoneID;
 	}
+	
+	@Override
+	public String toString() {
+		return "Zone id is " + this.zoneID;
+	}
 
 }

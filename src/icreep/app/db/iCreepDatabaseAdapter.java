@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import icreep.app.location.Floor;
+import icreep.app.location.Zone;
 import icreep.app.report.TimePlace;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -404,8 +406,8 @@ public class iCreepDatabaseAdapter {
 		ContentValues cVs = new ContentValues();
 		
 		cVs.put(iCreepHelper.ZONE_ID, -1);
-		cVs.put(iCreepHelper.DESCRIPTION, "Outside");
-		cVs.put(iCreepHelper.FLOOR,"Outside");
+		cVs.put(iCreepHelper.DESCRIPTION, Zone.getLocation(-1));
+		cVs.put(iCreepHelper.FLOOR, Floor.getFloor(-1));
 		cVs.put(iCreepHelper.BEACON_ID, -1);
 		
 		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
