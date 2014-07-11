@@ -80,18 +80,16 @@ public class iCreepDatabaseAdapter {
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
-		//get the current day's timePlaces
-		//today's date
+		//get the current day's timePlaces		
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date formatted = format.format(c.getTime());
+		String date = format.format(c.getTime());
 		
-		
-		
-		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND User.User_ID = Location.User_ID AND Location.Zone_ID = Zone.Zone_ID;";
+		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND Location.Location_Date = " + date + " AND User.User_ID = Location.User_ID AND Location.Zone_ID = Zone.Zone_ID;";
 		
 		//String[] toReturn = {iCreepHelper.USER_ID,iCreepHelper.FLOOR, iCreepHelper.DESCRIPTION, iCreepHelper.TIME_ENTERED, iCreepHelper.TIME_LEFT};
-		Cursor cursor = db.rawQuery(query, null);
+		//String[] args = {""+UserID, "Location.User_ID"};
+		Cursor cursor = db.rawQuery(query, null);//,  "User.User_ID =? AND User.User_ID =?",args,   ); //query, null);
 
 		if(cursor != null){
 			if(cursor.moveToFirst()){
