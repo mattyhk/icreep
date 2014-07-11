@@ -133,14 +133,12 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	 */
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		startRepeatingTask();
 	}
 	
 	@Override
 	public void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		stopRepeatingTask();
 	}
@@ -166,7 +164,6 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		
 		mAdapter.clear();
 		List<TimePlace> z = user.getVisitedZones();
-		Log.d("TEST", "List received is size " + z.size());
 		if (z.size() > 0){
 			for (TimePlace tp : z){
 				mAdapter.add(tp);
