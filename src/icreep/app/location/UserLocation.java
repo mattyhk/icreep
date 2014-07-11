@@ -248,6 +248,9 @@ public class UserLocation {
 		return this.userID;
 	}
 	
+	public int getTempLocation() {
+		return this.currentTempLocation;
+	}
 	
 
 }
