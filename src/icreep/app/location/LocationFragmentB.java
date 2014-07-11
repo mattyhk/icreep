@@ -29,6 +29,8 @@ import android.widget.Toast;
 public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	
 	private int INTERVAL = 5000;
+	private String FILE_FRAGMENT = "zones_3_";
+	private int OUTDOORS = -1;
 	
 	private ListView listView = null;
 	private TextView userName;
@@ -92,19 +94,29 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		View layout = inflater.inflate(R.layout.location_toast,
 		                               (ViewGroup)getActivity().findViewById(R.id.toast_layout_root));
 		TextView tv = (TextView) layout.findViewById(R.id.toast_title);
-		String FILE_FRAGMENT = "zones_3_";
-		Integer drawID =  getActivity().getResources()
-				.getIdentifier(FILE_FRAGMENT + item.getZoneID(), "drawable", getActivity()
-						.getPackageName());
+		
+		Integer drawID;
+		
+		if (item.getZoneID() == OUTDOORS) {
+			drawID = getActivity().getResources()
+					.getIdentifier("zones_outdoors", "drawable", getActivity().getPackageName());
+		}
+		
+		else {
+			drawID =  getActivity().getResources()
+					.getIdentifier(FILE_FRAGMENT + item.getZoneID(), "drawable", getActivity()
+							.getPackageName());
+		}
 						
 		ImageView zoneMap = (ImageView) layout.findViewById(R.id.toast_map);
+		
 		if (drawID != null) {
 			zoneMap.setImageResource(drawID);
 		}
 		
 		
 		tv.setText(item.getFloor() + " : " + item.getLocation());
-		t.setGravity(Gravity.BOTTOM, 0, 0);
+		t.setGravity(Gravity.CENTER, 0, 0);
 		t.setDuration(Toast.LENGTH_SHORT);
 		t.setView(layout);
 		t.show();
@@ -154,7 +166,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 				mAdapter.add(tp);
 			}
 		}
-		else {
+		else if (user.getCurrentLocation() == -2 && z.size() == 0) {
 			Message.message(getActivity(), "You have yet to visit a zone");
 		}
 		
