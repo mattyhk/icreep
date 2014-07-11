@@ -221,7 +221,8 @@ public class UserLocation {
 		
 		double timeSpent = System.currentTimeMillis() - mApplication.getTime();
 		
-		TimePlace tp = new TimePlace()
+		TimePlace tp = new TimePlace(timeSpent, mApplication.getCurrentLocation());
+		visited.add(tp);
 		
 		this.visitedZones = Sorting.join(visited);
 		
