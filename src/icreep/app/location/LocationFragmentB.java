@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -165,6 +166,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		
 		mAdapter.clear();
 		List<TimePlace> z = user.getVisitedZones();
+		Log.d("TEST", "List received is size " + z.size());
 		if (z.size() > 0){
 			for (TimePlace tp : z){
 				mAdapter.add(tp);

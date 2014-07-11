@@ -182,7 +182,7 @@ public class UserLocation {
 	}
 	
 	/**
-	 * Returns the current time in 24 hour format as "22:10"
+	 * Returns the current time in 24 hour format as "22:10:44"
 	 * @return time
 	 */
 	private static String getTime() {
@@ -219,10 +219,19 @@ public class UserLocation {
 		
 		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
 		
-		double timeSpent = System.currentTimeMillis() - mApplication.getTime();
+		double timeSpent = (System.currentTimeMillis() - mApplication.getTime()) / (1000 * 3600);
 		
 		TimePlace tp = new TimePlace(timeSpent, mApplication.getCurrentLocation());
-		visited.add(tp);
+		
+		if (visited != null) {
+			visited.add(tp);
+		}
+		
+		else {
+			visited = new ArrayList<TimePlace>();
+			visited.add(tp);
+			
+		}
 		
 		this.visitedZones = Sorting.join(visited);
 		
@@ -249,6 +258,7 @@ public class UserLocation {
 	public List<TimePlace> getVisitedZones() { 
 		
 		findVisitedZones();
+		Log.d("TEST", "Passing on list of size " + this.visitedZones.size());
 		
 		return this.visitedZones;
 	}
