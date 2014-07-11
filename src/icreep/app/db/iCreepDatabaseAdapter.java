@@ -293,6 +293,8 @@ public class iCreepDatabaseAdapter {
 	public long addNewLocation(int userID, int zoneID, String time, String date) {
 		ContentValues cV = new ContentValues();
 		
+		
+		
 		cV.put(iCreepHelper.TIME_ENTERED, time);
 		cV.put(iCreepHelper.TIME_LEFT, "");
 		cV.put(iCreepHelper.LOCATION_DATE, date);
@@ -304,6 +306,7 @@ public class iCreepDatabaseAdapter {
 		long success = db.insert(iCreepHelper.TABLE_NAME4, null, cV);
 		
 		if (success > 0) {
+			Log.d("TEST", "Inserting new location with id " + success);
 			return success;
 		}
 		
@@ -315,6 +318,8 @@ public class iCreepDatabaseAdapter {
 	
 	public boolean updateExitTime(String time, long lastEntryID) {
 		ContentValues cV = new ContentValues();
+		
+		Log.d("TEST", "Updating location with id " + lastEntryID);
 		
 		cV.put(iCreepHelper.TIME_LEFT, time);
 		
