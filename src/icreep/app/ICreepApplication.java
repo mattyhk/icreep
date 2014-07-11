@@ -9,6 +9,7 @@ public class ICreepApplication extends Application {
 	private boolean hasStartedRanging = false;
 	private int currentLocation = -2;
 	private int currentFloor = 2;
+	private long timeEntered;
 	
 	public ICreepApplication getInstance(){
 		return singleton;
@@ -54,6 +55,14 @@ public class ICreepApplication extends Application {
 	
 	public void stoppedRanging() {
 		this.hasStartedRanging = false;
+	}
+	
+	public void setTime(long time) {
+		this.timeEntered = time;
+	}
+	
+	public long getTime() {
+		return this.timeEntered;
 	}
 	
 	

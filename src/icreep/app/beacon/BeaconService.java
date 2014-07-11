@@ -110,7 +110,11 @@ public class BeaconService extends Service implements IBeaconConsumer,
 			currentLoc = userLocation.getCurrentLocation();
 		}
 		
-		mApplication.setCurrentLocation(currentLoc);
+		if (currentLoc != mApplication.getCurrentLocation()) {
+			mApplication.setCurrentLocation(currentLoc);
+			mApplication.setTime(System.currentTimeMillis());
+		}
+		
 	}
 	
 	/**

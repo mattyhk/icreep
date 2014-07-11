@@ -1,5 +1,8 @@
 package icreep.app.report;
 
+import icreep.app.location.Floor;
+import icreep.app.location.Zone;
+
 public class TimePlace
 {
 	private String location = "";
@@ -24,6 +27,15 @@ public class TimePlace
 		hours = h;
 		floor = f;
 		zoneID = zID;
+	}
+	
+	public TimePlace(double h, int zoneID) {
+		
+		this.zoneID = zoneID;
+		this.hours = h;
+		this.location = Zone.getLocation(zoneID);
+		this.floor = Floor.getFloor(zoneID);
+		
 	}
 
 	/*

@@ -3,9 +3,9 @@ package icreep.app.db;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import icreep.app.report.TimePlace;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -71,6 +71,7 @@ public class iCreepDatabaseAdapter {
 	 * Pre-Conditions: > Go through database and retrieve user floor, location(description) total time spent.
 	 * Post-conditions: > Return an ArrayList with floors, location(descriptions) and total time spent in location(description) or null
 	 */
+	@SuppressLint("SimpleDateFormat") 
 	public ArrayList<TimePlace> getTimePlaces(int UserID){
 		
 		ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
@@ -128,8 +129,10 @@ public class iCreepDatabaseAdapter {
 							TimePlace tp = new TimePlace(loc,totalTime,floor, id);
 							
 							timePlaces.add(tp);
-						}						
+						}
+						
 					}while(cursor.moveToNext());
+					
 					
 					return timePlaces;
 				}
@@ -399,7 +402,7 @@ public class iCreepDatabaseAdapter {
 		
 		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
 		
-		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzil Zone","Focus Room","Kabir Zone","S2","S1","Second Floor Kitchen","Water Zone","Second Floor Corner"};
+		String[] description = {"S3","Men's Bathroom","Intern Zone","Denzil Zone","Focus Room","Kabir Zone","S2","S1","Second Floor Kitchen","Water Zone","Second Floor Corner"};
 		
 		for(int i=0; i<description.length; i++){
 			
