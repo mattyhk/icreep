@@ -12,10 +12,10 @@ import android.content.Intent;
 public class AlarmControlClass
 {
 
-	Intent myIntent = null;
-	PendingIntent pendingIntent = null;
-	PendingIntent manualIntent = null ;
-	AlarmManager alarmManager = null;
+	Intent myIntent;
+	PendingIntent pendingIntent ;
+	PendingIntent manualIntent  ;
+	AlarmManager alarmManager ;
 	long _alarm = 0;
 	Context c = null ;
 	public AlarmControlClass()
@@ -51,7 +51,7 @@ public class AlarmControlClass
 
 		myIntent = new Intent(context, AutoAlarmListener.class);
 		pendingIntent = PendingIntent.getBroadcast(context, 0, myIntent, 0);
-		
+		manualIntent = PendingIntent.getBroadcast(context, 0, myIntent, 0);
 
 		alarmManager = (AlarmManager) context
 				.getSystemService(Activity.ALARM_SERVICE);
@@ -90,8 +90,17 @@ public class AlarmControlClass
 	 * about the fact if they cancel, it will cancel the pending intent... which
 	 * could be the auto mailer, could remove it and not want it removed
 	 */
-	public void turnOffAlarm()
+	public void turnOffAlarmAuto()
 	{
+//		myIntent = new Intent(c, AutoAlarmListener.class);
+//		pendingIntent = PendingIntent.getBroadcast(c, 0, myIntent, 0);
+		alarmManager.cancel(pendingIntent);
+	}
+	
+	public void turnOffAlarmMan()
+	{
+		myIntent = new Intent(c, AutoAlarmListener.class);
+		manualIntent = PendingIntent.getBroadcast(c, 0, myIntent, 0);
 		alarmManager.cancel(pendingIntent);
 	}
 }

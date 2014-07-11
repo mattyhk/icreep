@@ -33,7 +33,8 @@ public class MailService extends AsyncTask<String, Void, String>
 		try {
 			sent =mail.sendAutoMail();
 			if (sent == true) {
-				acc.alarmManager.cancel(acc.manualIntent);
+				acc.setAlarm(0, 0, c);
+				acc.turnOffAlarmMan();
 				Log.e("vince", "THE MAIL WAS SENT YAY");
 			}
 		} catch (Exception e) {
