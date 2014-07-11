@@ -7,7 +7,7 @@ public class ICreepApplication extends Application {
 	private static ICreepApplication singleton;
 	
 	private boolean hasStartedRanging = false;
-	private int currentLocation = -1;
+	private int currentLocation = -2;
 	private int currentFloor = 2;
 	
 	public ICreepApplication getInstance(){

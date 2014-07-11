@@ -116,7 +116,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		
 		
 		tv.setText(item.getFloor() + " : " + item.getLocation());
-		t.setGravity(Gravity.BOTTOM, 0, 0);
+		t.setGravity(Gravity.CENTER, 0, 0);
 		t.setDuration(Toast.LENGTH_SHORT);
 		t.setView(layout);
 		t.show();
