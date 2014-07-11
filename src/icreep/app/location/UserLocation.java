@@ -182,7 +182,7 @@ public class UserLocation {
 	 * Returns the current time in 24 hour format as "22:10"
 	 * @return time
 	 */
-	private String getTime() {
+	private static String getTime() {
 		Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY);
 		int minute = c.get(Calendar.MINUTE);
@@ -196,7 +196,7 @@ public class UserLocation {
 	 * @return date
 	 */
 	@SuppressLint("SimpleDateFormat") 
-	private String getDate() {
+	private static String getDate() {
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String formatted = format.format(c.getTime());
@@ -215,6 +215,7 @@ public class UserLocation {
 		this.visitedZones.clear();
 		
 		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
+		
 		this.visitedZones = Sorting.join(visited);
 		
 	}

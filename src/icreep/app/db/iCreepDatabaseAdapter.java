@@ -119,8 +119,10 @@ public class iCreepDatabaseAdapter {
 							TimePlace tp = new TimePlace(loc,totalTime,floor, id);
 							
 							timePlaces.add(tp);
-						}						
+						}
+						
 					}while(cursor.moveToNext());
+					
 					
 					return timePlaces;
 				}
