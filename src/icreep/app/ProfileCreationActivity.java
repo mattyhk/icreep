@@ -242,7 +242,7 @@ public class ProfileCreationActivity extends Activity
 		if (checkDetails(name, surname, position, email)) {
 			if (isValidEmail(email)) {
 				if (isValidName(name)) {
-					if (isValidSurname(surname)) {
+					if (isValidName(surname)) {
 						if (isValidPosition(position)) {
 							long id = icreepHelper.enterNewUser(name, surname,
 									position, email, "profilePic.png"); // default
@@ -322,16 +322,7 @@ public class ProfileCreationActivity extends Activity
 		}
 		return false;
 	}
-	
-	// function to validate surname against a surname Regular Expression
-	public boolean isValidSurname(String surname){
-		String surnameRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*" ;
-		if(surname.matches(surnameRegex)){
-			return true;
-		}
-		return false;
-	}
-	
+
 	// function to validate employee position against a employee position Regular Expression
 	public boolean isValidPosition(String position){
 		String employeePosRegex = "[A-Z][a-z]+( [A-Z][a-z]+)?";
