@@ -1,6 +1,9 @@
 package icreep.app.db;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import icreep.app.report.TimePlace;
 import android.content.ContentValues;
@@ -76,6 +79,14 @@ public class iCreepDatabaseAdapter {
 		//SELECT User_ID, Floor, Description, Time_Entered, Time_Left FROM User, Zone, Location WHERE User.User_ID = Location.User_ID, Location.User_ID = Zone.Location_ID
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
+		
+		//get the current day's timePlaces
+		//today's date
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date formatted = format.format(c.getTime());
+		
+		
 		
 		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND User.User_ID = Location.User_ID AND Location.Zone_ID = Zone.Zone_ID;";
 		
@@ -390,7 +401,7 @@ public class iCreepDatabaseAdapter {
 		
 		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
 		
-		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzil Zone","Focus Room","Kabir Zone","S2","S1","Second Floor Kitchen","Water Zone"};
+		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzil Zone","Focus Room","Kabir Zone","S2","S1","Second Floor Kitchen","Water Zone","Second Floor Corner"};
 		
 		for(int i=0; i<description.length; i++){
 			
