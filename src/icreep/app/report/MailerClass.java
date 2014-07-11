@@ -285,7 +285,16 @@ public class MailerClass
 	 */
 	public boolean sendAutoMail() throws Exception
 	{	
-		String to = "vreid@openboxsoftware.com"; // this will come from SQL or SP
+		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(c);
+		ArrayList<String> userDet = adapt.userDetails(userID);
+		
+		if (userDet==null)
+		{
+			icreep.app.Message.message(c, "There are no user details, thus we can't send email");
+			return false ;			
+		}
+		
+		String to = userDet.get(3); // this will come from SQL or SP
 		String from = "iCreep";
 		String subject = "Automatic Location report";
 		String message = buildEmailBody();
