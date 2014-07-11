@@ -186,9 +186,9 @@ public class ProfileCreationActivity extends Activity
 		
 		if (checkDetails(name, surname, position, email)) {
 			if (isValidEmail(email)) {
-				if (isValidName(name)) {
-					if (isValidName(surname)) {
-						if (isValidPosition(position)) {
+				if (isValidInput(name)) {
+					if (isValidInput(surname)) {
+						if (isValidInput(position)) {
 							if (icreepHelper.updateUserDetails(name, surname,
 									position, email, "profilePic.png", userID) == false) // will
 																							// add
@@ -241,9 +241,9 @@ public class ProfileCreationActivity extends Activity
 	{
 		if (checkDetails(name, surname, position, email)) {
 			if (isValidEmail(email)) {
-				if (isValidName(name)) {
-					if (isValidName(surname)) {
-						if (isValidPosition(position)) {
+				if (isValidInput(name)) {
+					if (isValidInput(surname)) {
+						if (isValidInput(position)) {
 							long id = icreepHelper.enterNewUser(name, surname,
 									position, email, "profilePic.png"); // default
 																		// profile
@@ -315,7 +315,7 @@ public class ProfileCreationActivity extends Activity
 	}
 	
 	// function to validate name against a name Regular Expression
-	public boolean isValidName(String name){
+	public boolean isValidInput(String name){
 		//if(!name.get(0).isChar())
 		String nameRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*";
 		if(name.matches(nameRegex)){
@@ -324,6 +324,7 @@ public class ProfileCreationActivity extends Activity
 		return false;
 	}
 
+	/*
 	// function to validate employee position against a employee position Regular Expression
 	public boolean isValidPosition(String position){
 		String employeePosRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*";
@@ -331,7 +332,7 @@ public class ProfileCreationActivity extends Activity
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	public void doMessage(String mess)
 	{
