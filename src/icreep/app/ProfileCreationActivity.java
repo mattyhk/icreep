@@ -187,7 +187,7 @@ public class ProfileCreationActivity extends Activity
 		if (checkDetails(name, surname, position, email)) {
 			if (isValidEmail(email)) {
 				if (isValidName(name)) {
-					if (isValidSurname(surname)) {
+					if (isValidName(surname)) {
 						if (isValidPosition(position)) {
 							if (icreepHelper.updateUserDetails(name, surname,
 									position, email, "profilePic.png", userID) == false) // will
