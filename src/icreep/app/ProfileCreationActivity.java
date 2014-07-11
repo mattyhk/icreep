@@ -216,22 +216,22 @@ public class ProfileCreationActivity extends Activity
 								doMessage("Update successful");
 							}
 						} else {
-							doMessage("Invalid position, please enter valid employee position");
-							doMessage("example: Developer or Aanalys Developer");
+							doMessage("Invalid position - please enter valid employee position.");
+							doMessage("Example: Developer or Aanalys Developer");
 						}
 					} else {
-						doMessage("Invalid surname - surname cannot contain any other special characters other than spaces and hyphens (-). Please enter a valid surname");
+						doMessage("Invalid surname - surname cannot contain any other special characters other than spaces and hyphens (-).");
 					}
 				} else {
 					doMessage("Invalid name - name cannot contain any other special characters other than spaces and hyphens (-).");
 				}
 			} else {
-				doMessage("Invalid email address, please use a valid email address");
+				doMessage("Invalid email address - please use a valid email address");
 				doMessage("Example: user1@gmail.com");
 			}
 		} else {
-			doMessage("Invalid " + invalidEntry + ". " + invalidEntry
-					+ " length cannot exceed " + chars + " characters");
+			doMessage("Invalid " + invalidEntry + " - " + invalidEntry
+					+ " length cannot exceed " + chars + " characters.");
 		}
 	}
 
@@ -268,7 +268,7 @@ public class ProfileCreationActivity extends Activity
 								return;
 							}
 						} else {
-							doMessage("Invalid position, please enter valid employee position");
+							doMessage("Invalid employee position, please enter valid employee position");
 							doMessage("example: Developer or Aanalys Developer");
 						}
 					} else {
@@ -282,7 +282,7 @@ public class ProfileCreationActivity extends Activity
 				doMessage("Example: user1@gmail.com");
 			}
 		} else {
-			doMessage("Invalid " + invalidEntry + ". " + invalidEntry
+			doMessage("Invalid " + invalidEntry + " - " + invalidEntry
 					+ " length cannot exceed " + chars + " characters");
 		}
 	}
@@ -290,8 +290,8 @@ public class ProfileCreationActivity extends Activity
 	//validate entered details character lengths
 	public boolean checkDetails(String name, String surname, String position, String email){
 		String[] checks = {name,surname,position, email};
-		String[] holders = {"name", "surname", "Employee Position","Email"};
-		int[] lengths = {30,30,255,30};
+		String[] holders = {"name", "surname", "Employee Position","Email address"};
+		int[] lengths = {30,30,30,255};
 				
 		for(int i=0; i<checks.length; i++){
 			if(checks[i].length() > lengths[i]){
