@@ -223,7 +223,7 @@ public class ProfileCreationActivity extends Activity
 						doMessage("Invalid surname - surname cannot contain any other special characters other than spaces and hyphens (-). Please enter a valid surname");
 					}
 				} else {
-					doMessage("Invalid name - name cannot contain any other special characters other than spaces and hyphens (-). Please enter a valid name");
+					doMessage("Invalid name - name cannot contain any other special characters other than spaces and hyphens (-).");
 				}
 			} else {
 				doMessage("Invalid email address, please use a valid email address");
@@ -231,7 +231,7 @@ public class ProfileCreationActivity extends Activity
 			}
 		} else {
 			doMessage("Invalid " + invalidEntry + ". " + invalidEntry
-					+ " length must not exceed " + chars + " characters");
+					+ " length cannot exceed " + chars + " characters");
 		}
 	}
 
@@ -283,7 +283,7 @@ public class ProfileCreationActivity extends Activity
 			}
 		} else {
 			doMessage("Invalid " + invalidEntry + ". " + invalidEntry
-					+ " length must not exceed " + chars + " characters");
+					+ " length cannot exceed " + chars + " characters");
 		}
 	}
 
