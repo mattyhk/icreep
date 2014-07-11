@@ -86,7 +86,7 @@ public class iCreepDatabaseAdapter {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String date = format.format(c.getTime());
 		
-		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND Location.Location_Date = " + date + " AND User.User_ID = Location.User_ID AND Location.Zone_ID = Zone.Zone_ID;";
+		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND User.User_ID = Location.User_ID AND Location.Zone_ID = Zone.Zone_ID;";
 		
 		//String[] toReturn = {iCreepHelper.USER_ID,iCreepHelper.FLOOR, iCreepHelper.DESCRIPTION, iCreepHelper.TIME_ENTERED, iCreepHelper.TIME_LEFT};
 		//String[] args = {""+UserID, "Location.User_ID"};
@@ -105,9 +105,11 @@ public class iCreepDatabaseAdapter {
 						
 						//get times from DB and convert to int
 						
-						String timeL = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));	
+						String timeL = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));
+						String dateCaptured = cursor.getString(cursor.getColumnIndex(iCreepHelper.LOCATION_DATE));
 						
-						if (!timeL.equals("")){
+						if (!timeL.equals("") && dateCaptured.equals(date)){
+							
 							int hoursTimeLeft = Integer.parseInt((timeL.split(":"))[0]);
 							int minsTimeLeft = Integer.parseInt((timeL.split(":"))[1]);
 							int secsTimeLeft = Integer.parseInt((timeL.split(":"))[2]);
