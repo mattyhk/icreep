@@ -2,6 +2,8 @@ package icreep.app.report;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 public class Sorting
 {
 
@@ -16,6 +18,7 @@ public class Sorting
 		{
 			return new ArrayList<TimePlace>();
 		}
+		
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
 		
 		if (a.size() == 0) {
@@ -47,7 +50,6 @@ public class Sorting
 		listG = secondarySortDescriptionAsc(listG);
 		listF = secondarySortDescriptionAsc(listF);
 		listSE = secondarySortDescriptionAsc(listSE);
-		list.clear();
 		
 		list.addAll(listOut);
 		list.addAll(listG);
@@ -129,10 +131,11 @@ public class Sorting
 		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
 		in = InsertionSort(in);
 		
-		if (in.size() == 0) {
+		if (in.size() == 0 || in.size() == 1) {
 			return in;
 		}
-		if (in.size() > 1) {
+		
+		else {
 			TimePlace toAdd = in.get(0);
 			in.remove(0);
 			
@@ -148,14 +151,9 @@ public class Sorting
 				}
 			}
 			finalSortedTimePlaces.add(toAdd);
-		}else 
-			{
-				return in;
-			}
+		}
 			
-			
-		
-	return finalSortedTimePlaces;
+		return finalSortedTimePlaces;
 	}
 	
 

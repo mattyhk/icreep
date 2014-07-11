@@ -222,11 +222,7 @@ public class iCreepDatabaseAdapter {
 	 * Post-conditions: > Return time in string format: "13:25" or null
 	 */
 	public String getReportTime(int userID){
-		// SELECT Delivery_Time FROM Reports, User WHERE User.User_ID =
-		// Reports.User_ID AND Auto_Delivery = true;
-
-		//SQLiteDatabase db = helper.getWritableDatabase();
-
+		
 		String query = "SELECT Reports.Delivery_Time,Reports.Auto_Delivery FROM Reports, User WHERE User.User_ID ="+userID+" AND User.User_ID = Reports.User_ID;";
 		SQLiteDatabase db = helper.getWritableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
@@ -306,6 +302,7 @@ public class iCreepDatabaseAdapter {
 		long success = db.insert(iCreepHelper.TABLE_NAME4, null, cV);
 		
 		if (success > 0) {
+			Log.d("TEST", "Inserting new location with id " + success);
 			return success;
 		}
 		
