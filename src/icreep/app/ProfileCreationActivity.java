@@ -42,6 +42,7 @@ public class ProfileCreationActivity extends Activity
 	SharedPreferencesControl spc;
 	
 	String invalidEntry;
+	int chars;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -183,7 +184,7 @@ public class ProfileCreationActivity extends Activity
 	public void doUpdateOfProfile(String name, String surname,
 			String position,String email) {
 		
-		if(checkDetails(name, surname,position,email)){
+		if (checkDetails(name, surname, position, email)) {
 			if (isValidEmail(email)) {
 				if (isValidName(name)) {
 					if (isValidSurname(surname)) {
@@ -197,7 +198,7 @@ public class ProfileCreationActivity extends Activity
 																							// name
 																							// later
 							{
-							doMessage("Update unsuccessful, please contact Admin");
+								doMessage("Update unsuccessful, please contact Admin");
 							} else {
 								if (profilePic != null) {
 									BitmapController bmc = new BitmapController();
@@ -212,25 +213,25 @@ public class ProfileCreationActivity extends Activity
 								listDetails.add(surname);
 								listDetails.add(position);
 								listDetails.add(email);
-							doMessage("Update successful");
+								doMessage("Update successful");
 							}
 						} else {
-						doMessage("Invalid position, please enter a valid employee position");
-						doMessage("Example: Developer");
+							doMessage("Invalid position, please enter valid employee position");
+							doMessage("example: Developer or Aanalys Developer");
 						}
 					} else {
-					doMessage("Invalid surname, please enter a valid surname");
+						doMessage("Invalid surname - surname cannot contain any other special characters other than spaces and hyphens (-). Please enter a valid surname");
 					}
 				} else {
-				doMessage("Invalid name, please enter a valid name");
+					doMessage("Invalid name - name cannot contain any other special characters other than spaces and hyphens (-). Please enter a valid name");
 				}
 			} else {
-			doMessage("Invalid email address, please use a valid email address");
-			doMessage("Example: user1@gmail.com");
+				doMessage("Invalid email address, please use a valid email address");
+				doMessage("Example: user1@gmail.com");
 			}
-		}
-		else{
-			doMessage("Invalid " + invalidEntry + " please enter valid " + invalidEntry);
+		} else {
+			doMessage("Invalid " + invalidEntry + ". " + invalidEntry
+					+ " length mus not exceed " + chars + " characters");
 		}
 	}
 
@@ -238,48 +239,51 @@ public class ProfileCreationActivity extends Activity
 	public void doNewInsertionOfData(String name, String surname,
 			String position, String email)
 	{
-		if(checkDetails(name, surname,position,email)){
-			if (isValidEmail(email)){
-				if(isValidName(name)){
-					if(isValidSurname(surname)){
-						if(isValidPosition(position)) {							
-							long id = icreepHelper.enterNewUser(name, surname, position, email,
-									"profilePic.png"); // default profile pic filename
-							
+		if (checkDetails(name, surname, position, email)) {
+			if (isValidEmail(email)) {
+				if (isValidName(name)) {
+					if (isValidSurname(surname)) {
+						if (isValidPosition(position)) {
+							long id = icreepHelper.enterNewUser(name, surname,
+									position, email, "profilePic.png"); // default
+																		// profile
+																		// pic
+																		// filename
+
 							// check if insertion was successful
 							if (id > 0) {
-								if (profilePic != null)
-								{
+								if (profilePic != null) {
 									BitmapController bmc = new BitmapController();
 									bmc.storeImage(profilePic);
 									originalProfile = profilePic;
 									spc.writeProfilePicName("profilePic.png");
 								}
-								
-								doMessage("User details saved");				
-								spc.writeNewUserID((int)id);
+
+								doMessage("User details saved");
+								spc.writeNewUserID((int) id);
 								iCreepDatabaseAdapter.createZone();
 								switchToMainMenu();
 							} else {
 								doMessage("User details not saved, please contact Admin");
-									return;
-								}
-						}else{
+								return;
+							}
+						} else {
 							doMessage("Invalid position, please enter valid employee position");
-							doMessage("example: Developer");
+							doMessage("example: Developer or Aanalys Developer");
 						}
-					}else{
-					doMessage("Invalid surname, please enter a valid surname");
+					} else {
+						doMessage("Invalid surname - surname cannot contain any other special characters other than spaces and hyphens (-). Please enter a valid surname");
 					}
-				}else{
-				doMessage("Invalid name, please enter a valid name");
+				} else {
+					doMessage("Invalid name - name cannot contain any other special characters other than spaces and hyphens (-). Please enter a valid name");
 				}
 			} else {
-			doMessage("Invalid email address, please use a valid email address");
-			doMessage("Example: user1@gmail.com");
+				doMessage("Invalid email address, please use a valid email address");
+				doMessage("Example: user1@gmail.com");
 			}
-		}else{
-			doMessage("Invalid " + invalidEntry + " please enter valid " + invalidEntry);
+		} else {
+			doMessage("Invalid " + invalidEntry + ". " + invalidEntry
+					+ " length mus not exceed " + chars + " characters");
 		}
 	}
 
@@ -292,6 +296,7 @@ public class ProfileCreationActivity extends Activity
 		for(int i=0; i<checks.length; i++){
 			if(checks[i].length() > lengths[i]){
 				invalidEntry = holders[i];
+				chars = lengths[i];
 				return false;				
 			}
 		}		
