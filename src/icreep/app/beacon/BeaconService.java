@@ -146,7 +146,9 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	 */
 	private void startBeaconRanging()
 	{
-		this.beaconManager.bind(this);
+		this.beaconManager.bind(
+
+				);
 		Log.d("TEST", "Started Ranging");
 	}
 
