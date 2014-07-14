@@ -90,8 +90,6 @@ public class iCreepDatabaseAdapter {
 		
 		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND User.User_ID = Location.User_ID AND Location.Zone_ID = Zone.Zone_ID;";
 		
-		//String[] toReturn = {iCreepHelper.USER_ID,iCreepHelper.FLOOR, iCreepHelper.DESCRIPTION, iCreepHelper.TIME_ENTERED, iCreepHelper.TIME_LEFT};
-		//String[] args = {""+UserID, "Location.User_ID"};
 		Cursor cursor = db.rawQuery(query, null);//,  "User.User_ID =? AND User.User_ID =?",args,   ); //query, null);
 
 		if(cursor != null){
@@ -414,29 +412,13 @@ public class iCreepDatabaseAdapter {
 		
 		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
 		
-		//Inside zones
-		String[] description = {"S3","Men's Bathroom","Intern Zone","BI Joes","Focus Room",
-				"Rejects","S2","S1","Second Floor Kitchen","Honey Badgers","BAU Team",
-				"G5","G4","G3","Men's Bathroom","Management Team","HR","G2","G1","Games Zone",
-				"Ground Floor Kitchen","Amphitheatre","Gym","Dining Area","Spider Pigs","Halaal Kitchen","Reception",
-				"F1","F2","F3","Men's Bathroom","F4","F5","Chill Zone","Old Mutual","Open Lease","Finance Team",
-				"First Floor Kitchen","Infrastructure Team","ACT Team","Brown Town","ODT","CDT Support 1","CDT Support Enhancements",
-				"CDT Support 2","GR Projects Support"};
-		
-		for(int i=0; i<beacons; i++){
+		for(int i = 1; i <= beacons; i++){
 			
 			ContentValues cV = new ContentValues();
-			cV.put(iCreepHelper.DESCRIPTION, description[i]);
+			cV.put(iCreepHelper.DESCRIPTION, Zone.getLocation(i));
+			cV.put(iCreepHelper.FLOOR, Floor.getFloor(i));
 			
-			if(i <= 11)
-				cV.put(iCreepHelper.FLOOR,"Second Floor");
-			else if(i >= 12 && i<=28)
-				cV.put(iCreepHelper.FLOOR,"Ground Floor");
-			else
-				cV.put(iCreepHelper.FLOOR,"First Floor");
-			
-			int b_ID = i+1;
-			cV.put(iCreepHelper.BEACON_ID, b_ID);
+			cV.put(iCreepHelper.BEACON_ID, i);
 			
 			db.insert(iCreepHelper.TABLE_NAME3, null, cV);
 		}	
@@ -460,14 +442,6 @@ public class iCreepDatabaseAdapter {
 		private static final String BEACON_ID = "Beacon_ID";
 		private static final String MAJOR = "Major";
 		private static final String MINOR = "Minor";
-		
-		/*
-		//create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "( ZoneBeacon_ID INTEGER PRIMARY KEY AUTOMINCREMENT, Beacon_ID INTEGER, Zone_ID INTEGER, ThreshholdValue FLOAT, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID), FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID));";
-		private static final String TABLE_NAME2 = "ZoneBeacon";
-		
-		private static final String ZONEBEACON_ID = "ZoneBeacon_ID";
-		private static final String THRESHHOLD_VALUE = "Threshhold_Value";
-		*/
 		
 		//create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "( Zone_ID INTEGER PRIMARY KEY AUTOMINCREMENT, Description VARCHAR(255), Floor INTEGER);";
 		private static final String TABLE_NAME3 = "Zone";
