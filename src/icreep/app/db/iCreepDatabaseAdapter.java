@@ -415,11 +415,11 @@ public class iCreepDatabaseAdapter {
 		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
 		
 		//Inside zones
-		String[] description = {"S3","Men's Second Floor Bathroom","Intern Zone","BI Joes","Focus Room",
+		String[] description = {"S3","Men's Bathroom","Intern Zone","BI Joes","Focus Room",
 				"Rejects","S2","S1","Second Floor Kitchen","Honey Badgers","BAU Team",
-				"G5","G4","G3","Men's Ground Floor Bathroom","Management Team","HR","G2","G1","Games Zone",
+				"G5","G4","G3","Men's Bathroom","Management Team","HR","G2","G1","Games Zone",
 				"Ground Floor Kitchen","Amphitheatre","Gym","Dining Area","Spider Pigs","Halaal Kitchen","Reception",
-				"F1","F2","F3","Men's First Floor Bathroom","F4","F5","Chill Zone","Old Mutual","Open Lease","Finance Team",
+				"F1","F2","F3","Men's Bathroom","F4","F5","Chill Zone","Old Mutual","Open Lease","Finance Team",
 				"First Floor Kitchen","Infrastructure Team","ACT Team","Brown Town","ODT","CDT Support 1","CDT Support Enhancements",
 				"CDT Support 2","GR Projects Support"};
 		
