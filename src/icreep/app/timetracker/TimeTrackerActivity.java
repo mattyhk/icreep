@@ -1,6 +1,8 @@
 package icreep.app.timetracker;
 
+import icreep.app.ICreepApplication;
 import icreep.app.R;
+import icreep.app.location.UserLocation;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.ActionBar;
@@ -23,8 +25,10 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	
 	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 	
-	ActionBar actionBar;
-	ViewPager viewPager;
+	private ActionBar actionBar;
+	private ViewPager viewPager;
+	private UserLocation user;
+	private ICreepApplication mApplication;
 	
 	private double totalInTime = 0;
 	private double totalOutTime = 0;
@@ -35,6 +39,9 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_time_tracker);
+		
+		user = new UserLocation(this);
+		mApplication = (ICreepApplication) getApplicationContext();
 
 		viewPager = (ViewPager) findViewById(R.id.time_tracker_pager);
 		viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
@@ -138,6 +145,12 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	protected void onPause() {
 		super.onPause();
 		unregisterBluetoothReceiver();
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		user.updateLocationOnDestroy(mApplication.getCurrentLocation(), mApplication.getLastEntryID());
 	}
 	
 	/*********************

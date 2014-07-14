@@ -11,18 +11,21 @@ import android.widget.Button;
 import android.widget.Toast;
 import icreep.app.R;
 import icreep.app.beacon.BeaconService;
+import icreep.app.location.UserLocation;
 
 public class MainMenuActivity extends Activity {
 	
 	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 	
-	Button location_button, time_tracker_button, reports_button, profile_button;
-	ICreepApplication mApplication;
+	private Button location_button, time_tracker_button, reports_button, profile_button;
+	private ICreepApplication mApplication;
+	private UserLocation user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_icreep_menu);
+		user = new UserLocation(this);
 		mApplication = (ICreepApplication) getApplicationContext();
 		
 		if (!mApplication.hasStartedRanging()) {
@@ -69,8 +72,13 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		
 		unregisterBluetoothReceiver();
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		user.updateLocationOnDestroy(mApplication.getCurrentLocation(), mApplication.getLastEntryID());
 	}
 	
 	/*********************

@@ -1,5 +1,6 @@
 package icreep.app.location;
 
+import icreep.app.ICreepApplication;
 import icreep.app.R;
 
 import java.util.HashMap;
@@ -27,13 +28,19 @@ public class LocationActivity extends FragmentActivity implements TabListener {
 	
 	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 
-	ActionBar actionBar;
-	ViewPager viewPager;
+	private ActionBar actionBar;
+	private ViewPager viewPager;
+	
+	private ICreepApplication mApplication;
+	private UserLocation user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_location);
+		
+		mApplication = (ICreepApplication) getApplicationContext();
+		user = new UserLocation(this);
 
 		viewPager = (ViewPager) findViewById(R.id.location_pager);
 		viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
@@ -101,6 +108,12 @@ public class LocationActivity extends FragmentActivity implements TabListener {
 		super.onPause();
 		
 		unregisterBluetoothReceiver();
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		user.updateLocationOnDestroy(mApplication.getCurrentLocation(), mApplication.getLastEntryID());
 	}
 	
 	/*********************
