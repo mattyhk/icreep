@@ -126,7 +126,7 @@ public class UserLocation {
 			if (entryID != NOT_VALID) {
 				
 				if (this.db.updateExitTime(time, entryID)) {
-					
+					mApplication.setTime(System.currentTimeMillis());	
 					Log.d("TEST", "Exit time was updated correctly");
 				}
 				
