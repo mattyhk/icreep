@@ -34,6 +34,7 @@ public class UserLocation {
 	private final static int MAX_EXIT_COUNT = 5;
 	private final static int UNKNOWN = -2;
 	private final static int OUTDOORS = -1;
+	private final static int NOT_VALID = -1;
 	
 	private int currentLocation;
 	private int entryCount;
@@ -111,18 +112,29 @@ public class UserLocation {
 		
 	}
 	
-	public void updateLocationOnDestroy(int location) {
+	/**
+	 * Method is called when requiring the latest location information to be written to the DB.
+	 * Does not modify the last entry ID.
+	 * @param location - the current location
+	 * @param entryID - the last known entry ID
+	 */
+	public void updateLocationOnDestroy(int location, long entryID) {
 		
 		String time = getTime();
 		
-		if (this.db.updateExitTime(time, this.lastLocationID)) {
-			
-			Log.d("TEST", "Exit time was updated correctly");
-			this.lastLocationID = 0;
-		}
-		
-		else {
-			Log.d("TEST", "Exit time was not updated correctly");
+		if (location != UNKNOWN) {
+			if (entryID != NOT_VALID) {
+				
+				if (this.db.updateExitTime(time, entryID)) {
+					
+					Log.d("TEST", "Exit time was updated correctly");
+				}
+				
+				else {
+					Log.d("TEST", "Exit time was not updated correctly");
+				}
+				
+			}
 		}
 	}
 
@@ -187,6 +199,7 @@ public class UserLocation {
 					Log.d("TEST", "Enter New Location Successfully");
 					Toast.makeText(context, "Entered new entry", Toast.LENGTH_SHORT).show();
 					this.lastLocationID = tempID;
+					mApplication.setLastEntryID(this.lastLocationID);
 					
 				}
 				else {

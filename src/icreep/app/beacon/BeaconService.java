@@ -15,7 +15,6 @@ import android.os.Message;
 import android.os.Process;
 import android.os.RemoteException;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 import com.radiusnetworks.ibeacon.IBeaconConsumer;
@@ -87,9 +86,9 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	
 	@Override
 	public void onDestroy() {
-		userLocation.updateLocationOnDestroy(mApplication.getCurrentLocation());
+		Log.d("TEST", "Destroy service");
+		userLocation.updateLocationOnDestroy(mApplication.getCurrentLocation(), mApplication.getLastEntryID());
 		stopBeaconRanging();
-		Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
 	}
 	
 	/**

@@ -9,6 +9,7 @@ public class ICreepApplication extends Application {
 	private boolean hasStartedRanging = false;
 	private int currentLocation = -2;
 	private int currentFloor = 2;
+	private long lastEntryID = -1;
 	private long timeEntered;
 	
 	public ICreepApplication getInstance(){
@@ -63,6 +64,14 @@ public class ICreepApplication extends Application {
 	
 	public long getTime() {
 		return this.timeEntered;
+	}
+	
+	public void setLastEntryID(long id) {
+		this.lastEntryID = id;
+	}
+	
+	public long getLastEntryID() {
+		return this.lastEntryID;
 	}
 	
 	
