@@ -16,7 +16,6 @@ import icreep.app.report.AlarmControlClass;
 
 public class MainActivity extends FragmentActivity
 {
-
 	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 
 	@Override
