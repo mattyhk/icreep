@@ -21,7 +21,7 @@
 
     <EditText
         android:id="@+id/editText4_user_position"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView5_user_position"
         android:ems="10" 
@@ -44,7 +44,7 @@
 
     <EditText
         android:id="@+id/editText3_user_email"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3_user_email"
         android:ems="10"
@@ -57,15 +57,15 @@
 
     <EditText
         android:id="@+id/editText2_user_surname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"       
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textView2_user_surname"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginTop="@dimen/top_margin_3.7in"
         android:ems="10"
         android:hint="@string/edit_surname"
         android:inputType="textPersonName"
         android:textColorHint="@color/whiteColor"
-        android:layout_marginTop="@dimen/top_margin_3.7in"
-        android:layout_marginLeft="@dimen/left_margin"
         android:textSize="@dimen/sub_heading_text_size_3.7in" />
 
     <TextView
@@ -129,7 +129,7 @@
 
     <EditText
         android:id="@+id/editText1_user_name"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1_user_name"
         android:ems="10"
