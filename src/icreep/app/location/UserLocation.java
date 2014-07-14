@@ -224,13 +224,16 @@ public class UserLocation {
 		TimePlace tp = new TimePlace(timeSpent, mApplication.getCurrentLocation());
 		
 		if (visited != null) {
-			visited.add(tp);
+			if (tp.getZoneID() != UNKNOWN) {
+				visited.add(tp);
+			}
 		}
 		
 		else {
 			visited = new ArrayList<TimePlace>();
-			visited.add(tp);
-			
+			if (tp.getZoneID() != UNKNOWN) {
+				visited.add(tp);
+			}
 		}
 		
 		this.visitedZones = Sorting.join(visited);
@@ -258,7 +261,6 @@ public class UserLocation {
 	public List<TimePlace> getVisitedZones() { 
 		
 		findVisitedZones();
-		Log.d("TEST", "Passing on list of size " + this.visitedZones.size());
 		
 		return this.visitedZones;
 	}

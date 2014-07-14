@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import icreep.app.location.Floor;
+import icreep.app.location.Zone;
 import icreep.app.report.TimePlace;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -289,20 +291,29 @@ public class iCreepDatabaseAdapter {
 	
 	
 	public long addNewLocation(int userID, int zoneID, String time, String date) {
-		ContentValues cV = new ContentValues();
 		
-		cV.put(iCreepHelper.TIME_ENTERED, time);
-		cV.put(iCreepHelper.TIME_LEFT, "");
-		cV.put(iCreepHelper.LOCATION_DATE, date);
-		cV.put(iCreepHelper.ZONE_ID, zoneID);
-		cV.put(iCreepHelper.USER_ID, userID);
+		long success;
 		
-		SQLiteDatabase db = helper.getWritableDatabase();
+		if (zoneID != -2) {
+			ContentValues cV = new ContentValues();
+			
+			cV.put(iCreepHelper.TIME_ENTERED, time);
+			cV.put(iCreepHelper.TIME_LEFT, "");
+			cV.put(iCreepHelper.LOCATION_DATE, date);
+			cV.put(iCreepHelper.ZONE_ID, zoneID);
+			cV.put(iCreepHelper.USER_ID, userID);
+			
+			SQLiteDatabase db = helper.getWritableDatabase();
+			
+			// db.insert returns the entry ID value
+			success = db.insert(iCreepHelper.TABLE_NAME4, null, cV);
+		}
 		
-		long success = db.insert(iCreepHelper.TABLE_NAME4, null, cV);
+		else {
+			success = -1;
+		}
 		
 		if (success > 0) {
-			Log.d("TEST", "Inserting new location with id " + success);
 			return success;
 		}
 		
@@ -395,8 +406,8 @@ public class iCreepDatabaseAdapter {
 		ContentValues cVs = new ContentValues();
 		
 		cVs.put(iCreepHelper.ZONE_ID, -1);
-		cVs.put(iCreepHelper.DESCRIPTION, "Outside");
-		cVs.put(iCreepHelper.FLOOR,"Outside");
+		cVs.put(iCreepHelper.DESCRIPTION, Zone.getLocation(-1));
+		cVs.put(iCreepHelper.FLOOR, Floor.getFloor(-1));
 		cVs.put(iCreepHelper.BEACON_ID, -1);
 		
 		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
