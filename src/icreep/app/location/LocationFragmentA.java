@@ -75,7 +75,7 @@ public class LocationFragmentA extends Fragment {
 		if (currentLocation == UNKNOWN) {
 			// Location is unknown
 			 drawID = getActivity().getResources()
-						.getIdentifier("zones_all", "drawable", getActivity().getPackageName());
+						.getIdentifier("zones_unknown", "drawable", getActivity().getPackageName());
 		}
 		
 		else if (currentLocation == OUTDOORS) {
@@ -119,7 +119,6 @@ public class LocationFragmentA extends Fragment {
 	 */
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		
 		// May need to move this to activity - can call it to run only when tab is selected
@@ -128,7 +127,6 @@ public class LocationFragmentA extends Fragment {
 	
 	@Override
 	public void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		
 		// Again may need to move this to activity
