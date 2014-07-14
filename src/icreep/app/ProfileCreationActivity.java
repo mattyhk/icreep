@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,10 +25,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class ProfileCreationActivity extends Activity
 {
+	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 	private static final int IMAGE_PICKER_SELECT = 999;
+	
 	private Button save_button;
 	private ImageButton home_button;
 	private ImageView profilePicture ;
@@ -180,6 +186,28 @@ public class ProfileCreationActivity extends Activity
 		});
 
 	}// onCreate
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		registerBluetoothReceiver();
+
+		BluetoothAdapter bluetoothAdapter = BluetoothAdapter
+				.getDefaultAdapter();
+		if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+			Intent enableBtIntent = new Intent(
+					BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		unregisterBluetoothReceiver();
+	}
 	
 	public void doUpdateOfProfile(String name, String surname,
 			String position,String email) {
@@ -369,6 +397,17 @@ public class ProfileCreationActivity extends Activity
             profilePicture.setImageBitmap(bitmap);
             profilePic = bitmap ;
         }
+        
+        switch (requestCode)
+		{
+			case ENABLE_BLUETOOTH_REQUEST:
+				if (resultCode != Activity.RESULT_OK) {
+					finishActivityWithMessage("Bluetooth must be on");
+				}
+				break;
+			default:
+				break;
+		}
     }
 	
 	private static Bitmap getBitmapFromCameraData(Intent data, Context context){
@@ -423,4 +462,63 @@ public class ProfileCreationActivity extends Activity
         
         return null ;
     }
+	
+	/*********************
+	 * 
+	 * Bluetooth Checker Makes Sure the Bluetooth functionality is on. May need
+	 * to move it into every activity
+	 * 
+	 ********************/
+	private void finishActivityWithMessage(String message)
+	{
+		// Notify the user of the problem
+		Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+		toast.show();
+
+		// End the activity
+		finish();
+	}
+
+	private void registerBluetoothReceiver()
+	{
+		final IntentFilter filter = new IntentFilter();
+		filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+
+		registerReceiver(this.bluetoothChangedReceiver, filter);
+	}
+
+	private void unregisterBluetoothReceiver()
+	{
+		unregisterReceiver(this.bluetoothChangedReceiver);
+	}
+
+	private BroadcastReceiver bluetoothChangedReceiver = new BroadcastReceiver()
+	{
+
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+
+			final String action = intent.getAction();
+			if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+				final int state = intent.getIntExtra(
+						BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+				switch (state)
+				{
+					case BluetoothAdapter.STATE_TURNING_ON:
+						break;
+					case BluetoothAdapter.STATE_ON:
+						break;
+					case BluetoothAdapter.STATE_TURNING_OFF:
+						finishActivityWithMessage("Requires Bluetooth");
+						break;
+					case BluetoothAdapter.STATE_OFF:
+						break;
+					case BluetoothAdapter.ERROR:
+						finishActivityWithMessage("Bluetooth Error");
+						break;
+				}
+			}
+		}
+	};
 }
