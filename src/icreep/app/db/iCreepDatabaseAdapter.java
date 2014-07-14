@@ -372,10 +372,11 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	//function to create Beacons
-	public static void createBeacons(){
+	public static void createBeacons(int beacons){
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
+		//Outside beacon
 		ContentValues cV = new ContentValues();
 		cV.put(iCreepHelper.BEACON_ID, -1);
 		cV.put(iCreepHelper.MAJOR, -1);
@@ -383,7 +384,7 @@ public class iCreepDatabaseAdapter {
 		
 		db.insert(iCreepHelper.TABLE_NAME1, null, cV);
 				
-		int beacons = 11;
+		//Inside beacons
 		int major = 3;
 		
 		for(int i=1; i<= beacons; i++){
@@ -397,14 +398,15 @@ public class iCreepDatabaseAdapter {
 		}		
 	}
 	
-	//create zones and match with the relevant Beacon
+	//create zones with the relevant Beacons
 	public static void createZone(){
-		createBeacons();
+		int beacons = 48;
+		createBeacons(beacons);
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
-		ContentValues cVs = new ContentValues();
-		
+		//Outside zone
+		ContentValues cVs = new ContentValues();	
 		cVs.put(iCreepHelper.ZONE_ID, -1);
 		cVs.put(iCreepHelper.DESCRIPTION, Zone.getLocation(-1));
 		cVs.put(iCreepHelper.FLOOR, Floor.getFloor(-1));
@@ -412,15 +414,27 @@ public class iCreepDatabaseAdapter {
 		
 		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
 		
-		String[] description = {"S3","Men's Bathroom","Intern Zone","Denzil Zone","Focus Room",
-				"Kabir Zone","S2","S1","Second Floor Kitchen","Water Zone","Second Floor Corner",
-				};
+		//Inside zones
+		String[] description = {"S3","Men's Second Floor Bathroom","Intern Zone","BI Joes","Focus Room",
+				"Rejects","S2","S1","Second Floor Kitchen","Honey Badgers","BAU Team",
+				"G5","G4","G3","Men's Ground Floor Bathroom","Management Team","HR","G2","G1","Games Zone",
+				"Ground Floor Kitchen","Amphitheatre","Gym","Dining Area","Spider Pigs","Halaal Kitchen","Reception",
+				"F1","F2","F3","Men's First Floor Bathroom","F4","F5","Chill Zone","Old Mutual","Open Lease","Finance Team",
+				"First Floor Kitchen","Infrastructure Team","ACT Team","Brown Town","ODT","CDT Support 1","CDT Support Enhancements",
+				"CDT Support 2","GR Projects Support"};
 		
-		for(int i=0; i<description.length; i++){
+		for(int i=0; i<beacons; i++){
 			
 			ContentValues cV = new ContentValues();
 			cV.put(iCreepHelper.DESCRIPTION, description[i]);
-			cV.put(iCreepHelper.FLOOR,"Second Floor");
+			
+			if(i <= 11)
+				cV.put(iCreepHelper.FLOOR,"Second Floor");
+			else if(i >= 12 && i<=28)
+				cV.put(iCreepHelper.FLOOR,"Ground Floor");
+			else
+				cV.put(iCreepHelper.FLOOR,"First Floor");
+			
 			int b_ID = i+1;
 			cV.put(iCreepHelper.BEACON_ID, b_ID);
 			
@@ -497,7 +511,7 @@ public class iCreepDatabaseAdapter {
 		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER UNIQUE, " + AUTO_DELIVERY +" BOOLEAN NOT NULL, " + DELIVERY_TIME +" VARCHAR(10), FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
 
 		public int tableCount = 5;
-		private int createTableQueryCount = 5;
+		private int createTableQueryCount = tableCount;
 		
 		public iCreepHelper(Context context) {
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
