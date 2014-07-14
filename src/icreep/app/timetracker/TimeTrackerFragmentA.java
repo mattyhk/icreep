@@ -66,7 +66,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_a);
 		Activity c = getActivity();
 		if (c != null) {
-			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
+			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.MainMenuActivity"));
 		}
 
         String userDetails = icreepHelper.getUserDetails(userID);

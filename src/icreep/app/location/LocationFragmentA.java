@@ -50,7 +50,7 @@ public class LocationFragmentA extends Fragment {
 		home = (ImageButton) v.findViewById(R.id.home_button_location_current);
 		Activity c = getActivity();
 		if (c != null) {
-			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
+			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.MainMenuActivity"));
 		}
 		
 		spc = new SharedPreferencesControl(getActivity());

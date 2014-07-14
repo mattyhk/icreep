@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity
 		
 		else {
 			Intent i = new Intent();
-			i.setClassName(this, "icreep.app.IcreepMenu");
+			i.setClassName(this, "icreep.app.MainMenuActivity");
 			startActivity(i);
 		}
 	}

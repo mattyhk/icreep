@@ -65,7 +65,7 @@ import android.widget.TextView;
 		home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_b);
 		Activity c = getActivity();
 		if (c != null) {
-			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
+			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.MainMenuActivity"));
 		}				
 		return v;
 	}

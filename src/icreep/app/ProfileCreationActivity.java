@@ -75,7 +75,7 @@ public class ProfileCreationActivity extends Activity
 			home_button.setEnabled(true);
 			home_button.setVisibility(View.VISIBLE);
 			home_button.setOnClickListener(new SwitchButtonListener(this,
-					"icreep.app.IcreepMenu"));
+					"icreep.app.MainMenuActivity"));
 			userID = spc.getUserID();
 		}
 
@@ -346,9 +346,9 @@ public class ProfileCreationActivity extends Activity
 		// apon testing, this might not work...so thus my alternative is
 //		save_button = (Button) findViewById(R.id.button2_save_user_details);
 //		save_button.setOnClickListener(new SwitchButtonListener(this,
-//				"icreep.app.IcreepMenu"));		
+//				"icreep.app.MainMenuActivity"));		
 		Intent i = new Intent();
-		i.setClassName(this, "icreep.app.IcreepMenu");
+		i.setClassName(this, "icreep.app.MainMenuActivity");
 		startActivity(i);
 	}	
 	
