@@ -110,6 +110,21 @@ public class UserLocation {
 		this.currentTempLocation = newLoc;
 		
 	}
+	
+	public void updateLocationOnDestroy(int location) {
+		
+		String time = getTime();
+		
+		if (this.db.updateExitTime(time, this.lastLocationID)) {
+			
+			Log.d("TEST", "Exit time was updated correctly");
+			this.lastLocationID = 0;
+		}
+		
+		else {
+			Log.d("TEST", "Exit time was not updated correctly");
+		}
+	}
 
 	/**
 	 * The user is no longer in the same current location. 
