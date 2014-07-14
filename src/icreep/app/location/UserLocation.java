@@ -223,15 +223,14 @@ public class UserLocation {
 		
 		TimePlace tp = new TimePlace(timeSpent, mApplication.getCurrentLocation());
 		
-		if (visited != null) {
-			if (tp.getZoneID() != UNKNOWN) {
-				visited.add(tp);
-			}
-		}
+		if (tp.getZoneID() != UNKNOWN) {
 		
-		else {
-			visited = new ArrayList<TimePlace>();
-			if (tp.getZoneID() != UNKNOWN) {
+			if (visited != null) {
+					visited.add(tp);
+			}
+			
+			else {
+				visited = new ArrayList<TimePlace>();
 				visited.add(tp);
 			}
 		}

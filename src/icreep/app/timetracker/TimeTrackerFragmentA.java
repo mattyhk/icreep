@@ -2,6 +2,7 @@ package icreep.app.timetracker;
 
 import java.util.ArrayList;
 
+import icreep.app.ICreepApplication;
 import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SharedPreferencesControl;
@@ -24,7 +25,8 @@ import android.widget.TextView;
 
 public class TimeTrackerFragmentA extends Fragment implements OnItemClickListener {
 	
-	private int INTERVAL = 5000;
+	private final int INTERVAL = 5000;
+	private final int UNKNOWN = -2;
 	
 	private ListView listView;
 	private ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
@@ -36,6 +38,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	private iCreepDatabaseAdapter icreepHelper;
 	private TimeTrackerListAdapter mAdapter;
 	private Handler mHandler = new Handler();
+	private ICreepApplication mApplication;
 	
 	public TimeTrackerFragmentA() {
 		// Required empty public constructor
@@ -46,6 +49,8 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_time_tracker_a, container, false);
+		
+		mApplication = (ICreepApplication) getActivity().getApplicationContext();
 		
 		//get time places that user has been to from the database       
         icreepHelper = new iCreepDatabaseAdapter(getActivity());
@@ -184,11 +189,19 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	}
 	
 	private void updateList() {
-		
-		
+
 		timePlaces = icreepHelper.getTimePlaces(userID);
 		
+		double timeSpent = (System.currentTimeMillis() - mApplication.getTime()) / (1000 * 3600);
+		
+		TimePlace tp = new TimePlace(timeSpent, mApplication.getCurrentLocation());
+		
         if(timePlaces != null){ 
+        	
+        	if (tp.getZoneID() != UNKNOWN) {
+        		timePlaces.add(tp);
+        	}
+        	
         	//this function will sort the location with respect to their floors and description(locations)
         	timePlaces = sortTimePlaces(timePlaces); 
         	//now add these TimePlaces into ListView
@@ -201,7 +214,23 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         	
         }
         else {
-        	Message.message(getActivity(), "You have yet to visit and leave a zone");
+        	
+        	if (tp.getZoneID() != UNKNOWN) {
+        		timePlaces = new ArrayList<TimePlace>();
+        		timePlaces.add(tp);
+        		
+        		mAdapter.clear();
+        		mAdapter.addAll(timePlaces);
+        		mAdapter.notifyDataSetChanged();
+        		
+        		totalTime(timePlaces);
+        	}
+        	
+        	else {
+        		
+        		Message.message(getActivity(), "You have yet to visit a zone");
+        	}
+        	
         }
 	}
 }

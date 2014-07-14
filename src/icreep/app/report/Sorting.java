@@ -21,14 +21,13 @@ public class Sorting
 			return new ArrayList<TimePlace>();
 		}
 		
-		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
-		
 		if (a.size() == 0) {
 			return new ArrayList<TimePlace>();
 		}
+		
+		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
 
 		ArrayList<TimePlace> listOut = new ArrayList<TimePlace>();
-
 		ArrayList<TimePlace> listG = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listF = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listSE = new ArrayList<TimePlace>();
