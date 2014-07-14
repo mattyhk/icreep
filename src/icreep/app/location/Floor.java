@@ -6,17 +6,28 @@ public class Floor {
 	
 	private static final SparseArray<String> zoneToFloor = new SparseArray<String>();
 	static {
-		zoneToFloor.append(1, "Second Floor");
-		zoneToFloor.append(2, "Second Floor");
-		zoneToFloor.append(3, "Second Floor");
-		zoneToFloor.append(4, "Second Floor");
-		zoneToFloor.append(5, "Second Floor");
-		zoneToFloor.append(6, "Second Floor");
-		zoneToFloor.append(7, "Second Floor");
-		zoneToFloor.append(8, "Second Floor");
-		zoneToFloor.append(9, "Second Floor");
-		zoneToFloor.append(10, "Second Floor");
-		zoneToFloor.append(11, "Second Floor");
+		
+		for (int i = 1; i <= 11; i++) {
+			zoneToFloor.append(i, "Second Floor");
+		}
+		
+		for (int i = 12; i <= 26; i++) {
+			zoneToFloor.append(i, "Ground Floor");
+		}
+		
+		for (int i = 27; i <= 48; i++) {
+			
+			if (i == 34) {
+				zoneToFloor.append(i, "Ground Floor");
+			}
+			
+			else {
+				zoneToFloor.append(i, "First Floor");
+			}
+			
+		}
+		
+		
 	}
 	
 	public static String getFloor(int zone) {
