@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.app.ActionBar;
+import icreep.app.location.UserLocation;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -39,17 +40,19 @@ public class ProfileCreationActivity extends Activity
 	private Bitmap originalProfile= null ;
 	private Bitmap profilePic = null ;
 	// Views to extract user details from
-	EditText userName, userSurname, userPosition, userEmail;
-	ArrayList<String> listDetails  = null;
+	private EditText userName, userSurname, userPosition, userEmail;
+	private ArrayList<String> listDetails  = null;
 
-	String photo = "";
-	int userID = -1;
+	private int userID = -1;
 	// Create db helper object
-	iCreepDatabaseAdapter icreepHelper;
-	SharedPreferencesControl spc;
+	private iCreepDatabaseAdapter icreepHelper;
+	private SharedPreferencesControl spc;
 	
-	String invalidEntry;
-	int chars;
+	private UserLocation user;
+	private ICreepApplication mApplication;
+	
+	private String invalidEntry;
+	private int chars;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +65,9 @@ public class ProfileCreationActivity extends Activity
 		actionBar.setDisplayHomeAsUpEnabled(false);
 		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setHomeButtonEnabled(false);
+		user = new UserLocation(this);
+		mApplication = (ICreepApplication) getApplicationContext();
+
 		// Testing to see if the shared pref exists, thus disable home button
 		// ect.
 		profilePicture = (ImageView) findViewById(R.id.imageView1_profile_picture);
@@ -213,6 +219,14 @@ public class ProfileCreationActivity extends Activity
 		super.onPause();
 		
 		unregisterBluetoothReceiver();
+	}
+	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		user.updateLocationOnDestroy(mApplication.getCurrentLocation(), mApplication.getLastEntryID());
+		
 	}
 	
 	public void doUpdateOfProfile(String name, String surname,
