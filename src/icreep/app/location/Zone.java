@@ -14,15 +14,15 @@ public class Zone {
 	static {
 		zoneToLocation.append(1, "S3");
 		zoneToLocation.append(2, "Men's Bathroom");
-		zoneToLocation.append(3, "Intern Zone");
-		zoneToLocation.append(4, "Denzil Zone");
+		zoneToLocation.append(3, "CreepStars");
+		zoneToLocation.append(4, "B.I. Joes");
 		zoneToLocation.append(5, "Focus Room");
-		zoneToLocation.append(6, "Kabir Zone");
+		zoneToLocation.append(6, "Rejects");
 		zoneToLocation.append(7, "S2");
 		zoneToLocation.append(8, "S1");
 		zoneToLocation.append(9, "Kitchen");
-		zoneToLocation.append(10, "Water Zone");
-		zoneToLocation.append(11, "Second Floor Corner");
+		zoneToLocation.append(10, "Honey Badgers");
+		zoneToLocation.append(11, "BAU");
 		zoneToLocation.append(12, "G5");
 		zoneToLocation.append(13, "G4");
 		zoneToLocation.append(14, "G3");

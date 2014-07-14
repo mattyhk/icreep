@@ -4,8 +4,6 @@ import icreep.app.location.Floor;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 public class Sorting
 {
 
