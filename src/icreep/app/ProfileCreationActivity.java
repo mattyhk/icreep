@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import icreep.app.db.iCreepDatabaseAdapter;
+import android.app.ActionBar;
 import icreep.app.location.UserLocation;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -58,7 +59,12 @@ public class ProfileCreationActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile_creation);
+		ActionBar actionBar = getActionBar();
+		actionBar.removeAllTabs();
 		
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setHomeButtonEnabled(false);
 		user = new UserLocation(this);
 		mApplication = (ICreepApplication) getApplicationContext();
 
@@ -437,7 +443,8 @@ public class ProfileCreationActivity extends Activity
         //check that the file is picture!!!        
         String[] checker = picturePath.split("\\.");
         if ((checker[1].equals("jpg")) || (checker[1].equals("png")) || (checker[1].equals("GIF")) || 
-        		(checker[1].equals("tif")) )
+        		(checker[1].equals("tif")) || (checker[1].equals("JPG")) || (checker[1].equals("PNG")) 
+        		|| (checker[1].equals("gif")))
         {
         	double orientation = -1 ;
         	 try {

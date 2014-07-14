@@ -1,5 +1,6 @@
 package icreep.app;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -27,7 +28,12 @@ public class MainMenuActivity extends Activity {
 		setContentView(R.layout.activity_icreep_menu);
 		user = new UserLocation(this);
 		mApplication = (ICreepApplication) getApplicationContext();
+		ActionBar actionBar = getActionBar();
+		actionBar.removeAllTabs();
 		
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setHomeButtonEnabled(false);
 		if (!mApplication.hasStartedRanging()) {
 
 			Intent trackingIntent = new Intent(this, BeaconService.class);

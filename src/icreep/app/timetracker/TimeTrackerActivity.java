@@ -45,9 +45,14 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 
 		viewPager = (ViewPager) findViewById(R.id.time_tracker_pager);
 		viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
-
+		actionBar = getActionBar();
+		actionBar.removeAllTabs();
+		
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setHomeButtonEnabled(false);
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
+			
 			@Override
 			public void onPageSelected(int arg0) {
 				actionBar.setSelectedNavigationItem(arg0);
