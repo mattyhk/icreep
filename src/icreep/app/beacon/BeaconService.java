@@ -87,6 +87,7 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	
 	@Override
 	public void onDestroy() {
+		userLocation.updateLocationOnDestroy(mApplication.getCurrentLocation());
 		stopBeaconRanging();
 		Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
 	}
