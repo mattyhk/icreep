@@ -429,7 +429,8 @@ public class ProfileCreationActivity extends Activity
         //check that the file is picture!!!        
         String[] checker = picturePath.split("\\.");
         if ((checker[1].equals("jpg")) || (checker[1].equals("png")) || (checker[1].equals("GIF")) || 
-        		(checker[1].equals("tif")) )
+        		(checker[1].equals("tif")) || (checker[1].equals("JPG")) || (checker[1].equals("PNG")) 
+        		|| (checker[1].equals("gif")))
         {
         	double orientation = -1 ;
         	 try {
