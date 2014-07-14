@@ -27,6 +27,8 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	ViewPager viewPager;
 	
 	private double totalInTime = 0;
+	private double totalOutTime = 0;
+	private double totalTime = 0;
 	private String userDetails;
 	
 	@Override
@@ -87,11 +89,27 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	}
 	
 	public double getTime(){
+		return totalTime;
+	}
+	
+	public double getInTime(){
 		return totalInTime;
 	}
 	
-	public void setTime(double t){
-		totalInTime = t;
+	public double getOutTime(){
+		return totalOutTime;
+	}
+	
+	public void setTotalTime(double t){
+		totalTime = t * 3600.0;
+	}
+	
+	public void setInTime(double t){
+		totalInTime = t * 3600.0;
+	}
+	
+	public void setOutTime(double t){
+		totalOutTime = t * 3600.0;
 	}
 	
 	public void setUserDetails(String ud){

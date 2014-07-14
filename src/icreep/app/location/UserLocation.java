@@ -33,6 +33,7 @@ public class UserLocation {
 	private final static int MAX_ENTRY_COUNT = 5;
 	private final static int MAX_EXIT_COUNT = 5;
 	private final static int UNKNOWN = -2;
+	private final static int OUTDOORS = -1;
 	
 	private int currentLocation;
 	private int entryCount;
@@ -239,6 +240,44 @@ public class UserLocation {
 		
 	}
 	
+	/**
+	 * Calculates total amount of time spent in the office. Ignores any time spent out of the office.
+	 * @return time
+	 */
+	private double timeInOffice() {
+		
+		double total = 0.0;
+		
+		if (this.visitedZones != null) {
+			for (TimePlace tp: this.visitedZones) {
+				if (tp.getZoneID() != OUTDOORS) {
+					total += tp.getTimeSpent();
+				}
+			}
+		}
+		
+		return total;
+	}
+	
+	/**
+	 * Calculates total amount of time spent out of the office. Ignores any time spent in the office.
+	 * @return time
+	 */
+	private double timeOutOfOffice() {
+		
+		double total = 0.0;
+		
+		if (this.visitedZones != null) {
+			for (TimePlace tp: this.visitedZones) {
+				if (tp.getZoneID() == OUTDOORS) {
+					total += tp.getTimeSpent();
+				}
+			}
+		}
+		
+		return total;
+	}
+	
 	/*******************
 	 * 
 	 * Getters and Setters
@@ -270,6 +309,21 @@ public class UserLocation {
 	
 	public int getTempLocation() {
 		return this.currentTempLocation;
+	}
+	
+	public double getTotalTime() {
+		double time = getInOfficeTime() + getOutOfficeTime();
+		return time;
+	}
+	
+	public double getInOfficeTime() {
+		double time = timeInOffice();
+		return time;
+	}
+	
+	public double getOutOfficeTime() {
+		double time = timeOutOfOffice();
+		return time;
 	}
 	
 
