@@ -8,13 +8,11 @@ import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.location.UserLocation;
-import icreep.app.report.Sorting;
 import icreep.app.report.TimePlace;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,61 +81,20 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	}
 	
 	/*
-	 * Pre-Conditions: > ArrayList of time places that is unsorted according location(description), floor and total time spent.
-	 * Post-conditions: > Sorts the arrayList of time places according location(description), floor and total time spent> The sort is done
-	 */
-	public ArrayList<TimePlace> sortTimePlaces(ArrayList<TimePlace> timePlaces){
-		
-		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
-		
-		if (timePlaces.size() == 0) {
-			return finalSortedTimePlaces;
-		}
-		
-		ArrayList<TimePlace> sorted = Sorting.InsertionSort(timePlaces);
-		
-		if (sorted.size() > 1) {
-			TimePlace toAdd = sorted.get(0);
-			sorted.remove(0);
-			
-			for(TimePlace tp : sorted){
-				if(tp.equals(toAdd)){
-					toAdd.increaseTimeSpent(tp.getTimeSpent());
-				} 
-				else{
-					finalSortedTimePlaces.add(toAdd);
-					toAdd=tp;
-				}
-			}
-			
-			finalSortedTimePlaces.add(toAdd);
-		}
-		
-		else {
-			return sorted;
-		}
-		
-		return finalSortedTimePlaces;
-	}
-	
-	/*
 	 * Pre-Conditions: > ArrayList of time places that is sorted according location(description), floor and total time spent.
 	 * Post-conditions: > this function will return the total time spent in all the floors, locations(Descriptions)
 	 */
 	public void totalTime(ArrayList<TimePlace> timePlaces){
 		
-		double total = 0;
-		
-		if(timePlaces != null){
-			for(TimePlace tp: timePlaces){
-				double time = tp.getTimeSpent();
-				total+= time;
-			}
-		}
+		double total = user.getTotalTime();
+		double totalIn = user.getInOfficeTime();
+		double totalOut = user.getOutOfficeTime();
 		
 		//send this total to TimeTracker Activity so that fragment B may access it from there
-		TimeTrackerActivity tTA = (TimeTrackerActivity) this.getActivity();
-		tTA.setTime(total);		
+		TimeTrackerActivity mActivity = (TimeTrackerActivity) this.getActivity();
+		mActivity.setTotalTime(total);
+		mActivity.setInTime(totalIn);
+		mActivity.setOutTime(totalOut);
 	}
 
 	@Override
@@ -182,12 +139,9 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	
 	private void updateList() {
 		
-		Log.d("TEST", "Updating Fragment");
-		
 		mAdapter.clear();
 		
 		timePlaces = (ArrayList<TimePlace>) user.getVisitedZones();
-		Log.d("TEST", timePlaces.toString());
 		
 		if (timePlaces.size() > 0){
 			totalTime(timePlaces);

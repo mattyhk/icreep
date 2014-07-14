@@ -17,7 +17,6 @@ import android.widget.TextView;
 @SuppressLint("DefaultLocale") public class TimeTrackerFragmentB extends Fragment {
 	
 	private int INTERVAL = 10000;
-	private double TIMEOUT = 8.0 * 60 * 60;
 	
 	private ProgressBar mProgressBar;
 	private ImageButton home;
@@ -26,6 +25,7 @@ import android.widget.TextView;
 	private TextView fragmentOutTime;
 	
 	private double timeIn = 0.0;
+	private double timeOut = 0.0;
 	
 
 	private Handler mHandler = new Handler(); 
@@ -45,15 +45,11 @@ import android.widget.TextView;
 		fragmentInTime = (TextView) v.findViewById(R.id.time_in_office);
 		fragmentOutTime = (TextView) v.findViewById(R.id.time_out_office);
 		
-		//float correctTextSize = 16*getResources().getDisplayMetrics().density;
-		//fragmentTitle.setTextSize(correctTextSize);
-		//fragmentUser.setTextSize(correctTextSize);
-		
 		mProgressBar = (ProgressBar) v.findViewById(R.id.time_tracker_progress_bar);
 		mProgressBar.setMax(100);
 		
 		fragmentInTime.setText("00:00:00");
-		fragmentOutTime.setText("8:00:00");
+		fragmentOutTime.setText("00:00:00");
 
 		timeTracker = (TimeTrackerActivity) this.getActivity();		
 
@@ -72,16 +68,17 @@ import android.widget.TextView;
 	
 	private void updateBar() {
 		
-		if (timeIn != timeTracker.getTime()) {
+		if (timeIn != timeTracker.getInTime() || timeOut != timeTracker.getOutTime()) {
 			
-			timeIn = timeTracker.getTime() * 60 * 60;
+			timeIn = timeTracker.getInTime();
+			timeOut = timeTracker.getOutTime();
 			
-			if(timeIn != 0){
-				double timeOutTemp = TIMEOUT - timeIn;
+			if(timeIn != 0 || timeOut != 0){
+				double fractionInOffice = ((timeIn) / timeTracker.getTime()) * 100;
 				
 				// get percentage and set progress
 				mProgressBar.setProgress(0);
-				mProgressBar.setProgress((int) calcPercentageTime(timeIn));
+				mProgressBar.setProgress((int) fractionInOffice);
 				
 				
 				int secondsIn = (int) (timeIn % 60);
@@ -89,9 +86,9 @@ import android.widget.TextView;
 				int hoursIn = (int) ((timeIn / 3600) % 60);
 				
 	
-				int secondsOut = (int) (timeOutTemp % 60);
-				int minutesOut = (int) ((timeOutTemp / 60) % 60);
-				int hoursOut = (int) ((timeOutTemp / 3600) % 60);
+				int secondsOut = (int) (timeOut % 60);
+				int minutesOut = (int) ((timeOut / 60) % 60);
+				int hoursOut = (int) ((timeOut / 3600) % 60);
 				
 				fragmentInTime.setText(String.format
 						("%02d:%02d:%02d", hoursIn, minutesIn, secondsIn));
@@ -101,7 +98,7 @@ import android.widget.TextView;
 			
 			else{
 				fragmentInTime.setText("00:00:00");
-				fragmentOutTime.setText("24:00:00");
+				fragmentOutTime.setText("00:00:00");
 			}
 		}
 		
@@ -122,16 +119,6 @@ import android.widget.TextView;
 		// TODO Auto-generated method stub
 		super.onPause();
 		stopRepeatingTask();
-	}
-	
-	/**
-	 * Calculates the percentage of time the user has spent in the office
-	 * @param inOffice - time spent in the office
-	 * @return percentage - the percentage rounded to nearest integer
-	 */
-	private double calcPercentageTime(double inOffice) {
-		inOffice = inOffice % (8.0 * 60 * 60);
-		return (inOffice/TIMEOUT)*100.0;
 	}
 	
 	private Runnable mBarUpdater = new Runnable() {
