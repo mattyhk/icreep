@@ -1,5 +1,7 @@
 package icreep.app.report;
 
+import icreep.app.location.Floor;
+
 import java.util.ArrayList;
 
 public class Sorting
@@ -16,22 +18,21 @@ public class Sorting
 		{
 			return new ArrayList<TimePlace>();
 		}
-		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
 		
 		if (a.size() == 0) {
 			return new ArrayList<TimePlace>();
 		}
 		
-		list.add(a.get(0));
-		ArrayList<TimePlace> listOut = new ArrayList<TimePlace>();
+		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
 
+		ArrayList<TimePlace> listOut = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listG = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listF = new ArrayList<TimePlace>();
 		ArrayList<TimePlace> listSE = new ArrayList<TimePlace>();
 
-		for (int i = 1; i < a.size(); i++) {
+		for (int i = 0; i < a.size(); i++) {
 			TimePlace t = a.get(i);
-			if (t.getFloor().equals("Outside"))
+			if (t.getFloor().equals(Floor.getFloor(-1)))
 			{
 				listOut.add(t);
 			}
@@ -43,16 +44,17 @@ public class Sorting
 				listSE.add(t);
 			}
 		}		
+		
 		listOut = secondarySortDescriptionAsc(listOut);
 		listG = secondarySortDescriptionAsc(listG);
 		listF = secondarySortDescriptionAsc(listF);
 		listSE = secondarySortDescriptionAsc(listSE);
-		list.clear();
 		
 		list.addAll(listOut);
 		list.addAll(listG);
 		list.addAll(listF);
 		list.addAll(listSE);
+		
 
 		return list;
 	}
@@ -91,10 +93,9 @@ public class Sorting
 
 	}
 
-	// Asc
+	// Ascending
 	private static ArrayList<TimePlace> secondarySortDescriptionAsc(
-			ArrayList<TimePlace> a)
-	{
+			ArrayList<TimePlace> a) {
 		ArrayList<TimePlace> toReturn = new ArrayList<TimePlace>();
 		
 		if (a.size() == 0) {
@@ -129,15 +130,18 @@ public class Sorting
 		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
 		in = InsertionSort(in);
 		
-		if (in.size() == 0) {
+		if (in.size() == 0 || in.size() == 1) {
 			return in;
 		}
-		if (in.size() > 1) {
+		
+		else {
+			
 			TimePlace toAdd = in.get(0);
 			in.remove(0);
 			
 			for(TimePlace tp : in)
 			{
+				
 				if(tp.equals(toAdd))
 				{
 					toAdd.increaseTimeSpent(tp.getTimeSpent());
@@ -148,14 +152,9 @@ public class Sorting
 				}
 			}
 			finalSortedTimePlaces.add(toAdd);
-		}else 
-			{
-				return in;
-			}
+		}
 			
-			
-		
-	return finalSortedTimePlaces;
+		return finalSortedTimePlaces;
 	}
 	
 	public boolean checkIfWorekdTooLong(ArrayList<TimePlace> in)

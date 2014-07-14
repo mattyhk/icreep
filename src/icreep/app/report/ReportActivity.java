@@ -108,7 +108,7 @@ public class ReportActivity extends FragmentActivity
 
 		// Adding home button listener
 		home.setOnClickListener(new SwitchButtonListener(this,
-				"icreep.app.IcreepMenu"));
+				"icreep.app.MainMenuActivity"));
 
 	}
 

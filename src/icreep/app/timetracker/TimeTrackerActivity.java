@@ -5,6 +5,11 @@ import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
@@ -12,14 +17,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class TimeTrackerActivity extends FragmentActivity implements TabListener {
+	
+	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 	
 	ActionBar actionBar;
 	ViewPager viewPager;
 	
-	public double totalInTime = 0;
-	public String userDetails;
+	private double totalInTime = 0;
+	private double totalOutTime = 0;
+	private double totalTime = 0;
+	private String userDetails;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +89,27 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	}
 	
 	public double getTime(){
+		return totalTime;
+	}
+	
+	public double getInTime(){
 		return totalInTime;
 	}
 	
-	public void setTime(double t){
-		totalInTime = t;
+	public double getOutTime(){
+		return totalOutTime;
+	}
+	
+	public void setTotalTime(double t){
+		totalTime = t * 3600.0;
+	}
+	
+	public void setInTime(double t){
+		totalInTime = t * 3600.0;
+	}
+	
+	public void setOutTime(double t){
+		totalOutTime = t * 3600.0;
 	}
 	
 	public void setUserDetails(String ud){
@@ -93,6 +119,85 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	public String getUserDetails(){
 		return userDetails;
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		registerBluetoothReceiver();
+
+		BluetoothAdapter bluetoothAdapter = BluetoothAdapter
+				.getDefaultAdapter();
+		if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+			Intent enableBtIntent = new Intent(
+					BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterBluetoothReceiver();
+	}
+	
+	/*********************
+	 * 
+	 * Bluetooth Checker Makes Sure the Bluetooth functionality is on. May need
+	 * to move it into every activity
+	 * 
+	 ********************/
+	private void finishActivityWithMessage(String message)
+	{
+		// Notify the user of the problem
+		Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+		toast.show();
+
+		// End the activity
+		finish();
+	}
+
+	private void registerBluetoothReceiver()
+	{
+		final IntentFilter filter = new IntentFilter();
+		filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+
+		registerReceiver(this.bluetoothChangedReceiver, filter);
+	}
+
+	private void unregisterBluetoothReceiver()
+	{
+		unregisterReceiver(this.bluetoothChangedReceiver);
+	}
+
+	private BroadcastReceiver bluetoothChangedReceiver = new BroadcastReceiver()
+	{
+
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+
+			final String action = intent.getAction();
+			if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+				final int state = intent.getIntExtra(
+						BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+				switch (state)
+				{
+					case BluetoothAdapter.STATE_TURNING_ON:
+						break;
+					case BluetoothAdapter.STATE_ON:
+						break;
+					case BluetoothAdapter.STATE_TURNING_OFF:
+						finishActivityWithMessage("Requires Bluetooth");
+						break;
+					case BluetoothAdapter.STATE_OFF:
+						break;
+					case BluetoothAdapter.ERROR:
+						finishActivityWithMessage("Bluetooth Error");
+						break;
+				}
+			}
+		}
+	};
 	
 	
 

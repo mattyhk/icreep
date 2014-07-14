@@ -2,12 +2,12 @@ package icreep.app.timetracker;
 
 import java.util.ArrayList;
 
+import icreep.app.ICreepApplication;
 import icreep.app.Message;
 import icreep.app.R;
-import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
-import icreep.app.report.Sorting;
+import icreep.app.location.UserLocation;
 import icreep.app.report.TimePlace;
 import android.app.Activity;
 import android.os.Bundle;
@@ -24,18 +24,21 @@ import android.widget.TextView;
 
 public class TimeTrackerFragmentA extends Fragment implements OnItemClickListener {
 	
-	private int INTERVAL = 5000;
+	private final int INTERVAL = 5000;
+//	private final int UNKNOWN = -2;
 	
 	private ListView listView;
 	private ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
 	
 	private ImageButton home;
 
-	int userID = -1;
+	private int userID;
 	
 	private iCreepDatabaseAdapter icreepHelper;
 	private TimeTrackerListAdapter mAdapter;
 	private Handler mHandler = new Handler();
+	private ICreepApplication mApplication;
+	private UserLocation user;
 	
 	public TimeTrackerFragmentA() {
 		// Required empty public constructor
@@ -47,19 +50,21 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_time_tracker_a, container, false);
 		
+		mApplication = (ICreepApplication) getActivity().getApplicationContext();
+		user = new UserLocation(getActivity());
+		
 		//get time places that user has been to from the database       
         icreepHelper = new iCreepDatabaseAdapter(getActivity());
         mAdapter = new TimeTrackerListAdapter(getActivity(), timePlaces);
 		
 		TextView fragmentUser = (TextView) v.findViewById(R.id.time_tracker_a_user);
-
-		SharedPreferencesControl spc = new SharedPreferencesControl(getActivity());
-		userID = spc.getUserID();
+		
+		userID = user.getUserID();
 		
 		home = (ImageButton) v.findViewById(R.id.home_button_time_tracker_a);
 		Activity c = getActivity();
 		if (c != null) {
-			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
+			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.MainMenuActivity"));
 		}
 
         String userDetails = icreepHelper.getUserDetails(userID);
@@ -72,55 +77,7 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
         
-        //get timePlaces (Description, totalTimeSpent, floor)        
-        timePlaces = icreepHelper.getTimePlaces(userID);
-               
-        if(timePlaces != null){ 
-        	updateList();
-        }
-        else{       	
-        	Message.message(getActivity(), "You haven't been anywhere");
-        }
-        
 		return v;
-	}
-	
-	/*
-	 * Pre-Conditions: > ArrayList of time places that is unsorted according location(description), floor and total time spent.
-	 * Post-conditions: > Sorts the arrayList of time places according location(description), floor and total time spent> The sort is done
-	 */
-	public ArrayList<TimePlace> sortTimePlaces(ArrayList<TimePlace> timePlaces){
-		
-		ArrayList<TimePlace> finalSortedTimePlaces = new ArrayList<TimePlace>();
-		
-		if (timePlaces.size() == 0) {
-			return finalSortedTimePlaces;
-		}
-		
-		ArrayList<TimePlace> sorted = Sorting.InsertionSort(timePlaces);
-		
-		if (sorted.size() > 1) {
-			TimePlace toAdd = sorted.get(0);
-			sorted.remove(0);
-			
-			for(TimePlace tp : sorted){
-				if(tp.equals(toAdd)){
-					toAdd.increaseTimeSpent(tp.getTimeSpent());
-				} 
-				else{
-					finalSortedTimePlaces.add(toAdd);
-					toAdd=tp;
-				}
-			}
-			
-			finalSortedTimePlaces.add(toAdd);
-		}
-		
-		else {
-			return sorted;
-		}
-		
-		return finalSortedTimePlaces;
 	}
 	
 	/*
@@ -129,18 +86,15 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	 */
 	public void totalTime(ArrayList<TimePlace> timePlaces){
 		
-		double total = 0;
-		
-		if(timePlaces != null){
-			for(TimePlace tp: timePlaces){
-				double time = tp.getTimeSpent();
-				total+= time;
-			}
-		}
+		double total = user.getTotalTime();
+		double totalIn = user.getInOfficeTime();
+		double totalOut = user.getOutOfficeTime();
 		
 		//send this total to TimeTracker Activity so that fragment B may access it from there
-		TimeTrackerActivity tTA = (TimeTrackerActivity) this.getActivity();
-		tTA.setTime(total);		
+		TimeTrackerActivity mActivity = (TimeTrackerActivity) this.getActivity();
+		mActivity.setTotalTime(total);
+		mActivity.setInTime(totalIn);
+		mActivity.setOutTime(totalOut);
 	}
 
 	@Override
@@ -185,23 +139,24 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	
 	private void updateList() {
 		
+		mAdapter.clear();
 		
-		timePlaces = icreepHelper.getTimePlaces(userID);
+		timePlaces = (ArrayList<TimePlace>) user.getVisitedZones();
 		
-        if(timePlaces != null){ 
-        	//this function will sort the location with respect to their floors and description(locations)
-        	timePlaces = sortTimePlaces(timePlaces); 
-        	//now add these TimePlaces into ListView
-        	mAdapter.clear();
-        	mAdapter.addAll(timePlaces);
-        	mAdapter.notifyDataSetChanged();
-
-        	//calculate and put Total-Time in Time Tracker Activity for Activity B
-        	totalTime(timePlaces);
-        	
-        }
-        else {
-        	Message.message(getActivity(), "You have yet to visit and leave a zone");
-        }
+		if (timePlaces.size() > 0){
+			totalTime(timePlaces);
+			for (TimePlace tp : timePlaces){
+				mAdapter.add(tp);
+			}
+		}
+		
+		else if (mApplication.getCurrentLocation() == -2 && timePlaces.size() == 0) {
+			Message.message(getActivity(), "You have yet to visit a zone");
+		}
+		
+		mAdapter.notifyDataSetChanged();
+		
+		
+		
 	}
 }
