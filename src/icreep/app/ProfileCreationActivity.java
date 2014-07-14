@@ -316,7 +316,8 @@ public class ProfileCreationActivity extends Activity
 	
 	// function to validate name against a name Regular Expression
 	public boolean isValidInput(String name){
-		//if(!name.get(0).isChar())
+		//if(!(name.get(0).charAt()).isDigit())
+		//if true - Capitalize first char of every word and then check against regex
 		String nameRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*";
 		if(name.matches(nameRegex)){
 			return true;
