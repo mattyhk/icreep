@@ -1,7 +1,9 @@
 package icreep.app.report;
 
+import icreep.app.ICreepApplication;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
+import icreep.app.location.UserLocation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,9 +28,11 @@ public class MailerClass
 	 * Pre-Conditions: None Post-conditions: > Send the mail using the default
 	 * mailer for the user to add recipients if they want
 	 */
-	Context c = null;
-	iCreepDatabaseAdapter adapt ;
-	int userID = -1;
+	private Context c = null;
+	private iCreepDatabaseAdapter adapt ;
+	private int userID = -1;
+	private UserLocation user;
+	private ICreepApplication mApplication;
 	
 	public MailerClass(Context c)
 	{
@@ -36,6 +40,8 @@ public class MailerClass
 		adapt = new iCreepDatabaseAdapter(c) ;
 		SharedPreferencesControl spc = new SharedPreferencesControl(c);
 		userID = spc.getUserID();
+		user = new UserLocation(c);
+		mApplication = (ICreepApplication) c.getApplicationContext();
 	}
 	public void sendMail()
 	{		
@@ -89,6 +95,8 @@ public class MailerClass
 		s = s + "\n";
 
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
+		
+		user.updateLocationOnDestroy(mApplication.getCurrentLocation(), mApplication.getLastEntryID());
 
 		// This will be the array list that vinny's code generates
 		list = adapt.getTimePlaces(userID);

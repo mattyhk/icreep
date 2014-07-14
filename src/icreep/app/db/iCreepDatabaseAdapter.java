@@ -333,15 +333,8 @@ public class iCreepDatabaseAdapter {
 		
 		if (cursor != null) {
 			if (cursor.moveToFirst()) {
-				String timeLeft = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));
-				if (timeLeft.equals("")) {
-					//String[] args = {""+lastEntryID};
 					db.update(iCreepHelper.TABLE_NAME4, cV, iCreepHelper.LOCATION_ID + "=" + lastEntryID, null);
 					return true;
-				}
-				else {
-					Log.d("TEST", "Time Left was not empty");
-				}
 			}
 			else {
 				Log.d("TEST", "Cursor is empty");
