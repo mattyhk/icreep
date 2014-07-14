@@ -33,8 +33,8 @@ public class MainActivity extends FragmentActivity
 		actionBar.setDisplayHomeAsUpEnabled(false);
 		actionBar.setDisplayShowHomeEnabled(true);
 		actionBar.setHomeButtonEnabled(false);
-		//adapt.clearDatabase();
-		//spc.clearSP(); // testing purposes
+//		adapt.clearDatabase();
+//		spc.clearSP(); // testing purposes
 		// Check for Bluetooth capability
 		if (!getPackageManager().hasSystemFeature(
 				PackageManager.FEATURE_BLUETOOTH_LE)) {
