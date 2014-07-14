@@ -43,6 +43,11 @@ public class ReportActivity extends FragmentActivity
 		setContentView(R.layout.activity_reports);
 		ActionBar actionBar = getActionBar();
 		actionBar.removeAllTabs();
+		
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setHomeButtonEnabled(false);
+		
 		//actionBar.hide(); //hides action bar completely
 		auto = (Button) findViewById(R.id.autoButton);
 		manual = (Button) findViewById(R.id.manualButton);

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import icreep.app.db.iCreepDatabaseAdapter;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -55,7 +56,12 @@ public class ProfileCreationActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile_creation);
-
+		ActionBar actionBar = getActionBar();
+		actionBar.removeAllTabs();
+		
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setHomeButtonEnabled(false);
 		// Testing to see if the shared pref exists, thus disable home button
 		// ect.
 		profilePicture = (ImageView) findViewById(R.id.imageView1_profile_picture);

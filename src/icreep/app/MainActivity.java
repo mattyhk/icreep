@@ -1,5 +1,6 @@
 package icreep.app;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -26,8 +27,14 @@ public class MainActivity extends FragmentActivity
 		setContentView(R.layout.activity_main);
 		SharedPreferencesControl spc = new SharedPreferencesControl(this);
 		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
-		adapt.clearDatabase();
-		spc.clearSP(); // testing purposes
+		ActionBar actionBar = getActionBar();
+		actionBar.removeAllTabs();
+		
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setHomeButtonEnabled(false);
+		//adapt.clearDatabase();
+		//spc.clearSP(); // testing purposes
 		// Check for Bluetooth capability
 		if (!getPackageManager().hasSystemFeature(
 				PackageManager.FEATURE_BLUETOOTH_LE)) {
