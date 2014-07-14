@@ -219,7 +219,7 @@ public class UserLocation {
 		
 		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
 		
-		double timeSpent = (System.currentTimeMillis() - mApplication.getTime()) / (1000 * 3600);
+		double timeSpent = (System.currentTimeMillis() - mApplication.getTime()) / (1000.0 * 3600.0);
 		
 		TimePlace tp = new TimePlace(timeSpent, mApplication.getCurrentLocation());
 		

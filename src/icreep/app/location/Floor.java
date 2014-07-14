@@ -30,7 +30,7 @@ public class Floor {
 		}
 		
 		else {
-			return zoneToFloor.get(zone);
+			return zoneToFloor.get(zone, "Unknown");
 		}
 	}
 }

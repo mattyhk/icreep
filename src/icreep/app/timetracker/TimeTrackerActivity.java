@@ -18,8 +18,8 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 	ActionBar actionBar;
 	ViewPager viewPager;
 	
-	public double totalInTime = 0;
-	public String userDetails;
+	private double totalInTime = 0;
+	private String userDetails;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

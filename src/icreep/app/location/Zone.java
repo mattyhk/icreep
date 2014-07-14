@@ -36,7 +36,7 @@ public class Zone {
 		}
 		
 		else {
-			return zoneToLocation.get(zone);
+			return zoneToLocation.get(zone, "Unknown");
 		}
 	}
 }
