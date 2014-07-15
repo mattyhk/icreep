@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--  App Generic Strings -->
+    <!-- App Generic Strings -->
     <string name="app_name">iCreep</string>
     <string name="action_settings">Settings</string>
     <string name="save_user_details">Save</string>
@@ -10,7 +10,9 @@
     <string name="select_proximity">Location</string>
     <string name="home">Home</string>
     
-    <!--  Profile Strings -->
+    <string name="icreep_version_number">Version 2.0</string>
+
+    <!-- Profile Strings -->
     <string name="profile">Profile</string>
     <string name="name_label">Name:</string>
     <string name="edit_name">Enter name</string>
@@ -22,16 +24,16 @@
     <string name="content_descrip">Profile Picture</string>
     <string name="position_label">Position:</string>
     <string name="edit_position">Enter position</string>
-    
-    <!--  Report Strings -->
+
+    <!-- Report Strings -->
     <string name="report">Reports</string>
     <string name="autoButtonText">Automated</string>
     <string name="manualButtonText">Manual</string>
     <string name="autoDelivery">Automated Delivery</string>
     <string name="deliveryTimeText">Delivery Time</string>
     <string name="sendReportText">Send Report</string>
-    
-    <!--  Location Strings -->
+
+    <!-- Location Strings -->
     <string name="title_activity_location">Location</string>
     <string name="title_location_current">Current Location</string>
     <string name="title_location_movement">Daily Movement</string>
@@ -39,22 +41,29 @@
     <string name="first_floor">First Floor</string>
     <string name="second_floor">Second Floor</string>
     <string name="zone_map">Zone Map</string>
-    
-    <!--  Time Tracker Strings -->
+    <string name="time_in_locations">Time in Locations</string>
+
+    <!-- Time Tracker Strings -->
     <string name="title_activity_time_tracker">Time Tracker</string>
     <string name="time_tracker">Time Tracker</string>
     <string name="outside">In / Out Office</string>
-	<string name="in_office_label">In Office</string>
-    <string name="out_office_label">Out Office</string>  
+    <string name="in_office_label">In Office</string>
+    <string name="out_office_label">Out Office</string>
     
-    <!--  Test Placeholder Strings -->
+    <!--  Boss Tracker String -->
+    <string name="boss_heading">Boss alert control</string>
+    <string name="boss_tracking">Tracking:</string>
+    <string name="boss_scan">Scan devices</string>
+    <string name="boss_pinger">Tracking Status</string>
+    <string name="boss_tracker">Boss Tracker</string>
+
+    <!-- Test Placeholder Strings -->
     <string name="user_position">Employee Name: Position</string>
     <string name="test2">6:18</string>
     <string name="timeInOffice">5:15</string>
     <string name="timeOutOffice">2:45</string>
-    
-	
-    <!--  Colours -->
+
+    <!-- Colours -->
     <color name="OpenBoxGreen">#BCD727</color>
     <color name="lightGreenForLabels">#b7ff00</color>
     <color name="greyForBackrounds">#CCCCCC</color>
@@ -64,11 +73,10 @@
     <color name="background">#999999</color>
     <color name="whiteColor">#FFFFFF</color>
     <color name="grey_text">#CCCCCC</color>
+
     <string name="manualDelivery">Manual Delivery</string>
     <string name="save_report_time">Save</string>
-    <color name="time_picker_color">#282828</color>
-    <string name="time_in_locations">Time in Locations</string>
-    <string name="icreep_version_number">Version 1.0</string>
 
+    <color name="time_picker_color">#282828</color>
 
 </resources>

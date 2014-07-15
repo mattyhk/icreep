@@ -17,11 +17,12 @@ import icreep.app.location.UserLocation;
 public class MainMenuActivity extends Activity {
 	
 	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
-	
-	private Button location_button, time_tracker_button, reports_button, profile_button;
+
 	private ICreepApplication mApplication;
 	private UserLocation user;
 
+	private Button location_button, time_tracker_button, reports_button, profile_button,boss_button;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,6 +59,9 @@ public class MainMenuActivity extends Activity {
 		profile_button = (Button) findViewById(R.id.button4_profile);
 		profile_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.ProfileCreationActivity"));
 		
+		//Boss button
+		boss_button = (Button)findViewById(R.id.button5_boss_tracker);
+		boss_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.beaconSelectionActivity"));
 	}//onCreate
 	
 	@Override
