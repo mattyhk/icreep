@@ -1,6 +1,8 @@
 package icreep.app.beacon;
 
+import icreep.app.AudioManagingController;
 import icreep.app.ICreepApplication;
+import icreep.app.location.Boardroom;
 import icreep.app.location.UserLocation;
 
 import java.util.Collection;
@@ -38,6 +40,7 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	private ICreepApplication mApplication;
 	private UserLocation userLocation;
 	private BeaconCollection beaconCollection = new BeaconCollection();
+	private AudioManagingController mAudioManager;
 	
 	
 	/*
@@ -73,6 +76,7 @@ public class BeaconService extends Service implements IBeaconConsumer,
 		Log.d("TEST", "Service onCreate");
 		mApplication = (ICreepApplication) getApplicationContext();
 		this.userLocation = new UserLocation(this);
+		this.mAudioManager = new AudioManagingController(this);
 		
 		userLocation.setCurrentLocation(mApplication.getCurrentLocation());
 		
@@ -112,8 +116,15 @@ public class BeaconService extends Service implements IBeaconConsumer,
 		
 		if (currentLoc != mApplication.getCurrentLocation()) {
 			Log.d("TEST", "Changing Location");
+			int oldLocation = mApplication.getCurrentLocation();
 			mApplication.setCurrentLocation(currentLoc);
 			mApplication.setTime(System.currentTimeMillis());
+			if (Boardroom.isOutToBoardroom(oldLocation, currentLoc)) {
+				mAudioManager.changeToSilent();
+			}
+			else if (Boardroom.isBoardroomToOut(oldLocation, currentLoc)) {
+				mAudioManager.changeBackToUserDefault();
+			}
 		}
 		
 	}
