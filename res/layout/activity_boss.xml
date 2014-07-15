@@ -9,33 +9,26 @@
 	
     <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="0dp" 
-        android:layout_weight="1"
+        android:layout_height="wrap_content" 
         android:orientation="horizontal"
-        android:layout_marginLeft="@dimen/left_margin" 
-        >
-        
-        
+        android:layout_marginLeft="@dimen/left_margin" >
+
         <LinearLayout 
-        android:layout_height="wrap_content"
+       		android:layout_height="wrap_content"
             android:layout_width="0dp" 
             android:orientation="vertical"
             android:layout_weight="1"
-            android:layout_marginBottom="10dp" 
-            android:layout_marginTop="10dp"
-              >
+            android:layout_marginBottom="10dp" >
             
-        <TextView
-        android:id="@+id/bossheading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/boss_heading"
-        android:textColor= "@color/lightGreenForLabels"     
-        android:textSize="@dimen/sub_heading_text_size" 
-        /> 
+	        <TextView
+		        android:id="@+id/bossheading"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/boss_heading"
+		        android:textColor= "@color/lightGreenForLabels"     
+		        android:textSize="@dimen/sub_heading_text_size" /> 
             
         </LinearLayout>
-       
 
          <ImageButton
              android:id="@+id/home_button_boss"
@@ -45,9 +38,7 @@
              android:contentDescription="@string/home" />
         
         </LinearLayout>
-   
-	
-    
+
     <TextView
         android:id="@+id/pingscanner"
         android:layout_width="match_parent"

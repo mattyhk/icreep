@@ -112,7 +112,7 @@
 
         <activity
             android:name="icreep.app.BeaconSelectionActivity"
-            android:label="@string/title_activity_beacon_selection" >
+            android:label="@string/boss_tracker" >
         </activity>
     </application>
 

@@ -9,6 +9,8 @@
     <string name="icreep_main_menu_logo">iCreep</string>
     <string name="select_proximity">Location</string>
     <string name="home">Home</string>
+    
+    <string name="icreep_version_number">Version 1.0</string>
 
     <!-- Profile Strings -->
     <string name="profile">Profile</string>
@@ -39,6 +41,7 @@
     <string name="first_floor">First Floor</string>
     <string name="second_floor">Second Floor</string>
     <string name="zone_map">Zone Map</string>
+    <string name="time_in_locations">Time in Locations</string>
 
     <!-- Time Tracker Strings -->
     <string name="title_activity_time_tracker">Time Tracker</string>
@@ -46,6 +49,13 @@
     <string name="outside">In / Out Office</string>
     <string name="in_office_label">In Office</string>
     <string name="out_office_label">Out Office</string>
+    
+    <!--  Boss Tracker String -->
+    <string name="boss_heading">Boss alert control</string>
+    <string name="boss_tracking">Tracking:</string>
+    <string name="boss_scan">Scan devices</string>
+    <string name="boss_pinger">Tracking Status</string>
+    <string name="boss_tracker">Boss Tracker</string>
 
     <!-- Test Placeholder Strings -->
     <string name="user_position">Employee Name: Position</string>
@@ -68,15 +78,5 @@
     <string name="save_report_time">Save</string>
 
     <color name="time_picker_color">#282828</color>
-
-    <string name="time_in_locations">Time in Locations</string>
-    <string name="icreep_version_number">Version 1.0</string>
-    <string name="boss_heading">Boss alert control</string>
-    <string name="boss_tracking">Tracking:</string>
-    <string name="boss_scan">Scan devices</string>
-    <string name="boss_pinger">Pinger</string>
-    <string name="boss_tracker">Boss Tracker</string>
-    <string name="title_activity_beacon_selection">BeaconSelectionActivity</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>
