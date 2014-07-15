@@ -84,5 +84,17 @@
         android:onClick="userReports"
         android:text="@string/report" />
 
+    <Button
+        android:id="@+id/button5_boss_tracker"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button4_profile"
+        android:layout_below="@+id/button4_profile"
+        android:layout_marginTop="@dimen/top_margin"
+        android:background="@drawable/button_style"
+        android:fontFamily="courier new"
+        android:onClick="userReports"
+        android:text="@string/boss_tracker" />
+
 </RelativeLayout>
 
