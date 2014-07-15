@@ -55,7 +55,7 @@ public class ProfileCreationActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile_creation);
-
+		
 		// Testing to see if the shared pref exists, thus disable home button
 		// ect.
 		profilePicture = (ImageView) findViewById(R.id.imageView1_profile_picture);
