@@ -108,7 +108,7 @@ public class LocationFragmentA extends Fragment {
 			floor = "Out of Office";
 		}
 		else {
-			floor = "Floor " + mApplication.getCurrentFloor();
+			floor = Floor.getFloor(mApplication.getCurrentLocation());
 		}
 		
 		floorTextView.setText(floor);

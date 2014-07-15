@@ -1,5 +1,6 @@
 package icreep.app;
 
+import icreep.app.location.Floor;
 import android.app.Application;
 
 public class ICreepApplication extends Application {
@@ -8,7 +9,7 @@ public class ICreepApplication extends Application {
 	
 	private boolean hasStartedRanging = false;
 	private int currentLocation = -2;
-	private int currentFloor = 2;
+	private String currentFloor = "";
 	private long lastEntryID = -1;
 	private long timeEntered;
 	
@@ -36,14 +37,15 @@ public class ICreepApplication extends Application {
 	
 	public void setCurrentLocation(int newLoc) {
 		this.currentLocation = newLoc;
+		setCurrentFloor(this.currentLocation);
 	}
 	
-	public int getCurrentFloor() {
+	public String getCurrentFloor() {
 		return currentFloor;
 	}
 	
 	public void setCurrentFloor(int newFloor) {
-		this.currentFloor = newFloor;
+		this.currentFloor = Floor.getFloor(newFloor);
 	}
 	
 	public boolean hasStartedRanging() {
