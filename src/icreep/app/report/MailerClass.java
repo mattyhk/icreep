@@ -29,36 +29,37 @@ public class MailerClass
 	 * mailer for the user to add recipients if they want
 	 */
 	private Context c = null;
-	private iCreepDatabaseAdapter adapt ;
+	private iCreepDatabaseAdapter adapt;
 	private int userID = -1;
 	private UserLocation user;
 	private ICreepApplication mApplication;
-	
+
 	public MailerClass(Context c)
 	{
-		this.c = c ;
-		adapt = new iCreepDatabaseAdapter(c) ;
+		this.c = c;
+		adapt = new iCreepDatabaseAdapter(c);
 		SharedPreferencesControl spc = new SharedPreferencesControl(c);
 		userID = spc.getUserID();
 		user = new UserLocation(c);
 		mApplication = (ICreepApplication) c.getApplicationContext();
 	}
+
 	public void sendMail()
-	{		
+	{
 		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(c);
 		ArrayList<String> userDet = adapt.userDetails(userID);
-		if (userDet==null)
-		{
-			icreep.app.Message.message(c, "There are no user details, thus we can't send email");
-			return ;			
+		if (userDet == null) {
+			icreep.app.Message.message(c,
+					"There are no user details, thus we can't send email");
+			return;
 		}
-		
-		
-		String defaultEmailaddress = userDet.get(3); // this will come from SQL or SP
-		
+
+		String defaultEmailaddress = userDet.get(3); // this will come from SQL
+														// or SP
+
 		Intent i = new Intent(Intent.ACTION_SENDTO);
 		i.setType("message/rfc822");
-		i.setData(Uri.parse("mailto:"+ defaultEmailaddress));
+		i.setData(Uri.parse("mailto:" + defaultEmailaddress));
 		i.putExtra(Intent.EXTRA_SUBJECT, "Manual Location report");
 
 		finalBuildEmailReport(); // this will create the latest report for data
@@ -95,13 +96,13 @@ public class MailerClass
 		s = s + "\n";
 
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
-		
-		user.updateLocationOnDestroy(mApplication.getCurrentLocation(), mApplication.getLastEntryID());
+
+		user.updateLocationOnDestroy(mApplication.getCurrentLocation(),
+				mApplication.getLastEntryID());
 
 		// This will be the array list that vinny's code generates
 		list = adapt.getTimePlaces(userID);
-		if (list == null)
-		{
+		if (list == null) {
 			Log.e("vince", "no activity");
 			s = s + "\nNo Activity";
 			list = new ArrayList<TimePlace>();
@@ -113,12 +114,11 @@ public class MailerClass
 				max = t.getLocation().length();
 			}
 		}
-		boolean o = false ;
+		boolean o = false;
 		boolean g = false;
 		boolean f = false;
 		boolean se = false;
-		if (list.size() == 0)
-		{
+		if (list.size() == 0) {
 			s = s + "\n==================================================";
 			s = s + "\nOutside";
 			s = s + "\n--------------------------------------------------";
@@ -131,80 +131,104 @@ public class MailerClass
 			s = s + "\n==================================================";
 			s = s + "\nSecond Floor";
 			s = s + "\n--------------------------------------------------";
-		}
-		for (TimePlace t : list) {
-			if (t.getFloor().equals("Outisde") && (o == false)) {
-				s = s + "\n==================================================";
-				s = s + "\nOutside";
-				s = s + "\n--------------------------------------------------";
-				o = true;
-			}
-			if (t.getFloor().equals("Ground Floor") && (g == false)) {
-				if (o == false) {
-					s = s + "\n==================================================";
+		} else 
+		{
+			for (TimePlace t : list) {
+				if (t.getFloor().equals("Outisde") && (o == false)) {
+					s = s
+							+ "\n==================================================";
 					s = s + "\nOutside";
-					s = s + "\n--------------------------------------------------";
+					s = s
+							+ "\n--------------------------------------------------";
 					o = true;
 				}
-				s = s + "\n==================================================";
-				s = s + "\nGround Floor";
-				s = s + "\n--------------------------------------------------";
-				g = true;
-			}
-			if (t.getFloor().equals("First Floor") && (f == false)) {
-				if (o == false) {
-					s = s + "\n==================================================";
-					s = s + "\nOutside";
-					s = s + "\n--------------------------------------------------";
-					o = true;
-				}
-				if (g == false) {
-					s = s + "\n==================================================";
+				if (t.getFloor().equals("Ground Floor") && (g == false)) {
+					if (o == false) {
+						s = s
+								+ "\n==================================================";
+						s = s + "\nOutside";
+						s = s
+								+ "\n--------------------------------------------------";
+						o = true;
+					}
+					s = s
+							+ "\n==================================================";
 					s = s + "\nGround Floor";
-					s = s + "\n--------------------------------------------------";
+					s = s
+							+ "\n--------------------------------------------------";
 					g = true;
 				}
-				s = s + "\n==================================================";
-				s = s + "\nFirst Floor";
-				s = s + "\n--------------------------------------------------";
-				f = true;
-			} else if (t.getFloor().equals("Second Floor") && (se == false)) {
-				if (o == false) {
-					s = s + "\n==================================================";
-					s = s + "\nOutside";
-					s = s + "\n--------------------------------------------------";
-					o = true;
-				}
-				if (g == false) {
-					s = s + "\n==================================================";
-					s = s + "\nGround Floor";
-					s = s + "\n--------------------------------------------------";
-					g = true;
-				}
-				if (f == false) {
-					s = s + "\n==================================================";
+				if (t.getFloor().equals("First Floor") && (f == false)) {
+					if (o == false) {
+						s = s
+								+ "\n==================================================";
+						s = s + "\nOutside";
+						s = s
+								+ "\n--------------------------------------------------";
+						o = true;
+					}
+					if (g == false) {
+						s = s
+								+ "\n==================================================";
+						s = s + "\nGround Floor";
+						s = s
+								+ "\n--------------------------------------------------";
+						g = true;
+					}
+					s = s
+							+ "\n==================================================";
 					s = s + "\nFirst Floor";
-					s = s + "\n--------------------------------------------------";
+					s = s
+							+ "\n--------------------------------------------------";
 					f = true;
+				} else if (t.getFloor().equals("Second Floor") && (se == false)) {
+					if (o == false) {
+						s = s
+								+ "\n==================================================";
+						s = s + "\nOutside";
+						s = s
+								+ "\n--------------------------------------------------";
+						o = true;
+					}
+					if (g == false) {
+						s = s
+								+ "\n==================================================";
+						s = s + "\nGround Floor";
+						s = s
+								+ "\n--------------------------------------------------";
+						g = true;
+					}
+					if (f == false) {
+						s = s
+								+ "\n==================================================";
+						s = s + "\nFirst Floor";
+						s = s
+								+ "\n--------------------------------------------------";
+						f = true;
+					}
+					s = s
+							+ "\n==================================================";
+					s = s + "\nSecond Floor";
+					s = s
+							+ "\n--------------------------------------------------";
+					se = true;
 				}
-				s = s + "\n==================================================";
-				s = s + "\nSecond Floor";
-				s = s + "\n--------------------------------------------------";
-				se = true;
+
+				int diff = max - t.getLocation().length();
+				String locate = t.getLocation();
+				for (int i = 0; i < diff; i++) {
+					locate = locate + " ";
+				}
+				s = s + "\n" + locate;
+				s = s + "\t \t \t \t";
+
+				double time = t.getTimeSpent() * 3600;
+				int secondsIn = (int) (time % 60);
+				int minutesIn = (int) ((time / 60) % 60);
+				int hoursIn = (int) ((time / 3600) % 60);
+				s = s + (hoursIn) + "hrs " + minutesIn + "min " + secondsIn
+						+ "secs";
 			}
-			int diff = max - t.getLocation().length();
-			String locate = t.getLocation();
-			for (int i = 0; i < diff; i++) {
-				locate = locate + " ";
-			}
-			s = s + "\n" + locate;
-			s = s + "\t \t \t \t";
-			
-			double time = t.getTimeSpent()*3600;
-			int secondsIn = (int) (time % 60);
-			int minutesIn = (int) ((time / 60) % 60);
-			int hoursIn = (int) ((time / 3600) % 60);
-			s = s + (hoursIn) + "hrs " + minutesIn + "min " + secondsIn + "secs";
 		}
 		s = s + "\n==================================================";
 		s = s + "\n";
@@ -261,18 +285,16 @@ public class MailerClass
 	 * be attached to the intent
 	 */
 	private String buildEmailBody()
-	{		
+	{
 		String needed = adapt.getUserDetails(userID);
-		String[] user = null ;
-		if (needed == null)
-		{
+		String[] user = null;
+		if (needed == null) {
 			needed = "no user available";
-		} else
-		{
-			user = needed.split(":");	
+		} else {
+			user = needed.split(":");
 			needed = user[0];
 		}
-		
+
 		String userName = needed; // can be retrieved from the DB
 		String s = "";
 		s = s + "Hi there " + userName;
@@ -292,21 +314,22 @@ public class MailerClass
 	 * Post-conditions: > builds the email for auto email > sends the auto email
 	 */
 	public boolean sendAutoMail() throws Exception
-	{	
+	{
 		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(c);
 		ArrayList<String> userDet = adapt.userDetails(userID);
-		
-		if (userDet==null)
-		{
-			icreep.app.Message.message(c, "There are no user details, thus we can't send email");
-			return false ;			
+
+		if (userDet == null) {
+			icreep.app.Message.message(c,
+					"There are no user details, thus we can't send email");
+			return false;
 		}
-		
+
 		String to = userDet.get(3); // this will come from SQL or SP
 		String from = "iCreep";
 		String subject = "Automatic Location report";
 		String message = buildEmailBody();
-		//message = message + "\nThis was done by auto mailer"; //the subject hints at this
+		// message = message + "\nThis was done by auto mailer"; //the subject
+		// hints at this
 
 		GMailAutoMailer mail = new GMailAutoMailer("icreepatopenbox@gmail.com",
 				"OpenBoxSoftCreep");
