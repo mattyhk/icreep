@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 
@@ -30,6 +31,7 @@ public class BeaconCollection {
 	private final static int OUTDOOR = -1;
 	
 	private int closestBeacon = OUTDOOR;
+	private boolean alreadyInArea = false;
 	
 	private final List<BeaconModel> myBeacons = new ArrayList<BeaconModel>();
 	private AudioManagingController audioController;
@@ -89,12 +91,15 @@ public class BeaconCollection {
 			
 			BeaconModel mBeacon = myBeacons.get(i);
 			
+			if (i < iBeaconList.size()) {
+				String uuid = iBeaconList.get(i).getProximityUuid();
+				if (uuid.equals(currentBoss)) {
+					inArea = true;
+				}
+			}
+			
 			if (j < iBeaconList.size()) {
 				if (mBeacon.getMinor() == iBeaconList.get(j).getMinor()) {
-					String uuid = iBeaconList.get(j).getProximityUuid();
-					if (uuid.equals(currentBoss)) {
-						inArea = true;
-					}
 					mBeacon.updateBeaconModel(iBeaconList.get(j));
 					j++;	
 				}
@@ -120,6 +125,9 @@ public class BeaconCollection {
 		 */
 		setClosestBeacon(closest);
 		
+		/*
+		 * Iterate through the rest of the iBeaconList checking if the boss device is there
+		 */
 		for (int i = j; i < iBeaconList.size(); i++) {
 			String uuid = iBeaconList.get(i).getProximityUuid();
 			if (uuid.equals(currentBoss)) {
@@ -127,9 +135,17 @@ public class BeaconCollection {
 			}
 		}
 		
-		if (inArea && mApplication.isTrackingBoss()) {
+		if (inArea && mApplication.isTrackingBoss() && !alreadyInArea) {
+			alreadyInArea = true;
+			Log.d("TEST", "inArea is " + inArea);
 			audioController.fireRingTone();
 		}
+		
+		else if (!inArea) {
+			alreadyInArea = false;
+		}
+		
+		
 
 	}
 	
