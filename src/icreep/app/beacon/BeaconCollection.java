@@ -20,7 +20,7 @@ import com.radiusnetworks.ibeacon.IBeacon;
 public class BeaconCollection {
 	
 	private final static int MAJOR = 3;
-	private final static int NUMBEACONS = 15;
+	private final static int NUMBEACONS = 48;
 	private final static double DEFAULT_ACCURACY = 30;
 	private final static int OUTDOOR = -1;
 	
@@ -138,5 +138,10 @@ public class BeaconCollection {
 			return myBeacons.get(closestBeacon).getMinor();	
 		}
 		
+	}
+	
+	@Override
+	public String toString() {
+		return myBeacons.toString();
 	}
 }

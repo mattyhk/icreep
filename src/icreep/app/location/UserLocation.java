@@ -8,7 +8,6 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 import icreep.app.ICreepApplication;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
@@ -43,7 +42,6 @@ public class UserLocation {
 	private int userID;
 	private long lastLocationID = 0;
 	private List<TimePlace> visitedZones = new ArrayList<TimePlace>();
-	private Context context;
 	private ICreepApplication mApplication;
 	
 	private iCreepDatabaseAdapter db;
@@ -53,7 +51,6 @@ public class UserLocation {
 		this.entryCount = 0;
 		this.exitCount = 0;
 		this.db = new iCreepDatabaseAdapter(context);
-		this.context = context;
 		this.mApplication = (ICreepApplication) context.getApplicationContext();
 		
 		SharedPreferencesControl spc = new SharedPreferencesControl(context);
@@ -197,7 +194,6 @@ public class UserLocation {
 				// Update the DB - ensure the DB is in order before adding new location entry
 				if (tempID > 0) {
 					Log.d("TEST", "Enter New Location Successfully");
-					Toast.makeText(context, "Entered new entry", Toast.LENGTH_SHORT).show();
 					this.lastLocationID = tempID;
 					mApplication.setLastEntryID(this.lastLocationID);
 					

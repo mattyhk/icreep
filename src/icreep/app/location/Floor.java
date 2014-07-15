@@ -11,11 +11,11 @@ public class Floor {
 			zoneToFloor.append(i, "Second Floor");
 		}
 		
-		for (int i = 12; i <= 26; i++) {
+		for (int i = 12; i <= 27; i++) {
 			zoneToFloor.append(i, "Ground Floor");
 		}
 		
-		for (int i = 27; i <= 48; i++) {
+		for (int i = 28; i <= 48; i++) {
 			
 			if (i == 34) {
 				zoneToFloor.append(i, "Ground Floor");
