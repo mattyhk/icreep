@@ -1,8 +1,5 @@
 package icreep.app;
 
-import java.io.IOException;
-
-
 import android.content.Context;
 
 import android.media.AudioManager;
