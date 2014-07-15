@@ -158,5 +158,23 @@ public class Sorting
 	return finalSortedTimePlaces;
 	}
 	
+	public boolean checkIfWorekdTooLong(ArrayList<TimePlace> in)
+	{
+			double total = 0;
+			
+			if(in != null){
+				for(TimePlace tp: in){
+					double time = tp.getTimeSpent();
+					total+= time;
+				}
+			}
+			
+			int hours = (int) Math.floor((total / (1000*3600)));
+			
+			if (hours >=8)
+				return true ;
+		return false;
+	}
+	
 
 }
