@@ -9,20 +9,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-public class TestingReceiver extends BroadcastReceiver
+public class DeviceGeneratorListenerUpdate extends BroadcastReceiver
 {
 	private DeviceListGenerator dl;
-
-	public TestingReceiver(DeviceListGenerator dlg)
+	private BossAlertActivity baa;
+	
+	public DeviceGeneratorListenerUpdate(DeviceListGenerator dlg,BossAlertActivity baa)
 	{
 		dl = dlg;
+		this.baa = baa;
 	}
 
 	public void onReceive(Context context, Intent intent)
 	{
 
 		ArrayList<BlueToothDeviceModel> list = dl.afterDoneScanning();
-
+		baa.updateList(list);
 		if (list.size() != 0) {
 			for (BlueToothDeviceModel bt : list) {
 				String name = bt.cur.getName() + " " + bt.getDeviceUniqueID();

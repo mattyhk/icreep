@@ -46,20 +46,30 @@
         
         </LinearLayout>
    
+	
+    
+    <TextView
+        android:id="@+id/pingscanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/boss_pinger"
+        android:textColor= "@color/lightGreenForLabels"     
+        android:textSize="@dimen/sub_heading_text_size" 
+        android:layout_marginLeft="@dimen/left_margin"
+        />
 
-	<Switch
-	    android:id="@+id/switchBarBoss"
-	    android:layout_width="wrap_content"
-	    android:layout_height="0dp"
-	    android:checked="false"
-	    android:textOff="OFF"
-	    android:textOn="ON        "	    
-	    android:layout_marginTop="@dimen/top_margin"
-	    android:layout_marginLeft="@dimen/left_margin" 	    
-	    android:background="@color/whiteBackground"
-	    android:textSize="40sp"
-	    android:layout_weight="1"
-	    />
+    <Switch
+        android:id="@+id/switchBarBoss"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_weight="1"
+        android:background="@color/whiteBackground"
+        android:checked="false"
+        android:textOff="OFF"
+        android:textOn="ON        "
+        android:textSize="40sp" />
 	
 	<LinearLayout 
 	    android:layout_width="match_parent"
@@ -98,24 +108,44 @@
 	    android:layout_marginLeft="@dimen/left_margin"
 	    android:layout_marginRight="25dp"
 	    android:layout_marginTop="2dp"
-	    android:layout_weight="8"
+	    android:layout_weight="7"
 	    android:background="@color/darkGreyForBackgrounds" >
 
 	</ListView>
-	
-	<Button
+
+	<LinearLayout
+	    android:id="@+id/llforbuttonsinboss"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:orientation="horizontal" >
+
+	    <Button
 	        android:id="@+id/bossSaveButton"
 	        style="?android:attr/borderlessButtonStyle"
-	        android:layout_width="wrap_content"
-	        android:layout_height="0dp"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="2dp"
 	        android:layout_marginRight="2dp"
-	        android:layout_marginLeft="@dimen/left_margin"
-	        android:layout_marginTop="3dp"
-	        android:layout_marginBottom="1dp"
+	        android:layout_marginTop="@dimen/top_margin"
+	        android:layout_weight="1"
+	        android:background="@drawable/reports_buttons_on"
 	        android:fontFamily="courier new"
-	        android:text="@string/save_report_time" 
-	        android:background = "@drawable/reports_button_off"
-	        android:layout_weight="1"/>
-	
+	        android:text="@string/save_report_time"
+	         android:enabled="true" />
+
+	    <Button
+	        android:id="@+id/bossScanButton"
+	        style="?android:attr/borderlessButtonStyle"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="2dp"
+	        android:layout_marginTop="@dimen/top_margin"
+	        android:layout_weight="1"
+	        android:background="@drawable/reports_button_off"
+	        android:fontFamily="courier new"
+	        android:text="@string/boss_scan"
+	        android:enabled="false" />
+	</LinearLayout>
 	
 </LinearLayout>

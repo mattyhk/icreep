@@ -97,5 +97,20 @@
         android:text="@string/time_tracker"
         android:textSize="@dimen/menu_button_text_size_7in" />
 
+    <Button
+        android:id="@+id/button5_boss_tracker"
+        android:layout_width="@dimen/menu_button_width_7in"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button4_profile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp"
+        android:background="@drawable/button_style"
+        android:fontFamily="courier new"
+        android:onClick="timeTracker"
+        android:paddingBottom="@dimen/menu_button_padding_top_bottom_7in"
+        android:paddingTop="@dimen/menu_button_padding_top_bottom_7in"
+        android:text="@string/boss_tracker"
+        android:textSize="@dimen/menu_button_text_size_7in"/>
+
 </RelativeLayout>
 

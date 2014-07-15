@@ -1,5 +1,7 @@
 package icreep.app;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -13,6 +15,7 @@ public class SharedPreferencesControl
 	{
 		this.c = c ;
 	}
+	
 	public boolean sharedPrefTest()
 	{
 		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
@@ -66,6 +69,45 @@ public class SharedPreferencesControl
 		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
 		SharedPreferences.Editor edit = sp.edit();
 		edit.clear();
+		edit.commit();
+	}
+	
+	public ArrayList<String> getPingUserDetails() 
+	{
+		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
+		String name = sp.getString("bossName", "");
+		ArrayList<String> list = new ArrayList<String>() ;
+		String mac = sp.getString("bossMac", "");
+		if (name.equals(""))
+		{
+			return list ;
+		}
+		if (mac.equals(""))
+		{
+			return list ;
+		}
+				
+		list.add(name);
+		list.add(mac);
+		
+		return list ;		
+	}
+	
+	public void writeBossDetails(String name, String mac)
+	{
+		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
+		SharedPreferences.Editor edit = sp.edit();
+		edit.putString("bossName", name);
+		edit.putString("bossMac", mac);
+		edit.commit();
+	}
+	
+	public void removeBossDetails()
+	{
+		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
+		SharedPreferences.Editor edit = sp.edit();
+		edit.remove("bossName");
+		edit.remove("bossMac");
 		edit.commit();
 	}
 	
