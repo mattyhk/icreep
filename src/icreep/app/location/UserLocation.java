@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+import icreep.app.ICreepApplication;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.db.iCreepDatabaseAdapter;
 import icreep.app.report.Sorting;
@@ -32,6 +33,8 @@ public class UserLocation {
 	private final static int MAX_ENTRY_COUNT = 5;
 	private final static int MAX_EXIT_COUNT = 5;
 	private final static int UNKNOWN = -2;
+	private final static int OUTDOORS = -1;
+	private final static int NOT_VALID = -1;
 	
 	private int currentLocation;
 	private int entryCount;
@@ -41,6 +44,7 @@ public class UserLocation {
 	private long lastLocationID = 0;
 	private List<TimePlace> visitedZones = new ArrayList<TimePlace>();
 	private Context context;
+	private ICreepApplication mApplication;
 	
 	private iCreepDatabaseAdapter db;
 	
@@ -50,6 +54,7 @@ public class UserLocation {
 		this.exitCount = 0;
 		this.db = new iCreepDatabaseAdapter(context);
 		this.context = context;
+		this.mApplication = (ICreepApplication) context.getApplicationContext();
 		
 		SharedPreferencesControl spc = new SharedPreferencesControl(context);
 		this.userID = spc.getUserID();
@@ -107,18 +112,29 @@ public class UserLocation {
 		
 	}
 	
-	public void updateLocationOnDestroy(int location) {
+	/**
+	 * Method is called when requiring the latest location information to be written to the DB.
+	 * Does not modify the last entry ID.
+	 * @param location - the current location
+	 * @param entryID - the last known entry ID
+	 */
+	public void updateLocationOnDestroy(int location, long entryID) {
 		
 		String time = getTime();
 		
-		if (this.db.updateExitTime(time, this.lastLocationID)) {
-			
-			Log.d("TEST", "Exit time was updated correctly");
-			this.lastLocationID = 0;
-		}
-		
-		else {
-			Log.d("TEST", "Exit time was not updated correctly");
+		if (location != UNKNOWN) {
+			if (entryID != NOT_VALID) {
+				
+				if (this.db.updateExitTime(time, entryID)) {
+					mApplication.setTime(System.currentTimeMillis());	
+					Log.d("TEST", "Exit time was updated correctly");
+				}
+				
+				else {
+					Log.d("TEST", "Exit time was not updated correctly");
+				}
+				
+			}
 		}
 	}
 
@@ -183,6 +199,7 @@ public class UserLocation {
 					Log.d("TEST", "Enter New Location Successfully");
 					Toast.makeText(context, "Entered new entry", Toast.LENGTH_SHORT).show();
 					this.lastLocationID = tempID;
+					mApplication.setLastEntryID(this.lastLocationID);
 					
 				}
 				else {
@@ -194,7 +211,7 @@ public class UserLocation {
 	}
 	
 	/**
-	 * Returns the current time in 24 hour format as "22:10"
+	 * Returns the current time in 24 hour format as "22:10:44"
 	 * @return time
 	 */
 	private static String getTime() {
@@ -231,8 +248,62 @@ public class UserLocation {
 		
 		ArrayList<TimePlace> visited = db.getTimePlaces(this.userID);
 		
+		double timeSpent = (System.currentTimeMillis() - mApplication.getTime()) / (1000.0 * 3600.0);
+		
+		TimePlace tp = new TimePlace(timeSpent, mApplication.getCurrentLocation());
+		
+		if (tp.getZoneID() != UNKNOWN) {
+		
+			if (visited != null) {
+					visited.add(tp);
+			}
+			
+			else {
+				visited = new ArrayList<TimePlace>();
+				visited.add(tp);
+			}
+		}
+		
 		this.visitedZones = Sorting.join(visited);
 		
+	}
+	
+	/**
+	 * Calculates total amount of time spent in the office. Ignores any time spent out of the office.
+	 * @return time
+	 */
+	private double timeInOffice() {
+		
+		double total = 0.0;
+		
+		if (this.visitedZones != null) {
+			for (TimePlace tp: this.visitedZones) {
+				if (tp.getZoneID() != OUTDOORS) {
+					total += tp.getTimeSpent();
+				}
+			}
+		}
+		
+		return total;
+	}
+	
+	/**
+	 * Calculates total amount of time spent out of the office. Ignores any time spent in the office.
+	 * @return time
+	 */
+	private double timeOutOfOffice() {
+		
+		double total = 0.0;
+		
+		if (this.visitedZones != null) {
+			for (TimePlace tp: this.visitedZones) {
+				if (tp.getZoneID() == OUTDOORS) {
+					total += tp.getTimeSpent();
+				}
+			}
+		}
+		
+		return total;
 	}
 	
 	/*******************
@@ -266,6 +337,21 @@ public class UserLocation {
 	
 	public int getTempLocation() {
 		return this.currentTempLocation;
+	}
+	
+	public double getTotalTime() {
+		double time = getInOfficeTime() + getOutOfficeTime();
+		return time;
+	}
+	
+	public double getInOfficeTime() {
+		double time = timeInOffice();
+		return time;
+	}
+	
+	public double getOutOfficeTime() {
+		double time = timeOutOfOffice();
+		return time;
 	}
 	
 

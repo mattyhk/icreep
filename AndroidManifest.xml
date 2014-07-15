@@ -50,7 +50,7 @@
         </activity>
         
         <activity
-            android:name="icreep.app.IcreepMenu"
+            android:name="icreep.app.MainMenuActivity"
             android:label="@string/title_activity_icreep_menu"
             android:parentActivityName="icreep.app.MainActivity" 
             android:screenOrientation="portrait">

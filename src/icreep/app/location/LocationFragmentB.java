@@ -68,7 +68,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		home = (ImageButton) v.findViewById(R.id.home_button_location_movement);
 		Activity c = getActivity();
 		if (c != null) {
-			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.IcreepMenu"));
+			home.setOnClickListener(new SwitchButtonListener(c, "icreep.app.MainMenuActivity"));
 		}
 		
 		userName = (TextView) v.findViewById(R.id.location_b_user);
@@ -132,14 +132,12 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	 */
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		startRepeatingTask();
 	}
 	
 	@Override
 	public void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		stopRepeatingTask();
 	}

@@ -69,6 +69,8 @@
     <color name="time_picker_color">#282828</color>
     <string name="time_in_locations">Time in Locations</string>
     <string name="icreep_version_number">Version 1.0</string>
+    <string name="boss_heading">Boss alert control</string>
+    <string name="boss_tracking">Tracking:</string>
 
 
 </resources>

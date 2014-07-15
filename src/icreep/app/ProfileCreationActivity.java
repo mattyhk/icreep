@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,10 +25,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class ProfileCreationActivity extends Activity
 {
+	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 	private static final int IMAGE_PICKER_SELECT = 999;
+	
 	private Button save_button;
 	private ImageButton home_button;
 	private ImageView profilePicture ;
@@ -49,7 +55,7 @@ public class ProfileCreationActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile_creation);
-
+		
 		// Testing to see if the shared pref exists, thus disable home button
 		// ect.
 		profilePicture = (ImageView) findViewById(R.id.imageView1_profile_picture);
@@ -75,7 +81,7 @@ public class ProfileCreationActivity extends Activity
 			home_button.setEnabled(true);
 			home_button.setVisibility(View.VISIBLE);
 			home_button.setOnClickListener(new SwitchButtonListener(this,
-					"icreep.app.IcreepMenu"));
+					"icreep.app.MainMenuActivity"));
 			userID = spc.getUserID();
 		}
 
@@ -89,10 +95,10 @@ public class ProfileCreationActivity extends Activity
 		userPosition = (EditText) findViewById(R.id.editText4_user_position);
 		userEmail = (EditText) findViewById(R.id.editText3_user_email);
 		
-//		userName.setText("Vincent");
-//		userSurname.setText("Reid");
-//		userPosition.setText("BOSS");
-//		userEmail.setText("hobolicious101@gmail.com");
+		userName.setText("In");
+		userSurname.setText("Tern");
+		userPosition.setText("Inty");
+		userEmail.setText("i@ob.com");
 		// rename helper for db management
 		icreepHelper = new iCreepDatabaseAdapter(this);
 		
@@ -181,14 +187,36 @@ public class ProfileCreationActivity extends Activity
 
 	}// onCreate
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		registerBluetoothReceiver();
+
+		BluetoothAdapter bluetoothAdapter = BluetoothAdapter
+				.getDefaultAdapter();
+		if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+			Intent enableBtIntent = new Intent(
+					BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		unregisterBluetoothReceiver();
+	}
+	
 	public void doUpdateOfProfile(String name, String surname,
 			String position,String email) {
 		
 		if (checkDetails(name, surname, position, email)) {
 			if (isValidEmail(email)) {
-				if (isValidName(name)) {
-					if (isValidName(surname)) {
-						if (isValidPosition(position)) {
+				if (isValidInput(name)) {
+					if (isValidInput(surname)) {
+						if (isValidInput(position)) {
 							if (icreepHelper.updateUserDetails(name, surname,
 									position, email, "profilePic.png", userID) == false) // will
 																							// add
@@ -241,9 +269,9 @@ public class ProfileCreationActivity extends Activity
 	{
 		if (checkDetails(name, surname, position, email)) {
 			if (isValidEmail(email)) {
-				if (isValidName(name)) {
-					if (isValidName(surname)) {
-						if (isValidPosition(position)) {
+				if (isValidInput(name)) {
+					if (isValidInput(surname)) {
+						if (isValidInput(position)) {
 							long id = icreepHelper.enterNewUser(name, surname,
 									position, email, "profilePic.png"); // default
 																		// profile
@@ -315,7 +343,9 @@ public class ProfileCreationActivity extends Activity
 	}
 	
 	// function to validate name against a name Regular Expression
-	public boolean isValidName(String name){
+	public boolean isValidInput(String name){
+		//if(!(name.get(0).charAt()).isDigit())
+		//if true - Capitalize first char of every word and then check against regex
 		String nameRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*";
 		if(name.matches(nameRegex)){
 			return true;
@@ -323,14 +353,15 @@ public class ProfileCreationActivity extends Activity
 		return false;
 	}
 
+	/*
 	// function to validate employee position against a employee position Regular Expression
 	public boolean isValidPosition(String position){
-		String employeePosRegex = "[A-Z][a-z]+( [A-Z][a-z]+)?";
+		String employeePosRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*";
 		if(position.matches(employeePosRegex)){
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	public void doMessage(String mess)
 	{
@@ -343,9 +374,9 @@ public class ProfileCreationActivity extends Activity
 		// apon testing, this might not work...so thus my alternative is
 //		save_button = (Button) findViewById(R.id.button2_save_user_details);
 //		save_button.setOnClickListener(new SwitchButtonListener(this,
-//				"icreep.app.IcreepMenu"));		
+//				"icreep.app.MainMenuActivity"));		
 		Intent i = new Intent();
-		i.setClassName(this, "icreep.app.IcreepMenu");
+		i.setClassName(this, "icreep.app.MainMenuActivity");
 		startActivity(i);
 	}	
 	
@@ -366,6 +397,17 @@ public class ProfileCreationActivity extends Activity
             profilePicture.setImageBitmap(bitmap);
             profilePic = bitmap ;
         }
+        
+        switch (requestCode)
+		{
+			case ENABLE_BLUETOOTH_REQUEST:
+				if (resultCode != Activity.RESULT_OK) {
+					finishActivityWithMessage("Bluetooth must be on");
+				}
+				break;
+			default:
+				break;
+		}
     }
 	
 	private static Bitmap getBitmapFromCameraData(Intent data, Context context){
@@ -420,4 +462,63 @@ public class ProfileCreationActivity extends Activity
         
         return null ;
     }
+	
+	/*********************
+	 * 
+	 * Bluetooth Checker Makes Sure the Bluetooth functionality is on. May need
+	 * to move it into every activity
+	 * 
+	 ********************/
+	private void finishActivityWithMessage(String message)
+	{
+		// Notify the user of the problem
+		Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+		toast.show();
+
+		// End the activity
+		finish();
+	}
+
+	private void registerBluetoothReceiver()
+	{
+		final IntentFilter filter = new IntentFilter();
+		filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+
+		registerReceiver(this.bluetoothChangedReceiver, filter);
+	}
+
+	private void unregisterBluetoothReceiver()
+	{
+		unregisterReceiver(this.bluetoothChangedReceiver);
+	}
+
+	private BroadcastReceiver bluetoothChangedReceiver = new BroadcastReceiver()
+	{
+
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+
+			final String action = intent.getAction();
+			if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+				final int state = intent.getIntExtra(
+						BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+				switch (state)
+				{
+					case BluetoothAdapter.STATE_TURNING_ON:
+						break;
+					case BluetoothAdapter.STATE_ON:
+						break;
+					case BluetoothAdapter.STATE_TURNING_OFF:
+						finishActivityWithMessage("Requires Bluetooth");
+						break;
+					case BluetoothAdapter.STATE_OFF:
+						break;
+					case BluetoothAdapter.ERROR:
+						finishActivityWithMessage("Bluetooth Error");
+						break;
+				}
+			}
+		}
+	};
 }

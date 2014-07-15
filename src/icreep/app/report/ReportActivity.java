@@ -40,7 +40,7 @@ public class ReportActivity extends FragmentActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_reports);
+		setContentView(R.layout.activity_reports);		
 		ActionBar actionBar = getActionBar();
 		actionBar.removeAllTabs();
 		//actionBar.hide(); //hides action bar completely
@@ -108,7 +108,7 @@ public class ReportActivity extends FragmentActivity
 
 		// Adding home button listener
 		home.setOnClickListener(new SwitchButtonListener(this,
-				"icreep.app.IcreepMenu"));
+				"icreep.app.MainMenuActivity"));
 
 	}
 

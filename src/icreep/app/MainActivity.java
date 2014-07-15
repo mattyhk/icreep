@@ -26,8 +26,8 @@ public class MainActivity extends FragmentActivity
 		setContentView(R.layout.activity_main);
 		SharedPreferencesControl spc = new SharedPreferencesControl(this);
 		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
-//		adapt.clearDatabase();
-//		spc.clearSP(); // testing purposes
+		adapt.clearDatabase();
+		spc.clearSP(); // testing purposes
 		// Check for Bluetooth capability
 		if (!getPackageManager().hasSystemFeature(
 				PackageManager.FEATURE_BLUETOOTH_LE)) {
@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity
 		
 		else {
 			Intent i = new Intent();
-			i.setClassName(this, "icreep.app.IcreepMenu");
+			i.setClassName(this, "icreep.app.MainMenuActivity");
 			startActivity(i);
 		}
 	}

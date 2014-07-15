@@ -1,8 +1,13 @@
 package icreep.app.db;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import icreep.app.location.Floor;
+import icreep.app.location.Zone;
 import icreep.app.report.TimePlace;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -68,6 +73,7 @@ public class iCreepDatabaseAdapter {
 	 * Pre-Conditions: > Go through database and retrieve user floor, location(description) total time spent.
 	 * Post-conditions: > Return an ArrayList with floors, location(descriptions) and total time spent in location(description) or null
 	 */
+	@SuppressLint("SimpleDateFormat") 
 	public ArrayList<TimePlace> getTimePlaces(int UserID){
 		
 		ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
@@ -77,10 +83,14 @@ public class iCreepDatabaseAdapter {
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
+		//get the current day's timePlaces		
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String date = format.format(c.getTime());
+		
 		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND User.User_ID = Location.User_ID AND Location.Zone_ID = Zone.Zone_ID;";
 		
-		//String[] toReturn = {iCreepHelper.USER_ID,iCreepHelper.FLOOR, iCreepHelper.DESCRIPTION, iCreepHelper.TIME_ENTERED, iCreepHelper.TIME_LEFT};
-		Cursor cursor = db.rawQuery(query, null);
+		Cursor cursor = db.rawQuery(query, null);//,  "User.User_ID =? AND User.User_ID =?",args,   ); //query, null);
 
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -95,9 +105,11 @@ public class iCreepDatabaseAdapter {
 						
 						//get times from DB and convert to int
 						
-						String timeL = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));	
+						String timeL = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));
+						String dateCaptured = cursor.getString(cursor.getColumnIndex(iCreepHelper.LOCATION_DATE));
 						
-						if (!timeL.equals("")){
+						if (!timeL.equals("") && dateCaptured.equals(date)){
+							
 							int hoursTimeLeft = Integer.parseInt((timeL.split(":"))[0]);
 							int minsTimeLeft = Integer.parseInt((timeL.split(":"))[1]);
 							int secsTimeLeft = Integer.parseInt((timeL.split(":"))[2]);
@@ -210,11 +222,7 @@ public class iCreepDatabaseAdapter {
 	 * Post-conditions: > Return time in string format: "13:25" or null
 	 */
 	public String getReportTime(int userID){
-		// SELECT Delivery_Time FROM Reports, User WHERE User.User_ID =
-		// Reports.User_ID AND Auto_Delivery = true;
-
-		//SQLiteDatabase db = helper.getWritableDatabase();
-
+		
 		String query = "SELECT Reports.Delivery_Time,Reports.Auto_Delivery FROM Reports, User WHERE User.User_ID ="+userID+" AND User.User_ID = Reports.User_ID;";
 		SQLiteDatabase db = helper.getWritableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
@@ -281,17 +289,27 @@ public class iCreepDatabaseAdapter {
 	
 	
 	public long addNewLocation(int userID, int zoneID, String time, String date) {
-		ContentValues cV = new ContentValues();
 		
-		cV.put(iCreepHelper.TIME_ENTERED, time);
-		cV.put(iCreepHelper.TIME_LEFT, "");
-		cV.put(iCreepHelper.LOCATION_DATE, date);
-		cV.put(iCreepHelper.ZONE_ID, zoneID);
-		cV.put(iCreepHelper.USER_ID, userID);
+		long success;
 		
-		SQLiteDatabase db = helper.getWritableDatabase();
+		if (zoneID != -2) {
+			ContentValues cV = new ContentValues();
+			
+			cV.put(iCreepHelper.TIME_ENTERED, time);
+			cV.put(iCreepHelper.TIME_LEFT, "");
+			cV.put(iCreepHelper.LOCATION_DATE, date);
+			cV.put(iCreepHelper.ZONE_ID, zoneID);
+			cV.put(iCreepHelper.USER_ID, userID);
+			
+			SQLiteDatabase db = helper.getWritableDatabase();
+			
+			// db.insert returns the entry ID value
+			success = db.insert(iCreepHelper.TABLE_NAME4, null, cV);
+		}
 		
-		long success = db.insert(iCreepHelper.TABLE_NAME4, null, cV);
+		else {
+			success = -1;
+		}
 		
 		if (success > 0) {
 			return success;
@@ -315,15 +333,8 @@ public class iCreepDatabaseAdapter {
 		
 		if (cursor != null) {
 			if (cursor.moveToFirst()) {
-				String timeLeft = cursor.getString(cursor.getColumnIndex(iCreepHelper.TIME_LEFT));
-				if (timeLeft.equals("")) {
-					//String[] args = {""+lastEntryID};
 					db.update(iCreepHelper.TABLE_NAME4, cV, iCreepHelper.LOCATION_ID + "=" + lastEntryID, null);
 					return true;
-				}
-				else {
-					Log.d("TEST", "Time Left was not empty");
-				}
 			}
 			else {
 				Log.d("TEST", "Cursor is empty");
@@ -352,10 +363,11 @@ public class iCreepDatabaseAdapter {
 	}
 	
 	//function to create Beacons
-	public static void createBeacons(){
+	public static void createBeacons(int beacons){
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
+		//Outside beacon
 		ContentValues cV = new ContentValues();
 		cV.put(iCreepHelper.BEACON_ID, -1);
 		cV.put(iCreepHelper.MAJOR, -1);
@@ -363,7 +375,7 @@ public class iCreepDatabaseAdapter {
 		
 		db.insert(iCreepHelper.TABLE_NAME1, null, cV);
 				
-		int beacons = 11;
+		//Inside beacons
 		int major = 3;
 		
 		for(int i=1; i<= beacons; i++){
@@ -377,30 +389,29 @@ public class iCreepDatabaseAdapter {
 		}		
 	}
 	
-	//create zones and match with the relevant Beacon
+	//create zones with the relevant Beacons
 	public static void createZone(){
-		createBeacons();
+		int beacons = 48;
+		createBeacons(beacons);
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
-		ContentValues cVs = new ContentValues();
-		
+		//Outside zone
+		ContentValues cVs = new ContentValues();	
 		cVs.put(iCreepHelper.ZONE_ID, -1);
-		cVs.put(iCreepHelper.DESCRIPTION, "Outside");
-		cVs.put(iCreepHelper.FLOOR,"Outside");
+		cVs.put(iCreepHelper.DESCRIPTION, Zone.getLocation(-1));
+		cVs.put(iCreepHelper.FLOOR, Floor.getFloor(-1));
 		cVs.put(iCreepHelper.BEACON_ID, -1);
 		
 		db.insert(iCreepHelper.TABLE_NAME3, null, cVs);
 		
-		String[] description = {"S3","Mens' Bathroom","Intern Zone","Denzil Zone","Focus Room","Kabir Zone","S2","S1","Second Floor Kitchen","Water Zone"};
-		
-		for(int i=0; i<description.length; i++){
+		for(int i = 1; i <= beacons; i++){
 			
 			ContentValues cV = new ContentValues();
-			cV.put(iCreepHelper.DESCRIPTION, description[i]);
-			cV.put(iCreepHelper.FLOOR,"Second Floor");
-			int b_ID = i+1;
-			cV.put(iCreepHelper.BEACON_ID, b_ID);
+			cV.put(iCreepHelper.DESCRIPTION, Zone.getLocation(i));
+			cV.put(iCreepHelper.FLOOR, Floor.getFloor(i));
+			
+			cV.put(iCreepHelper.BEACON_ID, i);
 			
 			db.insert(iCreepHelper.TABLE_NAME3, null, cV);
 		}	
@@ -412,7 +423,7 @@ public class iCreepDatabaseAdapter {
 		private static final String DATABASE_NAME = "icreepdatabase";
 		
 		//version changes every time the structure of the db changes
-		private static final int DATABASE_VERSION = 14;
+		private static final int DATABASE_VERSION = 15;
 		
 		//define tables (1..6) in db
 		
@@ -424,14 +435,6 @@ public class iCreepDatabaseAdapter {
 		private static final String BEACON_ID = "Beacon_ID";
 		private static final String MAJOR = "Major";
 		private static final String MINOR = "Minor";
-		
-		/*
-		//create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "( ZoneBeacon_ID INTEGER PRIMARY KEY AUTOMINCREMENT, Beacon_ID INTEGER, Zone_ID INTEGER, ThreshholdValue FLOAT, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID), FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID));";
-		private static final String TABLE_NAME2 = "ZoneBeacon";
-		
-		private static final String ZONEBEACON_ID = "ZoneBeacon_ID";
-		private static final String THRESHHOLD_VALUE = "Threshhold_Value";
-		*/
 		
 		//create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "( Zone_ID INTEGER PRIMARY KEY AUTOMINCREMENT, Description VARCHAR(255), Floor INTEGER);";
 		private static final String TABLE_NAME3 = "Zone";
@@ -470,12 +473,12 @@ public class iCreepDatabaseAdapter {
 		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " INTEGER NOT NULL,"+ MINOR +" INTEGER NOT NULL);";
 		//private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
 		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + BEACON_ID +" INTEGER UNIQUE, " + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " VARCHAR(20) NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
-		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " VARCHAR(10) NOT NULL, " + TIME_LEFT +" VARCHAR(10) NOT NULL, " + LOCATION_DATE+ " DATE NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON DELETE CASCADE ON UPDATE CASCADE);"; 
+		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " VARCHAR(10) NOT NULL, " + TIME_LEFT +" VARCHAR(10) NOT NULL, " + LOCATION_DATE+ " VARCHAR(10) NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON DELETE CASCADE ON UPDATE CASCADE);"; 
 		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME + " VARCHAR(30) NOT NULL," + SURNAME +" VARCHAR(30) NOT NULL, "+ EMAIL +" VARCHAR(255) NOT NULL," + EMPLOYEE_POSITION +" VARCHAR(30) NOT NULL, "+ PHOTO +" VARHCAR(255));";
 		private static final String create_Reprts_query = "CREATE TABLE " + TABLE_NAME6 + "(" + REPORT_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ USER_ID + " INTEGER UNIQUE, " + AUTO_DELIVERY +" BOOLEAN NOT NULL, " + DELIVERY_TIME +" VARCHAR(10), FOREIGN KEY (User_ID) REFERENCES User(User_ID));";
 
 		public int tableCount = 5;
-		private int createTableQueryCount = 5;
+		private int createTableQueryCount = tableCount;
 		
 		public iCreepHelper(Context context) {
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
