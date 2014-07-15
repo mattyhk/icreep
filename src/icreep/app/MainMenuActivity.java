@@ -16,7 +16,7 @@ public class MainMenuActivity extends Activity {
 	
 	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 	
-	Button location_button, time_tracker_button, reports_button, profile_button;
+	Button location_button, time_tracker_button, reports_button, profile_button,boss_button;
 	ICreepApplication mApplication;
 
 	@Override
@@ -49,6 +49,9 @@ public class MainMenuActivity extends Activity {
 		profile_button = (Button) findViewById(R.id.button4_profile);
 		profile_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.ProfileCreationActivity"));
 		
+		//Boss button
+		boss_button = (Button)findViewById(R.id.button5_boss_tracker);
+		boss_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.beaconSelectionActivity"));
 	}//onCreate
 	
 	@Override
