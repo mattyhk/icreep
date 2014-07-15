@@ -39,7 +39,7 @@ public class BeaconService extends Service implements IBeaconConsumer,
 	private IBeaconManager beaconManager;
 	private ICreepApplication mApplication;
 	private UserLocation userLocation;
-	private BeaconCollection beaconCollection = new BeaconCollection();
+	private BeaconCollection beaconCollection;
 	private AudioManagingController mAudioManager;
 	
 	
@@ -77,6 +77,7 @@ public class BeaconService extends Service implements IBeaconConsumer,
 		mApplication = (ICreepApplication) getApplicationContext();
 		this.userLocation = new UserLocation(this);
 		this.mAudioManager = new AudioManagingController(this);
+		this.beaconCollection = new BeaconCollection(this);
 		
 		userLocation.setCurrentLocation(mApplication.getCurrentLocation());
 		
