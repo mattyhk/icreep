@@ -157,11 +157,20 @@ public class BeaconSelectionActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * Gets the beacon currently pointed to by the selection index. Sets the 
+	 * application tracking status to the value of the switch button.
+	 */
 	private void saveBossDetails() {
-		IBeacon beacon = this.beaconList.get(selectedIndex);
-		currentBoss = beacon.getProximityUuid();
-		bossTrackingValue.setText(currentBoss);
-		spc.writeBossBeaconDetails(currentBoss);
+		
+		if (selectedIndex != -1) {
+			IBeacon beacon = this.beaconList.get(selectedIndex);
+			currentBoss = beacon.getProximityUuid();
+			bossTrackingValue.setText(currentBoss);
+			spc.writeBossBeaconDetails(currentBoss);
+		}
+		
+		mApplication.setTrackingBoss(switched.isChecked());
 	}
 	
 	private void setTheChecker()

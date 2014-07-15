@@ -1,10 +1,15 @@
 package icreep.app.beacon;
 
+import icreep.app.AudioManagingController;
+import icreep.app.ICreepApplication;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import android.content.Context;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 
@@ -27,8 +32,12 @@ public class BeaconCollection {
 	private int closestBeacon = OUTDOOR;
 	
 	private final List<BeaconModel> myBeacons = new ArrayList<BeaconModel>();
+	private AudioManagingController audioController;
+	private ICreepApplication mApplication;
 	
-	public BeaconCollection() {
+	public BeaconCollection(Context context) {
+		this.audioController = new AudioManagingController(context);
+		this.mApplication = (ICreepApplication) context.getApplicationContext();
 		
 		for (int i = 0; i <= NUMBEACONS; i++) {
 			
@@ -48,6 +57,9 @@ public class BeaconCollection {
 	 * Out of Office.
 	 */
 	public void processIBeacons(Collection<IBeacon> iBeacons) {
+		
+		String currentBoss = mApplication.getBossID();
+		boolean inArea = false;
 			
 		List<IBeacon> iBeaconList = new ArrayList<IBeacon>(iBeacons); 
 		
@@ -79,6 +91,10 @@ public class BeaconCollection {
 			
 			if (j < iBeaconList.size()) {
 				if (mBeacon.getMinor() == iBeaconList.get(j).getMinor()) {
+					String uuid = iBeaconList.get(j).getProximityUuid();
+					if (uuid.equals(currentBoss)) {
+						inArea = true;
+					}
 					mBeacon.updateBeaconModel(iBeaconList.get(j));
 					j++;	
 				}
@@ -103,6 +119,17 @@ public class BeaconCollection {
 		 * Set the closest beacon index
 		 */
 		setClosestBeacon(closest);
+		
+		for (int i = j; i < iBeaconList.size(); i++) {
+			String uuid = iBeaconList.get(i).getProximityUuid();
+			if (uuid.equals(currentBoss)) {
+				inArea = true;
+			}
+		}
+		
+		if (inArea && mApplication.isTrackingBoss()) {
+			audioController.fireRingTone();
+		}
 
 	}
 	
