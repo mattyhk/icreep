@@ -71,6 +71,8 @@
     <string name="icreep_version_number">Version 1.0</string>
     <string name="boss_heading">Boss alert control</string>
     <string name="boss_tracking">Tracking:</string>
+    <string name="boss_scan">Scan devices</string>
+    <string name="boss_pinger">Pinger</string>
 
 
 </resources>

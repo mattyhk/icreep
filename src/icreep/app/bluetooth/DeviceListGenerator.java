@@ -62,9 +62,11 @@ public class DeviceListGenerator
 
 		// Register for broadcasts when discovery has finished
 		// and listener for when complete
+		BossAlertActivity baa = (BossAlertActivity) c;
+		
 		filter = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 		c.registerReceiver(mReceiver, filter);
-		TestingReceiver testt = new TestingReceiver(this);
+		DeviceGeneratorListenerUpdate testt = new DeviceGeneratorListenerUpdate(this,(BossAlertActivity)c);
 		c.registerReceiver(testt, filter);
 
 		// Get the local Bluetooth adapter
@@ -72,7 +74,8 @@ public class DeviceListGenerator
 
 		// Get a set of currently paired devices
 		Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
-
+		
+		
 		// If there are paired devices, add each one to the ArrayAdapter // adds
 		// all the kmown paired devices
 		if (pairedDevices.size() > 0) {
@@ -104,6 +107,7 @@ public class DeviceListGenerator
 		Toast t=  Toast.makeText(c, "Scanning started", Toast.LENGTH_SHORT);
 		t.show();
 		mBtAdapter.startDiscovery();
+		devices.clear();
 	}
 
 	// The BroadcastReceiver that listens for discovered devices and

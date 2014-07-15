@@ -6,6 +6,7 @@ public class BlueToothDeviceModel
 {
 	public BluetoothDevice cur ;
 	
+	
 		public BlueToothDeviceModel(BluetoothDevice cur)
 		{
 			this.cur = cur ;
