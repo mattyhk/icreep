@@ -73,6 +73,7 @@
     <string name="boss_tracking">Tracking:</string>
     <string name="boss_scan">Scan devices</string>
     <string name="boss_pinger">Pinger</string>
+    <string name="boss_tracker">Boss Tracker</string>
 
 
 </resources>
