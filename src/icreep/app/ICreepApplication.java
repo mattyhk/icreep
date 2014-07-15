@@ -11,6 +11,8 @@ public class ICreepApplication extends Application {
 	private int currentFloor = 2;
 	private long lastEntryID = -1;
 	private long timeEntered;
+	private String bossID;
+	private boolean isTrackingBoss = false;
 	
 	public ICreepApplication getInstance(){
 		return singleton;
@@ -72,6 +74,22 @@ public class ICreepApplication extends Application {
 	
 	public long getLastEntryID() {
 		return this.lastEntryID;
+	}
+	
+	public void setBossID(String id) {
+		this.bossID = id;
+	}
+	
+	public String getBossID() {
+		return this.bossID;
+	}
+	
+	public boolean isTrackingBoss() {
+		return this.isTrackingBoss;
+	}
+	
+	public void setTrackingBoss(boolean tracking) {
+		this.isTrackingBoss = tracking;
 	}
 	
 	
