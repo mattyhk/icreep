@@ -37,7 +37,7 @@ public class Zone {
 		zoneToLocation.append(23, "Gym");
 		zoneToLocation.append(24, "Incubation Station");
 		zoneToLocation.append(25, "Spider Pigs");
-		zoneToLocation.append(26, "Halal Kitchen");
+		zoneToLocation.append(26, "Halaal Kitchen");
 		zoneToLocation.append(27, "Reception");
 		zoneToLocation.append(28, "F1");
 		zoneToLocation.append(29, "F2");
