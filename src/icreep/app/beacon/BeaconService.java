@@ -106,6 +106,7 @@ public class BeaconService extends Service implements IBeaconConsumer,
 			Region region) {
 		
 		int currentLoc = OUTDOOR;
+		mApplication.setBeaconList(iBeacons);
 		
 		if (iBeacons != null) {
 			beaconCollection.processIBeacons(iBeacons);

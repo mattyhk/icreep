@@ -1,5 +1,10 @@
 package icreep.app;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import com.radiusnetworks.ibeacon.IBeacon;
+
 import android.app.Application;
 
 public class ICreepApplication extends Application {
@@ -13,6 +18,7 @@ public class ICreepApplication extends Application {
 	private long timeEntered;
 	private String bossID;
 	private boolean isTrackingBoss = false;
+	private Collection<IBeacon> currentBeacons;
 	
 	public ICreepApplication getInstance(){
 		return singleton;
@@ -90,6 +96,19 @@ public class ICreepApplication extends Application {
 	
 	public void setTrackingBoss(boolean tracking) {
 		this.isTrackingBoss = tracking;
+	}
+	
+	public void setBeaconList(Collection<IBeacon> beacons){
+		this.currentBeacons = beacons;
+	}
+	
+	public Collection<IBeacon> getBeaconList() {
+		if (this.currentBeacons != null) {
+			return this.currentBeacons;
+		}
+		else {
+			return new ArrayList<IBeacon>();
+		}
 	}
 	
 	

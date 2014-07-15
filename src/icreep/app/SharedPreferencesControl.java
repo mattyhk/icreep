@@ -11,14 +11,18 @@ public class SharedPreferencesControl
 	// might adapt this class to accept many different preference filenames
 	String defaultFileName = "iCreepData"; 
 	Context c = null ;
+	private SharedPreferences sp;
+	private SharedPreferences.Editor edit;
+	
 	public SharedPreferencesControl(Context c)
 	{
-		this.c = c ;
+		this.c = c;
+		this.sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
+		this.edit = sp.edit();
 	}
 	
 	public boolean sharedPrefTest()
 	{
-		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
 		int user = sp.getInt("userID", -1);
 		boolean tc = (user == -1);
 		return tc ;
@@ -26,14 +30,12 @@ public class SharedPreferencesControl
 	
 	public int getUserID()
 	{
-		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
 		int user = sp.getInt("userID", -1);
 		return user ;
 	}
 	
 	public boolean sharedProfilePicTest()
 	{
-		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
 		String user = sp.getString("profilePic", "");
 		if (user.equals(""))
 		{
@@ -43,31 +45,24 @@ public class SharedPreferencesControl
 	
 	public String getProfilePicFilename()
 	{
-		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
 		String user = sp.getString("profilePic", "");
 		return user ;
 	}
 	
 	public void writeNewUserID(int userID)
 	{
-		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
-		SharedPreferences.Editor edit = sp.edit();
 		edit.putInt("userID", userID);
 		edit.commit();
 	}
 	
 	public void writeProfilePicName(String profilePicName)
 	{
-		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
-		SharedPreferences.Editor edit = sp.edit();
 		edit.putString("profilePic", profilePicName);
 		edit.commit();
 	}
 	
 	public void clearSP()
 	{
-		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
-		SharedPreferences.Editor edit = sp.edit();
 		edit.clear();
 		edit.commit();
 	}
@@ -95,8 +90,6 @@ public class SharedPreferencesControl
 	
 	public void writeBossDetails(String name, String mac)
 	{
-		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
-		SharedPreferences.Editor edit = sp.edit();
 		edit.putString("bossName", name);
 		edit.putString("bossMac", mac);
 		edit.commit();
@@ -104,10 +97,18 @@ public class SharedPreferencesControl
 	
 	public void removeBossDetails()
 	{
-		SharedPreferences sp = c.getSharedPreferences(defaultFileName, Context.MODE_PRIVATE);
-		SharedPreferences.Editor edit = sp.edit();
 		edit.remove("bossName");
 		edit.remove("bossMac");
+		edit.commit();
+	}
+	
+	public String getBossBeaconDetails() {
+		String uuid = sp.getString("bossUUID", "");
+		return uuid;
+	}
+	
+	public void writeBossBeaconDetails(String uuid) {
+		edit.putString("bossUUID", uuid);
 		edit.commit();
 	}
 	
