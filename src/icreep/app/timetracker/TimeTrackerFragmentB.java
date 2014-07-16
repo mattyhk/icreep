@@ -109,14 +109,12 @@ import android.widget.TextView;
 	 */
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		startRepeatingTask();
 	}
 	
 	@Override
 	public void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		stopRepeatingTask();
 	}

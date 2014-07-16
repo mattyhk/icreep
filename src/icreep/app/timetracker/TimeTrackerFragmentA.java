@@ -2,8 +2,6 @@ package icreep.app.timetracker;
 
 import java.util.ArrayList;
 
-import icreep.app.ICreepApplication;
-import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
@@ -36,7 +34,6 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	private iCreepDatabaseAdapter icreepHelper;
 	private TimeTrackerListAdapter mAdapter;
 	private Handler mHandler = new Handler();
-	private ICreepApplication mApplication;
 	private UserLocation user;
 	
 	public TimeTrackerFragmentA() {
@@ -49,7 +46,6 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_time_tracker_a, container, false);
 		
-		mApplication = (ICreepApplication) getActivity().getApplicationContext();
 		user = new UserLocation(getActivity());
 		
 		//get time places that user has been to from the database       
@@ -145,10 +141,6 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 			for (TimePlace tp : timePlaces){
 				mAdapter.add(tp);
 			}
-		}
-		
-		else if (mApplication.getCurrentLocation() == -2 && timePlaces.size() == 0) {
-			Message.message(getActivity(), "You have yet to visit a zone");
 		}
 		
 		mAdapter.notifyDataSetChanged();
