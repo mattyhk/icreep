@@ -17,7 +17,7 @@ import icreep.app.report.AlarmControlClass;
 
 public class MainActivity extends FragmentActivity
 {
-	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
+//	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 	
 	private ICreepApplication mApplication; 
 
@@ -38,10 +38,10 @@ public class MainActivity extends FragmentActivity
 //		adapt.clearDatabase();
 //		spc.clearSP(); // testing purposes
 		// Check for Bluetooth capability
-		if (!getPackageManager().hasSystemFeature(
-				PackageManager.FEATURE_BLUETOOTH_LE)) {
-			finishActivityWithMessage("Device does not support Bluetooth LE");
-		}
+//		if (!getPackageManager().hasSystemFeature(
+//				PackageManager.FEATURE_BLUETOOTH_LE)) {
+//			finishActivityWithMessage("Device does not support Bluetooth LE");
+//		}
 		
 		if (spc.hasNoUser() == true) {
 			Intent i = new Intent();
@@ -80,15 +80,15 @@ public class MainActivity extends FragmentActivity
 	protected void onResume()
 	{
 		super.onResume();
-		registerBluetoothReceiver();
-
-		BluetoothAdapter bluetoothAdapter = BluetoothAdapter
-				.getDefaultAdapter();
-		if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
-			Intent enableBtIntent = new Intent(
-					BluetoothAdapter.ACTION_REQUEST_ENABLE);
-			startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
-		}
+//		registerBluetoothReceiver();
+//
+//		BluetoothAdapter bluetoothAdapter = BluetoothAdapter
+//				.getDefaultAdapter();
+//		if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+//			Intent enableBtIntent = new Intent(
+//					BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//			startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
+//		}
 
 	}
 
@@ -97,7 +97,7 @@ public class MainActivity extends FragmentActivity
 	{
 		super.onPause();
 
-		unregisterBluetoothReceiver();
+//		unregisterBluetoothReceiver();
 	}
 
 	@Override
@@ -149,65 +149,65 @@ public class MainActivity extends FragmentActivity
 	 * 
 	 ********************/
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-
-		switch (requestCode)
-		{
-			case ENABLE_BLUETOOTH_REQUEST:
-				if (resultCode != Activity.RESULT_OK) {
-					finishActivityWithMessage("Bluetooth must be on");
-				}
-				break;
-			default:
-				break;
-		}
-	}
-
-	private void registerBluetoothReceiver()
-	{
-		final IntentFilter filter = new IntentFilter();
-		filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-
-		registerReceiver(this.bluetoothChangedReceiver, filter);
-	}
-
-	private void unregisterBluetoothReceiver()
-	{
-		unregisterReceiver(this.bluetoothChangedReceiver);
-	}
-
-	private BroadcastReceiver bluetoothChangedReceiver = new BroadcastReceiver()
-	{
-
-		@Override
-		public void onReceive(Context context, Intent intent)
-		{
-
-			final String action = intent.getAction();
-			if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
-				final int state = intent.getIntExtra(
-						BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
-				switch (state)
-				{
-					case BluetoothAdapter.STATE_TURNING_ON:
-						break;
-					case BluetoothAdapter.STATE_ON:
-						break;
-					case BluetoothAdapter.STATE_TURNING_OFF:
-						finishActivityWithMessage("Requires Bluetooth");
-						break;
-					case BluetoothAdapter.STATE_OFF:
-						break;
-					case BluetoothAdapter.ERROR:
-						finishActivityWithMessage("Bluetooth Error");
-						break;
-				}
-			}
-		}
-	};
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+//	{
+//		// TODO Auto-generated method stub
+//		super.onActivityResult(requestCode, resultCode, data);
+//
+//		switch (requestCode)
+//		{
+//			case ENABLE_BLUETOOTH_REQUEST:
+//				if (resultCode != Activity.RESULT_OK) {
+//					finishActivityWithMessage("Bluetooth must be on");
+//				}
+//				break;
+//			default:
+//				break;
+//		}
+//	}
+//
+//	private void registerBluetoothReceiver()
+//	{
+//		final IntentFilter filter = new IntentFilter();
+//		filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+//
+//		registerReceiver(this.bluetoothChangedReceiver, filter);
+//	}
+//
+//	private void unregisterBluetoothReceiver()
+//	{
+//		unregisterReceiver(this.bluetoothChangedReceiver);
+//	}
+//
+//	private BroadcastReceiver bluetoothChangedReceiver = new BroadcastReceiver()
+//	{
+//
+//		@Override
+//		public void onReceive(Context context, Intent intent)
+//		{
+//
+//			final String action = intent.getAction();
+//			if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+//				final int state = intent.getIntExtra(
+//						BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+//				switch (state)
+//				{
+//					case BluetoothAdapter.STATE_TURNING_ON:
+//						break;
+//					case BluetoothAdapter.STATE_ON:
+//						break;
+//					case BluetoothAdapter.STATE_TURNING_OFF:
+//						finishActivityWithMessage("Requires Bluetooth");
+//						break;
+//					case BluetoothAdapter.STATE_OFF:
+//						break;
+//					case BluetoothAdapter.ERROR:
+//						finishActivityWithMessage("Bluetooth Error");
+//						break;
+//				}
+//			}
+//		}
+//	};
 
 }
