@@ -48,7 +48,7 @@ public class BeaconSelectionActivity extends Activity {
 	private BeaconListAdapter mAdapter;
 	private UserLocation user;
 	
-	private int selectedIndex = NOT_SELECTED;
+	public int selectedIndex = NOT_SELECTED;
 	private boolean checkedSwitch = false;
 	private String currentBoss = "";
 	private ArrayList<IBeacon> beaconList = new ArrayList<IBeacon>();
@@ -107,10 +107,12 @@ public class BeaconSelectionActivity extends Activity {
 					int position, long id)	{
 				// TODO Auto-generated method stub
 				if (selectedIndex != position) {
+					selectedIndex = position;
 					mAdapter.notifyDataSetChanged();
 					beaconListView.setItemChecked(position, true);
-					view.setBackgroundColor(Color.BLUE);
-					selectedIndex = position;
+					 
+					
+			
 					// mAdapter.notifyDataSetChanged();
 				}
 			}
@@ -203,7 +205,7 @@ public class BeaconSelectionActivity extends Activity {
 		
 		if (selectedIndex != -1) {
 			IBeacon beacon = this.beaconList.get(selectedIndex);
-			currentBoss = beacon.getProximityUuid();
+			currentBoss = "" + beacon.getMinor();
 			bossTrackingValue.setText(currentBoss);
 			spc.writeBossBeaconDetails(currentBoss);
 		}

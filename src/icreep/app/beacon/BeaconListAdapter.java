@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.radiusnetworks.ibeacon.IBeacon;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class BeaconListAdapter extends ArrayAdapter<IBeacon> {
 	private ArrayList<IBeacon> beacons;
 	private LayoutInflater vi;
 	private Context context;
+	BeaconSelectionActivity bsa ;
 
 	public BeaconListAdapter(Context context, ArrayList<IBeacon> objects) {
 		super(context, 0, objects);
@@ -25,6 +27,7 @@ public class BeaconListAdapter extends ArrayAdapter<IBeacon> {
 		this.beacons = objects;
 		this.vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.context = context;
+		this.bsa = (BeaconSelectionActivity) context;
 	}
 	
 	@Override
@@ -36,11 +39,16 @@ public class BeaconListAdapter extends ArrayAdapter<IBeacon> {
 		if (beacon != null) {
 			v = vi.inflate(R.layout.list_boss_device, null);
 			v.setBackgroundColor(context.getResources().getColor(R.color.whiteBackground));
+			if (bsa.selectedIndex==position)
+			{
+				v.setBackgroundColor(Color.CYAN);
+			}else v.setBackgroundColor(context.getResources().getColor(R.color.whiteBackground));
+			
 			final TextView name = (TextView) v
 					.findViewById(R.id.view_of_boss_name);
 			
 			if (name != null) {
-				name.setText("Name: " + beacon.getProximityUuid());
+				name.setText("Minor: " + beacon.getMinor());
 			}
 		}
 		
