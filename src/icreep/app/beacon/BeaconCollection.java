@@ -61,7 +61,7 @@ public class BeaconCollection {
 	 */
 	public void processIBeacons(Collection<IBeacon> iBeacons) {
 		
-		String currentBoss = mApplication.getBossID();
+		int currentBoss = mApplication.getBossID();
 		boolean inArea = false;
 			
 		List<IBeacon> iBeaconList = new ArrayList<IBeacon>(iBeacons); 
@@ -93,8 +93,8 @@ public class BeaconCollection {
 			BeaconModel mBeacon = myBeacons.get(i);
 			
 			if (i < iBeaconList.size()) {
-				String uuid = iBeaconList.get(i).getProximityUuid();
-				if (uuid.equals(currentBoss)) {
+				int minor = iBeaconList.get(i).getMinor();
+				if (minor == currentBoss) {
 					inArea = true;
 				}
 			}
@@ -130,8 +130,8 @@ public class BeaconCollection {
 		 * Iterate through the rest of the iBeaconList checking if the boss device is there
 		 */
 		for (int i = j; i < iBeaconList.size(); i++) {
-			String uuid = iBeaconList.get(i).getProximityUuid();
-			if (uuid.equals(currentBoss)) {
+			int minor = iBeaconList.get(i).getMinor();
+			if (minor == currentBoss) {
 				inArea = true;
 			}
 		}
