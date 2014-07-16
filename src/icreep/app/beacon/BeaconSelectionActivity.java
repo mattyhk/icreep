@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.radiusnetworks.ibeacon.IBeacon;
 
 import icreep.app.ICreepApplication;
+import icreep.app.MainMenuActivity;
 import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SharedPreferencesControl;
@@ -154,6 +155,14 @@ public class BeaconSelectionActivity extends Activity {
 		});
 	}
 	
+	
+	@Override
+	public void onBackPressed() 
+	{
+	    Intent myIntent = new Intent(this, MainMenuActivity.class);
+	    startActivity(myIntent);
+	    super.onBackPressed();
+	}
 	@Override
 	protected void onResume() {
 		

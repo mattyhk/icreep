@@ -1,11 +1,13 @@
 package icreep.app.report;
 
+import icreep.app.MainMenuActivity;
 import icreep.app.R;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
@@ -312,5 +314,14 @@ public class ReportActivity extends FragmentActivity
 		super.onRestoreInstanceState(savedInstanceState);
 
 	}
+	
+	@Override
+	public void onBackPressed() 
+	{
+	    Intent myIntent = new Intent(this, MainMenuActivity.class);
+	    startActivity(myIntent);
+	    super.onBackPressed();
+	}
 
+	
 }
