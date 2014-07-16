@@ -18,7 +18,7 @@ public class ICreepApplication extends Application {
 	private long lastEntryID = -1;
 	private long timeEntered;
 //	private String bossID = "f7826da6-4fa2-4e98-8024-bc5b71e0893e";
-	private String bossID = "";
+//	private String bossID = "";
 	private boolean isTrackingBoss = false;
 	private Collection<IBeacon> currentBeacons;
 	
