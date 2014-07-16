@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/bossactivitylayout"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/darkGreyForBackgrounds">
+    
+	
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/left_margin" >
+
+        <LinearLayout 
+       		android:layout_height="wrap_content"
+            android:layout_width="0dp" 
+            android:orientation="vertical"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/bossheading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/top_margin_3.7in"
+                android:text="@string/boss_heading"
+                android:textColor="@color/lightGreenForLabels"
+                android:textSize="@dimen/heading_text_size_3.7in" />
+            
+        </LinearLayout>
+
+         <ImageButton
+             android:id="@+id/home_button_boss"
+             android:layout_width="30dp"
+             android:layout_height="30dp"
+             android:background="@drawable/home"
+             android:contentDescription="@string/home" />
+        
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/pingscanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/boss_pinger"
+        android:textColor= "@color/whiteColor"    
+        android:textSize="@dimen/sub_heading_text_size_3.7in" 
+        android:layout_marginLeft="@dimen/left_margin"
+        />
+
+    <Switch
+        android:id="@+id/switchBarBoss"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginTop="@dimen/top_margin_3.7in"
+        android:layout_weight="1"
+        android:background="@color/whiteBackground"
+        android:checked="false"
+        android:textOff="OFF"
+        android:textOn="ON        "
+        android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/bossScanButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginRight="75dp"
+        android:layout_marginTop="@dimen/top_margin_3.7in"
+        android:background="@drawable/reports_button_off"
+	    android:fontFamily="courier new"
+	    android:text="@string/boss_scan"
+	    android:textSize="@dimen/heading_text_size_3.7in"
+	    android:enabled="false"/>
+	
+	<LinearLayout 
+	    android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        
+	    <TextView
+        android:id="@+id/bosstracking"
+        android:layout_width= "wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/boss_tracking"
+        android:textColor= "@color/whiteColor"
+        android:layout_marginTop="@dimen/top_margin_3.7in"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:textSize="@dimen/sub_heading_text_size_3.7in"
+        />
+
+	    <TextView
+	        android:id="@+id/bossTrackingValue"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="@dimen/left_margin"
+	        android:layout_marginTop="@dimen/top_margin_3.7in"
+            android:layout_marginBottom="-10dp"
+	        android:textColor="@color/lightGreenForLabels"
+	        android:textSize="@dimen/sub_heading_text_size_3.7in" />
+	    
+	    </LinearLayout>
+
+	<ListView
+	    android:id="@+id/boss_listview"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_marginBottom="2dp"
+	    android:layout_marginTop="@dimen/top_margin_3.7in"
+	    android:layout_marginLeft="@dimen/left_margin"
+	    android:layout_marginRight="25dp"
+	    android:layout_weight="7"
+	    android:background="@color/darkGreyForBackgrounds" >
+
+	</ListView>
+
+	<LinearLayout
+	    android:id="@+id/llforbuttonsinboss"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+
+		<Button
+		    android:id="@+id/bossSaveButton"
+		    style="?android:attr/borderlessButtonStyle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginBottom="20dp"
+		    android:layout_marginLeft="230dp"
+		    android:layout_marginTop="@dimen/top_margin_3.7in"
+		    android:background="@drawable/button_style"
+		    android:enabled="true"
+		    android:fontFamily="courier new"
+		    android:onClick="saveDetails"
+		    android:text="@string/save_report_time" />
+
+	</LinearLayout>
+	
+</LinearLayout>

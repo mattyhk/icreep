@@ -51,9 +51,9 @@
     <string name="out_office_label">Out Office</string>
     
     <!--  Boss Tracker String -->
-    <string name="boss_heading">Boss alert control</string>
+    <string name="boss_heading">Boss Tracker</string>
     <string name="boss_tracking">Tracking:</string>
-    <string name="boss_scan">Scan devices</string>
+    <string name="boss_scan">Scan Devices</string>
     <string name="boss_pinger">Tracking Status</string>
     <string name="boss_tracker">Boss Tracker</string>
 
