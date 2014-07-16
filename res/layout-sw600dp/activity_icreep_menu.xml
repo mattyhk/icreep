@@ -21,18 +21,6 @@
         android:textColor="@color/whiteColor"
         android:textSize="@dimen/icreep_logo_7in"
         android:textStyle="bold" />
-    
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/top_margin"
-        android:layout_marginRight="@dimen/left_margin"
-        android:text="@string/icreep_version_number"
-        android:textColor="@color/lightGreenForLabels"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 <!--Buttons-->
 
@@ -68,27 +56,12 @@
         android:textSize="@dimen/menu_button_text_size_7in" />
 
     <Button
-        android:id="@+id/button4_profile"
-        android:layout_width="@dimen/menu_button_width_7in"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3_reports"
-        android:layout_below="@+id/button3_reports"
-        android:layout_marginTop="@dimen/top_margin_menu_buttons"
-        android:background="@drawable/button_style"
-        android:fontFamily="courier new"
-        android:onClick="userProfile"
-        android:text="@string/profile"
-        android:paddingBottom="@dimen/menu_button_padding_top_bottom_7in"
-        android:paddingTop="@dimen/menu_button_padding_top_bottom_7in"
-        android:textSize="@dimen/menu_button_text_size_7in" />
-
-    <Button
         android:id="@+id/button2_time_tracker"
         android:layout_width="@dimen/menu_button_width_7in"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1_location"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="@dimen/top_margin_menu_buttons"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
         android:onClick="timeTracker"
@@ -97,20 +70,45 @@
         android:text="@string/time_tracker"
         android:textSize="@dimen/menu_button_text_size_7in" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/icreep_version_number"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/lightGreenForLabels" />
+
     <Button
         android:id="@+id/button5_boss_tracker"
         android:layout_width="@dimen/menu_button_width_7in"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button4_profile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
+        android:layout_alignLeft="@+id/button4_profile"
+        android:layout_below="@+id/button3_reports"
+        android:layout_marginTop="@dimen/top_margin_menu_buttons"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
         android:onClick="timeTracker"
         android:paddingBottom="@dimen/menu_button_padding_top_bottom_7in"
         android:paddingTop="@dimen/menu_button_padding_top_bottom_7in"
         android:text="@string/boss_tracker"
-        android:textSize="@dimen/menu_button_text_size_7in"/>
+        android:textSize="@dimen/menu_button_text_size_7in" />
+
+    <Button
+        android:id="@+id/button4_profile"
+        android:layout_width="@dimen/menu_button_width_7in"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button3_reports"
+        android:layout_below="@+id/button5_boss_tracker"
+        android:layout_marginTop="@dimen/top_margin_menu_buttons"
+        android:background="@drawable/button_style"
+        android:fontFamily="courier new"
+        android:onClick="userProfile"
+        android:paddingBottom="@dimen/menu_button_padding_top_bottom_7in"
+        android:paddingTop="@dimen/menu_button_padding_top_bottom_7in"
+        android:text="@string/profile"
+        android:textSize="@dimen/menu_button_text_size_7in" />
 
 </RelativeLayout>
 

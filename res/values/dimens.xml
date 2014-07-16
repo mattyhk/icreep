@@ -9,7 +9,7 @@
     <dimen name="left_margin">20dp</dimen>
     <dimen name="right_margin">10dp</dimen>
     <dimen name="top_margin_save_button">40dp</dimen>
-    <dimen name="top_margin_menu_buttons">50dp</dimen>
+    <dimen name="top_margin_menu_buttons">32dp</dimen>
     <dimen name="top_margin_table">100dp</dimen>
     
     <dimen name="top_margin_10in">30dp</dimen>

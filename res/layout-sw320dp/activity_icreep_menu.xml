@@ -37,18 +37,6 @@
 <!--Buttons-->
 
     <Button
-        android:id="@+id/button4_profile"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3_reports"
-        android:layout_below="@+id/button3_reports"
-        android:layout_marginTop="@dimen/top_margin"
-        android:background="@drawable/button_style"
-        android:fontFamily="courier new"
-        android:onClick="userProfile"
-        android:text="@string/profile" />
-
-    <Button
         android:id="@+id/button1_location"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -88,13 +76,25 @@
         android:id="@+id/button5_boss_tracker"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4_profile"
-        android:layout_below="@+id/button4_profile"
+        android:layout_alignLeft="@+id/button3_reports"
+        android:layout_below="@+id/button3_reports"
         android:layout_marginTop="@dimen/top_margin"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
         android:onClick="userReports"
         android:text="@string/boss_tracker" />
+
+    <Button
+        android:id="@+id/button4_profile"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button5_boss_tracker"
+        android:layout_below="@+id/button5_boss_tracker"
+        android:layout_marginTop="@dimen/top_margin"
+        android:background="@drawable/button_style"
+        android:fontFamily="courier new"
+        android:onClick="userProfile"
+        android:text="@string/profile" />
 
 </RelativeLayout>
 

@@ -85,6 +85,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="icreep.app.MainActivity" />
         </activity>
+        <activity
+            android:name="icreep.app.beacon.BeaconSelectionActivity"
+            android:label="@string/boss_tracker"
+			android:parentActivityName="icreep.app.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="icreep.app.MainActivity" />
+        </activity>
 
         <service android:name="icreep.app.beacon.BeaconService" >
         </service>
@@ -109,11 +118,6 @@
         </service>
 
         <receiver android:name="icreep.app.report.AutoAlarmListener" />
-
-        <activity
-            android:name="icreep.app.BeaconSelectionActivity"
-            android:label="@string/boss_tracker" >
-        </activity>
     </application>
 
 </manifest>

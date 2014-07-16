@@ -9,7 +9,13 @@ import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
+import icreep.app.location.UserLocation;
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -23,10 +29,12 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BeaconSelectionActivity extends Activity {
 	
-	private int NOT_SELECTED = -1;
+	private final int NOT_SELECTED = -1;
+	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
 	
 	private TextView bossTrackingValue;
 	private ListView beaconListView;
@@ -38,8 +46,9 @@ public class BeaconSelectionActivity extends Activity {
 	private SharedPreferencesControl spc;
 	private ICreepApplication mApplication;
 	private BeaconListAdapter mAdapter;
+	private UserLocation user;
 	
-	private int selectedIndex = NOT_SELECTED;
+	public int selectedIndex = NOT_SELECTED;
 	private boolean checkedSwitch = false;
 	private String currentBoss = "";
 	private ArrayList<IBeacon> beaconList = new ArrayList<IBeacon>();
@@ -55,6 +64,7 @@ public class BeaconSelectionActivity extends Activity {
 		spc = new SharedPreferencesControl(this);
 		mApplication = (ICreepApplication) getApplicationContext();
 		mAdapter = new BeaconListAdapter(this, beaconList);
+		user = new UserLocation(this);
 		
 		bossTrackingValue = (TextView) findViewById(R.id.bossTrackingValue);
 		switched = (Switch) findViewById(R.id.switchBarBoss);
@@ -97,10 +107,12 @@ public class BeaconSelectionActivity extends Activity {
 					int position, long id)	{
 				// TODO Auto-generated method stub
 				if (selectedIndex != position) {
+					selectedIndex = position;
 					mAdapter.notifyDataSetChanged();
 					beaconListView.setItemChecked(position, true);
-					view.setBackgroundColor(Color.BLUE);
-					selectedIndex = position;
+					 
+					
+			
 					// mAdapter.notifyDataSetChanged();
 				}
 			}
@@ -123,6 +135,34 @@ public class BeaconSelectionActivity extends Activity {
 				updateList();
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		
+		super.onResume();
+		
+		registerBluetoothReceiver();
+
+		BluetoothAdapter bluetoothAdapter = BluetoothAdapter
+				.getDefaultAdapter();
+		if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+			Intent enableBtIntent = new Intent(
+					BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterBluetoothReceiver();
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		user.updateLocationOnDestroy(mApplication.getCurrentLocation(), mApplication.getLastEntryID());
 	}
 	
 	
@@ -165,7 +205,7 @@ public class BeaconSelectionActivity extends Activity {
 		
 		if (selectedIndex != -1) {
 			IBeacon beacon = this.beaconList.get(selectedIndex);
-			currentBoss = beacon.getProximityUuid();
+			currentBoss = "" + beacon.getMinor();
 			bossTrackingValue.setText(currentBoss);
 			spc.writeBossBeaconDetails(currentBoss);
 		}
@@ -190,5 +230,64 @@ public class BeaconSelectionActivity extends Activity {
 		updateButton.setBackground(getResources().getDrawable(R.drawable.reports_buttons_on));
 		bossTrackingValue.setText(currentBoss);		
 	}
+	
+	/*********************
+	 * 
+	 * Bluetooth Checker Makes Sure the Bluetooth functionality is on. May need
+	 * to move it into every activity
+	 * 
+	 ********************/
+	private void finishActivityWithMessage(String message)
+	{
+		// Notify the user of the problem
+		Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+		toast.show();
+
+		// End the activity
+		finish();
+	}
+
+	private void registerBluetoothReceiver()
+	{
+		final IntentFilter filter = new IntentFilter();
+		filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+
+		registerReceiver(this.bluetoothChangedReceiver, filter);
+	}
+
+	private void unregisterBluetoothReceiver()
+	{
+		unregisterReceiver(this.bluetoothChangedReceiver);
+	}
+
+	private BroadcastReceiver bluetoothChangedReceiver = new BroadcastReceiver()
+	{
+
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+
+			final String action = intent.getAction();
+			if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+				final int state = intent.getIntExtra(
+						BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+				switch (state)
+				{
+					case BluetoothAdapter.STATE_TURNING_ON:
+						break;
+					case BluetoothAdapter.STATE_ON:
+						break;
+					case BluetoothAdapter.STATE_TURNING_OFF:
+						finishActivityWithMessage("Requires Bluetooth");
+						break;
+					case BluetoothAdapter.STATE_OFF:
+						break;
+					case BluetoothAdapter.ERROR:
+						finishActivityWithMessage("Bluetooth Error");
+						break;
+				}
+			}
+		}
+	};
 
 }

@@ -28,8 +28,10 @@ public class BeaconCollection {
 	private final static int NUMBEACONS = 48;
 	private final static double DEFAULT_ACCURACY = 30;
 	private final static int OUTDOOR = -1;
+	private final static int BOSS_LIMIT = 3;
 	
 	private int closestBeacon = OUTDOOR;
+	private int bossCounter = 0;
 	
 	private final List<BeaconModel> myBeacons = new ArrayList<BeaconModel>();
 	private AudioManagingController audioController;
@@ -55,6 +57,7 @@ public class BeaconCollection {
 	 * Modifies the closestBeacon field by first checking which of the beacons in range, if any,
 	 * is the closest. Sets the field to the beacon's index, otherwise sets it to -1 representing
 	 * Out of Office.
+	 * Also checks if the current boss is in the area.
 	 */
 	public void processIBeacons(Collection<IBeacon> iBeacons) {
 		
@@ -89,12 +92,15 @@ public class BeaconCollection {
 			
 			BeaconModel mBeacon = myBeacons.get(i);
 			
+			if (i < iBeaconList.size()) {
+				String uuid = iBeaconList.get(i).getProximityUuid();
+				if (uuid.equals(currentBoss)) {
+					inArea = true;
+				}
+			}
+			
 			if (j < iBeaconList.size()) {
 				if (mBeacon.getMinor() == iBeaconList.get(j).getMinor()) {
-					String uuid = iBeaconList.get(j).getProximityUuid();
-					if (uuid.equals(currentBoss)) {
-						inArea = true;
-					}
 					mBeacon.updateBeaconModel(iBeaconList.get(j));
 					j++;	
 				}
@@ -120,6 +126,9 @@ public class BeaconCollection {
 		 */
 		setClosestBeacon(closest);
 		
+		/*
+		 * Iterate through the rest of the iBeaconList checking if the boss device is there
+		 */
 		for (int i = j; i < iBeaconList.size(); i++) {
 			String uuid = iBeaconList.get(i).getProximityUuid();
 			if (uuid.equals(currentBoss)) {
@@ -127,10 +136,43 @@ public class BeaconCollection {
 			}
 		}
 		
-		if (inArea && mApplication.isTrackingBoss()) {
-			audioController.fireRingTone();
+		if (inArea) {
+			updateBossInArea();
 		}
-
+		
+		else {
+			updateBossOutOfArea();
+		}
+	}
+	
+	/**
+	 * Updates boss counter. Checks if the value is equal to the threshold. If the value has reached the threshhold, 
+	 * check if we are actively tracking the boss. If not, reset the counter as well. 
+	 */
+	private void updateBossInArea(){
+		
+		if (!mApplication.isTrackingBoss()) {
+			this.bossCounter = 0;
+		}
+		
+		else {
+			
+			this.bossCounter++;
+			
+			if (bossCounter == BOSS_LIMIT) {
+				this.audioController.fireRingTone();
+			}
+		}
+		
+	}
+	
+	/**
+	 * Resets the boss counter
+	 */
+	private void updateBossOutOfArea(){
+		
+		this.bossCounter = 0;
+		
 	}
 	
 	/**************************
