@@ -107,8 +107,8 @@ public class SharedPreferencesControl
 		return uuid;
 	}
 	
-	public void writeBossBeaconDetails(String uuid) {
-		edit.putString("bossMinorID", uuid);
+	public void writeBossBeaconDetails(String minor) {
+		edit.putString("bossMinorID", minor);
 		edit.commit();
 	}
 	
