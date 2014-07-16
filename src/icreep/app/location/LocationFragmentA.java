@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class LocationFragmentA extends Fragment {
@@ -26,15 +27,15 @@ public class LocationFragmentA extends Fragment {
 	private Handler mHandler;
 	
 	private ICreepApplication mApplication;
+	private iCreepDatabaseAdapter iCreepHelper;
+	private int userID;
+	private SharedPreferencesControl spc;
 	
 	private TextView floorTextView;
 	private TextView userName;
 	private ImageButton home;
 	private ImageView zoneMap;
-	private iCreepDatabaseAdapter iCreepHelper;
-	private int userID;
-	private SharedPreferencesControl spc;
-	
+	private ProgressBar progressBar;
 	
 	public LocationFragmentA() {
 		// Required empty public constructor
@@ -46,6 +47,8 @@ public class LocationFragmentA extends Fragment {
 		// Inflate the layout for this fragment
 		
 		View v = inflater.inflate(R.layout.fragment_location_a, container, false);
+		
+		
 		
 		home = (ImageButton) v.findViewById(R.id.home_button_location_current);
 		Activity c = getActivity();
@@ -59,7 +62,10 @@ public class LocationFragmentA extends Fragment {
 		mHandler = new Handler();
 		mApplication = (ICreepApplication) getActivity().getApplicationContext();
 		floorTextView = (TextView) v.findViewById(R.id.location_a_floor_text_view);
+		progressBar = (ProgressBar) v.findViewById(R.id.location_a_progress_bar);
+		progressBar.setVisibility(View.VISIBLE);
 		zoneMap = (ImageView) v.findViewById(R.id.location_a_zone_map);
+		zoneMap.setVisibility(View.GONE);
 		userName = (TextView) v.findViewById(R.id.location_a_user);
 		userName.setText(iCreepHelper.getUserDetails(userID));
 		
@@ -74,8 +80,8 @@ public class LocationFragmentA extends Fragment {
 		 Integer drawID = null;
 		if (currentLocation == UNKNOWN) {
 			// Location is unknown
-			 drawID = getActivity().getResources()
-						.getIdentifier("zones_unknown", "drawable", getActivity().getPackageName());
+			 zoneMap.setVisibility(View.GONE);
+			 progressBar.setVisibility(View.VISIBLE);
 		}
 		
 		else if (currentLocation == OUTDOORS) {
@@ -92,6 +98,8 @@ public class LocationFragmentA extends Fragment {
 		
 		if (drawID != null) {
 			zoneMap.setImageResource(drawID);
+			progressBar.setVisibility(View.GONE);
+			zoneMap.setVisibility(View.VISIBLE);
 		}
 	}
 	

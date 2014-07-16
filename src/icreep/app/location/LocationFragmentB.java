@@ -1,7 +1,5 @@
 package icreep.app.location;
 
-import icreep.app.ICreepApplication;
-import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SwitchButtonListener;
 import icreep.app.db.iCreepDatabaseAdapter;
@@ -44,7 +42,6 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 	private Handler mHandler;
 	private UserLocation user;
 	private Toast t;
-	private ICreepApplication mApplication;
 
 	public LocationFragmentB() {
 		// Required empty public constructor
@@ -57,8 +54,7 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 		View v = inflater.inflate(R.layout.fragment_location_b, container, false);
 		
 		user = new UserLocation(getActivity());
-		
-		mApplication = (ICreepApplication) getActivity().getApplicationContext();
+	
 		
 		userID = user.getUserID();
 		iCreepHelper = new iCreepDatabaseAdapter(getActivity());
