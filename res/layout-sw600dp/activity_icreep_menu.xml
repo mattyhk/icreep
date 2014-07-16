@@ -76,6 +76,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/left_margin"
+        android:layout_marginBottom="@dimen/top_margin"
         android:text="@string/icreep_version_number"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/lightGreenForLabels" />
