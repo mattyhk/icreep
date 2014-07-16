@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -116,6 +117,8 @@ public class BeaconSelectionActivity extends Activity {
 				// TODO Auto-generated method stub
 				if (selectedIndex != position) {
 					selectedIndex = position;
+					currentBoss = beaconList.get(selectedIndex).getMinor();
+					Log.d("TEST", "Selected Index is " + selectedIndex);
 					mAdapter.notifyDataSetChanged();
 					beaconListView.setItemChecked(position, true);
 					 
@@ -213,7 +216,7 @@ public class BeaconSelectionActivity extends Activity {
 
 		if (currentBoss == selectedBeacon.getMinor())
 		{
-			Message.message(this, "The user for the alert, hasn't changed");
+			Message.message(this, "The beacon being tracked has not changed");
 			return false ;
 		}	
 		
@@ -225,6 +228,7 @@ public class BeaconSelectionActivity extends Activity {
 	 * application tracking status to the value of the switch button.
 	 */
 	private void saveBossDetails() {
+		
 		if (switched.isChecked() == false) {
 			bossTrackingValue.setText(String.valueOf(currentBoss));
 			spc.writeBossBeaconDetails(String.valueOf(currentBoss));
@@ -236,8 +240,7 @@ public class BeaconSelectionActivity extends Activity {
 		}
 		
 		if (selectedIndex != NOT_SELECTED) {
-			IBeacon beacon = this.beaconList.get(selectedIndex);
-			currentBoss = beacon.getMinor();
+			Log.d("TEST", "Saving position at " + selectedIndex);
 			bossTrackingValue.setText(String.valueOf(currentBoss));
 			spc.writeBossBeaconDetails(String.valueOf(currentBoss));
 			selectedIndex = NOT_SELECTED;
@@ -253,6 +256,8 @@ public class BeaconSelectionActivity extends Activity {
 	}
 	
 	private void switchOnBeaconBossTracking() {
+		bossTrackingValue.setText(String.valueOf(currentBoss));
+		spc.writeBossBeaconDetails(String.valueOf(currentBoss));
 		Message.message(this, "Tracking Boss Beacon " + currentBoss);
 		mApplication.setBossID(currentBoss);
 		mApplication.setTrackingBoss(true);
