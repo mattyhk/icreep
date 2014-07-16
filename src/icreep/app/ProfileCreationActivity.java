@@ -77,7 +77,6 @@ public class ProfileCreationActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				// TODO Auto-generated method stub
 		        Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		        startActivityForResult(i, IMAGE_PICKER_SELECT);
 			}
@@ -151,7 +150,6 @@ public class ProfileCreationActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				// TODO Auto-generated method stub
 				// get user details
 				String name = userName.getText().toString();
 				String surname = userSurname.getText().toString();
@@ -223,7 +221,6 @@ public class ProfileCreationActivity extends Activity
 	
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
 		super.onStop();
 		user.updateLocationOnDestroy(mApplication.getCurrentLocation(), mApplication.getLastEntryID());
 		
@@ -452,7 +449,6 @@ public class ProfileCreationActivity extends Activity
 				//You can then grab the orientation of the image:
 	            orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         	Bitmap generated = BitmapFactory.decodeFile(picturePath);

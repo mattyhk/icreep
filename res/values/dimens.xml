@@ -36,7 +36,7 @@
       <dimen name="icreep_logo_7in">100sp</dimen>
       <dimen name="heading_text_size_7in">32sp</dimen>
       <dimen name="in_out_office_labels_7in">28sp</dimen>
-      <dimen name="sub_heading_text_size_7in">28sp</dimen>
+      <dimen name="sub_heading_text_size_7in">26sp</dimen>
       <dimen name="menu_button_text_size_7in">40sp</dimen>
       <dimen name="save_button_text_size_7in">38sp</dimen>
     
