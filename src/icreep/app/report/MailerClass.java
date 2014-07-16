@@ -119,7 +119,7 @@ public class MailerClass
 		boolean se = false;
 		if (list.size() == 0) {
 			s = s + "\n==================================================";
-			s = s + "\nNot in office";
+			s = s + "\nNot In Office";
 			s = s + "\n--------------------------------------------------";
 			s = s + "\n==================================================";
 			s = s + "\nGround Floor";
@@ -135,7 +135,7 @@ public class MailerClass
 				if (t.getFloor().equals("Outside") && (o == false)) {
 					s = s
 							+ "\n==================================================";
-					s = s + "\nNot in office";
+					s = s + "\nNot In Office";
 					s = s
 							+ "\n--------------------------------------------------";
 					o = true;

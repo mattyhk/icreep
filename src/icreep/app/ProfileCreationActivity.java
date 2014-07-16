@@ -538,4 +538,15 @@ public class ProfileCreationActivity extends Activity
 			}
 		}
 	};
+	
+	@Override
+	public void onBackPressed() 
+	{
+		if (userID != -1)
+		{
+	    Intent myIntent = new Intent(this, MainMenuActivity.class);
+	    startActivity(myIntent);
+	    super.onBackPressed();
+		}
+	}
 }

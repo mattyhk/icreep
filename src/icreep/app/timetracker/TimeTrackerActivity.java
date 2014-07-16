@@ -1,6 +1,7 @@
 package icreep.app.timetracker;
 
 import icreep.app.ICreepApplication;
+import icreep.app.MainMenuActivity;
 import icreep.app.R;
 import icreep.app.location.UserLocation;
 import android.app.ActionBar.Tab;
@@ -145,6 +146,13 @@ public class TimeTrackerActivity extends FragmentActivity implements TabListener
 			startActivityForResult(enableBtIntent, ENABLE_BLUETOOTH_REQUEST);
 		}
 	}
+	@Override
+	public void onBackPressed() 
+	{
+	    Intent myIntent = new Intent(this, MainMenuActivity.class);
+	    startActivity(myIntent);
+	    super.onBackPressed();
+	}
 	
 	@Override
 	protected void onPause() {
@@ -253,4 +261,6 @@ class MyAdapter extends FragmentPagerAdapter {
 	public void destroyItem(ViewGroup container, int position, Object object) {
 		super.destroyItem(container, position, object);
 	}
+	
+	
 }

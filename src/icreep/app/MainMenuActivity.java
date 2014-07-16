@@ -150,4 +150,9 @@ public class MainMenuActivity extends Activity {
 		}
 	};
 	
+	@Override
+	public void onBackPressed() 
+	{
+	    
+	}
 }//MainMenuActivity class

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import icreep.app.bluetooth.DeviceListGenerator;
 
+import icreep.app.MainMenuActivity;
 import icreep.app.Message;
 import icreep.app.R;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -211,5 +213,13 @@ public class BossAlertActivity extends Activity
 		scanner.setBackground(getResources().getDrawable(R.drawable.reports_buttons_on));
 		bossTrackingValue.setText(list.get(0));		
 		
+	}
+	
+	@Override
+	public void onBackPressed() 
+	{
+	    Intent myIntent = new Intent(this, MainMenuActivity.class);
+	    startActivity(myIntent);
+	    super.onBackPressed();
 	}
 }
