@@ -25,7 +25,6 @@ import android.widget.TextView;
 public class TimeTrackerFragmentA extends Fragment implements OnItemClickListener {
 	
 	private final int INTERVAL = 5000;
-//	private final int UNKNOWN = -2;
 	
 	private ListView listView;
 	private ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
@@ -108,14 +107,12 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 	 */
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		startRepeatingTask();
 	}
 	
 	@Override
 	public void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		stopRepeatingTask();
 	}
@@ -155,8 +152,6 @@ public class TimeTrackerFragmentA extends Fragment implements OnItemClickListene
 		}
 		
 		mAdapter.notifyDataSetChanged();
-		
-		
-		
+	
 	}
 }
