@@ -29,9 +29,11 @@ public class BeaconCollection {
 	private final static double DEFAULT_ACCURACY = 30;
 	private final static int OUTDOOR = -1;
 	private final static int BOSS_LIMIT = 3;
+	private final static int PLAY_LIMIT = 30;
 	
 	private int closestBeacon = OUTDOOR;
 	private int bossCounter = 0;
+	private int lastPlayedCount = 30;
 	
 	private final List<BeaconModel> myBeacons = new ArrayList<BeaconModel>();
 	private AudioManagingController audioController;
@@ -61,7 +63,7 @@ public class BeaconCollection {
 	 */
 	public void processIBeacons(Collection<IBeacon> iBeacons) {
 		
-		String currentBoss = mApplication.getBossID();
+		int currentBoss = mApplication.getBossID();
 		boolean inArea = false;
 			
 		List<IBeacon> iBeaconList = new ArrayList<IBeacon>(iBeacons); 
@@ -93,8 +95,8 @@ public class BeaconCollection {
 			BeaconModel mBeacon = myBeacons.get(i);
 			
 			if (i < iBeaconList.size()) {
-				String uuid = iBeaconList.get(i).getProximityUuid();
-				if (uuid.equals(currentBoss)) {
+				int minor = iBeaconList.get(i).getMinor();
+				if (minor == currentBoss) {
 					inArea = true;
 				}
 			}
@@ -130,8 +132,8 @@ public class BeaconCollection {
 		 * Iterate through the rest of the iBeaconList checking if the boss device is there
 		 */
 		for (int i = j; i < iBeaconList.size(); i++) {
-			String uuid = iBeaconList.get(i).getProximityUuid();
-			if (uuid.equals(currentBoss)) {
+			int minor = iBeaconList.get(i).getMinor();
+			if (minor == currentBoss) {
 				inArea = true;
 			}
 		}
@@ -147,9 +149,12 @@ public class BeaconCollection {
 	
 	/**
 	 * Updates boss counter. Checks if the value is equal to the threshold. If the value has reached the threshhold, 
-	 * check if we are actively tracking the boss. If not, reset the counter as well. 
+	 * check if we are actively tracking the boss. If not, reset the counter as well. The noise
+	 * will only be played if it has not been set off at least in the last 30 cycles. 
 	 */
 	private void updateBossInArea(){
+		
+		this.lastPlayedCount ++;
 		
 		if (!mApplication.isTrackingBoss()) {
 			this.bossCounter = 0;
@@ -160,7 +165,15 @@ public class BeaconCollection {
 			this.bossCounter++;
 			
 			if (bossCounter == BOSS_LIMIT) {
-				this.audioController.fireRingTone();
+				
+				if (lastPlayedCount >= PLAY_LIMIT) {
+					this.audioController.fireRingTone();
+					this.lastPlayedCount = 0;
+				}
+				
+				else {
+					this.bossCounter = 0;
+				}
 			}
 		}
 		
@@ -171,6 +184,7 @@ public class BeaconCollection {
 	 */
 	private void updateBossOutOfArea(){
 		
+		this.lastPlayedCount ++;		
 		this.bossCounter = 0;
 		
 	}
