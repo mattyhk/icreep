@@ -46,10 +46,14 @@ public class MainActivity extends FragmentActivity
 				int hour = Integer.parseInt(times[0]);
 				String[] minut = times[1].split("\\+");
 				int min = Integer.parseInt(minut[0]);
+				String checked = minut[1];
+				if (checked.equals("1"))
+				{
 				AlarmControlClass acc = new AlarmControlClass();
 				acc.setAlarm(hour, min, this);
 				acc.sendAutoEmailRepeat();
 				Message.message(this, "Alarm is set");
+				}
 			}
 			
 			Intent i = new Intent();
