@@ -58,7 +58,7 @@
         android:layout_marginTop="@dimen/top_margin_7in"
 	    android:layout_marginLeft="@dimen/left_margin"
 	    android:textOn="       ON       "	
-	    android:textSize="24sp"
+	    android:textSize="30sp"
 	    android:background="@drawable/on_off_switch_style" 	/>
 
     <Button
@@ -87,10 +87,10 @@
         android:layout_height="wrap_content"
         android:text="@string/boss_tracking"
         android:textColor= "@color/whiteColor"
-        android:layout_marginTop="@dimen/top_margin_3.7in"
+        android:layout_marginTop="@dimen/top_margin_7in"
         android:layout_marginBottom="-10dp"
         android:layout_marginLeft="@dimen/left_margin"
-        android:textSize="@dimen/sub_heading_text_size_3.7in"
+        android:textSize="@dimen/sub_heading_text_size_7in"
         />
 
 	    <TextView
@@ -98,10 +98,10 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="@dimen/left_margin"
-	        android:layout_marginTop="@dimen/top_margin_3.7in"
+	        android:layout_marginTop="@dimen/top_margin_7in"
             android:layout_marginBottom="-10dp"
 	        android:textColor="@color/lightGreenForLabels"
-	        android:textSize="@dimen/sub_heading_text_size_3.7in" />
+	        android:textSize="@dimen/sub_heading_text_size_7in" />
 	    
 	    </LinearLayout>
 
@@ -130,7 +130,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_marginBottom="20dp"
-		    android:layout_marginLeft="230dp"
+		    android:layout_marginLeft="500dp"
 		    android:layout_marginTop="@dimen/top_margin_3.7in"
 		    android:background="@drawable/button_style"
 		    android:enabled="true"
