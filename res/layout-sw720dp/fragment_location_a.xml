@@ -35,7 +35,6 @@
 		        android:layout_height="wrap_content"
 		        android:textColor="@color/whiteColor"
                 android:textSize="@dimen/sub_heading_text_size_10in"
-                android:layout_marginTop = "@dimen/top_margin"
                 android:layout_marginLeft = "@dimen/left_margin" />
             
         </LinearLayout>
