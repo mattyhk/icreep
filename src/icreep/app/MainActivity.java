@@ -18,12 +18,15 @@ import icreep.app.report.AlarmControlClass;
 public class MainActivity extends FragmentActivity
 {
 	private static final int ENABLE_BLUETOOTH_REQUEST = 1;
+	
+	private ICreepApplication mApplication; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		mApplication = (ICreepApplication) getApplicationContext();
 		SharedPreferencesControl spc = new SharedPreferencesControl(this);
 		iCreepDatabaseAdapter adapt = new iCreepDatabaseAdapter(this);
 		ActionBar actionBar = getActionBar();
@@ -40,7 +43,15 @@ public class MainActivity extends FragmentActivity
 			finishActivityWithMessage("Device does not support Bluetooth LE");
 		}
 		
-		if (spc.sharedPrefTest() == true) {
+		if (spc.hasNoUser() == true) {
+			Intent i = new Intent();
+			i.setClassName(this, "icreep.app.ProfileCreationActivity");
+			startActivity(i);
+		} 
+		
+		else {
+			mApplication.setBossID(Integer.parseInt(spc.getBossBeaconDetails()));
+			
 			String time = "";
 			time = adapt.getReportTime(spc.getUserID());
 			if (time != null) {
@@ -52,13 +63,7 @@ public class MainActivity extends FragmentActivity
 				acc.sendAutoEmailRepeat();
 				Message.message(this, "Alarm is set");
 			}
-
-			Intent i = new Intent();
-			i.setClassName(this, "icreep.app.ProfileCreationActivity");
-			startActivity(i);
-		} 
-		
-		else {
+			
 			Intent i = new Intent();
 			i.setClassName(this, "icreep.app.MainMenuActivity");
 			startActivity(i);

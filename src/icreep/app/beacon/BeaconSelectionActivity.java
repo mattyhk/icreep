@@ -49,7 +49,6 @@ public class BeaconSelectionActivity extends Activity {
 	private UserLocation user;
 	
 	public int selectedIndex = NOT_SELECTED;
-	private boolean checkedSwitch = false;
 	private String currentBoss = "";
 	private ArrayList<IBeacon> beaconList = new ArrayList<IBeacon>();
 	
@@ -85,7 +84,8 @@ public class BeaconSelectionActivity extends Activity {
 		
 		currentBoss = spc.getBossBeaconDetails();
 
-		setTheChecker();
+		setCheckButton();
+		
 		switched.setOnCheckedChangeListener(new OnCheckedChangeListener()
 		{
 			
@@ -221,16 +221,16 @@ public class BeaconSelectionActivity extends Activity {
 	private void saveBossDetails() {
 		if (switched.isChecked() == false)
 		{
-			currentBoss = "" ;
+			currentBoss = "0" ;
 			bossTrackingValue.setText(currentBoss);
 			spc.writeBossBeaconDetails(currentBoss);
 			selectedIndex = NOT_SELECTED;
 			mAdapter.clear();
 			mAdapter.notifyDataSetChanged();			
 			switchOffBeaconBossTracking();
-			return ;
+			return;
 		}
-		if (selectedIndex != -1) {
+		if (selectedIndex != NOT_SELECTED) {
 			IBeacon beacon = this.beaconList.get(selectedIndex);
 			currentBoss = "" + beacon.getMinor();
 			bossTrackingValue.setText(currentBoss);
@@ -238,10 +238,8 @@ public class BeaconSelectionActivity extends Activity {
 			selectedIndex = NOT_SELECTED;
 			mAdapter.notifyDataSetChanged();
 			switchOnBeaconBossTracking();
-			return ;
+			return;
 		}
-		
-		mApplication.setTrackingBoss(switched.isChecked());
 	}
 	
 	private void switchOffBeaconBossTracking() {
@@ -249,24 +247,28 @@ public class BeaconSelectionActivity extends Activity {
 	}
 	
 	private void switchOnBeaconBossTracking() {
+		mApplication.setBossID(Integer.parseInt(currentBoss));
 		mApplication.setTrackingBoss(true);
 	}
 	
-	private void setTheChecker()
+	private void setCheckButton()
 	{
 		//boolean checked = false ;
-		currentBoss = spc.getBossBeaconDetails();
-		if (currentBoss.equals(""))
-		{
-			checkedSwitch = false; 
-			switched.setChecked(checkedSwitch);		
-			return;
+		if (mApplication.getBossID() == 0) {
+			this.currentBoss = "";
 		}
 		
-		checkedSwitch = true;
-		switched.setChecked(checkedSwitch);
-		updateButton.setEnabled(true);
-		updateButton.setBackground(getResources().getDrawable(R.drawable.reports_buttons_on));
+		else {
+			this.currentBoss = String.valueOf(mApplication.getBossID());
+		}
+		
+		switched.setChecked(mApplication.isTrackingBoss());
+		
+		if (mApplication.isTrackingBoss()) {
+			updateButton.setEnabled(true);
+			updateButton.setBackground(getResources().getDrawable(R.drawable.reports_buttons_on));
+		}
+		
 		bossTrackingValue.setText(currentBoss);		
 	}
 	

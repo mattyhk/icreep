@@ -21,7 +21,7 @@ public class SharedPreferencesControl
 		this.edit = sp.edit();
 	}
 	
-	public boolean sharedPrefTest()
+	public boolean hasNoUser()
 	{
 		int user = sp.getInt("userID", -1);
 		boolean tc = (user == -1);
@@ -103,12 +103,12 @@ public class SharedPreferencesControl
 	}
 	
 	public String getBossBeaconDetails() {
-		String uuid = sp.getString("bossUUID", "");
+		String uuid = sp.getString("bossMinorID", "0");
 		return uuid;
 	}
 	
 	public void writeBossBeaconDetails(String uuid) {
-		edit.putString("bossUUID", uuid);
+		edit.putString("bossMinorID", uuid);
 		edit.commit();
 	}
 	

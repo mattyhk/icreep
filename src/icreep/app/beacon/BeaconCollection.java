@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 
@@ -151,6 +152,8 @@ public class BeaconCollection {
 	 */
 	private void updateBossInArea(){
 		
+		Log.d("TEST", "Boss scanned " + bossCounter);
+		
 		if (!mApplication.isTrackingBoss()) {
 			this.bossCounter = 0;
 		}
@@ -170,6 +173,8 @@ public class BeaconCollection {
 	 * Resets the boss counter
 	 */
 	private void updateBossOutOfArea(){
+
+		Log.d("TEST", "Boss not scanned " + bossCounter);
 		
 		this.bossCounter = 0;
 		
