@@ -130,7 +130,7 @@ public class MailerClass
 			s = s + "\n==================================================";
 			s = s + "\nSecond Floor";
 			s = s + "\n--------------------------------------------------";
-		} else {
+		} 
 			for (TimePlace t : list) {
 				if (t.getFloor().equals("Outside") && (o == false)) {
 					s = s
@@ -226,7 +226,7 @@ public class MailerClass
 				int hoursIn = (int) ((time / 3600) % 60);
 				s = s + (hoursIn) + "hrs " + minutesIn + "min " + secondsIn
 						+ "secs";
-			}
+			
 		}
 		s = s + "\n==================================================";
 		s = s + "\n";
