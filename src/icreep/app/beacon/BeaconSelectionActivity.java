@@ -163,6 +163,7 @@ public class BeaconSelectionActivity extends Activity {
 	    startActivity(myIntent);
 	    super.onBackPressed();
 	}
+	
 	@Override
 	protected void onResume() {
 		
