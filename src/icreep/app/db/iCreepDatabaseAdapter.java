@@ -78,9 +78,7 @@ public class iCreepDatabaseAdapter {
 		
 		ArrayList<TimePlace> timePlaces = new ArrayList<TimePlace>();
 		
-		//sql to get all of the user's locations
-		//SELECT User_ID, Floor, Description, Time_Entered, Time_Left FROM User, Zone, Location WHERE User.User_ID = Location.User_ID, Location.User_ID = Zone.Location_ID
-		
+		//sql to get all of the user's locations		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		
 		//get the current day's timePlaces		
@@ -90,7 +88,7 @@ public class iCreepDatabaseAdapter {
 		
 		String query = "SELECT * FROM User, Zone, Location WHERE User.User_ID ="+UserID+" AND User.User_ID = Location.User_ID AND Location.Zone_ID = Zone.Zone_ID;";
 		
-		Cursor cursor = db.rawQuery(query, null);//,  "User.User_ID =? AND User.User_ID =?",args,   ); //query, null);
+		Cursor cursor = db.rawQuery(query, null);
 
 		if(cursor != null){
 			if(cursor.moveToFirst()){
@@ -134,21 +132,13 @@ public class iCreepDatabaseAdapter {
 						}
 						
 					}while(cursor.moveToNext());
-					
-					
+
 					return timePlaces;
 				}
-				else{
-					return null;
-				}
-			}
-			else{
-				return null;
 			}
 		}
-		else{
-			return null;
-		}		
+		
+		return null;	
 	}
 	
 	/*
@@ -158,7 +148,7 @@ public class iCreepDatabaseAdapter {
 	public String getUserDetails(int userID){
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
-		//String query = "SELECT * FROM User, Reports WHERE User.User_ID ="+userID+" AND User.User_ID = Reports.User_ID;";
+		
 		String query = "SELECT * FROM User WHERE User.User_ID ="+userID+";";
 		Cursor cursor = db.rawQuery(query, null);
 		
@@ -168,17 +158,10 @@ public class iCreepDatabaseAdapter {
 					userDetails = cursor.getString(cursor.getColumnIndex(iCreepHelper.NAME)) + " " + cursor.getString(cursor.getColumnIndex(iCreepHelper.SURNAME)) + ": " + cursor.getString(cursor.getColumnIndex(iCreepHelper.EMPLOYEE_POSITION));
 					return userDetails;
 				}
-				else{
-					return null;
-				}
-			}
-			else{
-				return null;
 			}
 		}
-		else{
-			return null;
-		}
+		
+		return null;
 	}
 	
 	/*
@@ -204,17 +187,10 @@ public class iCreepDatabaseAdapter {
 									
 					return ud;
 				}
-				else{
-					return null;
-				}
-			}
-			else{
-				return null;
 			}
 		}
-		else{
-			return null;
-		}
+		
+		return null;
 	}
 	
 	/*
@@ -236,13 +212,10 @@ public class iCreepDatabaseAdapter {
 						.getColumnIndex(iCreepHelper.DELIVERY_TIME));
 				time = time + "+" + val;
 				return time;
-			} else {
-				return null;
 			}
-		} else {
-			return null;
 		}
 
+		return null;
 	}
 
 	/*
@@ -257,7 +230,6 @@ public class iCreepDatabaseAdapter {
 			forDelivery = 1;
 		}
 		
-		//String query = "UPDATE Reports SET Auto_Delivery = "+forDelivery+", Delivery_Time = '" + newTime + "' WHERE User.User_ID ="+userID+" AND User.User_ID = Reports.User_ID;";
 		ContentValues cVs = new ContentValues();
 		cVs.put(iCreepHelper.AUTO_DELIVERY, forDelivery);
 		cVs.put(iCreepHelper.DELIVERY_TIME, newTime);
@@ -265,11 +237,9 @@ public class iCreepDatabaseAdapter {
 		
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
-			//String[] args = {""+userID};
 			db.update(iCreepHelper.TABLE_NAME6,cVs,iCreepHelper.USER_ID + "=" + userID,null);
 			return true ;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			return false ;
 		}	
 	}
@@ -303,7 +273,6 @@ public class iCreepDatabaseAdapter {
 			
 			SQLiteDatabase db = helper.getWritableDatabase();
 			
-			// db.insert returns the entry ID value
 			success = db.insert(iCreepHelper.TABLE_NAME4, null, cV);
 		}
 		
@@ -358,7 +327,6 @@ public class iCreepDatabaseAdapter {
 				db.delete("SQLITE_SEQUENCE", "name=?", args);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 		}
 	}
 	
@@ -425,10 +393,6 @@ public class iCreepDatabaseAdapter {
 		//version changes every time the structure of the db changes
 		private static final int DATABASE_VERSION = 15;
 		
-		//define tables (1..6) in db
-		
-		// for easy access later define table column NAMES for each table here
-		
 		//create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "( Beacon_ID INTEGER PRIMARY KEY AUTOMINCREMENT, Major INTEGER, Minor INTEGER);";
 		private static final String TABLE_NAME1 = "Beacon";
 		
@@ -471,7 +435,6 @@ public class iCreepDatabaseAdapter {
 			
 		//CREATE_TABLE QUERIES for db		
 		private static final String create_Beacon_query = "CREATE TABLE " + TABLE_NAME1 + "(" + BEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + MAJOR + " INTEGER NOT NULL,"+ MINOR +" INTEGER NOT NULL);";
-		//private static final String create_ZoneBeacon_query = "CREATE TABLE " + TABLE_NAME2 + "("+ ZONEBEACON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ BEACON_ID +" INTEGER,"+ ZONE_ID + " INTEGER," + THRESHHOLD_VALUE +" FLOAT NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
 		private static final String create_Zone_query = "CREATE TABLE " + TABLE_NAME3 + "(" + ZONE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + BEACON_ID +" INTEGER UNIQUE, " + DESCRIPTION + " VARCHAR(255) NOT NULL,"+ FLOOR + " VARCHAR(20) NOT NULL, FOREIGN KEY (Beacon_ID) REFERENCES Beacon(Beacon_ID) ON DELETE CASCADE ON UPDATE CASCADE);";
 		private static final String create_Location_query = "CREATE TABLE " + TABLE_NAME4 + "(" + LOCATION_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+ ZONE_ID +" INTEGER, "+ USER_ID +" INTEGER,"+ TIME_ENTERED + " VARCHAR(10) NOT NULL, " + TIME_LEFT +" VARCHAR(10) NOT NULL, " + LOCATION_DATE+ " VARCHAR(10) NOT NULL, FOREIGN KEY (Zone_ID) REFERENCES Zone(Zone_ID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (User_ID) REFERENCES User(User_ID) ON DELETE CASCADE ON UPDATE CASCADE);"; 
 		private static final String create_User_query = "CREATE TABLE " + TABLE_NAME5 + "("+ USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME + " VARCHAR(30) NOT NULL," + SURNAME +" VARCHAR(30) NOT NULL, "+ EMAIL +" VARCHAR(255) NOT NULL," + EMPLOYEE_POSITION +" VARCHAR(30) NOT NULL, "+ PHOTO +" VARHCAR(255));";
@@ -484,10 +447,9 @@ public class iCreepDatabaseAdapter {
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		}
 
+		// when creating the db for the first time (executing the CREATE TABLE SQL) - execute CREATE_TABLE queries here		
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			// when creating the db for the first time (executing the CREATE TABLE SQL) - execute CREATE_TABLE queries here
-			
 			String[] createTableQueries = {create_Beacon_query,create_Zone_query,create_User_query,create_Location_query,create_Reprts_query};	
 			
 			for(int i=0; i<createTableQueryCount; i++){
@@ -495,30 +457,25 @@ public class iCreepDatabaseAdapter {
 					//create tables
 					db.execSQL(createTableQueries[i]);
 				} catch (SQLException e) {
-					//display error on toast if appeared
 				}
 			}			
 		}
-
+		
+		//function called upon database upgrade
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			// u can backup db online (after changes), alter table, drop table and such here...
-			// on upgrade, drop older tables
-			
-			
 			String[] tables = {TABLE_NAME1,TABLE_NAME3,TABLE_NAME4,TABLE_NAME5,TABLE_NAME6};
 			
 			//dropping existing tables upon db structure changes (if oldVersion != newVersion)
 			for(int i=0;i<tableCount;i++){
 				try {
 					//carry out wanted query: Alter, DROP TABLEs, etc...
-					//need to drop tables if DB structure changes
 					db.execSQL("DROP TABLE IF EXISTS " + tables[i]);
 				} catch (SQLException e) {
 				}
 			}
 			
-			//recreate tables
+			//create new database
 			onCreate(db);	
 		}
 	}
