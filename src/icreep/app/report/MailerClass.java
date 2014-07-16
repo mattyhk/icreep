@@ -92,7 +92,6 @@ public class MailerClass
 	private void finalBuildEmailReport()
 	{
 		String s = "This is the report for your daily statistics:";
-
 		s = s + "\n";
 
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
@@ -131,8 +130,7 @@ public class MailerClass
 			s = s + "\n==================================================";
 			s = s + "\nSecond Floor";
 			s = s + "\n--------------------------------------------------";
-		} else 
-		{
+		} else {
 			for (TimePlace t : list) {
 				if (t.getFloor().equals("Outisde") && (o == false)) {
 					s = s
@@ -305,6 +303,10 @@ public class MailerClass
 		s = s + "\n";
 		s = s + "\nRegards";
 		s = s + "\nOpen Box Software iCreep team";
+		Date d = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+		s = s + "\nSent on the " + sdf.format(d) + " at " + sdf2.format(d);
 
 		return s;
 	}
