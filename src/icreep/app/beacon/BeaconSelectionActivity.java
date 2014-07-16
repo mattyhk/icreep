@@ -10,6 +10,7 @@ import icreep.app.R;
 import icreep.app.SharedPreferencesControl;
 import icreep.app.SwitchButtonListener;
 import icreep.app.location.UserLocation;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -61,6 +62,14 @@ public class BeaconSelectionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_boss);
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.removeAllTabs();
+		
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setHomeButtonEnabled(false);
+		
 		spc = new SharedPreferencesControl(this);
 		mApplication = (ICreepApplication) getApplicationContext();
 		mAdapter = new BeaconListAdapter(this, beaconList);
@@ -179,7 +188,16 @@ public class BeaconSelectionActivity extends Activity {
 	
 	private boolean validateSave()
 	{
+		if ((switched.isChecked() == false) && (currentBoss.equals("") == false))
+		{
+			return true;
+		}
 		
+		if ((switched.isChecked()==false)&&(currentBoss.equals("") == true))
+		{
+			Message.message(this, "Please switch on tracking status and search for iBeacon");
+			return false ;
+		}
 		if (selectedIndex == NOT_SELECTED)
 		{
 			Message.message(this, "Please select an item in order to save");
@@ -188,7 +206,7 @@ public class BeaconSelectionActivity extends Activity {
 		
 		IBeacon selectedBeacon = this.beaconList.get(selectedIndex);
 
-		if (currentBoss.equals(selectedBeacon.getProximityUuid()) == true)
+		if (currentBoss.equals("" + selectedBeacon.getMinor()) == true)
 		{
 			Message.message(this, "The user for the alert, hasn't changed");
 			return false ;
@@ -202,15 +220,39 @@ public class BeaconSelectionActivity extends Activity {
 	 * application tracking status to the value of the switch button.
 	 */
 	private void saveBossDetails() {
-		
+		if (switched.isChecked() == false)
+		{
+			currentBoss = "" ;
+			bossTrackingValue.setText(currentBoss);
+			spc.writeBossBeaconDetails(currentBoss);
+			selectedIndex = NOT_SELECTED;
+			mAdapter.clear();
+			mAdapter.notifyDataSetChanged();			
+			switchOffBeaconBossTracking();
+			return ;
+		}
 		if (selectedIndex != -1) {
 			IBeacon beacon = this.beaconList.get(selectedIndex);
 			currentBoss = "" + beacon.getMinor();
 			bossTrackingValue.setText(currentBoss);
 			spc.writeBossBeaconDetails(currentBoss);
+			selectedIndex = NOT_SELECTED;
+			mAdapter.notifyDataSetChanged();
+			switchOnBeaconBossTracking();
+			return ;
 		}
 		
 		mApplication.setTrackingBoss(switched.isChecked());
+	}
+	
+	public void switchOffBeaconBossTracking()
+	{
+		
+	}
+	
+	public void switchOnBeaconBossTracking()
+	{
+		
 	}
 	
 	private void setTheChecker()
