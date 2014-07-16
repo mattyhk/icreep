@@ -92,7 +92,6 @@ public class MailerClass
 	private void finalBuildEmailReport()
 	{
 		String s = "This is the report for your daily statistics:";
-
 		s = s + "\n";
 
 		ArrayList<TimePlace> list = new ArrayList<TimePlace>();
@@ -120,7 +119,7 @@ public class MailerClass
 		boolean se = false;
 		if (list.size() == 0) {
 			s = s + "\n==================================================";
-			s = s + "\nOutside";
+			s = s + "\nNot in office";
 			s = s + "\n--------------------------------------------------";
 			s = s + "\n==================================================";
 			s = s + "\nGround Floor";
@@ -131,13 +130,12 @@ public class MailerClass
 			s = s + "\n==================================================";
 			s = s + "\nSecond Floor";
 			s = s + "\n--------------------------------------------------";
-		} else 
-		{
+		} 
 			for (TimePlace t : list) {
-				if (t.getFloor().equals("Outisde") && (o == false)) {
+				if (t.getFloor().equals("Outside") && (o == false)) {
 					s = s
 							+ "\n==================================================";
-					s = s + "\nOutside";
+					s = s + "\nNot in office";
 					s = s
 							+ "\n--------------------------------------------------";
 					o = true;
@@ -228,7 +226,7 @@ public class MailerClass
 				int hoursIn = (int) ((time / 3600) % 60);
 				s = s + (hoursIn) + "hrs " + minutesIn + "min " + secondsIn
 						+ "secs";
-			}
+			
 		}
 		s = s + "\n==================================================";
 		s = s + "\n";
@@ -305,6 +303,10 @@ public class MailerClass
 		s = s + "\n";
 		s = s + "\nRegards";
 		s = s + "\nOpen Box Software iCreep team";
+		Date d = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+		s = s + "\nSent on the " + sdf.format(d) + " at " + sdf2.format(d);
 
 		return s;
 	}
