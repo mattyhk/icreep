@@ -248,6 +248,7 @@ public class BeaconSelectionActivity extends Activity {
 	}
 	
 	private void switchOffBeaconBossTracking() {
+		Message.message(this, "Stopped Tracking Boss");
 		mApplication.setTrackingBoss(false);
 	}
 	
