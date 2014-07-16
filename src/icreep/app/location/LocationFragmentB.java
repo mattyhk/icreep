@@ -168,9 +168,6 @@ public class LocationFragmentB extends Fragment implements OnItemClickListener {
 				mAdapter.add(tp);
 			}
 		}
-		else if (mApplication.getCurrentLocation() == -2 && z.size() == 0) {
-			Message.message(getActivity(), "You have yet to visit a zone");
-		}
 		
 		mAdapter.notifyDataSetChanged();
 	}
