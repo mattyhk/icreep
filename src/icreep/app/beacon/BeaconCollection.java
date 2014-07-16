@@ -10,7 +10,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 
@@ -30,9 +29,11 @@ public class BeaconCollection {
 	private final static double DEFAULT_ACCURACY = 30;
 	private final static int OUTDOOR = -1;
 	private final static int BOSS_LIMIT = 3;
+	private final static int PLAY_LIMIT = 30;
 	
 	private int closestBeacon = OUTDOOR;
 	private int bossCounter = 0;
+	private int lastPlayedCount = 30;
 	
 	private final List<BeaconModel> myBeacons = new ArrayList<BeaconModel>();
 	private AudioManagingController audioController;
@@ -148,11 +149,12 @@ public class BeaconCollection {
 	
 	/**
 	 * Updates boss counter. Checks if the value is equal to the threshold. If the value has reached the threshhold, 
-	 * check if we are actively tracking the boss. If not, reset the counter as well. 
+	 * check if we are actively tracking the boss. If not, reset the counter as well. The noise
+	 * will only be played if it has not been set off at least in the last 30 cycles. 
 	 */
 	private void updateBossInArea(){
 		
-		Log.d("TEST", "Boss scanned " + bossCounter);
+		this.lastPlayedCount ++;
 		
 		if (!mApplication.isTrackingBoss()) {
 			this.bossCounter = 0;
@@ -163,7 +165,15 @@ public class BeaconCollection {
 			this.bossCounter++;
 			
 			if (bossCounter == BOSS_LIMIT) {
-				this.audioController.fireRingTone();
+				
+				if (lastPlayedCount >= PLAY_LIMIT) {
+					this.audioController.fireRingTone();
+					this.lastPlayedCount = 0;
+				}
+				
+				else {
+					this.bossCounter = 0;
+				}
 			}
 		}
 		
@@ -173,9 +183,8 @@ public class BeaconCollection {
 	 * Resets the boss counter
 	 */
 	private void updateBossOutOfArea(){
-
-		Log.d("TEST", "Boss not scanned " + bossCounter);
 		
+		this.lastPlayedCount ++;		
 		this.bossCounter = 0;
 		
 	}

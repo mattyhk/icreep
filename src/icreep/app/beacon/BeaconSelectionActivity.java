@@ -49,7 +49,7 @@ public class BeaconSelectionActivity extends Activity {
 	private UserLocation user;
 	
 	public int selectedIndex = NOT_SELECTED;
-	private String currentBoss = "";
+	private String currentBoss = "0";
 	private ArrayList<IBeacon> beaconList = new ArrayList<IBeacon>();
 	
 	
@@ -130,6 +130,12 @@ public class BeaconSelectionActivity extends Activity {
 			
 			@Override
 			public void onClick(View v)	{
+				
+				if (!((bossTrackingValue).equals("0")) && (switched.isChecked())) {
+					switchOnBeaconBossTracking();
+					return;
+				}
+				
 				if (validateSave()) {
 					saveBossDetails();
 				}
@@ -182,7 +188,7 @@ public class BeaconSelectionActivity extends Activity {
 		mAdapter.addAll(this.beaconList);
 		mAdapter.notifyDataSetChanged();
 		 
-		selectedIndex = -1;
+		selectedIndex = NOT_SELECTED;
 	}
 	
 	private boolean validateSave()
@@ -221,8 +227,8 @@ public class BeaconSelectionActivity extends Activity {
 	private void saveBossDetails() {
 		if (switched.isChecked() == false)
 		{
-			currentBoss = "0" ;
-			bossTrackingValue.setText(currentBoss);
+			currentBoss = "0";
+			bossTrackingValue.setText("");
 			spc.writeBossBeaconDetails(currentBoss);
 			selectedIndex = NOT_SELECTED;
 			mAdapter.clear();
@@ -232,7 +238,7 @@ public class BeaconSelectionActivity extends Activity {
 		}
 		if (selectedIndex != NOT_SELECTED) {
 			IBeacon beacon = this.beaconList.get(selectedIndex);
-			currentBoss = "" + beacon.getMinor();
+			currentBoss = String.valueOf(beacon.getMinor());
 			bossTrackingValue.setText(currentBoss);
 			spc.writeBossBeaconDetails(currentBoss);
 			selectedIndex = NOT_SELECTED;
