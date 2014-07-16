@@ -23,10 +23,10 @@
                 android:id="@+id/bossheading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_margin_3.7in"
+                android:layout_marginTop="@dimen/top_margin_7in"
                 android:text="@string/boss_heading"
                 android:textColor="@color/lightGreenForLabels"
-                android:textSize="@dimen/heading_text_size_3.7in" />
+                android:textSize="@dimen/heading_text_size_7in" />
             
         </LinearLayout>
 
@@ -45,22 +45,21 @@
         android:layout_height="wrap_content"
         android:text="@string/boss_pinger"
         android:textColor= "@color/whiteColor"    
-        android:textSize="@dimen/sub_heading_text_size_3.7in" 
+        android:textSize="@dimen/sub_heading_text_size_7in" 
         android:layout_marginLeft="@dimen/left_margin"
         />
 
     <Switch
         android:id="@+id/switchBarBoss"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/left_margin"
-        android:layout_marginTop="@dimen/top_margin_3.7in"
-        android:layout_weight="1"
-        android:background="@color/whiteBackground"
+        android:layout_height="wrap_content"
         android:checked="false"
         android:textOff="OFF"
-        android:textOn="ON        "
-        android:textSize="40sp" />
+        android:layout_marginTop="@dimen/top_margin_7in"
+	    android:layout_marginLeft="@dimen/left_margin"
+	    android:textOn="       ON       "	
+	    android:textSize="24sp"
+	    android:background="@drawable/on_off_switch_style" 	/>
 
     <Button
         android:id="@+id/bossScanButton"
@@ -69,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/left_margin"
         android:layout_marginRight="75dp"
-        android:layout_marginTop="@dimen/top_margin_3.7in"
+        android:layout_marginTop="@dimen/top_margin_7in"
         android:background="@drawable/reports_button_off"
 	    android:fontFamily="courier new"
 	    android:text="@string/boss_scan"
