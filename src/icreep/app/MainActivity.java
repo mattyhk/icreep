@@ -44,7 +44,8 @@ public class MainActivity extends FragmentActivity
 			if (time != null) {
 				String[] times = time.split(":");
 				int hour = Integer.parseInt(times[0]);
-				int min = Integer.parseInt(times[1]);
+				String[] minut = times[1].split("\\+");
+				int min = Integer.parseInt(minut[0]);
 				AlarmControlClass acc = new AlarmControlClass();
 				acc.setAlarm(hour, min, this);
 				acc.sendAutoEmailRepeat();
