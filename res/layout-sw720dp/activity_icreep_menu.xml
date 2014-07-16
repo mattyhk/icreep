@@ -68,27 +68,12 @@
         android:textSize="@dimen/menu_button_text_size_10in" />
 
     <Button
-        android:id="@+id/button4_profile"
-        android:layout_width="@dimen/menu_button_width_10in"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3_reports"
-        android:layout_below="@+id/button3_reports"
-        android:layout_marginTop="@dimen/top_margin_menu_buttons"
-        android:background="@drawable/button_style"
-        android:fontFamily="courier new"
-        android:onClick="userProfile"
-        android:text="@string/profile"
-        android:paddingBottom="@dimen/menu_button_padding_top_bottom_10in"
-        android:paddingTop="@dimen/menu_button_padding_top_bottom_10in"
-        android:textSize="@dimen/menu_button_text_size_10in" />
-
-    <Button
         android:id="@+id/button2_time_tracker"
         android:layout_width="@dimen/menu_button_width_10in"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1_location"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="@dimen/top_margin_menu_buttons"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
         android:onClick="timeTracker"
@@ -101,15 +86,30 @@
         android:id="@+id/button5_boss_tracker"
         android:layout_width="@dimen/menu_button_width_10in"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4_profile"
-        android:layout_below="@+id/button4_profile"
-        android:layout_marginTop="44dp"
+        android:layout_alignLeft="@+id/button3_reports"
+        android:layout_below="@+id/button3_reports"
+        android:layout_marginTop="@dimen/top_margin_menu_buttons"
         android:background="@drawable/button_style"
         android:fontFamily="courier new"
         android:onClick="timeTracker"
         android:paddingBottom="@dimen/menu_button_padding_top_bottom_10in"
         android:paddingTop="@dimen/menu_button_padding_top_bottom_10in"
         android:text="@string/boss_tracker"
+        android:textSize="@dimen/menu_button_text_size_10in" />
+
+    <Button
+        android:id="@+id/button4_profile"
+        android:layout_width="@dimen/menu_button_width_10in"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button5_boss_tracker"
+        android:layout_below="@+id/button5_boss_tracker"
+        android:layout_marginTop="@dimen/top_margin_menu_buttons"
+        android:background="@drawable/button_style"
+        android:fontFamily="courier new"
+        android:onClick="userProfile"
+        android:paddingBottom="@dimen/menu_button_padding_top_bottom_10in"
+        android:paddingTop="@dimen/menu_button_padding_top_bottom_10in"
+        android:text="@string/profile"
         android:textSize="@dimen/menu_button_text_size_10in" />
 
 </RelativeLayout>
