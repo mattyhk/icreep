@@ -144,7 +144,7 @@ public class MailerClass
 					if (o == false) {
 						s = s
 								+ "\n==================================================";
-						s = s + "\nOutside";
+						s = s + "\nNot In Office";
 						s = s
 								+ "\n--------------------------------------------------";
 						o = true;
@@ -160,7 +160,7 @@ public class MailerClass
 					if (o == false) {
 						s = s
 								+ "\n==================================================";
-						s = s + "\nOutside";
+						s = s + "\nNot In Office";
 						s = s
 								+ "\n--------------------------------------------------";
 						o = true;
@@ -183,7 +183,7 @@ public class MailerClass
 					if (o == false) {
 						s = s
 								+ "\n==================================================";
-						s = s + "\nOutside";
+						s = s + "\nNot In Office";
 						s = s
 								+ "\n--------------------------------------------------";
 						o = true;
