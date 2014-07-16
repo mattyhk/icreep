@@ -86,7 +86,7 @@ public class ProfileCreationActivity extends Activity
 		
 		spc = new SharedPreferencesControl(this);
 		home_button = (ImageButton) findViewById(R.id.home_button_profile);
-		if (spc.sharedPrefTest() == true) {
+		if (spc.hasNoUser() == true) {
 			home_button.setEnabled(false);
 			home_button.setVisibility(View.INVISIBLE);
 		} else {
