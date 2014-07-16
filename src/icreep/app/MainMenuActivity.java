@@ -61,7 +61,7 @@ public class MainMenuActivity extends Activity {
 		
 		//Boss button
 		boss_button = (Button)findViewById(R.id.button5_boss_tracker);
-		boss_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.BeaconSelectionActivity"));
+		boss_button.setOnClickListener(new SwitchButtonListener(this, "icreep.app.beacon.BeaconSelectionActivity"));
 	}//onCreate
 	
 	@Override

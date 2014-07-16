@@ -8,14 +8,16 @@ import android.media.MediaPlayer;
 public class AudioManagingController
 {
 	private AudioManager am;
-	private Context c ;
 	private int originalMode;
+	private int id;
+	private MediaPlayer mp;
 	
 	public AudioManagingController(Context c)
 	{
-		this.c = c;
-		am=(AudioManager)c.getSystemService(Context.AUDIO_SERVICE);
-		originalMode = am.getRingerMode();
+		this.am=(AudioManager)c.getSystemService(Context.AUDIO_SERVICE);
+		this.originalMode = am.getRingerMode();
+		this.id = c.getResources().getIdentifier("bossalert", "raw", c.getPackageName());
+		this.mp = MediaPlayer.create(c,id);
 	}
 	
 	public void changeToSilent()
@@ -43,10 +45,10 @@ public class AudioManagingController
 	public void fireRingTone()
 	{
 		if (am.getRingerMode() !=0)	{
-			int id = c.getResources().getIdentifier("bossalert", "raw", c.getPackageName());
-			MediaPlayer mp = MediaPlayer.create(c,id);
-			mp.setLooping(false);
-			mp.start();
+			if (!mp.isPlaying()){
+				mp.setLooping(false);
+				mp.start();
+			}
 		}	
 	}
 	
