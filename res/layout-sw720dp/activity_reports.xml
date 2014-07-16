@@ -38,7 +38,7 @@
 		        android:text="@string/user_position"
 		        android:gravity="left"
 		        android:textColor="@color/whiteColor"
-                android:textSize="@dimen/heading_text_size_10in"
+                android:textSize="@dimen/sub_heading_text_size_10in"
                 android:layout_marginLeft = "@dimen/left_margin"/>
             
         </LinearLayout>
