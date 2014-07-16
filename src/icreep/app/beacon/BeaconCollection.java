@@ -10,7 +10,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 
@@ -29,9 +28,10 @@ public class BeaconCollection {
 	private final static int NUMBEACONS = 48;
 	private final static double DEFAULT_ACCURACY = 30;
 	private final static int OUTDOOR = -1;
+	private final static int BOSS_LIMIT = 3;
 	
 	private int closestBeacon = OUTDOOR;
-	private boolean alreadyInArea = false;
+	private int bossCounter = 0;
 	
 	private final List<BeaconModel> myBeacons = new ArrayList<BeaconModel>();
 	private AudioManagingController audioController;
@@ -57,6 +57,7 @@ public class BeaconCollection {
 	 * Modifies the closestBeacon field by first checking which of the beacons in range, if any,
 	 * is the closest. Sets the field to the beacon's index, otherwise sets it to -1 representing
 	 * Out of Office.
+	 * Also checks if the current boss is in the area.
 	 */
 	public void processIBeacons(Collection<IBeacon> iBeacons) {
 		
@@ -135,18 +136,43 @@ public class BeaconCollection {
 			}
 		}
 		
-		if (inArea && mApplication.isTrackingBoss() && !alreadyInArea) {
-			alreadyInArea = true;
-			Log.d("TEST", "inArea is " + inArea);
-			audioController.fireRingTone();
+		if (inArea) {
+			updateBossInArea();
 		}
 		
-		else if (!inArea) {
-			alreadyInArea = false;
+		else {
+			updateBossOutOfArea();
+		}
+	}
+	
+	/**
+	 * Updates boss counter. Checks if the value is equal to the threshold. If the value has reached the threshhold, 
+	 * check if we are actively tracking the boss. If not, reset the counter as well. 
+	 */
+	private void updateBossInArea(){
+		
+		if (!mApplication.isTrackingBoss()) {
+			this.bossCounter = 0;
 		}
 		
+		else {
+			
+			this.bossCounter++;
+			
+			if (bossCounter == BOSS_LIMIT) {
+				this.audioController.fireRingTone();
+			}
+		}
 		
-
+	}
+	
+	/**
+	 * Resets the boss counter
+	 */
+	private void updateBossOutOfArea(){
+		
+		this.bossCounter = 0;
+		
 	}
 	
 	/**************************

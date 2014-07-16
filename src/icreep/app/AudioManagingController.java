@@ -8,14 +8,12 @@ import android.media.MediaPlayer;
 public class AudioManagingController
 {
 	private AudioManager am;
-	private Context c ;
 	private int originalMode;
 	private int id;
 	private MediaPlayer mp;
 	
 	public AudioManagingController(Context c)
 	{
-		this.c = c;
 		this.am=(AudioManager)c.getSystemService(Context.AUDIO_SERVICE);
 		this.originalMode = am.getRingerMode();
 		this.id = c.getResources().getIdentifier("bossalert", "raw", c.getPackageName());
