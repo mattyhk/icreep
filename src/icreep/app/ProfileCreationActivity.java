@@ -106,10 +106,10 @@ public class ProfileCreationActivity extends Activity
 		userPosition = (EditText) findViewById(R.id.editText4_user_position);
 		userEmail = (EditText) findViewById(R.id.editText3_user_email);
 		
-		userName.setText("In");
-		userSurname.setText("Tern");
-		userPosition.setText("Inty");
-		userEmail.setText("i@ob.com");
+		userName.setText("");
+		userSurname.setText("");
+		userPosition.setText("");
+		userEmail.setText("");
 		// rename helper for db management
 		icreepHelper = new iCreepDatabaseAdapter(this);
 		
@@ -164,14 +164,7 @@ public class ProfileCreationActivity extends Activity
 				{
 
 					doMessage("You have made no changes, thus you can't save");
-					
-//					if (listDetails.get(0).equals("") == true) 
-//					{
-//						doMessage("One of your inputs is still the default blank input, please correct");
-//					} else 
-//					{
-						doMessage("You have made no changes, thus you can't save");
-//					}
+
 					return;
 				}
 				
