@@ -1,9 +1,11 @@
+/**
+ *  THIS CLASS IS NOT BEING USED
+ */
+
 package icreep.app.bluetooth;
 
 import java.util.ArrayList;
 
-
-import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

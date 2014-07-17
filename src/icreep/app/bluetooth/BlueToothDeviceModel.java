@@ -1,3 +1,7 @@
+/**
+ *  THIS CLASS IS NOT BEING USED
+ */
+
 package icreep.app.bluetooth;
 
 import android.bluetooth.BluetoothDevice;

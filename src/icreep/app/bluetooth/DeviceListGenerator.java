@@ -1,3 +1,7 @@
+/**
+ *  THIS CLASS IS NOT BEING USED
+ */
+
 package icreep.app.bluetooth;
 
 import java.util.ArrayList;
@@ -59,10 +63,6 @@ public class DeviceListGenerator
 		// added listener for all new devices
 		IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 		c.registerReceiver(mReceiver, filter);
-
-		// Register for broadcasts when discovery has finished
-		// and listener for when complete
-		BossAlertActivity baa = (BossAlertActivity) c;
 		
 		filter = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 		c.registerReceiver(mReceiver, filter);
