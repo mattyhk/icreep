@@ -26,7 +26,8 @@
 		        android:textColor="@color/lightGreenForLabels"
                 android:textSize="@dimen/heading_text_size_7in"
                 android:layout_marginTop = "@dimen/top_margin_7in"
-                android:layout_marginLeft = "@dimen/left_margin"/>
+                android:layout_marginLeft = "@dimen/left_margin"
+                android:textStyle="bold"/>
 	        
 	        <TextView
 		        android:id="@+id/time_tracker_b_user"

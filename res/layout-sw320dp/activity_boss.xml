@@ -26,7 +26,8 @@
                 android:layout_marginTop="@dimen/top_margin_3.7in"
                 android:text="@string/boss_heading"
                 android:textColor="@color/lightGreenForLabels"
-                android:textSize="@dimen/heading_text_size_3.7in" />
+                android:textSize="@dimen/heading_text_size_3.7in" 
+                android:textStyle="bold"/>
             
         </LinearLayout>
 
@@ -130,7 +131,7 @@
 		    style="?android:attr/borderlessButtonStyle"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_marginBottom="20dp"
+		    android:layout_marginBottom="40dp"
 		    android:layout_marginLeft="230dp"
 		    android:layout_marginTop="@dimen/top_margin_3.7in"
 		    android:background="@drawable/button_style"
