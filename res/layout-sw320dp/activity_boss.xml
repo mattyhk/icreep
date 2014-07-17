@@ -56,11 +56,10 @@
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/left_margin"
         android:layout_marginTop="@dimen/top_margin_3.7in"
-        android:layout_weight="1"
         android:background="@color/whiteBackground"
         android:checked="false"
-        android:textOff="OFF"
-        android:textOn="ON        "
+        android:textOff="     OFF     "
+        android:textOn="     ON     "
         android:textSize="40sp" />
 
     <Button

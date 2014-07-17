@@ -23,7 +23,7 @@
                 android:id="@+id/bossheading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_margin_7in"
+                android:layout_marginTop="@dimen/top_margin_10in"
                 android:text="@string/boss_heading"
                 android:textColor="@color/lightGreenForLabels"
                 android:textSize="@dimen/heading_text_size_7in" 
@@ -53,23 +53,23 @@
     <Switch
         android:id="@+id/switchBarBoss"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginTop="@dimen/top_margin_10in"
+        android:background="@color/whiteBackground"
         android:checked="false"
-        android:textOff="OFF"
-        android:layout_marginTop="@dimen/top_margin_7in"
-	    android:layout_marginLeft="@dimen/left_margin"
-	    android:textOn="       ON       "	
-	    android:textSize="24sp"
-	    android:background="@drawable/on_off_switch_style" 	/>
+        android:textOff="          OFF          "
+        android:textOn="          ON          "
+        android:textSize="40sp" 	/>
 
     <Button
         android:id="@+id/bossScanButton"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="@dimen/left_margin"
         android:layout_marginRight="75dp"
-        android:layout_marginTop="@dimen/top_margin_7in"
+        android:layout_marginTop="@dimen/top_margin_10in"
         android:background="@drawable/reports_button_off"
 	    android:fontFamily="courier new"
 	    android:text="@string/boss_scan"
@@ -78,7 +78,7 @@
 	
 	<LinearLayout 
 	    android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_height="15dp"
         android:orientation="horizontal"
         android:layout_weight="1">
         
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:text="@string/boss_tracking"
         android:textColor= "@color/whiteColor"
-        android:layout_marginTop="@dimen/top_margin_7in"
+        android:layout_marginTop="@dimen/top_margin_10in"
         android:layout_marginBottom="-10dp"
         android:layout_marginLeft="@dimen/left_margin"
         android:textSize="@dimen/sub_heading_text_size_7in"
@@ -99,7 +99,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="@dimen/left_margin"
-	        android:layout_marginTop="@dimen/top_margin_7in"
+	        android:layout_marginTop="@dimen/top_margin_10in"
             android:layout_marginBottom="-10dp"
 	        android:textColor="@color/lightGreenForLabels"
 	        android:textSize="@dimen/sub_heading_text_size_7in" />
@@ -111,7 +111,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="0dp"
 	    android:layout_marginBottom="2dp"
-	    android:layout_marginTop="@dimen/top_margin_7in"
+	    android:layout_marginTop="@dimen/top_margin_10in"
 	    android:layout_marginLeft="@dimen/left_margin"
 	    android:layout_marginRight="25dp"
 	    android:layout_weight="7"

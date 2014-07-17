@@ -23,14 +23,14 @@
 	<Switch
 	    android:id="@+id/switchBar"
 	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:checked="false"
-	    android:textOff="OFF"
-	    android:layout_marginTop="@dimen/top_margin_10in"
-	    android:layout_marginLeft="@dimen/left_margin"
-	    android:textOn="       ON       "	
-	    android:textSize="24sp"
-	    android:background="@drawable/on_off_switch_style" 	    
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginTop="@dimen/top_margin_7in"
+        android:background="@color/whiteBackground"
+        android:checked="false"
+        android:textOff="          OFF          "
+        android:textOn="          ON          "
+        android:textSize="40sp"/> 	    
 	    />
 		    
 	<TextView
