@@ -29,11 +29,11 @@ public class BeaconCollection {
 	private final static double DEFAULT_ACCURACY = 30;
 	private final static int OUTDOOR = -1;
 	private final static int BOSS_LIMIT = 3;
-	private final static int PLAY_LIMIT = 300;
+	private final static int PLAY_LIMIT = 100;
 	
 	private int closestBeacon = OUTDOOR;
 	private int bossCounter = 0;
-	private int lastPlayedCount = 30;
+	private int lastPlayedCount = 100;
 	
 	private final List<BeaconModel> myBeacons = new ArrayList<BeaconModel>();
 	private AudioManagingController audioController;
@@ -165,7 +165,6 @@ public class BeaconCollection {
 			this.bossCounter++;
 			
 			if (bossCounter == BOSS_LIMIT) {
-				
 				if (lastPlayedCount >= PLAY_LIMIT) {
 					this.audioController.fireRingTone();
 					this.lastPlayedCount = 0;
