@@ -16,7 +16,7 @@ import com.radiusnetworks.ibeacon.IBeacon;
 
 /**
  * Class that holds a collection of every beacon in the tracking system. Handles updating the beacon objects
- * when the device receives new values from beacons in range
+ * when the device receives new values from beacons in range. Also handles tracking the Boss Device.
  * 
  * @author mkerr
  *
@@ -29,7 +29,7 @@ public class BeaconCollection {
 	private final static double DEFAULT_ACCURACY = 30;
 	private final static int OUTDOOR = -1;
 	private final static int BOSS_LIMIT = 3;
-	private final static int PLAY_LIMIT = 30;
+	private final static int PLAY_LIMIT = 300;
 	
 	private int closestBeacon = OUTDOOR;
 	private int bossCounter = 0;
