@@ -27,7 +27,8 @@
                 android:layout_marginTop="@dimen/top_margin_7in"
                 android:text="@string/title_location_movement"
                 android:textColor="@color/lightGreenForLabels"
-                android:textSize="@dimen/heading_text_size_7in" />
+                android:textSize="@dimen/heading_text_size_7in" 
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/location_b_user"

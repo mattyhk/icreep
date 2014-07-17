@@ -21,15 +21,15 @@
         />
 	<Switch 
 	    android:id="@+id/switchBar" 
-	    android:layout_width="wrap_content" 
-	    android:layout_height="wrap_content" 
-	    android:layout_marginLeft="@dimen/left_margin" 
-	    android:layout_marginTop="@dimen/top_margin_3.7in"	     
-	    android:checked="false" 
-	    android:textOff="OFF" 
-	    android:textOn="       ON       "	
-	    android:textSize="24sp"
-	    android:background="@drawable/on_off_switch_style"/>
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginTop="@dimen/top_margin_3.7in"
+        android:background="@color/whiteBackground"
+        android:checked="false"
+        android:textOff="     OFF     "
+        android:textOn="     ON     "
+        android:textSize="40sp"/>
 		    
 	<TextView
         android:id="@+id/DeliveryTime"
@@ -51,19 +51,17 @@
 	    android:layout_marginTop="@dimen/top_margin_3.7in"
 	    android:background="@drawable/time_picker"
 	    android:fadingEdge="vertical" />
-	
+
 	<Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save_report_time"
-        android:enabled="false"
-        android:textColor="@color/blackColor"
-        android:background="@drawable/button_style"  
-        android:fontFamily="courier new"
-        android:layout_marginTop="@dimen/top_margin_3.7in"
-        android:layout_marginLeft="@dimen/left_margin" 
-        />
-	
+	    android:id="@+id/saveButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="235dp"
+	    android:layout_marginBottom="33dp"
+	    android:background="@drawable/button_style"
+	    android:enabled="false"
+	    android:fontFamily="courier new"
+	    android:text="@string/save_report_time"
+	    android:textColor="@color/blackColor" />
 	    
 </LinearLayout>
