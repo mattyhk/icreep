@@ -307,7 +307,7 @@ public class ProfileCreationActivity extends Activity
 							}
 						} else {
 							doMessage("Invalid employee position, please enter valid employee position");
-							doMessage("example: Developer or Aanalys Developer");
+							doMessage("example: Developer or Analyst");
 						}
 					} else {
 						doMessage("Invalid surname - surname cannot contain any other special characters other than spaces and hyphens (-). Please enter a valid surname");
